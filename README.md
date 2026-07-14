@@ -23,3 +23,7 @@ The website is published by `.github/workflows/deploy-pages.yml` after a push to
 - Confirm app privacy behavior against the Flutter source before changing `privacy/index.html`.
 
 See [MIGRATION.md](MIGRATION.md) for legacy URL mapping and asset notes.
+
+## License
+
+The original CBT Cards website content is licensed under [CC BY-NC-SA 4.0](LICENSE): attribution and the same license are required for sharing or adaptations, and commercial use is not permitted without prior written permission from MetalHatsCats. CBT Cards names and logos are not licensed for reuse.
