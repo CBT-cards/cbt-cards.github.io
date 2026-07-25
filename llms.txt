@@ -11,6 +11,7 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - https://cbt-cards.github.io/terms/
 - https://cbt-cards.github.io/support/
 - https://cbt-cards.github.io/faq/
+- https://cbt-cards.github.io/agents/ (install the public CBT Cards skill for OpenClaw or Hermes)
 
 ## Store listings
 

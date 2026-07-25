@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Connect CBT Cards to an AI agent</title>
+    <meta
+      name="description"
+      content="Add the verified CBT Cards resource to an OpenClaw or Hermes agent."
+    />
+    <link rel="canonical" href="https://cbt-cards.github.io/agents/" />
+    <link rel="stylesheet" href="/styles.css?v=20260717" />
+    <link rel="icon" href="/assets/app-icon.png" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap nav">
+        <a class="brand" href="/"
+          ><img src="/assets/app-icon.png" width="42" height="42" alt="CBT Cards" />CBT Cards</a
+        >
+        <nav class="nav-links" aria-label="Primary">
+          <a href="/how-it-works/">How it works</a><a href="/features/">Features</a
+          ><a href="/faq/">FAQ</a><a href="/privacy/">Privacy</a>
+        </nav>
+        <a class="download" href="/#download">Download</a>
+      </div>
+    </header>
+    <main>
+      <section class="page-hero">
+        <div class="wrap">
+          <div class="crumb"><a href="/">CBT Cards</a> / Agent resource</div>
+          <h1>Connect CBT Cards to your agent.</h1>
+          <p class="lede">
+            A small, public knowledge resource for answering factual questions about CBT Cards.
+            It does not provide access to diary entries, check-ins, or any user data.
+          </p>
+        </div>
+      </section>
+      <section class="section alt">
+        <div class="wrap prose agent-guide">
+          <h2>What the agent receives</h2>
+          <p>
+            The resource is a portable <code>SKILL.md</code> with links to the official product,
+            features, support, privacy, terms, and FAQ pages. It tells the agent to use those
+            sources, preserve the wellness disclaimer, and not present the app as medical care.
+          </p>
+          <p>
+            <a href="/agents/cbt-cards/SKILL.md">Open the CBT Cards skill file</a>
+            or <a href="/llms.txt">view the compact site index</a>.
+          </p>
+
+          <h2>OpenClaw</h2>
+          <p>
+            In the workspace used by the intended agent, save the skill in its <code>skills</code>
+            directory and start a new session.
+          </p>
+          <pre><code>mkdir -p skills/cbt-cards
+curl -fsSL https://cbt-cards.github.io/agents/cbt-cards/SKILL.md \
+  -o skills/cbt-cards/SKILL.md</code></pre>
+          <p>
+            The skill is then available only to that workspace’s agent. To share it more broadly,
+            place the same directory under <code>~/.openclaw/skills/</code>. If you use a skill
+            allowlist, add <code>cbt-cards</code> to the intended agent’s list.
+          </p>
+
+          <h2>Hermes</h2>
+          <p>Install the public skill directly from its URL:</p>
+          <pre><code>hermes skills install \
+  https://cbt-cards.github.io/agents/cbt-cards/SKILL.md \
+  --name cbt-cards --now</code></pre>
+          <p>
+            Verify it with <code>hermes skills list</code>, then start a task with
+            <code>/cbt-cards</code> or ask the agent a CBT Cards question in natural language.
+          </p>
+
+          <h2>Use it safely</h2>
+          <ul>
+            <li>This is a public, read-only source; it does not connect to a user’s account or app data.</li>
+            <li>Use the linked privacy policy for questions about data handling.</li>
+            <li>CBT Cards is for general wellness and self-reflection, not diagnosis, treatment, or emergency support.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="wrap footer-grid">
+        <div>© 2026 CBT Cards</div>
+        <nav aria-label="Footer">
+          <a href="/privacy/">Privacy</a><a href="/terms/">Terms</a
+          ><a href="/support/">Support</a><a href="/agents/">For agents</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
