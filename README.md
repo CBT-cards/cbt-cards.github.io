@@ -40,28 +40,34 @@ Worksheet pages are static HTML forms with no submit action. Text typed into the
 Public toolkit:
 
 - `/toolkit/` — human-readable dataset landing page with `Dataset` structured data
+- `/toolkit/review-status/` — CBT Cards publication-review boundary for source records
+- `/data/toolkit-review.json` — machine-readable review/publication overlay keyed by stable source record ID
 - `/toolkit/cards/` — source index for 77 reflection-card records
 - `/toolkit/metaphors/` — source index for 23 metaphor records
 - `/toolkit/protocols/` — source index for 15 protocol records with an explicit review boundary
 - `/toolkit/cards/.../` — curated standalone pages for selected reviewed card records
-- `/data/toolkit-source.json` — pinned source-corpus version, commit, blob SHA, record counts, license, distribution URL, and quality notes
+- `/data/toolkit-source.json` — pinned source-corpus version, commit, blob SHA, record counts, license, distribution URL, review-overlay pointer, and quality notes
 
-The related source corpus is MetalHatsCats CBT Toolkit v0.1.0. The current pinned source contains 115 English records: 77 cards, 23 metaphors, and 15 protocols. The source corpus has no per-record clinical-review metadata, so source presence alone is not publication approval.
+The related source corpus is MetalHatsCats CBT Toolkit v0.1.0. The pinned source contains 115 English records: 77 cards, 23 metaphors, and 15 protocols. The source corpus has no CBT Cards-specific per-record publication or clinical-review metadata.
+
+Any source record not explicitly listed in `data/toolkit-review.json` defaults to `review_status: unreviewed` and `publication_status: source_only`. `reviewed_for_publication` means editorial and safety review for a standalone CBT Cards website page. It does not mean clinical validation, evidence of efficacy, diagnosis, or suitability for an individual.
 
 Agent, discovery, and machine-readable resources:
 
 - `/agents/` — integration guide
-- `/agents/cbt-cards/SKILL.md` — latest mutable skill alias
+- `/agents/cbt-cards/SKILL.md` — latest mutable skill alias, currently v1.4.0
 - `/agents/cbt-cards/manifest.json` — skill version manifest
 - `/agents/cbt-cards/v1.1.0/SKILL.md` — immutable historical skill version
 - `/agents/cbt-cards/v1.2.0/SKILL.md` — immutable version adding raw-corpus/curated-content rules
-- `/agents/cbt-cards/v1.3.0/SKILL.md` — current immutable version adding worksheet rendering/privacy rules
+- `/agents/cbt-cards/v1.3.0/SKILL.md` — immutable version adding worksheet rendering/privacy rules
+- `/agents/cbt-cards/v1.4.0/SKILL.md` — immutable version requiring toolkit review-overlay checks
 - `/llms.txt` — compact public index
-- `/llms-full.txt` — extended source-priority, release, worksheet, corpus, and safety index
+- `/llms-full.txt` — extended source-priority, release, worksheet, corpus, publication-status, and safety index
 - `/data/catalog.json` — canonical public resource catalog with stable IDs
 - `/data/changelog.json` — scoped website/public-data release provenance
 - `/data/knowledge.jsonl` — RAG-friendly curated prose knowledge records for public learning resources and reviewed toolkit cards
 - `/data/worksheets.json` — structured form definitions kept separate from prose knowledge records
+- `/data/toolkit-review.json` — CBT Cards-owned source-record publication status
 - `/feed.xml` — Atom discovery feed
 - `/feed.json` — JSON Feed 1.1 discovery feed
 - `/.well-known/security.txt` — standard public security contact
@@ -83,6 +89,7 @@ python3 scripts/check_site.py
 python3 scripts/check_worksheets.py
 python3 scripts/check_discovery.py
 python3 scripts/check_changelog.py
+python3 scripts/check_toolkit_review.py
 ```
 
 The site checker verifies public HTML metadata, one H1 per indexed page, canonical uniqueness, JSON-LD parsing, internal links, crawler/IndexNow configuration, sitemap coverage/targets, resource catalog targets, curated JSONL alignment, toolkit source metadata, and agent skill/version targets.
@@ -92,6 +99,8 @@ The worksheet checker verifies worksheet IDs, catalog alignment, canonical and l
 The discovery checker verifies Atom/JSON Feed parity, canonical feed targets, security metadata, and matching catalog entries.
 
 The changelog checker verifies schema version, stable release IDs, chronological order, allowed scopes/change types, catalog resource alignment, canonical local targets, sitemap inclusion, and discovery-feed presence.
+
+The toolkit-review checker verifies safe defaults for unlisted source records, published source-ID uniqueness, exact alignment between the review overlay, catalog toolkit cards, curated JSONL toolkit records and canonical pages, plus latest-skill awareness of the overlay.
 
 ## Deployment and discovery
 
@@ -116,8 +125,11 @@ The repository must remain `CBT-cards/cbt-cards.github.io` to serve the user-sit
 - Never infer a mobile-app release from a website, dataset, worksheet, feed, or agent-skill change. Mobile release entries require separately verified release metadata.
 - Keep each curated JSONL knowledge record self-contained and aligned with its canonical page. Reuse the same stable resource ID in the catalog and curated dataset.
 - Keep worksheet UI schemas in `data/worksheets.json`; do not duplicate form definitions into `knowledge.jsonl` unless the schema strategy changes intentionally.
+- A raw toolkit record must not become a standalone published resource unless its stable source ID is explicitly added to `data/toolkit-review.json` as `reviewed_for_publication` and `published`.
+- Any raw toolkit source ID absent from the review overlay is `unreviewed` and `source_only` by default.
+- Never describe `reviewed_for_publication` as clinical validation or efficacy evidence.
 - Keep raw toolkit source IDs separate from curated resource IDs. A curated card record also carries its original `source_record_id`.
-- Do not generate standalone protocol/health-guidance pages from raw corpus records unless the record has gone through explicit editorial and safety review.
+- Do not generate standalone protocol/health-guidance pages from raw corpus records unless the record has gone through explicit editorial and safety review and is added to the review overlay.
 - Do not treat record titles as unique identifiers. The source corpus already contains repeated titles; stable IDs are authoritative.
 - When changing the agent skill, publish an immutable version and update `agents/cbt-cards/manifest.json`, `data/catalog.json`, and llms indexes before moving the latest alias.
 
