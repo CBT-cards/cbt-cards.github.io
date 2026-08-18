@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cbt-cards.github.io/schemas/worksheets-v1.schema.json",
+  "title": "CBT Cards worksheet definitions v1",
+  "type": "object",
+  "required": ["schema_version", "updated", "worksheets"],
+  "properties": {
+    "$schema": {"type": "string", "format": "uri"},
+    "schema_version": {"const": "1.0"},
+    "updated": {"type": "string", "format": "date"},
+    "worksheets": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "locale", "title", "canonical_url", "learning_resource", "source", "safety_scope", "privacy_behavior", "fields"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "locale": {"type": "string", "minLength": 2},
+          "title": {"type": "string", "minLength": 1},
+          "canonical_url": {"type": "string", "format": "uri"},
+          "learning_resource": {"type": "string", "format": "uri"},
+          "source": {"type": "string", "format": "uri"},
+          "safety_scope": {"type": "string", "minLength": 1},
+          "privacy_behavior": {"type": "string", "minLength": 1},
+          "fields": {
+            "type": "array", "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["id", "position", "label", "prompt"],
+              "properties": {
+                "id": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+                "position": {"type": "integer", "minimum": 1},
+                "label": {"type": "string", "minLength": 1},
+                "prompt": {"type": "string", "minLength": 1}
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
