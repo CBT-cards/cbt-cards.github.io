@@ -19,6 +19,7 @@ EXPECTED_IDS = {
     "knowledge-record-v1",
     "locales-v1",
     "translation-record-v1",
+    "agent-eval-case-v1",
     "skill-manifest-v1",
 }
 
@@ -151,6 +152,22 @@ def main() -> None:
         fail("translation schema must distinguish machine_draft and human_reviewed")
     if set(translation_props.get("publication_status", {}).get("enum", [])) != {"not_published", "published"}:
         fail("translation schema must distinguish not_published and published")
+
+    agent_eval = json.loads((ROOT / "schemas" / "agent-eval-case-v1.schema.json").read_text(encoding="utf-8"))
+    required_eval = set(agent_eval.get("required", []))
+    for key in (
+        "id",
+        "category",
+        "user_message",
+        "expected_route",
+        "expected_resource_ids",
+        "expected_source_record_ids",
+        "expected_checks",
+        "prohibited_claims",
+        "rationale",
+    ):
+        if key not in required_eval:
+            fail(f"agent eval schema must require {key}")
 
     print(f"schema check passed: {len(entries)} versioned contracts discoverable from catalog")
 
