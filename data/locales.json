@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "name": "CBT Cards website locale registry",
+  "canonical": "https://cbt-cards.github.io/data/locales.json",
+  "updated": "2026-08-18",
+  "default_locale": "en",
+  "published_web_locales": [
+    {
+      "code": "en",
+      "language_name": "English",
+      "status": "published",
+      "base_url": "https://cbt-cards.github.io/",
+      "path_prefix": "/",
+      "direction": "ltr",
+      "html_lang": "en"
+    }
+  ],
+  "hreflang": {
+    "enabled": false,
+    "reason": "Only one website locale is currently published.",
+    "future_requirements": [
+      "Use a stable locale-specific URL for every translated page.",
+      "Add self-referencing and reciprocal hreflang links across every locale counterpart.",
+      "Add x-default for the default/global entry point where appropriate.",
+      "Keep each localized page self-canonical rather than canonicalizing translations to English.",
+      "Update sitemap, catalog, locale registry, agent indexes, and internal navigation in the same release."
+    ]
+  },
+  "translation_policy": {
+    "health_adjacent_content": "human_review_required_before_publication",
+    "machine_translation": "may_assist drafting but is not sufficient publication review for health-adjacent learning, worksheet, or toolkit content",
+    "rtl": "Any published right-to-left locale must declare dir=rtl on localized HTML and receive layout review.",
+    "source_preservation": "Translations must preserve source links, safety boundaries, stable resource IDs or explicit localized-ID mappings, and review provenance."
+  },
+  "mobile_app_languages": {
+    "status": "not_asserted_by_this_repository",
+    "note": "The website locale registry describes cbt-cards.github.io only. Do not infer Android or iOS language support from the website locale list, historical release notes, or unverified store metadata."
+  }
+}
