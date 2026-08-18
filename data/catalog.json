@@ -33,6 +33,8 @@
     {"id": "worry-time", "type": "learning", "url": "https://cbt-cards.github.io/learn/worry-time/", "title": "Worry time", "reviewed": "2026-08-18"},
     {"id": "activity-planning", "type": "learning", "url": "https://cbt-cards.github.io/learn/activity-planning/", "title": "Activity planning", "reviewed": "2026-08-18"},
     {"id": "cbt-journaling", "type": "learning", "url": "https://cbt-cards.github.io/learn/cbt-journaling/", "title": "CBT journaling", "reviewed": "2026-08-18"},
-    {"id": "agent-skill", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md", "title": "CBT Cards agent skill", "version": "1.1.0"}
+    {"id": "agent-skill-latest", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md", "title": "CBT Cards agent skill (latest)", "version": "1.1.0", "mutable": true},
+    {"id": "agent-skill-v1.1.0", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.1.0/SKILL.md", "title": "CBT Cards agent skill v1.1.0", "version": "1.1.0", "mutable": false},
+    {"id": "agent-skill-manifest", "type": "agent-manifest", "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json", "title": "CBT Cards skill manifest"}
   ]
 }
