@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CBT Cards changelog: website &amp; public data updates</title>
-<meta name="description" content="Track CBT Cards website, public-data, schema, worksheet, toolkit, and agent-interface updates without confusing them with mobile-app releases." />
+<meta name="description" content="Track CBT Cards website, public-data, translation, schema, worksheet, toolkit, and agent-interface updates without confusing them with mobile-app releases." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href="https://cbt-cards.github.io/changelog/" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/changelog.json" title="CBT Cards machine-readable changelog" />
@@ -15,18 +15,44 @@
 <link rel="icon" href="/assets/app-icon.png" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="CBT Cards changelog" />
-<meta property="og:description" content="Website and public-data updates, separated from mobile-app release history." />
+<meta property="og:description" content="Website, data, translation, and agent-interface updates, separated from mobile-app release history." />
 <meta property="og:url" content="https://cbt-cards.github.io/changelog/" />
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://cbt-cards.github.io/changelog/"}]},{"@type":"CollectionPage","name":"CBT Cards public changelog","url":"https://cbt-cards.github.io/changelog/","description":"Website, public knowledge, schema, worksheet, dataset, toolkit-review, and agent-interface release history for CBT Cards.","dateModified":"2026-08-18","publisher":{"@id":"https://cbt-cards.github.io/#publisher"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://cbt-cards.github.io/changelog/"}]},{"@type":"CollectionPage","name":"CBT Cards public changelog","url":"https://cbt-cards.github.io/changelog/","description":"Website, public knowledge, translation, schema, worksheet, dataset, toolkit-review, and agent-interface release history for CBT Cards.","dateModified":"2026-08-18","publisher":{"@id":"https://cbt-cards.github.io/#publisher"}}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/how-it-works/">How it works</a><a href="/features/">Features</a><a href="/learn/">Learn</a><a href="/toolkit/">Toolkit</a><a href="/about/">About</a></nav><a class="download" href="/#download">Download</a></div></header>
+<header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/agents/">For AI</a><a href="/about/">About</a></nav><a class="download" href="/toolkit/">Explore tools</a></div></header>
 <main id="main">
-<section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / Changelog</div><h1>CBT Cards public changelog</h1><p class="lede">Website and public-data changes, recorded separately from mobile-app releases.</p></div></section>
+<section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / Changelog</div><h1>CBT Cards public changelog</h1><p class="lede">Website, public-data, translation, and agent-interface changes, recorded separately from mobile-app releases.</p></div></section>
 <section class="section alt"><div class="wrap prose">
-<p>This changelog tracks changes to the public CBT Cards website, learning library, printable browser worksheets, schemas, toolkit pages, structured data, feeds, and agent interfaces. A website, data, or agent entry does <strong>not</strong> imply that an Android or iOS app version shipped on the same date.</p>
+<p>This changelog tracks changes to the public CBT Cards website, learning library, printable browser worksheets, schemas, language data, toolkit pages, structured data, feeds, and agent interfaces. A website, data, translation, or agent entry does <strong>not</strong> imply that an Android or iOS app version shipped on the same date.</p>
 <p>Agents and tooling can read the same history from <a href="/data/changelog.json"><code>data/changelog.json</code></a>. Versioned data contracts are listed in <a href="/schemas/index.json"><code>schemas/index.json</code></a>.</p>
+
+<article id="agent-2026-08-18-localization-aware-skill">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Agent interface</p>
+<h2>Localization-aware agent skill v1.6.0</h2>
+<p>Published a new agent-skill version that understands CBT Cards language and translation status instead of assuming that any available translation is official published content.</p>
+<ul>
+<li>Published immutable <a href="/agents/cbt-cards/v1.6.0/SKILL.md">skill v1.6.0</a> and advanced the version manifest and latest alias.</li>
+<li>Added the locale registry and translation overlay to the normal source-selection flow.</li>
+<li>Defined machine drafts as development data rather than official CBT Cards localizations.</li>
+<li>When no reviewed localization exists, assistants may translate the canonical source for a user but should identify that output as their own translation.</li>
+</ul>
+<p>This is an agent-interface release. It does not imply a new Android or iOS app version.</p>
+</article>
+
+<article id="data-2026-08-18-localization-foundation">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Public data</p>
+<h2>Locale registry and translation overlay foundation</h2>
+<p>Added a language model that keeps source content, translation drafts, review state, and localized publication state separate rather than cloning English pages and hoping they stay aligned.</p>
+<ul>
+<li>Added <a href="/data/locales.json"><code>data/locales.json</code></a> with English as the source locale, Russian as a pilot locale, and German as planned.</li>
+<li>Added <a href="/data/translations.jsonl"><code>data/translations.jsonl</code></a> with three initial Russian machine drafts for CBT thought record, Thought vs Fact, and Worry Time.</li>
+<li>Added versioned schemas for the locale registry and one translation record.</li>
+<li>Added CI checks for stable resource IDs, locale state, source-review snapshots, key-point alignment, and publication boundaries.</li>
+</ul>
+<p>The initial Russian records are explicitly <code>machine_draft</code>, <code>unreviewed</code>, and <code>not_published</code>. They have no canonical localized pages. A source update also makes an older translation fail validation until its source snapshot is updated.</p>
+</article>
 
 <article id="agent-2026-08-18-public-resource-skill">
 <p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Agent interface</p>
@@ -97,6 +123,6 @@
 </article>
 </div></section>
 </main>
-<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/toolkit/">Toolkit</a><a href="/toolkit/review-status/">Review status</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/support/">Support</a><a href="/agents/">For agents</a></nav></div></footer>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/toolkit/review-status/">Review status</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/support/">Support</a><a href="/agents/">For AI</a></nav></div></footer>
 </body>
 </html>
