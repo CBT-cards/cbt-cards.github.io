@@ -1,6 +1,6 @@
 # CBT Cards
 
-CBT Cards is a public library of practical reflection resources for people and the AI assistants they choose to use. It publishes short CBT-inspired cards, plain-language learning guides, printable browser worksheets, structured public data, review metadata, language-status metadata, public agent evals, reproducible non-model baselines, citation metadata, and versioned portable agent instructions. The original CBT Cards mobile app remains documented as a separate product surface. CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
+CBT Cards is a public library of practical reflection resources for people and the AI assistants they choose to use. It publishes short CBT-inspired cards, plain-language learning guides, printable browser worksheets, structured public data, review metadata, language-status metadata, public agent evals, reproducible non-model baselines, held-out challenge cases, a provenance-first model-run protocol, citation metadata, and versioned portable agent instructions. The original CBT Cards mobile app remains documented as a separate product surface. CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
 
 ## Public reflection resources
 
@@ -61,17 +61,30 @@ CBT Cards is a public library of practical reflection resources for people and t
 ## Agent evaluation research
 
 - Human-readable research page: https://cbt-cards.github.io/research/
-- Evaluation cases (JSONL): https://cbt-cards.github.io/data/agent-evals.jsonl
+- Starter evaluation cases: https://cbt-cards.github.io/data/agent-evals.jsonl
+- Held-out challenge cases: https://cbt-cards.github.io/data/agent-evals-challenge.jsonl
+- Starter deterministic runs: https://cbt-cards.github.io/data/agent-eval-runs.jsonl
+- Held-out deterministic challenge runs: https://cbt-cards.github.io/data/agent-eval-challenge-runs.jsonl
 - Evaluation case schema: https://cbt-cards.github.io/schemas/agent-eval-case-v1.schema.json
-- Evaluation runs (JSONL): https://cbt-cards.github.io/data/agent-eval-runs.jsonl
-- Evaluation run schema: https://cbt-cards.github.io/schemas/agent-eval-run-v1.schema.json
 - Reproducible baseline runner: https://cbt-cards.github.io/scripts/run_eval_baselines.py
-- The starter set contains 24 hand-authored cases across retrieval, learning, worksheets, localization, publication boundaries, privacy, and safety.
-- Every run pins the SHA-256 of the exact evaluation-case dataset bytes it used.
-- `null-route-v1` is an intentionally weak non-model floor: route 1/24, targets 0/19, locale 0/4, boundary 1/7.
-- `deterministic-contract-router-v1` is a rule-based contract/harness baseline using only `user_message`: route 24/24, targets 19/19, locale 4/4, boundary 7/7 on the current starter set.
-- The deterministic router's perfect score is not evidence of general assistant or model quality. It verifies the routing/evaluation harness on this small fixed taxonomy.
-- No LLM/model results are currently claimed. Future model runs must carry their own model/provider/version/date and evaluator provenance.
+- The starter set contains 24 cases across retrieval, learning, worksheets, localization, publication boundaries, privacy, and safety.
+- `deterministic-contract-router-v1` reaches 24/24 routes on the friendly starter set but only 1/12 on the separately authored held-out challenge set, with 0/10 challenge target selections, 0/1 locale behaviors, and 1/3 boundary routes.
+- Challenge dataset SHA-256: `f20bbc8562315de235fe6b935b17be8eeaa41d604b222c91904618658b2c0407`.
+- If a runner, prompt, model, or adapter is tuned on the 12 challenge cases, this challenge generation is no longer held out for that system.
+- Deterministic baseline scores are not evidence of general assistant or model quality.
+
+## Real model-run protocol
+
+- Protocol v1: https://cbt-cards.github.io/research/MODEL_RUN_PROTOCOL.md
+- Fixed model-run prompt v1: https://cbt-cards.github.io/research/model-run-prompt-v1.txt
+- Model-response contract: https://cbt-cards.github.io/schemas/agent-model-response-v1.schema.json
+- Model-run contract: https://cbt-cards.github.io/schemas/agent-model-run-v1.schema.json
+- Deterministic post-generation evaluator: https://cbt-cards.github.io/scripts/evaluate_model_run.py
+- Generation and scoring are separate stages. During generation the model may receive `user_message`, normal runtime/system instructions, and normal public CBT Cards sources, but benchmark-only expected fields must remain hidden.
+- A model run records provider, model, exposed version/snapshot when available, runtime, execution timestamp, prompt SHA-256, dataset SHA-256, raw answers, evaluator version, and per-case routing results.
+- The v1 deterministic evaluator scores route, exact target IDs, locale behavior, and boundary routing. It does not automatically score prose quality, `expected_checks`, or prohibited claims.
+- CI uses a synthetic fixture only to validate the protocol/scorer contract. That fixture is not a model benchmark result.
+- No LLM or hosted-assistant score is currently claimed.
 
 ## Portable agent skill
 
@@ -98,8 +111,10 @@ CBT Cards is a public library of practical reflection resources for people and t
 - Curated source-language knowledge dataset (JSONL): https://cbt-cards.github.io/data/knowledge.jsonl
 - Locale registry: https://cbt-cards.github.io/data/locales.json
 - Translation overlays (JSONL): https://cbt-cards.github.io/data/translations.jsonl
-- Agent evaluation cases (JSONL): https://cbt-cards.github.io/data/agent-evals.jsonl
-- Agent evaluation runs (JSONL): https://cbt-cards.github.io/data/agent-eval-runs.jsonl
+- Starter agent evaluation cases: https://cbt-cards.github.io/data/agent-evals.jsonl
+- Held-out agent evaluation challenge cases: https://cbt-cards.github.io/data/agent-evals-challenge.jsonl
+- Starter deterministic runs: https://cbt-cards.github.io/data/agent-eval-runs.jsonl
+- Held-out deterministic challenge runs: https://cbt-cards.github.io/data/agent-eval-challenge-runs.jsonl
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Toolkit review overlay: https://cbt-cards.github.io/data/toolkit-review.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
@@ -109,7 +124,7 @@ CBT Cards is a public library of practical reflection resources for people and t
 - Extended index: https://cbt-cards.github.io/llms-full.txt
 - Agent integration guide: https://cbt-cards.github.io/agents/
 
-For CBT Cards-owned JSON/JSONL formats, use the versioned contracts listed in schemas/index.json. Catalog entries expose schema_url where applicable.
+For CBT Cards-owned formats, use the versioned contracts listed in schemas/index.json. Some schemas are interface-only contracts until a real public instance exists; do not invent an instance merely because a schema is discoverable.
 
 Website, dataset, translation, schema, worksheet, research, and agent-skill changes are separate from mobile-app releases. Do not infer an Android/iOS app version from public-site release metadata.
 
