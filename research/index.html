@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CBT Cards agent evals: held-out tests &amp; model-run protocol</title>
+<meta name="description" content="Public CBT Cards agent evaluation cases, held-out challenge results, reproducible deterministic baselines, and an executable provenance-first protocol for isolated real model runs." />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href="https://cbt-cards.github.io/research/" />
+<link rel="alternate" type="application/x-ndjson" href="https://cbt-cards.github.io/data/agent-evals.jsonl" title="CBT Cards starter agent evaluation cases" />
+<link rel="alternate" type="application/x-ndjson" href="https://cbt-cards.github.io/data/agent-evals-challenge.jsonl" title="CBT Cards held-out agent evaluation challenge cases" />
+<link rel="alternate" type="application/x-ndjson" href="https://cbt-cards.github.io/data/agent-eval-runs.jsonl" title="CBT Cards reproducible starter evaluation runs" />
+<link rel="alternate" type="application/x-ndjson" href="https://cbt-cards.github.io/data/agent-eval-challenge-runs.jsonl" title="CBT Cards reproducible held-out challenge runs" />
+<link rel="alternate" type="application/json" href="https://cbt-cards.github.io/schemas/agent-model-run-v1.schema.json" title="CBT Cards model-run schema" />
+<link rel="stylesheet" href="/styles.css?v=20260818" />
+<link rel="icon" href="/assets/app-icon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="CBT Cards agent evals" />
+<meta property="og:description" content="Starter and held-out agent evals plus an isolated execution path for recording real model runs." />
+<meta property="og:url" content="https://cbt-cards.github.io/research/" />
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"Research","item":"https://cbt-cards.github.io/research/"}]},{"@type":"Dataset","name":"CBT Cards agent evaluation research","description":"Starter and held-out scenarios, reproducible deterministic baselines, and public contracts and tooling for isolated model-run provenance and scoring.","url":"https://cbt-cards.github.io/research/","distribution":[{"@type":"DataDownload","encodingFormat":"application/x-ndjson","contentUrl":"https://cbt-cards.github.io/data/agent-evals.jsonl"},{"@type":"DataDownload","encodingFormat":"application/x-ndjson","contentUrl":"https://cbt-cards.github.io/data/agent-evals-challenge.jsonl"},{"@type":"DataDownload","encodingFormat":"application/x-ndjson","contentUrl":"https://cbt-cards.github.io/data/agent-eval-runs.jsonl"},{"@type":"DataDownload","encodingFormat":"application/x-ndjson","contentUrl":"https://cbt-cards.github.io/data/agent-eval-challenge-runs.jsonl"}],"license":"https://cbt-cards.github.io/LICENSE","creator":{"@id":"https://cbt-cards.github.io/#publisher"},"dateModified":"2026-08-18"}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/learn/">Learn</a><a href="/toolkit/">Toolkit</a><a href="/languages/">Languages</a><a href="/research/">Research</a><a href="/agents/">For AI</a><a href="/about/">About</a></nav><a class="download" href="/data/agent-evals.jsonl">Eval data</a></div></header>
+<main id="main">
+<section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / Research</div><h1>Test the assistant on wording it did not memorize.</h1><p class="lede">CBT Cards publishes inspectable evaluation cases, reproducible deterministic baselines, a separate held-out challenge set, and an isolated execution path for recording real model runs with dataset, prompt, skill, runtime, model, response, and evaluator provenance.</p></div></section>
+<section class="section alt"><div class="wrap prose">
+<h2>Starter set: 24 cases</h2>
+<p>The starter dataset covers retrieval, learning, worksheets, localization, publication boundaries, privacy, and safety. Each case records an expected route, stable resource or raw source IDs, semantic checks, prohibited claims, and a rationale rather than one exact reference answer.</p>
+<p><a href="/data/agent-evals.jsonl"><strong>Starter cases</strong></a> · <a href="/schemas/agent-eval-case-v1.schema.json">Case schema</a> · <a href="/data/agent-eval-runs.jsonl">Starter runs</a></p>
+
+<h2>Starter baseline: useful, but friendly</h2>
+<p><code>deterministic-contract-router-v1</code> is a small keyword router that reads only <code>user_message</code>. On the starter set it reaches 24/24 routes, 19/19 target selections, 4/4 locale behaviors, and 7/7 boundary routes. The intentionally weak <code>null-route-v1</code> floor reaches 1/24 routes.</p>
+<p>The perfect starter score is a harness result, not evidence of general assistant quality. A router built around familiar wording can look rather competent when the examination politely repeats its study guide.</p>
+
+<h2>Held-out challenge: 12 new cases</h2>
+<p>The challenge set was authored separately with paraphrased and adversarial wording across the same seven categories. The deterministic router was not changed after challenge authoring before its result was recorded.</p>
+<ul>
+<li><strong>Same deterministic router:</strong> 1/12 routes, 0/10 target selections, 0/1 locale behaviors, 1/3 boundary routes.</li>
+<li><strong>Null route floor:</strong> 0/12 routes, 0/10 targets, 0/1 locale behaviors, 0/3 boundary routes.</li>
+</ul>
+<p>The drop from 24/24 to 1/12 is the point of the held-out layer. It demonstrates brittleness instead of hiding it behind the starter score.</p>
+<p><a href="/data/agent-evals-challenge.jsonl"><strong>Challenge cases</strong></a> · <a href="/data/agent-eval-challenge-runs.jsonl">Challenge runs</a> · challenge SHA-256 <code>f20bbc8562315de235fe6b935b17be8eeaa41d604b222c91904618658b2c0407</code></p>
+<p>If a router, prompt, adapter, or model is tuned using these 12 cases, this challenge generation is no longer held out for that system. A later generalization claim needs a new untouched challenge generation.</p>
+
+<h2>Protocol for real model runs</h2>
+<p>The repository has a two-stage protocol for evaluating ChatGPT, API models, OpenClaw, Hermes, or another assistant runtime without exposing benchmark answers during generation.</p>
+<ol>
+<li><strong>Generate first.</strong> The model receives the case <code>user_message</code>, the normal public CBT Cards resources/runtime being tested, and the fixed <a href="/research/model-run-prompt-v1.txt">model-run prompt v1</a>. Benchmark-only expected fields remain hidden.</li>
+<li><strong>Score later.</strong> After all responses are captured, <a href="/scripts/evaluate_model_run.py"><code>evaluate_model_run.py</code></a> reads the expected fields and deterministically scores route, exact target IDs, locale behavior, and boundary routing.</li>
+</ol>
+<p>Each response uses the <a href="/schemas/agent-model-response-v1.schema.json">model-response contract</a>. A published run uses the <a href="/schemas/agent-model-run-v1.schema.json">model-run contract</a> and records provider, model, exposed snapshot/version, runtime, execution timestamp, prompt SHA-256, dataset SHA-256, evaluator version, raw answer text, answer hash, and per-case routing results.</p>
+
+<h2>Executable isolated OpenAI path</h2>
+<p>The first provider adapter is <a href="/scripts/run_model_openai.py"><code>run_model_openai.py</code></a>. It gives each API request the fixed evaluation prompt, the current public CBT Cards skill, and exactly one case field: <code>user_message</code>. Web search is restricted to the CBT Cards public domain and the routing envelope is requested as strict structured JSON.</p>
+<p>Generation and scoring remain separate processes. <a href="/scripts/score_model_execution.py"><code>score_model_execution.py</code></a> converts an execution artifact into the neutral scored run, and <a href="/scripts/check_model_run_candidate.py"><code>check_model_run_candidate.py</code></a> verifies prompt/dataset/skill/response provenance and refuses to treat v1 as semantically scored.</p>
+<p>A manual GitHub Actions workflow, <code>Run isolated CBT Cards model eval</code>, can run either starter or challenge data in a fresh process using repository secret <code>OPENAI_API_KEY</code> once that workflow exists on the repository default branch. It uploads the execution manifest, raw response JSONL, and scored run JSON as an Actions artifact. It does not commit a public benchmark result automatically.</p>
+<p>The full rules are in <a href="/research/MODEL_RUN_PROTOCOL.md"><strong>MODEL_RUN_PROTOCOL.md</strong></a>. Normal PR CI exercises input-isolation plus the complete post-generation scoring/candidate pipeline with a synthetic fixture; that fixture is not a model result.</p>
+
+<h2>What v1 scores, and what it does not</h2>
+<p>The deterministic model-run evaluator scores routing metadata only. It does <strong>not</strong> automatically grade empathy, prose quality, factual completeness, clinical suitability, the case <code>expected_checks</code>, or prohibited-claim compliance. Those dimensions require a separately declared semantic review method.</p>
+<p>This separation matters: a route can be correct while the prose is poor, and polished prose can still use the wrong source or cross a publication/privacy boundary.</p>
+
+<h2>No model score yet</h2>
+<p>No LLM or hosted-assistant score is currently published. The isolated execution workflow is defined and CI-validated, but its manual Actions entry point is intended for use after the workflow is present on the default branch. A real result should then be generated in a fresh process with its own provider credential and inspected before publication. Deterministic baselines and CI fixtures must not be relabeled as model results.</p>
+
+<h2>Research direction</h2>
+<p>The next useful result is a first clean artifact-only model execution on starter and untouched challenge data, followed by a separately versioned semantic-review protocol for prohibited claims, source fidelity, and answer quality. Multilingual fidelity can then be evaluated without quietly converting translation drafts into official content.</p>
+</div></section>
+</main>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/research/">Research</a><a href="/languages/">Languages</a><a href="/toolkit/">Toolkit</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/agents/">For AI</a></nav></div></footer>
+</body>
+</html>

@@ -1,0 +1,23 @@
+name: New practice proposal
+description: Propose a reviewed CBT Cards-owned practice
+body:
+  - type: input
+    id: mechanism
+    attributes: {label: Mechanism}
+    validations: {required: true}
+  - type: textarea
+    id: situations
+    attributes: {label: Plain-language situations}
+    validations: {required: true}
+  - type: textarea
+    id: fit
+    attributes: {label: Best used when}
+    validations: {required: true}
+  - type: textarea
+    id: avoid
+    attributes: {label: Avoid when / genuine-risk exclusions}
+    validations: {required: true}
+  - type: textarea
+    id: provenance
+    attributes: {label: Evidence and provenance}
+    validations: {required: true}

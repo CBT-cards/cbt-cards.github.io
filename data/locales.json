@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "name": "CBT Cards locale registry",
+  "canonical": "https://cbt-cards.github.io/data/locales.json",
+  "source_locale": "en",
+  "updated": "2026-08-18",
+  "locales": [
+    {
+      "locale": "en",
+      "name": "English",
+      "native_name": "English",
+      "status": "source",
+      "machine_readable": true,
+      "public_html": true,
+      "policy": "Canonical source content. Published records may be used when their resource-level review status permits it."
+    },
+    {
+      "locale": "ru",
+      "name": "Russian",
+      "native_name": "Русский",
+      "status": "pilot",
+      "machine_readable": true,
+      "public_html": false,
+      "policy": "All current curated resources have machine-readable translation drafts. Drafts remain non-authoritative and produce no localized HTML until separate human language and editorial review; public HTML can be enabled later for incremental reviewed publication."
+    },
+    {
+      "locale": "de",
+      "name": "German",
+      "native_name": "Deutsch",
+      "status": "planned",
+      "machine_readable": false,
+      "public_html": false,
+      "policy": "Planned locale. No CBT Cards German translation should be inferred from source content until an explicit translation record exists."
+    }
+  ]
+}

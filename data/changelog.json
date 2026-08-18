@@ -5,6 +5,187 @@
   "updated": "2026-08-18",
   "entries": [
     {
+      "id": "data-2026-08-18-model-run-protocol",
+      "date": "2026-08-18",
+      "scope": "data",
+      "title": "Provenance-first model-run protocol v1",
+      "summary": "Added a two-stage protocol for generating real assistant responses without benchmark answers and scoring routing metadata afterward with a deterministic evaluator.",
+      "changes": [
+        {"type": "added", "resource_id": "model-run-protocol", "url": "https://cbt-cards.github.io/research/MODEL_RUN_PROTOCOL.md"},
+        {"type": "added", "resource_id": "model-run-prompt-v1", "url": "https://cbt-cards.github.io/research/model-run-prompt-v1.txt"},
+        {"type": "added", "resource_id": "model-run-evaluator-v1", "url": "https://cbt-cards.github.io/scripts/evaluate_model_run.py"},
+        {"type": "changed", "resource_id": "research", "url": "https://cbt-cards.github.io/research/"},
+        {"type": "changed", "resource_id": "schema-manifest", "url": "https://cbt-cards.github.io/schemas/index.json"},
+        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+      ],
+      "notes": [
+        "Generation and scoring are separate stages: the model sees user_message plus the normal runtime/public CBT Cards sources, while benchmark expected fields remain hidden until deterministic scoring.",
+        "The model-response and model-run v1 schemas are interface-only contracts until a real model run is published; no fabricated instance is added merely to satisfy schema discovery.",
+        "Published model runs must record provider, model, exposed version or snapshot, runtime, execution timestamp, prompt SHA-256, evaluation dataset SHA-256, evaluator version, raw answers, and per-case routing results.",
+        "The v1 deterministic evaluator scores route, exact target IDs, locale behavior, and boundary routing. It does not automatically score prose quality, expected_checks, or prohibited_claims.",
+        "No LLM or hosted-assistant score is claimed by this protocol release. The CI fixture tests the evaluator contract and is explicitly not a model result."
+      ]
+    },
+    {
+      "id": "data-2026-08-18-held-out-eval-challenge",
+      "date": "2026-08-18",
+      "scope": "data",
+      "title": "Held-out paraphrase and adversarial eval challenge",
+      "summary": "Added 12 separately authored challenge cases and recorded the unchanged deterministic router's large drop from its friendly starter-set score.",
+      "changes": [
+        {"type": "added", "resource_id": "agent-evals-challenge", "url": "https://cbt-cards.github.io/data/agent-evals-challenge.jsonl"},
+        {"type": "added", "resource_id": "agent-eval-challenge-runs", "url": "https://cbt-cards.github.io/data/agent-eval-challenge-runs.jsonl"},
+        {"type": "changed", "resource_id": "research", "url": "https://cbt-cards.github.io/research/"},
+        {"type": "changed", "resource_id": "schema-manifest", "url": "https://cbt-cards.github.io/schemas/index.json"},
+        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+      ],
+      "notes": [
+        "The challenge set contains 12 paraphrase/adversarial cases across the same seven categories as the starter set and was authored separately from the deterministic router rules.",
+        "The deterministic-contract-router-v1 was not changed after challenge authoring before recording the challenge result.",
+        "The router drops from 24/24 starter routes to 1/12 challenge routes, with 0/10 target selections, 0/1 locale behaviors, and 1/3 boundary routes correct.",
+        "The challenge dataset SHA-256 is f20bbc8562315de235fe6b935b17be8eeaa41d604b222c91904618658b2c0407.",
+        "If a runner, prompt, model, or adapter is tuned on these challenge cases, this generation must no longer be described as held out for that system."
+      ]
+    },
+    {
+      "id": "agent-2026-08-18-portable-skill-v1-7",
+      "date": "2026-08-18",
+      "scope": "agent",
+      "title": "Portable Agent Skills release v1.7.0",
+      "summary": "Published a strict portable Agent Skills profile for the latest CBT Cards skill while preserving the existing immutable URL convention and adding installation guidance for OpenClaw, Hermes Agent, and generic Agent Skills clients.",
+      "changes": [
+        {"type": "added", "resource_id": "agent-skill-v1.7.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.7.0/SKILL.md"},
+        {"type": "added", "resource_id": "agent-skill-v1.7.0-portable", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.7.0/cbt-cards/SKILL.md"},
+        {"type": "added", "resource_id": "agent-skill-install", "url": "https://cbt-cards.github.io/agents/cbt-cards/INSTALL.md"},
+        {"type": "changed", "resource_id": "agent-skill-latest", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md"},
+        {"type": "changed", "resource_id": "agent-skill-manifest", "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"},
+        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+      ],
+      "notes": [
+        "v1.7.0 restricts SKILL.md frontmatter to the portable Agent Skills field set and stores release version in string-valued metadata.version rather than a custom top-level frontmatter field.",
+        "The mutable alias, backward-compatible immutable URL, and strict portable distribution contain identical v1.7.0 skill content.",
+        "The strict portable distribution places SKILL.md under an immediate cbt-cards directory so directory/name validation can succeed without breaking the existing versioned URL convention.",
+        "Runtime-specific OpenClaw and Hermes installation instructions live in INSTALL.md outside the portable skill core.",
+        "This is an agent-interface release and does not imply an Android or iOS app release."
+      ]
+    },
+    {
+      "id": "data-2026-08-18-reproducible-eval-baselines",
+      "date": "2026-08-18",
+      "scope": "data",
+      "title": "Reproducible agent eval baselines and citation metadata",
+      "summary": "Added a versioned evaluation-run format, two deterministic non-model baselines tied to the exact evaluation dataset hash, CI regeneration checks, and repository-level citation metadata.",
+      "changes": [
+        {"type": "added", "resource_id": "agent-eval-runs", "url": "https://cbt-cards.github.io/data/agent-eval-runs.jsonl"},
+        {"type": "changed", "resource_id": "agent-evals", "url": "https://cbt-cards.github.io/data/agent-evals.jsonl"},
+        {"type": "changed", "resource_id": "research", "url": "https://cbt-cards.github.io/research/"},
+        {"type": "changed", "resource_id": "schema-manifest", "url": "https://cbt-cards.github.io/schemas/index.json"}
+      ],
+      "notes": [
+        "Each run record pins the SHA-256 of the exact agent-evals JSONL bytes used and keeps aggregate metrics separate from per-case results.",
+        "The intentionally weak null-route-v1 baseline gets 1/24 routes, 0/19 target selections, 0/4 locale behaviors, and 1/7 boundary routes correct.",
+        "The deterministic-contract-router-v1 baseline gets 24/24 routes, 19/19 target selections, 4/4 locale behaviors, and 7/7 boundary routes correct on the current starter set.",
+        "The deterministic router is a non-model contract/harness baseline using only user_message; its perfect score is not evidence of general model or assistant quality.",
+        "The repository includes CITATION.cff using Citation File Format 1.2.0. No DOI or project-wide semantic version is claimed before one is actually assigned or deliberately released."
+      ]
+    },
+    {
+      "id": "data-2026-08-18-agent-eval-foundation",
+      "date": "2026-08-18",
+      "scope": "data",
+      "title": "Public agent routing and boundary evals",
+      "summary": "Published a starter set of 24 evaluation cases for testing CBT Cards resource routing, localization status, publication boundaries, privacy boundaries, and safety abstention without prescribing exact model wording.",
+      "changes": [
+        {"type": "added", "resource_id": "research", "url": "https://cbt-cards.github.io/research/"},
+        {"type": "added", "resource_id": "agent-evals", "url": "https://cbt-cards.github.io/data/agent-evals.jsonl"},
+        {"type": "changed", "resource_id": "schema-manifest", "url": "https://cbt-cards.github.io/schemas/index.json"},
+        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+      ],
+      "notes": [
+        "The starter set contains 24 hand-authored cases across retrieval, learning, worksheets, localization, publication boundaries, privacy, and safety.",
+        "Cases record expected routes, stable resource or source IDs, semantic checks, prohibited claims, and rationales rather than one exact reference answer.",
+        "CI validates that expected resource IDs exist, raw source-only IDs remain source-only, localization expectations match current publication state, and required boundary categories remain represented.",
+        "No public model scores are claimed in this release; recorded model runs should be published separately with explicit model, version, and date metadata."
+      ]
+    },
+    {
+      "id": "web-2026-08-18-localization-publication-pipeline",
+      "date": "2026-08-18",
+      "scope": "website",
+      "title": "Localization review and generated publication pipeline",
+      "summary": "Completed Russian machine-draft coverage for the current curated knowledge set, added a human-readable language-status hub, and introduced deterministic generation that publishes only human-reviewed localized records.",
+      "changes": [
+        {"type": "added", "resource_id": "languages", "url": "https://cbt-cards.github.io/languages/"},
+        {"type": "changed", "resource_id": "product-overview", "url": "https://cbt-cards.github.io/"},
+        {"type": "changed", "resource_id": "translation-dataset", "url": "https://cbt-cards.github.io/data/translations.jsonl"},
+        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+      ],
+      "notes": [
+        "All 12 records in the current curated English knowledge set now have Russian machine-draft overlays; zero Russian records are currently human-reviewed or published.",
+        "Machine drafts never generate localized public resource pages.",
+        "Localized public pages use /<locale>/resources/<resource_id>/ and are generated only from human_reviewed + reviewed_for_publication + published records.",
+        "The public_html locale flag enables gradual publication; reviewed published records may coexist with unpublished machine drafts.",
+        "The generator maintains the language-status page, enabled locale hubs, localized resource pages, and their sitemap entries."
+      ]
+    },
+    {
+      "id": "agent-2026-08-18-localization-aware-skill",
+      "date": "2026-08-18",
+      "scope": "agent",
+      "title": "Localization-aware agent skill v1.6.0",
+      "summary": "Added explicit language and translation-status handling to the CBT Cards agent skill so assistants can distinguish source content, machine drafts, reviewed translations, and published localized resources.",
+      "changes": [
+        {"type": "added", "resource_id": "agent-skill-v1.6.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.6.0/SKILL.md"},
+        {"type": "changed", "resource_id": "agent-skill-latest", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md"},
+        {"type": "changed", "resource_id": "agent-skill-manifest", "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"},
+        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+      ],
+      "notes": [
+        "The skill checks the locale registry and translation overlay before treating localized text as official CBT Cards content.",
+        "Machine-draft translations are development data and must not be presented as reviewed or published CBT Cards localizations.",
+        "When no reviewed localization exists, an assistant may translate the canonical source for the user but must not misattribute that output as an official CBT Cards translation.",
+        "This is an agent-interface release and does not imply an Android or iOS app release."
+      ]
+    },
+    {
+      "id": "data-2026-08-18-localization-foundation",
+      "date": "2026-08-18",
+      "scope": "data",
+      "title": "Locale registry and translation overlay foundation",
+      "summary": "Added a source-locale registry, versioned translation-record contract, Russian pilot translation overlays, and CI rules that keep localized review and publication status separate from source content.",
+      "changes": [
+        {"type": "added", "resource_id": "locale-registry", "url": "https://cbt-cards.github.io/data/locales.json"},
+        {"type": "added", "resource_id": "translation-dataset", "url": "https://cbt-cards.github.io/data/translations.jsonl"},
+        {"type": "changed", "resource_id": "schema-manifest", "url": "https://cbt-cards.github.io/schemas/index.json"},
+        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+      ],
+      "notes": [
+        "English is the current canonical source locale for curated knowledge records.",
+        "Russian is a pilot locale with machine-readable translation drafts that remain independently reviewable from the source content.",
+        "Russian machine drafts are explicitly unreviewed and not published; they have no canonical localized pages.",
+        "German is registered as planned and has no translation records yet.",
+        "Each translation records the source review date it was based on; CI rejects translations when that source snapshot no longer matches the current English record."
+      ]
+    },
+    {
+      "id": "agent-2026-08-18-public-resource-skill",
+      "date": "2026-08-18",
+      "scope": "agent",
+      "title": "Public reflection resource skill v1.5.0",
+      "summary": "Reframed the CBT Cards agent skill around finding and using public reflection cards, worksheets, learning resources, and verified project information rather than treating the mobile app as the primary resource surface.",
+      "changes": [
+        {"type": "added", "resource_id": "agent-skill-v1.5.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.5.0/SKILL.md"},
+        {"type": "changed", "resource_id": "agent-skill-latest", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md"},
+        {"type": "changed", "resource_id": "agent-skill-manifest", "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"},
+        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+      ],
+      "notes": [
+        "The skill now treats published cards, worksheets, and reviewed learning pages as first-class resources for human-facing reflection tasks.",
+        "The mobile app remains a documented product surface for app-specific facts, privacy, support, and download requests.",
+        "The agent skill release does not imply an Android or iOS app release."
+      ]
+    },
+    {
       "id": "web-2026-08-18-crawl-graph-quality",
       "date": "2026-08-18",
       "scope": "website",
@@ -16,7 +197,7 @@
       "notes": [
         "Every sitemap HTML URL except the homepage must have an inbound link from another indexed page.",
         "Every indexed page must be reachable from the homepage in at most three internal-link hops.",
-        "Learn, Worksheets, Toolkit, About, Changelog, and Agents are required as direct homepage-linked hubs."
+        "Learn, Worksheets, Toolkit, Languages, About, Changelog, and Agents are required as direct homepage-linked hubs."
       ]
     },
     {
@@ -36,7 +217,7 @@
         {"type": "changed", "resource_id": "agent-skill-manifest", "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"}
       ],
       "notes": [
-        "The schema manifest maps each CBT Cards-owned JSON/JSONL instance to a versioned JSON Schema 2020-12 contract.",
+        "The schema manifest maps committed instances to versioned JSON Schema 2020-12 contracts and may also list interface-only contracts before a real public instance exists.",
         "Purpose-specific repository validators remain responsible for invariants beyond generic JSON Schema, including canonical targets, privacy wording, ordered worksheet fields, and toolkit publication-set equality.",
         "The JSONL contract describes one record/line rather than the entire newline-delimited file as one JSON document."
       ]

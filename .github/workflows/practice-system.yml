@@ -1,0 +1,8 @@
+name: Practice system quality
+on: [pull_request, push]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/check_practice_system.py

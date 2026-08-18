@@ -1,0 +1,11 @@
+name: Safety-boundary correction
+description: Report a routing or exclusion that could be unsafe
+body:
+  - type: input
+    id: target
+    attributes: {label: Practice or route}
+    validations: {required: true}
+  - type: textarea
+    id: risk
+    attributes: {label: Safety concern}
+    validations: {required: true}

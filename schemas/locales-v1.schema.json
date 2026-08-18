@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cbt-cards.github.io/schemas/locales-v1.schema.json",
+  "title": "CBT Cards locale registry v1",
+  "type": "object",
+  "required": ["schema_version", "name", "canonical", "source_locale", "updated", "locales"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "name": {"type": "string", "minLength": 1},
+    "canonical": {"const": "https://cbt-cards.github.io/data/locales.json"},
+    "source_locale": {"type": "string", "pattern": "^[a-z]{2}(?:-[A-Z]{2})?$"},
+    "updated": {"type": "string", "format": "date"},
+    "locales": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["locale", "name", "native_name", "status", "machine_readable", "public_html", "policy"],
+        "properties": {
+          "locale": {"type": "string", "pattern": "^[a-z]{2}(?:-[A-Z]{2})?$"},
+          "name": {"type": "string", "minLength": 1},
+          "native_name": {"type": "string", "minLength": 1},
+          "status": {"enum": ["source", "pilot", "planned"]},
+          "machine_readable": {
+            "type": "boolean",
+            "description": "Whether locale overlays may be exposed as machine-readable public development or published data."
+          },
+          "public_html": {
+            "type": "boolean",
+            "description": "Whether this locale may expose reviewed localized HTML. This is a locale-level capability flag, not a claim that every translation record in the locale is published."
+          },
+          "policy": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

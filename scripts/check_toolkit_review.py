@@ -33,14 +33,25 @@ def main() -> None:
     page_path = ROOT / "toolkit" / "review-status" / "index.html"
     sitemap_path = ROOT / "sitemap.xml"
     latest_skill_path = ROOT / "agents" / "cbt-cards" / "SKILL.md"
+    skill_manifest_path = ROOT / "agents" / "cbt-cards" / "manifest.json"
 
-    for path in (review_path, source_path, catalog_path, knowledge_path, page_path, sitemap_path, latest_skill_path):
+    for path in (
+        review_path,
+        source_path,
+        catalog_path,
+        knowledge_path,
+        page_path,
+        sitemap_path,
+        latest_skill_path,
+        skill_manifest_path,
+    ):
         if not path.exists():
             fail(f"missing required file: {path.relative_to(ROOT)}")
 
     review = json.loads(review_path.read_text(encoding="utf-8"))
     source = json.loads(source_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    skill_manifest = json.loads(skill_manifest_path.read_text(encoding="utf-8"))
 
     if review.get("schema_version") != "1.0":
         fail("unexpected review schema_version")
@@ -58,21 +69,50 @@ def main() -> None:
     if defaults != expected_defaults:
         fail(f"unexpected defaults for unlisted records: {defaults}")
 
+    latest_skill_version = skill_manifest.get("latest")
+    if not isinstance(latest_skill_version, str) or not latest_skill_version:
+        fail("skill manifest missing latest version")
+    expected_latest_url = f"{ORIGIN}/agents/cbt-cards/SKILL.md"
+    if skill_manifest.get("latest_url") != expected_latest_url:
+        fail("skill manifest latest_url mismatch")
+
+    immutable_skill_url = f"{ORIGIN}/agents/cbt-cards/v{latest_skill_version}/SKILL.md"
+    manifest_versions = {
+        item.get("version"): item.get("url")
+        for item in skill_manifest.get("versions", [])
+        if isinstance(item, dict)
+    }
+    if manifest_versions.get(latest_skill_version) != immutable_skill_url:
+        fail("skill manifest latest version is not mapped to its immutable URL")
+
+    immutable_skill_path = local_target(immutable_skill_url)
+    if immutable_skill_path is None or not immutable_skill_path.exists():
+        fail(f"latest immutable skill is missing: {immutable_skill_url}")
+
     resources = catalog.get("resources")
     if not isinstance(resources, list):
         fail("catalog resources must be a list")
     resource_by_id = {item.get("id"): item for item in resources}
 
+    latest_skill_resource_id = f"agent-skill-v{latest_skill_version}"
     for resource_id, expected_url in {
         "toolkit-review-page": f"{ORIGIN}/toolkit/review-status/",
         "toolkit-review-data": f"{ORIGIN}/data/toolkit-review.json",
-        "agent-skill-v1.4.0": f"{ORIGIN}/agents/cbt-cards/v1.4.0/SKILL.md",
+        latest_skill_resource_id: immutable_skill_url,
     }.items():
         resource = resource_by_id.get(resource_id)
         if not resource:
             fail(f"catalog missing {resource_id}")
         if resource.get("url") != expected_url:
             fail(f"catalog URL mismatch for {resource_id}")
+
+    latest_alias_resource = resource_by_id.get("agent-skill-latest")
+    if not latest_alias_resource:
+        fail("catalog missing agent-skill-latest")
+    if latest_alias_resource.get("url") != expected_latest_url:
+        fail("catalog latest skill URL mismatch")
+    if latest_alias_resource.get("version") != latest_skill_version:
+        fail("catalog latest skill version does not match manifest")
 
     records = review.get("records")
     if not isinstance(records, list) or not records:
@@ -147,14 +187,20 @@ def main() -> None:
         fail("sitemap missing toolkit review-status page")
 
     skill = latest_skill_path.read_text(encoding="utf-8")
-    if "version: 1.4.0" not in skill:
-        fail("latest skill is not v1.4.0")
+    immutable_skill = immutable_skill_path.read_text(encoding="utf-8")
+    if f"version: {latest_skill_version}" not in skill:
+        fail(f"latest skill alias is not v{latest_skill_version}")
+    if skill != immutable_skill:
+        fail("latest skill alias does not match latest immutable skill")
     if f"{ORIGIN}/data/toolkit-review.json" not in skill:
         fail("latest skill does not reference toolkit review overlay")
     if "unreviewed" not in skill or "source_only" not in skill:
         fail("latest skill does not preserve default raw-record status")
 
-    print(f"toolkit review check passed: {len(records)} published records; unlisted records default to source-only")
+    print(
+        f"toolkit review check passed: {len(records)} published records; "
+        f"latest skill v{latest_skill_version}; unlisted records default to source-only"
+    )
 
 
 if __name__ == "__main__":
