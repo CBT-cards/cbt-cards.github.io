@@ -12,69 +12,49 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - https://cbt-cards.github.io/support/
 - https://cbt-cards.github.io/faq/
 - https://cbt-cards.github.io/about/
-- Editorial review policy: https://cbt-cards.github.io/about/editorial-review/
+- Editorial review: https://cbt-cards.github.io/about/editorial-review/
+- Website localization: https://cbt-cards.github.io/about/localization/
 - Changelog: https://cbt-cards.github.io/changelog/
 
-## Learning library
+## Website locale status
 
-- https://cbt-cards.github.io/learn/
-- https://cbt-cards.github.io/learn/cbt-thought-record/
-- https://cbt-cards.github.io/learn/automatic-thoughts/
-- https://cbt-cards.github.io/learn/thought-vs-fact/
-- https://cbt-cards.github.io/learn/worry-time/
-- https://cbt-cards.github.io/learn/activity-planning/
-- https://cbt-cards.github.io/learn/cbt-journaling/
+- Website locale registry: https://cbt-cards.github.io/data/locales.json
+- Current published website locale: English (`en`) at the root URL.
+- The website locale registry describes cbt-cards.github.io only.
+- Do not infer Android or iOS language support from website locale metadata.
+- A future second website locale requires stable locale URLs, reciprocal hreflang, synchronized discovery, and human review for health-adjacent translations.
 
-Learning, worksheet, and curated toolkit-card pages are covered by the CBT Cards editorial review registry. The current project review target is 365 days; this is a maintenance policy, not a clinical standard.
+## Learning and worksheets
 
-## Printable worksheets
-
+- Learning library: https://cbt-cards.github.io/learn/
 - Worksheet hub: https://cbt-cards.github.io/worksheets/
-- CBT thought record: https://cbt-cards.github.io/worksheets/cbt-thought-record/
-- Worry time: https://cbt-cards.github.io/worksheets/worry-time/
-- Activity planning: https://cbt-cards.github.io/worksheets/activity-planning/
-- Machine-readable worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
+- Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Public worksheet pages have no submit action; typed text remains in the current browser page unless the user independently prints or saves it.
 
 ## Public toolkit corpus
 
-- Toolkit landing page: https://cbt-cards.github.io/toolkit/
+- Toolkit: https://cbt-cards.github.io/toolkit/
 - Review-status page: https://cbt-cards.github.io/toolkit/review-status/
-- Machine-readable review overlay: https://cbt-cards.github.io/data/toolkit-review.json
-- Cards index: https://cbt-cards.github.io/toolkit/cards/
-- Metaphors index: https://cbt-cards.github.io/toolkit/metaphors/
-- Protocol records index: https://cbt-cards.github.io/toolkit/protocols/
-- Source metadata and pinned corpus version: https://cbt-cards.github.io/data/toolkit-source.json
-- The related source corpus contains 115 English records: 77 cards, 23 metaphors, and 15 protocols.
-- Any source record not explicitly listed in the review overlay defaults to unreviewed and source-only.
+- Review overlay: https://cbt-cards.github.io/data/toolkit-review.json
+- Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
+- Unlisted source records default to unreviewed and source-only.
 - reviewed_for_publication means editorial/safety review for website publication, not clinical validation or proof of efficacy.
 
 ## Machine-readable resources
 
-- JSON resource catalog: https://cbt-cards.github.io/data/catalog.json
+- Resource catalog: https://cbt-cards.github.io/data/catalog.json
 - JSON Schema manifest: https://cbt-cards.github.io/schemas/index.json
 - Content review registry: https://cbt-cards.github.io/data/content-review.json
-- Machine-readable changelog: https://cbt-cards.github.io/data/changelog.json
-- RAG-friendly curated knowledge dataset (JSONL): https://cbt-cards.github.io/data/knowledge.jsonl
-- Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
-- Toolkit review overlay: https://cbt-cards.github.io/data/toolkit-review.json
-- Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
+- Website locale registry: https://cbt-cards.github.io/data/locales.json
+- Changelog JSON: https://cbt-cards.github.io/data/changelog.json
+- Curated knowledge JSONL: https://cbt-cards.github.io/data/knowledge.jsonl
 - Atom feed: https://cbt-cards.github.io/feed.xml
-- JSON Feed 1.1: https://cbt-cards.github.io/feed.json
-- Security contact: https://cbt-cards.github.io/.well-known/security.txt
-- Extended index: https://cbt-cards.github.io/llms-full.txt
-- Agent integration guide: https://cbt-cards.github.io/agents/
-- Latest agent skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
+- JSON Feed: https://cbt-cards.github.io/feed.json
+- Agent guide: https://cbt-cards.github.io/agents/
+- Latest skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 - Skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
-- Immutable skill v1.5.0: https://cbt-cards.github.io/agents/cbt-cards/v1.5.0/SKILL.md
+- Immutable skill v1.6.0: https://cbt-cards.github.io/agents/cbt-cards/v1.6.0/SKILL.md
 
-For CBT Cards-owned JSON/JSONL formats, use the versioned contracts listed in schemas/index.json. Catalog entries expose schema_url where applicable.
+For review freshness, join covered resources to data/content-review.json by catalog resource_id. Do not infer a later review date from sitemap lastmod, changelog activity, Git history, or a newer skill version.
 
-For review freshness, join health-adjacent resources to data/content-review.json by catalog resource_id. Do not infer a later review date from sitemap lastmod, changelog updates, or skill versions.
-
-Website changelog entries are separate from mobile-app releases. Do not infer an Android/iOS app version from website, dataset, worksheet, or agent-skill changes.
-
-## Store listings
-
-- Android: https://play.google.com/store/apps/details?id=cbt.cbtcards.stressrelief
-- iOS: https://apps.apple.com/us/app/cbt-cards-%D1%81bt-for-daily-use/id6737169041
+Website/data/agent changelog entries are separate from mobile-app releases. Do not infer an Android/iOS app version from website changes.
