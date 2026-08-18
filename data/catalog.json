@@ -44,9 +44,10 @@
     {"id": "source-card-21", "type": "toolkit-card", "url": "https://cbt-cards.github.io/toolkit/cards/thoughts-are-not-facts/", "title": "Thoughts ≠ Facts", "source_record_id": "card-21", "reviewed": "2026-08-18"},
     {"id": "source-card-27", "type": "toolkit-card", "url": "https://cbt-cards.github.io/toolkit/cards/socratic-questioning/", "title": "Socratic Questioning", "source_record_id": "card-27", "reviewed": "2026-08-18"},
     {"id": "source-card-32", "type": "toolkit-card", "url": "https://cbt-cards.github.io/toolkit/cards/ground-yourself/", "title": "Ground Yourself", "source_record_id": "card-32", "reviewed": "2026-08-18"},
-    {"id": "knowledge-dataset", "type": "dataset", "url": "https://cbt-cards.github.io/data/knowledge.jsonl", "title": "CBT Cards public knowledge dataset", "format": "application/x-ndjson", "locale": "en", "updated": "2026-08-18"},
-    {"id": "agent-skill-latest", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md", "title": "CBT Cards agent skill (latest)", "version": "1.1.0", "mutable": true},
+    {"id": "knowledge-dataset", "type": "dataset", "url": "https://cbt-cards.github.io/data/knowledge.jsonl", "title": "CBT Cards curated knowledge dataset", "format": "application/x-ndjson", "locale": "en", "updated": "2026-08-18"},
+    {"id": "agent-skill-latest", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md", "title": "CBT Cards agent skill (latest)", "version": "1.2.0", "mutable": true},
     {"id": "agent-skill-v1.1.0", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.1.0/SKILL.md", "title": "CBT Cards agent skill v1.1.0", "version": "1.1.0", "mutable": false},
+    {"id": "agent-skill-v1.2.0", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.2.0/SKILL.md", "title": "CBT Cards agent skill v1.2.0", "version": "1.2.0", "mutable": false},
     {"id": "agent-skill-manifest", "type": "agent-manifest", "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json", "title": "CBT Cards skill manifest"}
   ]
 }
