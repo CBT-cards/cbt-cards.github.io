@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Editorial review policy — CBT Cards</title>
+<meta name="description" content="How CBT Cards reviews health-adjacent learning pages, printable worksheets, and curated toolkit cards for sources, wording, safety, and freshness." />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href="https://cbt-cards.github.io/about/editorial-review/" />
+<link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/content-review.json" title="CBT Cards content review registry" />
+<link rel="stylesheet" href="/styles.css?v=20260818" />
+<link rel="icon" href="/assets/app-icon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Editorial review policy — CBT Cards" />
+<meta property="og:description" content="Review scope, cadence, and boundaries for public CBT Cards educational content." />
+<meta property="og:url" content="https://cbt-cards.github.io/about/editorial-review/" />
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"About","item":"https://cbt-cards.github.io/about/"},{"@type":"ListItem","position":3,"name":"Editorial review policy","item":"https://cbt-cards.github.io/about/editorial-review/"}]},{"@type":"Article","headline":"CBT Cards editorial review policy","mainEntityOfPage":"https://cbt-cards.github.io/about/editorial-review/","dateModified":"2026-08-18","publisher":{"@id":"https://cbt-cards.github.io/#publisher"}}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/how-it-works/">How it works</a><a href="/features/">Features</a><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/about/">About</a></nav><a class="download" href="/#download">Download</a></div></header>
+<main id="main">
+<section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / <a href="/about/">About</a> / Editorial review</div><h1>Editorial review policy</h1><p class="lede">How public CBT Cards educational resources are checked for sources, wording, safety boundaries, and freshness.</p></div></section>
+<section class="section alt"><div class="wrap prose">
+<h2>What is covered</h2>
+<p>The review registry currently covers all published resources classified in the public catalog as <code>learning</code>, <code>worksheet</code>, or <code>toolkit-card</code>. The machine-readable status is available at <a href="/data/content-review.json"><code>data/content-review.json</code></a>.</p>
+
+<h2>What the review checks</h2>
+<ul>
+<li>Source links and factual wording still support the page.</li>
+<li>General CBT information remains distinct from CBT Cards-specific product behavior.</li>
+<li>Safety wording continues to preserve the general-wellness and self-reflection boundary.</li>
+<li>Worksheet privacy statements still match the static no-submit browser behavior.</li>
+<li>Curated toolkit cards remain consistent with their source record ID and publication-review status.</li>
+<li>Product, privacy, or data-handling claims are not silently inferred from generic therapy concepts.</li>
+</ul>
+
+<h2>Review cadence</h2>
+<p>CBT Cards uses an internal target of reviewing covered resources at least once every 365 days. This is a project maintenance rule, not a clinical standard. The registry records <code>last_reviewed</code> and <code>next_review_due</code> for each covered resource.</p>
+<p>The repository quality gate rejects a deployment when a covered resource is overdue. A meaningful source, safety, or product change should trigger an earlier review rather than waiting for the scheduled date.</p>
+
+<h2>What “reviewed” does not mean</h2>
+<p>Editorial review does not mean clinical validation, proof that an exercise is effective for a diagnosis, medical-device review, or a recommendation that an exercise is suitable for a particular person. CBT Cards does not make those claims.</p>
+
+<h2>Relationship to toolkit publication status</h2>
+<p>The <a href="/toolkit/review-status/">toolkit publication overlay</a> answers a different question: whether a raw source-corpus record has been reviewed for a standalone CBT Cards web page. The content review registry then tracks freshness for the curated page after it has been published.</p>
+
+<h2>Machine-readable status</h2>
+<p>Agents and tooling should use the stable catalog <code>resource_id</code> to join a page with its review entry. The registry intentionally tracks public resources, not individual users or app data.</p>
+</div></section>
+</main>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/about/editorial-review/">Editorial review</a><a href="/privacy/">Privacy</a><a href="/agents/">For agents</a></nav></div></footer>
+</body>
+</html>
