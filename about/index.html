@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>About CBT Cards — from mobile app to public reflection library</title>
-<meta name="description" content="CBT Cards began as a mobile app and is growing into a public library of practical reflection tools for people, researchers, developers, and AI assistants." />
+<meta name="description" content="CBT Cards began as a mobile app and is growing into a public, multilingual library of practical reflection tools for people, researchers, developers, and AI assistants." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href="https://cbt-cards.github.io/about/" />
 <meta property="og:type" content="article" />
@@ -30,7 +30,7 @@
       "@type": "AboutPage",
       "name": "About CBT Cards",
       "url": "https://cbt-cards.github.io/about/",
-      "description": "The origin, direction, editorial principles, and public source-of-truth approach for CBT Cards.",
+      "description": "The origin, direction, editorial principles, multilingual approach, and public source-of-truth model for CBT Cards.",
       "isPartOf": {"@id": "https://cbt-cards.github.io/#website"}
     }
   ]
@@ -58,7 +58,7 @@
 <p>The app still exists, but an app install is no longer the boundary of the project. Useful prompts, worksheets, explanations, and source material can be more valuable when they are linkable, inspectable, reusable, and available outside one product interface.</p>
 
 <h2>Where it is going</h2>
-<p>CBT Cards is becoming a public reflection library for two kinds of readers: people and the assistants they choose to use. A person should be able to open a card or worksheet and understand it without technical background. An assistant should be able to find the same resource through a stable ID, canonical URL, structured data, and explicit safety and review metadata.</p>
+<p>CBT Cards is becoming a public reflection library for two kinds of readers: people and the assistants they choose to use. A person should be able to open a card or worksheet and understand it without technical background. An assistant should be able to find the same resource through a stable ID, canonical URL, structured data, and explicit language, safety, and review metadata.</p>
 <p>The goal is not to wrap ordinary text in AI terminology. The goal is to make practical material easy to discover, cite, translate, test, and use responsibly across different interfaces.</p>
 
 <h2>What the project publishes</h2>
@@ -67,15 +67,21 @@
 <li><a href="/worksheets/">Browser-local worksheets</a> that do not submit what a person types to CBT Cards.</li>
 <li><a href="/learn/">Plain-language learning guides</a> with source links and visible review dates.</li>
 <li><a href="/data/catalog.json">Machine-readable catalogs and datasets</a> with stable resource IDs and canonical URLs.</li>
+<li><a href="/data/locales.json">Language and translation metadata</a> that separates source material, draft translations, reviewed translations, and published localized pages.</li>
 <li><a href="/agents/">Agent-facing instructions and data contracts</a> for assistants, developers, and research tooling.</li>
-<li><a href="/changelog/">A public changelog</a> that records website, data, schema, and agent-interface changes separately from mobile releases.</li>
+<li><a href="/changelog/">A public changelog</a> that records website, data, translation, schema, and agent-interface changes separately from mobile releases.</li>
 </ul>
+
+<h2>Languages without pretending drafts are finished</h2>
+<p>English is currently the source language for the curated public knowledge dataset. Russian is being introduced as the first pilot locale, and German is planned. The project keeps language status explicit instead of treating every generated translation as publication-ready text.</p>
+<p>Machine-generated translations can be useful development material, but they are not automatically official CBT Cards content. A localized resource needs separate language and editorial review before it can receive published status and a canonical public page. Translation records also keep the review date of the English source they were based on, so a later source update can make an older translation visibly stale rather than quietly inconsistent.</p>
 
 <h2>Editorial approach</h2>
 <ul>
 <li>Write for a person first. Plain language is not a temporary layer that gets removed when software arrives.</li>
 <li>Keep a stable source record underneath different pages, translations, formats, and integrations.</li>
 <li>Distinguish source material from records explicitly reviewed for standalone publication.</li>
+<li>Distinguish machine translation drafts from reviewed and published localized content.</li>
 <li>Use authoritative sources when a learning page explains a health-adjacent concept.</li>
 <li>Keep provenance, review dates, safety limits, and uncertainty visible instead of filling gaps with confident prose.</li>
 <li>Do not describe editorial review as clinical validation or evidence that a technique will work for an individual.</li>
