@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import subprocess
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = "https://cbt-cards.github.io"
@@ -206,6 +208,15 @@ def main() -> None:
             fail(f"catalog URL mismatch for {resource_id}")
         if resource.get("schema_url") != schema_url:
             fail(f"catalog schema_url mismatch for {resource_id}")
+
+    try:
+        subprocess.run(
+            [sys.executable, str(ROOT / "scripts" / "build_localized_pages.py"), "--check"],
+            cwd=ROOT,
+            check=True,
+        )
+    except subprocess.CalledProcessError:
+        fail("generated localized pages or sitemap entries are out of sync")
 
     coverage = []
     for locale, entry in locale_by_id.items():
