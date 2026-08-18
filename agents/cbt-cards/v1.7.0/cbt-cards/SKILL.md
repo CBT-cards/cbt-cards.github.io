@@ -11,6 +11,12 @@ metadata:
 
 # CBT Cards
 
+## Skill Release
+
+version: 1.7.0
+
+The version is also recorded in standard `metadata.version`. The body label preserves compatibility with older CBT Cards validators while the frontmatter remains within the portable Agent Skills field set.
+
 ## Purpose
 
 CBT Cards is a public library of practical reflection resources for people and the AI assistants they choose to use. It also documents the original CBT Cards mobile app.
