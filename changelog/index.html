@@ -21,12 +21,26 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/agents/">For AI</a><a href="/about/">About</a></nav><a class="download" href="/toolkit/">Explore tools</a></div></header>
+<header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/languages/">Languages</a><a href="/agents/">For AI</a><a href="/about/">About</a></nav><a class="download" href="/toolkit/">Explore tools</a></div></header>
 <main id="main">
 <section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / Changelog</div><h1>CBT Cards public changelog</h1><p class="lede">Website, public-data, translation, and agent-interface changes, recorded separately from mobile-app releases.</p></div></section>
 <section class="section alt"><div class="wrap prose">
 <p>This changelog tracks changes to the public CBT Cards website, learning library, printable browser worksheets, schemas, language data, toolkit pages, structured data, feeds, and agent interfaces. A website, data, translation, or agent entry does <strong>not</strong> imply that an Android or iOS app version shipped on the same date.</p>
 <p>Agents and tooling can read the same history from <a href="/data/changelog.json"><code>data/changelog.json</code></a>. Versioned data contracts are listed in <a href="/schemas/index.json"><code>schemas/index.json</code></a>.</p>
+
+<article id="web-2026-08-18-localization-publication-pipeline">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Website/localization</p>
+<h2>Localization review and generated publication pipeline</h2>
+<p>Completed Russian machine-draft coverage for the current curated knowledge set and added a deterministic publication path that keeps drafts separate from reviewed public localizations.</p>
+<ul>
+<li>Added the human-readable <a href="/languages/">language and translation status page</a>.</li>
+<li>Expanded Russian pilot data to all 12 records in the current curated English knowledge set. All 12 remain machine drafts; none is currently human-reviewed or published.</li>
+<li>Added deterministic generation for language hubs and localized resource pages at <code>/&lt;locale&gt;/resources/&lt;resource_id&gt;/</code>.</li>
+<li>Machine drafts never produce localized public HTML. Generated resource pages require <code>human_reviewed</code>, <code>reviewed_for_publication</code>, and <code>published</code>.</li>
+<li>The generator also keeps localization sitemap entries synchronized with the data.</li>
+</ul>
+<p>The locale-level <code>public_html</code> flag now supports gradual rollout: a locale may contain reviewed published records and unpublished machine drafts at the same time.</p>
+</article>
 
 <article id="agent-2026-08-18-localization-aware-skill">
 <p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Agent interface</p>
@@ -47,11 +61,11 @@
 <p>Added a language model that keeps source content, translation drafts, review state, and localized publication state separate rather than cloning English pages and hoping they stay aligned.</p>
 <ul>
 <li>Added <a href="/data/locales.json"><code>data/locales.json</code></a> with English as the source locale, Russian as a pilot locale, and German as planned.</li>
-<li>Added <a href="/data/translations.jsonl"><code>data/translations.jsonl</code></a> with three initial Russian machine drafts for CBT thought record, Thought vs Fact, and Worry Time.</li>
+<li>Added <a href="/data/translations.jsonl"><code>data/translations.jsonl</code></a> for machine-readable localized overlays keyed by stable resource ID.</li>
 <li>Added versioned schemas for the locale registry and one translation record.</li>
 <li>Added CI checks for stable resource IDs, locale state, source-review snapshots, key-point alignment, and publication boundaries.</li>
 </ul>
-<p>The initial Russian records are explicitly <code>machine_draft</code>, <code>unreviewed</code>, and <code>not_published</code>. They have no canonical localized pages. A source update also makes an older translation fail validation until its source snapshot is updated.</p>
+<p>Russian machine-draft records are explicitly <code>machine_draft</code>, <code>unreviewed</code>, and <code>not_published</code>. They have no canonical localized pages. A source update also makes an older translation fail validation until its source snapshot is updated.</p>
 </article>
 
 <article id="agent-2026-08-18-public-resource-skill">
@@ -73,9 +87,9 @@
 <p>Added direct homepage links to the major public-resource hubs and a CI rule that checks the sitemap as an actual internal-link graph rather than merely a list of files.</p>
 <ul>
 <li>Requires every indexed page except the homepage to receive at least one link from another indexed page.</li>
-<li>Requires every sitemap page to be reachable from the homepage in at most three internal-link hops.</li>
-<li>Requires Learn, Worksheets, Toolkit, About, Changelog, and Agents to be linked directly from the homepage.</li>
-<li>Adds a dedicated homepage public-resources section for worksheets, release history, and agent/data interfaces.</li>
+<li>Requires every indexed page to be reachable from the homepage in at most three internal-link hops.</li>
+<li>Requires Learn, Worksheets, Toolkit, Languages, About, Changelog, and Agents to be linked directly from the homepage.</li>
+<li>Adds a dedicated homepage public-resources section for worksheets, release history, agent/data interfaces, and language status.</li>
 </ul>
 </article>
 
@@ -85,7 +99,7 @@
 <p>Published JSON Schema draft 2020-12 contracts for CBT Cards-owned machine-readable formats and made them discoverable from the public resource catalog.</p>
 <ul>
 <li>Added <a href="/schemas/index.json">a schema manifest</a> mapping versioned contracts to their instance URLs.</li>
-<li>Added contracts for the resource catalog, changelog, worksheets, toolkit review overlay, toolkit source manifest, curated knowledge-record lines, and agent skill manifest.</li>
+<li>Added contracts for the resource catalog, changelog, worksheets, toolkit review overlay, toolkit source manifest, curated knowledge-record lines, locale registry, translation records, and agent skill manifest.</li>
 <li>Added <code>schema_url</code> links to applicable public catalog resources.</li>
 </ul>
 </article>
@@ -123,6 +137,6 @@
 </article>
 </div></section>
 </main>
-<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/toolkit/review-status/">Review status</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/support/">Support</a><a href="/agents/">For AI</a></nav></div></footer>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/languages/">Languages</a><a href="/toolkit/review-status/">Review status</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/support/">Support</a><a href="/agents/">For AI</a></nav></div></footer>
 </body>
 </html>
