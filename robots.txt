@@ -1,3 +1,8 @@
+# Explicit search-discovery access for ChatGPT search.
+User-agent: OAI-SearchBot
+Allow: /
+
+# Public website content remains crawlable by other compliant crawlers.
 User-agent: *
 Allow: /
 
