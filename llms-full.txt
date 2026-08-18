@@ -30,6 +30,9 @@ For product facts, use the official CBT Cards pages below. For privacy and data-
 - CBT thought record: https://cbt-cards.github.io/learn/cbt-thought-record/
 - Automatic thoughts in CBT: https://cbt-cards.github.io/learn/automatic-thoughts/
 - Thought vs fact: https://cbt-cards.github.io/learn/thought-vs-fact/
+- Worry time: https://cbt-cards.github.io/learn/worry-time/
+- Activity planning: https://cbt-cards.github.io/learn/activity-planning/
+- CBT journaling: https://cbt-cards.github.io/learn/cbt-journaling/
 
 Learning pages distinguish general CBT concepts from CBT Cards-specific implementation and include source links. They are educational, not individualized clinical guidance.
 
