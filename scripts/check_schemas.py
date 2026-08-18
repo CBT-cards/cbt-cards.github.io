@@ -13,6 +13,7 @@ DRAFT = "https://json-schema.org/draft/2020-12/schema"
 EXPECTED_IDS = {
     "catalog-v1",
     "changelog-v1",
+    "content-review-v1",
     "worksheets-v1",
     "toolkit-review-v1",
     "toolkit-source-v1",
@@ -113,6 +114,13 @@ def main() -> None:
         fail("toolkit-review schema must preserve source_only default")
     if default_props["clinical_validation_status"].get("const") != "not_claimed":
         fail("toolkit-review schema must preserve not_claimed default")
+
+    content_review = json.loads((ROOT / "schemas" / "content-review-v1.schema.json").read_text(encoding="utf-8"))
+    policy_props = content_review["properties"]["policy"]["properties"]
+    if policy_props["review_kind"].get("const") != "editorial_source_and_safety":
+        fail("content-review schema must preserve editorial_source_and_safety review kind")
+    if policy_props["clinical_validation_status"].get("const") != "not_claimed":
+        fail("content-review schema must preserve not_claimed clinical status")
 
     knowledge = json.loads((ROOT / "schemas" / "knowledge-record-v1.schema.json").read_text(encoding="utf-8"))
     required_knowledge = set(knowledge.get("required", []))
