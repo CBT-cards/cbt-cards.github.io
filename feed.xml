@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>CBT Cards public resources</title>
+  <subtitle>New and updated CBT Cards learning guides, worksheets, toolkit resources, and agent-facing public data.</subtitle>
+  <id>https://cbt-cards.github.io/</id>
+  <link href="https://cbt-cards.github.io/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="https://cbt-cards.github.io/" rel="alternate" type="text/html" />
+  <updated>2026-08-18T00:00:00Z</updated>
+  <author><name>CBT Cards</name><uri>https://cbt-cards.github.io/about/</uri></author>
+  <entry>
+    <title>Free CBT reflection worksheets</title>
+    <id>https://cbt-cards.github.io/worksheets/</id>
+    <link href="https://cbt-cards.github.io/worksheets/" />
+    <updated>2026-08-18T00:00:00Z</updated>
+    <summary>Browser-local printable worksheets for a CBT thought record, worry time, and activity planning, with no account or submit action.</summary>
+  </entry>
+  <entry>
+    <title>CBT thought record worksheet</title>
+    <id>https://cbt-cards.github.io/worksheets/cbt-thought-record/</id>
+    <link href="https://cbt-cards.github.io/worksheets/cbt-thought-record/" />
+    <updated>2026-08-18T00:00:00Z</updated>
+    <summary>A seven-step printable browser worksheet for structured thought-record reflection.</summary>
+  </entry>
+  <entry>
+    <title>Worry time worksheet</title>
+    <id>https://cbt-cards.github.io/worksheets/worry-time/</id>
+    <link href="https://cbt-cards.github.io/worksheets/worry-time/" />
+    <updated>2026-08-18T00:00:00Z</updated>
+    <summary>A browser-local worksheet for recording a worry, parking it, and returning to it during a planned review period.</summary>
+  </entry>
+  <entry>
+    <title>Activity planning worksheet</title>
+    <id>https://cbt-cards.github.io/worksheets/activity-planning/</id>
+    <link href="https://cbt-cards.github.io/worksheets/activity-planning/" />
+    <updated>2026-08-18T00:00:00Z</updated>
+    <summary>A printable activity-planning worksheet for making one next step concrete and reviewing the result.</summary>
+  </entry>
+  <entry>
+    <title>CBT Cards learning library</title>
+    <id>https://cbt-cards.github.io/learn/</id>
+    <link href="https://cbt-cards.github.io/learn/" />
+    <updated>2026-08-18T00:00:00Z</updated>
+    <summary>Plain-language, sourced guides to thought records, automatic thoughts, thought-vs-fact reflection, worry time, activity planning, and structured journaling.</summary>
+  </entry>
+  <entry>
+    <title>CBT Cards public toolkit</title>
+    <id>https://cbt-cards.github.io/toolkit/</id>
+    <link href="https://cbt-cards.github.io/toolkit/" />
+    <updated>2026-08-18T00:00:00Z</updated>
+    <summary>A public entry point to curated reflection cards and provenance for the related CBT Toolkit source corpus.</summary>
+  </entry>
+  <entry>
+    <title>CBT Cards for AI agents</title>
+    <id>https://cbt-cards.github.io/agents/</id>
+    <link href="https://cbt-cards.github.io/agents/" />
+    <updated>2026-08-18T00:00:00Z</updated>
+    <summary>Canonical web, JSON, JSONL, worksheet-schema, llms.txt, and versioned skill interfaces for public CBT Cards resources.</summary>
+  </entry>
+</feed>
