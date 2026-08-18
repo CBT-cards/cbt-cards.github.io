@@ -3,16 +3,17 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CBT Cards for AI agents: skill, llms.txt &amp; JSON catalog</title>
-<meta name="description" content="Use official CBT Cards product facts and public learning resources in AI agents through a portable skill, llms.txt indexes, and a machine-readable JSON catalog." />
+<title>CBT Cards for AI agents: skill, llms.txt, JSON &amp; JSONL</title>
+<meta name="description" content="Use official CBT Cards product facts and public learning resources in AI agents through canonical web pages, llms.txt indexes, a JSON catalog, a JSONL knowledge dataset, and a portable skill." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href="https://cbt-cards.github.io/agents/" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/catalog.json" title="CBT Cards public resource catalog" />
+<link rel="alternate" type="application/x-ndjson" href="https://cbt-cards.github.io/data/knowledge.jsonl" title="CBT Cards public knowledge dataset" />
 <link rel="stylesheet" href="/styles.css?v=20260818" />
 <link rel="icon" href="/assets/app-icon.png" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="CBT Cards for AI agents" />
-<meta property="og:description" content="Official skill, llms.txt indexes, and a JSON catalog for public CBT Cards resources." />
+<meta property="og:description" content="Official web sources, llms.txt indexes, JSON/JSONL resources, and versioned agent skills for CBT Cards." />
 <meta property="og:url" content="https://cbt-cards.github.io/agents/" />
 <script type="application/ld+json">
 {
@@ -28,7 +29,7 @@
     {
       "@type": "TechArticle",
       "headline": "CBT Cards for AI agents",
-      "description": "How to consume the official CBT Cards public knowledge resource through HTML, llms.txt, JSON, or a portable skill.",
+      "description": "How to consume the official CBT Cards public knowledge resource through canonical HTML, llms.txt, JSON, JSONL, or a versioned portable skill.",
       "mainEntityOfPage": "https://cbt-cards.github.io/agents/",
       "dateModified": "2026-08-18"
     }
@@ -47,21 +48,28 @@
 <section class="page-hero"><div class="wrap">
 <div class="crumb"><a href="/">CBT Cards</a> / For AI agents</div>
 <h1>Use CBT Cards as a public agent resource.</h1>
-<p class="lede">Official product facts and learning resources are available as ordinary HTML, compact text indexes, a JSON catalog, and a portable agent skill. None of these resources provides access to a user's journal, check-ins, or app data.</p>
+<p class="lede">Official product facts and learning resources are available as canonical HTML, compact text indexes, JSON/JSONL data, and versioned agent skills. None of these resources provides access to a user's journal, check-ins, or app data.</p>
 </div></section>
 <section class="section alt"><div class="wrap prose agent-guide">
 <h2>Choose the smallest useful interface</h2>
 <ul>
-<li><strong>Web pages:</strong> best when the agent can browse and cite canonical pages directly.</li>
+<li><strong>Web pages:</strong> best when an agent can browse and cite canonical pages directly.</li>
 <li><strong><a href="/llms.txt">llms.txt</a>:</strong> compact discovery index for the main public resources.</li>
-<li><strong><a href="/llms-full.txt">llms-full.txt</a>:</strong> extended source-priority and safety guidance.</li>
-<li><strong><a href="/data/catalog.json">JSON catalog</a>:</strong> stable IDs, resource types, canonical URLs, product scope, stores, and current skill version.</li>
-<li><strong><a href="/agents/cbt-cards/SKILL.md">SKILL.md</a>:</strong> portable instructions for agents that support skill files.</li>
+<li><strong><a href="/llms-full.txt">llms-full.txt</a>:</strong> extended source-priority, dataset, versioning, and safety guidance.</li>
+<li><strong><a href="/data/catalog.json">JSON catalog</a>:</strong> stable IDs, resource types, canonical URLs, product scope, store links, and agent version metadata.</li>
+<li><strong><a href="/data/knowledge.jsonl">JSONL knowledge dataset</a>:</strong> one self-contained record per public learning resource, suitable for retrieval and indexing without scraping presentation HTML.</li>
+<li><strong><a href="/agents/cbt-cards/SKILL.md">SKILL.md</a>:</strong> portable latest-version instructions for agents that support skill files.</li>
 </ul>
+
+<h2>JSONL record shape</h2>
+<p>Each record in <code>knowledge.jsonl</code> has a stable resource ID, locale, canonical URL, summary, key points, relation to the CBT Cards implementation, safety scope, review date, and source URLs. The canonical HTML page remains the human-readable source to cite.</p>
 
 <h2>Source priority</h2>
 <p>For a product-specific claim, read the most relevant official page before answering. Use the privacy policy as the primary source for data handling. When public information does not confirm a detail, say so rather than inferring it from the product name or a generic description of CBT.</p>
 <p>For conceptual CBT questions, use the <a href="/learn/">learning library</a> and keep general educational information separate from CBT Cards-specific implementation.</p>
+
+<h2>Versioned skills</h2>
+<p>The unversioned <a href="/agents/cbt-cards/SKILL.md"><code>SKILL.md</code></a> is a moving alias for the latest published skill. For reproducible integrations, resolve <a href="/agents/cbt-cards/manifest.json"><code>manifest.json</code></a> and pin an immutable version such as <a href="/agents/cbt-cards/v1.1.0/SKILL.md"><code>v1.1.0/SKILL.md</code></a>.</p>
 
 <h2>OpenClaw</h2>
 <p>In the workspace used by the intended agent, save the skill in its <code>skills</code> directory and start a new session.</p>
@@ -71,7 +79,7 @@ curl -fsSL https://cbt-cards.github.io/agents/cbt-cards/SKILL.md \
 <p>The skill is then available to that workspace's agent. To share it more broadly, place the same directory under <code>~/.openclaw/skills/</code>. If you use a skill allowlist, add <code>cbt-cards</code> to the intended agent's list.</p>
 
 <h2>Hermes</h2>
-<p>Install the public skill directly from its canonical URL:</p>
+<p>Install the public skill directly from its canonical latest-version URL:</p>
 <pre><code>hermes skills install \
   https://cbt-cards.github.io/agents/cbt-cards/SKILL.md \
   --name cbt-cards --now</code></pre>
