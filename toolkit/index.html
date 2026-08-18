@@ -4,15 +4,16 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CBT Cards toolkit: cards, metaphors &amp; protocols</title>
-<meta name="description" content="Explore the public CBT Cards toolkit corpus: 77 reflection cards, 23 metaphors, and 15 protocols, with source provenance and machine-readable data." />
+<meta name="description" content="Explore the public CBT Cards toolkit corpus: 77 reflection cards, 23 metaphors, and 15 protocols, with source provenance and explicit publication-review status." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href="https://cbt-cards.github.io/toolkit/" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/toolkit-source.json" title="CBT toolkit source metadata" />
+<link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/toolkit-review.json" title="CBT Cards toolkit review overlay" />
 <link rel="stylesheet" href="/styles.css?v=20260818" />
 <link rel="icon" href="/assets/app-icon.png" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="CBT Cards toolkit" />
-<meta property="og:description" content="A public corpus of reflection cards, metaphors, and protocols connected to CBT Cards." />
+<meta property="og:description" content="A public corpus of reflection cards, metaphors, and protocols connected to CBT Cards, with explicit review/publication status." />
 <meta property="og:url" content="https://cbt-cards.github.io/toolkit/" />
 <meta property="og:image" content="https://cbt-cards.github.io/assets/egg-reflection-cards.png" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -59,7 +60,7 @@
 <section class="page-hero"><div class="wrap">
 <div class="crumb"><a href="/">CBT Cards</a> / Toolkit</div>
 <h1>CBT Cards toolkit</h1>
-<p class="lede">A public source corpus of reflection cards, metaphors, and protocols connected to CBT Cards, with stable record IDs and provenance for people, search engines, and agents.</p>
+<p class="lede">A public source corpus of reflection cards, metaphors, and protocols connected to CBT Cards, with stable record IDs, provenance, and an explicit publication-review boundary.</p>
 </div></section>
 <section class="section alt"><div class="wrap">
 <div class="kicker">Source corpus</div>
@@ -67,10 +68,15 @@
 <div class="feature-grid">
 <article class="feature"><h3>77 reflection cards</h3><p>Short prompts covering reflection, thought checking, action, grounding, values, self-talk, worry, and related themes.</p><p><a href="/toolkit/cards/">Browse all card records →</a></p></article>
 <article class="feature"><h3>23 metaphors</h3><p>Short narrative metaphors designed to make abstract reflection ideas easier to remember and discuss.</p><p><a href="/toolkit/metaphors/">Browse metaphor records →</a></p></article>
-<article class="feature"><h3>15 protocols</h3><p>Structured multi-step records. Protocols are kept in the machine-readable corpus but require separate editorial and safety review before standalone publication here.</p><p><a href="/toolkit/protocols/">View protocol index →</a></p></article>
+<article class="feature"><h3>15 protocols</h3><p>Structured multi-step records. Protocols are kept in the machine-readable corpus but remain source-only unless separately reviewed for publication here.</p><p><a href="/toolkit/protocols/">View protocol index →</a></p></article>
 </div>
 </div></section>
 <section class="section"><div class="wrap prose">
+<h2>Publication review status</h2>
+<p>CBT Cards maintains a separate review overlay because the source dataset itself does not encode CBT Cards-specific publication approval. If a source record is not explicitly listed in the overlay, treat it as <code>unreviewed</code> and <code>source_only</code>.</p>
+<p><a href="/toolkit/review-status/">Read the review-status policy →</a> · <a href="/data/toolkit-review.json">Open the machine-readable review overlay →</a></p>
+<p><code>reviewed_for_publication</code> means editorial and safety review for a standalone CBT Cards web page. It does not mean clinical validation, proven efficacy, or an individualized recommendation.</p>
+
 <h2>Curated card pages</h2>
 <p>Rather than generate hundreds of thin pages automatically, CBT Cards publishes selected records as standalone pages only when the source wording, scope, and safety boundary have been reviewed.</p>
 <ul>
@@ -82,12 +88,12 @@
 <li><a href="/toolkit/cards/ground-yourself/">Ground Yourself</a> — source record <code>card-32</code></li>
 </ul>
 <h2>Machine-readable source</h2>
-<p>The complete corpus remains available as NDJSON from the public MetalHatsCats datasets repository. This site records the pinned source commit, blob SHA, counts, licensing, and known quality notes in <a href="/data/toolkit-source.json"><code>data/toolkit-source.json</code></a>.</p>
-<p>Agents should treat record IDs as source identifiers, preserve attribution, and avoid turning a short prompt into diagnosis or individualized treatment advice.</p>
+<p>The complete corpus remains available as NDJSON from the public source dataset. This site records the pinned source commit, blob SHA, counts, licensing, and known quality notes in <a href="/data/toolkit-source.json"><code>data/toolkit-source.json</code></a>.</p>
+<p>Agents should treat record IDs as source identifiers, consult the <a href="/data/toolkit-review.json">review overlay</a> before claiming publication approval, preserve attribution, and avoid turning a short prompt into diagnosis or individualized treatment advice.</p>
 <h2>Editorial boundary</h2>
-<p>The source dataset has no per-record clinical-review metadata. It also contains CBT-adjacent terminology in addition to core CBT concepts. Appearance in the corpus therefore means “public toolkit content,” not “clinically validated intervention.”</p>
+<p>The source dataset has no per-record clinical-review metadata. It also contains CBT-adjacent terminology in addition to core CBT concepts. Appearance in the corpus therefore means “public toolkit source content,” not “clinically validated intervention” or “CBT Cards-published guidance.”</p>
 </div></section>
 </main>
-<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/toolkit/cards/">Cards</a><a href="/toolkit/metaphors/">Metaphors</a><a href="/toolkit/protocols/">Protocols</a><a href="/learn/">Learn</a><a href="/about/">About</a><a href="/agents/">For agents</a></nav></div></footer>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/toolkit/cards/">Cards</a><a href="/toolkit/metaphors/">Metaphors</a><a href="/toolkit/protocols/">Protocols</a><a href="/toolkit/review-status/">Review status</a><a href="/learn/">Learn</a><a href="/about/">About</a><a href="/agents/">For agents</a></nav></div></footer>
 </body>
 </html>

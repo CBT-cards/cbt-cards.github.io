@@ -21,12 +21,13 @@
   "media_type": "application/x-ndjson",
   "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
   "clinical_review_metadata_present": false,
-  "publication_policy": "The CBT Cards website publishes curated HTML pages from this corpus only after editorial and safety review. The full source corpus remains available as machine-readable data.",
+  "cbt_cards_review_overlay": "https://cbt-cards.github.io/data/toolkit-review.json",
+  "publication_policy": "CBT Cards publishes a standalone page from this corpus only when the stable source record ID is explicitly listed as reviewed_for_publication and published in the CBT Cards review overlay. Any unlisted source record defaults to unreviewed and source_only. Editorial publication review is not clinical validation or evidence of efficacy.",
   "quality_notes": [
-    "The source taxonomy distinguishes card, metaphor, and protocol records but does not encode clinical-review status.",
+    "The source taxonomy distinguishes card, metaphor, and protocol records but does not encode CBT Cards-specific clinical-review or publication status.",
     "The corpus contains CBT-adjacent techniques and labels in addition to core CBT concepts; a record should not be treated as clinical guidance solely because it appears in this dataset.",
-    "Protocol records require separate review before being republished as standalone health-adjacent web guidance.",
-    "Source records protocol-1 and protocol-8 share the title Burnout Recovery Protocol and should be reconciled before large-scale page generation."
+    "Protocol records remain source-only unless explicitly added to the CBT Cards review overlay after separate editorial and safety review.",
+    "Source records protocol-1 and protocol-8 share the title Burnout Recovery Protocol; stable source IDs, not titles, are authoritative."
   ],
   "verified": "2026-08-18"
 }

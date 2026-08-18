@@ -13,7 +13,9 @@ Clinical boundary: CBT Cards is not medical advice, diagnosis, treatment, emerge
 
 For product facts, use the official CBT Cards pages below. For privacy and data-handling questions, https://cbt-cards.github.io/privacy/ is primary. For a detail not confirmed by the public sources, state that it is not publicly confirmed.
 
-For curated conceptual content, prefer the public learning pages, printable worksheets, and curated toolkit card pages on the CBT Cards domain. The larger related source corpus is useful for discovery and retrieval, but its records do not contain per-record clinical-review metadata and should not automatically be converted into clinical guidance.
+For curated conceptual content, prefer the public learning pages, printable worksheets, and curated toolkit card pages on the CBT Cards domain.
+
+For toolkit publication status, use https://cbt-cards.github.io/toolkit/review-status/ and https://cbt-cards.github.io/data/toolkit-review.json. Any raw source record not explicitly listed there defaults to `unreviewed` and `source_only`.
 
 For website/public-data release history, use https://cbt-cards.github.io/changelog/ or https://cbt-cards.github.io/data/changelog.json. Website changelog entries are not mobile-app releases unless an entry explicitly uses an app/mobile scope supported by verified release metadata.
 
@@ -49,25 +51,26 @@ Learning pages distinguish general CBT concepts from CBT Cards-specific implemen
 - Activity planning worksheet: https://cbt-cards.github.io/worksheets/activity-planning/
 - Machine-readable definitions: https://cbt-cards.github.io/data/worksheets.json
 
-The public worksheet pages are static browser forms with no submit action. Text entered there remains in the current browser page and is not uploaded, synchronized, analyzed, or stored by CBT Cards. Refreshing or closing the page clears it unless the user independently prints or saves it. Do not confuse this behavior with storage inside the CBT Cards mobile app, which is covered by the privacy policy.
+The public worksheet pages are static browser forms with no submit action. Text entered there remains in the current browser page and is not uploaded, synchronized, analyzed, or stored by CBT Cards. Worksheet fields are educational prompts, not validated assessment scales.
 
-Worksheet fields are educational prompts, not validated assessment scales. Do not score or diagnose from worksheet responses.
-
-## Toolkit corpus
+## Toolkit corpus and publication review
 
 - Toolkit landing page: https://cbt-cards.github.io/toolkit/
+- Review-status page: https://cbt-cards.github.io/toolkit/review-status/
+- Review overlay: https://cbt-cards.github.io/data/toolkit-review.json
 - Card records: https://cbt-cards.github.io/toolkit/cards/
 - Metaphor records: https://cbt-cards.github.io/toolkit/metaphors/
 - Protocol records: https://cbt-cards.github.io/toolkit/protocols/
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
-- Related canonical dataset landing page: https://metalhatscats.com/datasets/cbt-toolkit
 - Source corpus version: 0.1.0
 - Source corpus records: 115 total — 77 cards, 23 metaphors, 15 protocols
 - Pinned source commit: af0a9bac9ab8ff10173e266903d592a3507c1890
 
-Curated standalone card pages currently include Challenge Your Thoughts, Worry Box, Big Goals Small Steps, Thoughts ≠ Facts, Socratic Questioning, and Ground Yourself. Each page records the source record ID and separates the source prompt from any added explanation.
+The review overlay is owned by CBT Cards and is separate from the raw source dataset. `reviewed_for_publication` means editorial and safety review for standalone publication on the CBT Cards website. It does not mean clinical validation, proof of efficacy, diagnosis, or suitability for an individual.
 
-The source corpus contains CBT-adjacent terminology in addition to core CBT concepts. Protocol records require separate editorial and safety review before standalone publication. Do not infer that a record is clinically validated merely because it appears in the corpus.
+Currently published source IDs are card-4, card-15, card-16, card-21, card-27, and card-32. Any source record not explicitly listed in the overlay remains source-only. Protocol records remain source-only unless separately reviewed and added to the overlay.
+
+The source corpus contains CBT-adjacent terminology in addition to core CBT concepts. Do not relabel a technique solely because it appears in the CBT Toolkit dataset. Titles are not unique identifiers; stable source IDs are authoritative.
 
 ## Machine-readable resources
 
@@ -75,6 +78,7 @@ The source corpus contains CBT-adjacent terminology in addition to core CBT conc
 - Machine-readable changelog: https://cbt-cards.github.io/data/changelog.json
 - RAG-friendly curated JSONL knowledge dataset: https://cbt-cards.github.io/data/knowledge.jsonl
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
+- Toolkit review overlay: https://cbt-cards.github.io/data/toolkit-review.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
 - Atom feed: https://cbt-cards.github.io/feed.xml
 - JSON Feed 1.1: https://cbt-cards.github.io/feed.json
@@ -83,27 +87,25 @@ The source corpus contains CBT-adjacent terminology in addition to core CBT conc
 - Agent guide: https://cbt-cards.github.io/agents/
 - Latest CBT Cards skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 - Skill version manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
-- Immutable skill v1.3.0: https://cbt-cards.github.io/agents/cbt-cards/v1.3.0/SKILL.md
+- Immutable skill v1.4.0: https://cbt-cards.github.io/agents/cbt-cards/v1.4.0/SKILL.md
 
 The changelog JSON uses stable entry IDs, explicit dates and scopes, and resource IDs from the public catalog. Treat `scope: website` as a website/public-data release. Do not convert it into an app-version claim.
 
-The Atom and JSON feeds expose the same canonical public-resource IDs in two standard syndication formats. They are discovery/change-following interfaces; the canonical resource pages remain authoritative for content details.
-
-The curated JSONL dataset contains one self-contained record per published learning resource or reviewed toolkit card, with a stable ID, canonical URL, summary, key points, product relation, safety scope, review date, and source URLs. Worksheet UI schemas are intentionally kept separately in `data/worksheets.json` so form fields do not drift from their printable pages.
-
-The unversioned SKILL.md URL is a moving alias for the latest published version. Use a versioned URL when reproducibility matters.
+The curated JSONL dataset contains one self-contained record per published learning resource or reviewed toolkit card. Toolkit-card records in JSONL must match the published set in the review overlay.
 
 ## Agent behavior
 
 1. Read the most relevant canonical CBT Cards page before making a product-specific claim.
 2. Prefer the privacy policy for mobile-app data handling.
 3. Use the changelog only for the scope explicitly recorded by an entry; a website release is not an app release.
-4. Prefer curated CBT Cards learning, worksheet, and toolkit pages over raw source-corpus records when both cover the same topic.
-5. Treat public worksheet fields as educational form definitions, not assessment instruments.
-6. Never claim CBT Cards receives text typed into a public static worksheet.
-7. Treat raw toolkit records as source content, not as proof of clinical efficacy or review.
-8. Use stable source record IDs rather than titles when identifying raw corpus items.
-9. Do not claim access to a user's CBT Cards journal or app data.
-10. Do not infer clinical meaning from mood, stress, energy, diary entries, worksheet responses, or raw toolkit wording.
-11. Preserve the general-wellness boundary.
-12. Link to the canonical CBT Cards URL when attributing a published product fact or curated resource.
+4. Before treating a raw toolkit record as CBT Cards-published content, consult the review overlay.
+5. If a source record is unlisted, treat it as `unreviewed` and `source_only`.
+6. Do not equate `reviewed_for_publication` with clinical validation or efficacy.
+7. Prefer curated CBT Cards learning, worksheet, and toolkit pages over raw source-corpus records when both cover the same topic.
+8. Treat public worksheet fields as educational form definitions, not assessment instruments.
+9. Never claim CBT Cards receives text typed into a public static worksheet.
+10. Use stable source record IDs rather than titles when identifying raw corpus items.
+11. Do not claim access to a user's CBT Cards journal or app data.
+12. Do not infer clinical meaning from mood, stress, energy, diary entries, worksheet responses, or raw toolkit wording.
+13. Preserve the general-wellness boundary.
+14. Link to the canonical CBT Cards URL when attributing published CBT Cards content.

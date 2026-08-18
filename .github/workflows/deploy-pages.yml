@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check Python helper syntax
-        run: python3 -m py_compile scripts/check_site.py scripts/check_worksheets.py scripts/check_discovery.py scripts/check_changelog.py scripts/notify_indexnow.py
+        run: python3 -m py_compile scripts/check_site.py scripts/check_worksheets.py scripts/check_discovery.py scripts/check_changelog.py scripts/check_toolkit_review.py scripts/notify_indexnow.py
       - name: Validate HTML, canonical URLs, structured data, sitemap and internal links
         run: python3 scripts/check_site.py
       - name: Validate worksheet schemas and canonical form pages
@@ -31,6 +31,8 @@ jobs:
         run: python3 scripts/check_discovery.py
       - name: Validate public changelog and resource provenance
         run: python3 scripts/check_changelog.py
+      - name: Validate toolkit review and publication status
+        run: python3 scripts/check_toolkit_review.py
 
   deploy:
     if: github.event_name != 'pull_request'

@@ -36,12 +36,15 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 ## Public toolkit corpus
 
 - Toolkit landing page: https://cbt-cards.github.io/toolkit/
+- Review-status page: https://cbt-cards.github.io/toolkit/review-status/
+- Machine-readable review overlay: https://cbt-cards.github.io/data/toolkit-review.json
 - Cards index: https://cbt-cards.github.io/toolkit/cards/
 - Metaphors index: https://cbt-cards.github.io/toolkit/metaphors/
 - Protocol records index: https://cbt-cards.github.io/toolkit/protocols/
 - Source metadata and pinned corpus version: https://cbt-cards.github.io/data/toolkit-source.json
 - The related source corpus contains 115 English records: 77 cards, 23 metaphors, and 15 protocols.
-- Curated standalone card pages are listed from the toolkit landing page. Do not assume every source record has received clinical or editorial review.
+- Any source record not explicitly listed in the review overlay defaults to unreviewed and source-only.
+- reviewed_for_publication means editorial/safety review for website publication, not clinical validation or proof of efficacy.
 
 ## Machine-readable resources
 
@@ -49,6 +52,7 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - Machine-readable changelog: https://cbt-cards.github.io/data/changelog.json
 - RAG-friendly curated knowledge dataset (JSONL): https://cbt-cards.github.io/data/knowledge.jsonl
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
+- Toolkit review overlay: https://cbt-cards.github.io/data/toolkit-review.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
 - Atom feed: https://cbt-cards.github.io/feed.xml
 - JSON Feed 1.1: https://cbt-cards.github.io/feed.json
@@ -57,7 +61,7 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - Agent integration guide: https://cbt-cards.github.io/agents/
 - Latest agent skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 - Skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
-- Immutable skill v1.3.0: https://cbt-cards.github.io/agents/cbt-cards/v1.3.0/SKILL.md
+- Immutable skill v1.4.0: https://cbt-cards.github.io/agents/cbt-cards/v1.4.0/SKILL.md
 
 Website changelog entries are separate from mobile-app releases. Do not infer an Android/iOS app version from website, dataset, worksheet, or agent-skill changes.
 

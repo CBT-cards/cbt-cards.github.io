@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CBT Toolkit review status — CBT Cards</title>
+<meta name="description" content="See which CBT Toolkit source records have been reviewed for standalone CBT Cards website publication and how unlisted records are treated." />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href="https://cbt-cards.github.io/toolkit/review-status/" />
+<link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/toolkit-review.json" title="CBT Cards toolkit review overlay" />
+<link rel="stylesheet" href="/styles.css?v=20260818" />
+<link rel="icon" href="/assets/app-icon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="CBT Toolkit review status — CBT Cards" />
+<meta property="og:description" content="A machine-readable publication-review boundary for the CBT Cards public toolkit." />
+<meta property="og:url" content="https://cbt-cards.github.io/toolkit/review-status/" />
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},
+      {"@type":"ListItem","position":2,"name":"Toolkit","item":"https://cbt-cards.github.io/toolkit/"},
+      {"@type":"ListItem","position":3,"name":"Review status","item":"https://cbt-cards.github.io/toolkit/review-status/"}
+    ]},
+    {"@type":"CollectionPage","name":"CBT Cards toolkit review status","url":"https://cbt-cards.github.io/toolkit/review-status/","dateModified":"2026-08-18"}
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap nav">
+<a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a>
+<nav class="nav-links" aria-label="Primary"><a href="/how-it-works/">How it works</a><a href="/features/">Features</a><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/about/">About</a></nav>
+<a class="download" href="/#download">Download</a>
+</div></header>
+<main id="main">
+<section class="page-hero"><div class="wrap">
+<div class="crumb"><a href="/">CBT Cards</a> / <a href="/toolkit/">Toolkit</a> / Review status</div>
+<h1>Toolkit review status</h1>
+<p class="lede">A clear boundary between raw source-corpus records and records reviewed for standalone publication by CBT Cards.</p>
+</div></section>
+<section class="section alt"><div class="wrap prose">
+<h2>Default rule</h2>
+<p>If a source record is <strong>not explicitly listed</strong> in the CBT Cards review registry, treat it as <code>unreviewed</code> and <code>source_only</code>. Its presence in the source corpus does not mean CBT Cards has approved it for standalone publication.</p>
+<p>The machine-readable registry is <a href="/data/toolkit-review.json"><code>data/toolkit-review.json</code></a>.</p>
+
+<h2>What “reviewed for publication” means</h2>
+<p><code>reviewed_for_publication</code> means the CBT Cards project performed an editorial and safety review for a public website page. It does <strong>not</strong> mean the technique has been clinically validated by CBT Cards, proven effective for a condition, or recommended for an individual.</p>
+
+<h2>Currently published source records</h2>
+<ul>
+<li><code>card-4</code> — <a href="/toolkit/cards/challenge-your-thoughts/">Challenge Your Thoughts</a></li>
+<li><code>card-15</code> — <a href="/toolkit/cards/worry-box/">Worry Box</a></li>
+<li><code>card-16</code> — <a href="/toolkit/cards/big-goals-small-steps/">Big Goals, Small Steps</a></li>
+<li><code>card-21</code> — <a href="/toolkit/cards/thoughts-are-not-facts/">Thoughts ≠ Facts</a></li>
+<li><code>card-27</code> — <a href="/toolkit/cards/socratic-questioning/">Socratic Questioning</a></li>
+<li><code>card-32</code> — <a href="/toolkit/cards/ground-yourself/">Ground Yourself</a></li>
+</ul>
+
+<h2>Known source-quality boundaries</h2>
+<ul>
+<li>The pinned source corpus contains 115 records, but the source schema does not encode CBT Cards-specific clinical-review or publication status.</li>
+<li>Source records <code>protocol-1</code> and <code>protocol-8</code> share the title “Burnout Recovery Protocol”. Stable source IDs, not titles, are authoritative.</li>
+<li>The corpus contains CBT-adjacent terminology and techniques. A record should not be relabeled as CBT solely because it appears in a dataset named CBT Toolkit.</li>
+<li>Protocol records remain source-only unless they are explicitly added to the review registry after separate editorial and safety review.</li>
+</ul>
+
+<h2>For agents and data consumers</h2>
+<p>Consult the review registry before presenting a raw toolkit record as CBT Cards-published content. When a record is not listed, identify it as raw source content and preserve the general-wellness boundary.</p>
+<p>See also <a href="/data/toolkit-source.json">source provenance</a>, the <a href="/agents/">agent guide</a>, and the <a href="/changelog/">public changelog</a>.</p>
+</div></section>
+</main>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/agents/">For agents</a></nav></div></footer>
+</body>
+</html>
