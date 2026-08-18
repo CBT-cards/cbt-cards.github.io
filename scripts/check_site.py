@@ -2,6 +2,7 @@
 from html.parser import HTMLParser
 from pathlib import Path
 import json
+import re
 import sys
 import urllib.parse
 import xml.etree.ElementTree as ET
@@ -88,6 +89,13 @@ def require_local_target(label, url, errors):
     return target
 
 
+def skill_version(path):
+    if not path.exists():
+        return None
+    match = re.search(r"(?m)^version:\s*([^\s]+)\s*$", path.read_text(encoding="utf-8"))
+    return match.group(1) if match else None
+
+
 errors = []
 html_files = sorted(
     p for p in ROOT.rglob("*.html")
@@ -125,6 +133,16 @@ for path in html_files:
         target = url_to_local(href)
         if target is not None and not target.exists():
             errors.append(f"{rel}: broken internal link {href}")
+
+robots_path = ROOT / "robots.txt"
+if not robots_path.exists():
+    errors.append("missing robots.txt")
+else:
+    robots = robots_path.read_text(encoding="utf-8")
+    if not re.search(r"(?mi)^User-agent:\s*OAI-SearchBot\s*$", robots):
+        errors.append("robots.txt: missing explicit OAI-SearchBot group")
+    if "Sitemap: https://cbt-cards.github.io/sitemap.xml" not in robots:
+        errors.append("robots.txt: missing canonical sitemap declaration")
 
 sitemap = ROOT / "sitemap.xml"
 if not sitemap.exists():
@@ -229,7 +247,6 @@ for resource_id, resource in catalog_by_id.items():
         errors.append(f"data/catalog.json: curated resource {resource_id} missing from knowledge.jsonl")
 
 toolkit_source_path = ROOT / "data/toolkit-source.json"
-toolkit_source = None
 if not toolkit_source_path.exists():
     errors.append("missing data/toolkit-source.json")
 else:
@@ -267,6 +284,7 @@ else:
         errors.append(f"data/toolkit-source.json: invalid JSON: {exc}")
 
 manifest_path = ROOT / "agents/cbt-cards/manifest.json"
+manifest = None
 if not manifest_path.exists():
     errors.append("missing agents/cbt-cards/manifest.json")
 else:
@@ -282,10 +300,11 @@ else:
             require_local_target("agents/cbt-cards/manifest.json latest_url", latest_url, errors)
 
         versions = manifest.get("versions")
+        version_names = set()
+        version_urls = {}
         if not isinstance(versions, list) or not versions:
             errors.append("agents/cbt-cards/manifest.json: versions must be a non-empty list")
         else:
-            version_names = set()
             for item in versions:
                 version = item.get("version")
                 url = item.get("url")
@@ -295,9 +314,38 @@ else:
                 if version in version_names:
                     errors.append(f"agents/cbt-cards/manifest.json: duplicate version {version}")
                 version_names.add(version)
-                require_local_target(f"agents/cbt-cards/manifest.json version {version}", url, errors)
+                version_urls[version] = url
+                target = require_local_target(f"agents/cbt-cards/manifest.json version {version}", url, errors)
+                if target is not None:
+                    declared = skill_version(target)
+                    if declared != version:
+                        errors.append(
+                            f"agents/cbt-cards/manifest.json: version {version} points to skill declaring {declared}"
+                        )
             if latest and latest not in version_names:
                 errors.append(f"agents/cbt-cards/manifest.json: latest {latest} not present in versions")
+
+        latest_alias = ROOT / "agents/cbt-cards/SKILL.md"
+        declared_latest = skill_version(latest_alias)
+        if latest and declared_latest != latest:
+            errors.append(
+                f"agents/cbt-cards/SKILL.md: declares {declared_latest}, manifest latest is {latest}"
+            )
+
+        catalog_latest = catalog_by_id.get("agent-skill-latest")
+        if catalog_latest is None:
+            errors.append("data/catalog.json: missing agent-skill-latest resource")
+        elif latest and catalog_latest.get("version") != latest:
+            errors.append(
+                f"data/catalog.json: agent-skill-latest version {catalog_latest.get('version')} != manifest latest {latest}"
+            )
+        if latest:
+            immutable_id = f"agent-skill-v{latest}"
+            immutable = catalog_by_id.get(immutable_id)
+            if immutable is None:
+                errors.append(f"data/catalog.json: missing immutable latest resource {immutable_id}")
+            elif immutable.get("url") != version_urls.get(latest):
+                errors.append(f"data/catalog.json: {immutable_id} URL differs from manifest")
     except json.JSONDecodeError as exc:
         errors.append(f"agents/cbt-cards/manifest.json: invalid JSON: {exc}")
 
@@ -309,5 +357,6 @@ if errors:
 
 print(
     f"OK: {len(html_files)} HTML pages checked; {len(canonicals)} canonical URLs; "
-    f"{len(knowledge_ids)} curated knowledge records; internal links, sitemap, catalog, toolkit source, manifest, JSON and JSON-LD parsed."
+    f"{len(knowledge_ids)} curated knowledge records; internal links, sitemap, catalog, toolkit source, "
+    "crawler policy, skill versions, JSON and JSON-LD parsed."
 )
