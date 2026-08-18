@@ -4,10 +4,11 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CBT Cards for AI agents: skill, llms.txt, JSON &amp; worksheets</title>
-<meta name="description" content="Use official CBT Cards product facts, curated learning content, printable worksheet schemas, and the public CBT toolkit corpus through canonical web pages, llms.txt, JSON/JSONL data, and versioned skills." />
+<meta name="description" content="Use official CBT Cards product facts, curated learning content, printable worksheet schemas, release provenance, and public toolkit data through canonical web pages, llms.txt, JSON/JSONL data, and versioned skills." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href="https://cbt-cards.github.io/agents/" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/catalog.json" title="CBT Cards public resource catalog" />
+<link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/changelog.json" title="CBT Cards machine-readable changelog" />
 <link rel="alternate" type="application/x-ndjson" href="https://cbt-cards.github.io/data/knowledge.jsonl" title="CBT Cards curated knowledge dataset" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/worksheets.json" title="CBT Cards worksheet definitions" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/toolkit-source.json" title="CBT toolkit source metadata" />
@@ -15,7 +16,7 @@
 <link rel="icon" href="/assets/app-icon.png" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="CBT Cards for AI agents" />
-<meta property="og:description" content="Official web sources, curated JSON/JSONL resources, printable worksheet definitions, a public source corpus, and versioned agent skills for CBT Cards." />
+<meta property="og:description" content="Official web sources, release provenance, curated JSON/JSONL resources, printable worksheet definitions, a public source corpus, and versioned agent skills for CBT Cards." />
 <meta property="og:url" content="https://cbt-cards.github.io/agents/" />
 <script type="application/ld+json">
 {
@@ -31,7 +32,7 @@
     {
       "@type": "TechArticle",
       "headline": "CBT Cards for AI agents",
-      "description": "How to consume CBT Cards public product facts, learning resources, printable worksheet schemas, source-corpus metadata, and versioned agent instructions.",
+      "description": "How to consume CBT Cards public product facts, release provenance, learning resources, printable worksheet schemas, source-corpus metadata, and versioned agent instructions.",
       "mainEntityOfPage": "https://cbt-cards.github.io/agents/",
       "dateModified": "2026-08-18"
     }
@@ -50,20 +51,25 @@
 <section class="page-hero"><div class="wrap">
 <div class="crumb"><a href="/">CBT Cards</a> / For AI agents</div>
 <h1>Use CBT Cards as a public agent resource.</h1>
-<p class="lede">Official product facts, curated learning resources, printable worksheet definitions, toolkit records, and source metadata are available as canonical HTML, compact text indexes, JSON/JSONL data, and versioned agent skills. None of these resources provides access to a user's journal, check-ins, or app data.</p>
+<p class="lede">Official product facts, release provenance, curated learning resources, printable worksheet definitions, toolkit records, and source metadata are available as canonical HTML, compact text indexes, JSON/JSONL data, and versioned agent skills. None of these resources provides access to a user's journal, check-ins, or app data.</p>
 </div></section>
 <section class="section alt"><div class="wrap prose agent-guide">
 <h2>Choose the smallest useful interface</h2>
 <ul>
 <li><strong>Web pages:</strong> best when an agent can browse and cite canonical pages directly.</li>
 <li><strong><a href="/llms.txt">llms.txt</a>:</strong> compact discovery index for the main public resources.</li>
-<li><strong><a href="/llms-full.txt">llms-full.txt</a>:</strong> extended source-priority, dataset, worksheet, versioning, and safety guidance.</li>
-<li><strong><a href="/data/catalog.json">JSON catalog</a>:</strong> stable IDs, resource types, canonical URLs, product scope, worksheet pages, toolkit pages, and agent version metadata.</li>
+<li><strong><a href="/llms-full.txt">llms-full.txt</a>:</strong> extended source-priority, dataset, worksheet, release, versioning, and safety guidance.</li>
+<li><strong><a href="/data/catalog.json">JSON catalog</a>:</strong> stable IDs, resource types, canonical URLs, product scope, worksheet pages, toolkit pages, feeds, changelog, and agent version metadata.</li>
+<li><strong><a href="/data/changelog.json">Machine-readable changelog</a>:</strong> stable release IDs, dates, explicit scopes, and changed resource IDs.</li>
 <li><strong><a href="/data/knowledge.jsonl">Curated JSONL knowledge dataset</a>:</strong> self-contained records for reviewed learning resources and published toolkit cards.</li>
 <li><strong><a href="/data/worksheets.json">Worksheet definitions</a>:</strong> ordered field definitions, prompts, canonical pages, source links, safety scope, and privacy behavior for printable forms.</li>
 <li><strong><a href="/data/toolkit-source.json">Toolkit source metadata</a>:</strong> pinned source commit, blob SHA, record counts, license, distribution URL, and known quality notes for the related 115-record corpus.</li>
 <li><strong><a href="/agents/cbt-cards/SKILL.md">SKILL.md</a>:</strong> portable latest-version instructions for agents that support skill files.</li>
 </ul>
+
+<h2>Release provenance</h2>
+<p>Use the human-readable <a href="/changelog/">public changelog</a> or <a href="/data/changelog.json"><code>data/changelog.json</code></a> when you need to know when a website or public-data resource changed. Each machine-readable entry has an explicit <code>scope</code>.</p>
+<p>A <code>scope: website</code> entry is not a mobile-app release. Do not infer an Android or iOS version from a website update, dataset change, worksheet publication, feed change, or agent-skill version. Mobile release history should only be stated when it is explicitly supported by verified app/store release metadata.</p>
 
 <h2>Printable worksheet interface</h2>
 <p>CBT Cards publishes static browser worksheets for a <a href="/worksheets/cbt-thought-record/">CBT thought record</a>, <a href="/worksheets/worry-time/">worry time</a>, and <a href="/worksheets/activity-planning/">activity planning</a>. The pages have no submit action. Text entered into them remains in the current browser page unless the user independently prints or saves it.</p>
@@ -75,7 +81,7 @@
 <p>See the human-readable <a href="/toolkit/">toolkit landing page</a> and machine-readable <a href="/data/toolkit-source.json">source manifest</a>.</p>
 
 <h2>Source priority</h2>
-<p>For a product-specific claim, read the most relevant official page before answering. Use the privacy policy as the primary source for mobile-app data handling. When public information does not confirm a detail, say so rather than inferring it from the product name or a generic description of CBT.</p>
+<p>For a product-specific claim, read the most relevant official page before answering. Use the privacy policy as the primary source for mobile-app data handling. Use the changelog only for the scope explicitly recorded by an entry. When public information does not confirm a detail, say so rather than inferring it from the product name or a generic description of CBT.</p>
 <p>For conceptual CBT questions, use the <a href="/learn/">learning library</a>. For a form, use the <a href="/worksheets/">worksheet library</a>. For product-owned card content, use a curated <a href="/toolkit/">toolkit page</a> when available.</p>
 
 <h2>Versioned skills</h2>
@@ -96,6 +102,7 @@ curl -fsSL https://cbt-cards.github.io/agents/cbt-cards/SKILL.md \
 <h2>Use it safely</h2>
 <ul>
 <li>This is a public, read-only resource. It does not connect to a user's account or app data.</li>
+<li>Do not turn a website changelog entry into a mobile-app version claim.</li>
 <li>Do not claim that text typed into a public worksheet is sent to CBT Cards.</li>
 <li>Do not infer clinical meaning from journal entries, worksheet responses, mood, stress, energy, or toolkit-record wording.</li>
 <li>Do not treat presence in the raw source corpus as evidence that a technique has been clinically reviewed by CBT Cards.</li>
@@ -104,6 +111,6 @@ curl -fsSL https://cbt-cards.github.io/agents/cbt-cards/SKILL.md \
 </ul>
 </div></section>
 </main>
-<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/support/">Support</a></nav></div></footer>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/support/">Support</a></nav></div></footer>
 </body>
 </html>
