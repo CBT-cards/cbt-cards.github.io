@@ -30,7 +30,9 @@ a {
   color: inherit;
 }
 a:focus-visible,
-summary:focus-visible {
+summary:focus-visible,
+textarea:focus-visible,
+[contenteditable="true"]:focus-visible {
   outline: 3px solid #17130e;
   outline-offset: 4px;
 }
@@ -219,6 +221,12 @@ img {
   font-size: 24px;
   margin: 0 0 8px;
 }
+.card-heading {
+  font-size: 28px !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.1 !important;
+  margin: 0 0 10px !important;
+}
 .number {
   width: 35px;
   height: 35px;
@@ -380,6 +388,88 @@ img {
 .muted {
   color: #5c4c35;
 }
+.worksheet-intro .worksheet-note {
+  max-width: 760px;
+  margin-top: 24px;
+  padding: 14px 16px;
+  border: 2px solid #17130e;
+  border-radius: 14px;
+  background: #f9f4e8;
+  font-size: 15px;
+}
+.worksheet-section {
+  padding-top: 48px;
+}
+.worksheet {
+  max-width: 900px;
+}
+.worksheet-actions {
+  margin-bottom: 32px;
+  padding: 20px 22px;
+  border: 2px solid #17130e;
+  border-radius: 18px;
+  background: #f9f4e8;
+}
+.worksheet-actions p {
+  margin: 0;
+}
+.worksheet-actions p + p {
+  margin-top: 8px;
+}
+.worksheet-field {
+  margin: 22px 0;
+  padding: 26px;
+  border: 2px solid #17130e;
+  border-radius: 22px;
+  background: #f9f4e8;
+  break-inside: avoid;
+}
+.worksheet-field .number {
+  margin-bottom: 14px;
+}
+.worksheet-field h2 {
+  margin: 0 0 8px;
+  font-size: 30px;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.worksheet-field p {
+  max-width: 720px;
+  margin: 0 0 16px;
+}
+.worksheet-field label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.worksheet-field textarea,
+.worksheet-input {
+  width: 100%;
+  min-height: 118px;
+  border: 2px solid #17130e;
+  border-radius: 12px;
+  padding: 13px 14px;
+  background: #fff;
+  color: #17130e;
+  font: inherit;
+  line-height: 1.45;
+}
+.worksheet-field textarea {
+  resize: vertical;
+}
+.worksheet-source {
+  margin-top: 42px;
+  padding-top: 24px;
+  border-top: 2px solid #17130e;
+}
+.worksheet-source h2 {
+  font-size: 30px;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -443,5 +533,107 @@ img {
   .store {
     flex: 1;
     min-width: 140px;
+  }
+  .worksheet-field {
+    padding: 20px;
+    border-radius: 18px;
+  }
+  .worksheet-field h2 {
+    font-size: 26px;
+  }
+}
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  body {
+    background: #fff;
+    color: #000;
+    font-family: Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.35;
+  }
+  .no-print,
+  .worksheet-actions {
+    display: none !important;
+  }
+  .wrap,
+  .worksheet {
+    width: 100%;
+    max-width: none;
+  }
+  .page-hero {
+    padding: 0 0 5mm;
+    background: #fff;
+    border-bottom: 1.5pt solid #000;
+  }
+  .page-hero h1 {
+    margin: 0 0 3mm;
+    font-size: 22pt;
+    letter-spacing: -0.02em;
+  }
+  .page-hero .lede {
+    max-width: none;
+    margin: 0;
+    font-size: 11pt;
+  }
+  .worksheet-section {
+    padding: 3mm 0 0;
+    background: #fff;
+  }
+  .worksheet-field {
+    margin: 4mm 0;
+    padding: 4mm;
+    border: 1pt solid #000;
+    border-radius: 0;
+    background: #fff;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .worksheet-field .number {
+    width: 7mm;
+    height: 7mm;
+    margin: 0 0 2mm;
+    border: 1pt solid #000;
+    background: #fff;
+    color: #000;
+    font-size: 9pt;
+  }
+  .worksheet-field h2 {
+    margin: 0 0 1.5mm;
+    font-size: 13.5pt;
+  }
+  .worksheet-field p {
+    margin: 0 0 2.5mm;
+  }
+  .worksheet-field label {
+    margin-bottom: 1mm;
+    font-size: 8.5pt;
+  }
+  .worksheet-field textarea,
+  .worksheet-input {
+    min-height: 26mm;
+    border: 1pt solid #666;
+    border-radius: 0;
+    padding: 2.5mm;
+    background: #fff;
+    color: #000;
+    overflow: visible;
+    resize: none;
+  }
+  .worksheet-source {
+    margin-top: 6mm;
+    padding-top: 4mm;
+    border-top: 1pt solid #000;
+  }
+  .worksheet-source h2 {
+    font-size: 13.5pt;
+  }
+  a {
+    text-decoration: none;
   }
 }
