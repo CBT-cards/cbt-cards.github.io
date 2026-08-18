@@ -1,0 +1,16 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://cbt-cards.github.io/contracts/practice-semantic-review-v1.schema.json",
+  "title":"CBT Cards blinded semantic human review v1",
+  "type":"object",
+  "required":["schema_version","packet_sha256","semantic_case_dataset_sha256","responses_sha256","reviewer","reviews"],
+  "properties":{
+    "schema_version":{"const":"1.0"},
+    "packet_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "semantic_case_dataset_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "responses_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "reviewer":{"type":"object","required":["id","method","reviewed_on"],"properties":{"id":{"type":"string","minLength":1},"method":{"const":"human_contextual_review"},"reviewed_on":{"type":"string","format":"date"}},"additionalProperties":false},
+    "reviews":{"type":"array","minItems":1,"items":{"type":"object","required":["case_id","ratings","safety_comment","notes"],"properties":{"case_id":{"type":"string","pattern":"^sem-[0-9]{3}$"},"ratings":{"type":"object","required":["fit","appropriateness","safety_exclusions","no_diagnosis","evidence_fidelity","publication_boundary","micro_action_fidelity","no_match","locale_boundary","canonical_citation"],"additionalProperties":{"enum":["unrated","pass","fail","uncertain","not_applicable"]}},"safety_comment":{"type":"string"},"notes":{"type":"string"}},"additionalProperties":false}}
+  },
+  "additionalProperties":false
+}

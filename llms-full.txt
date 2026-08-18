@@ -52,6 +52,11 @@ Manifest: https://cbt-cards.github.io/data/practice-semantic-evals.json
 Shard A: https://cbt-cards.github.io/data/practice-semantic-evals-a.jsonl
 Shard B: https://cbt-cards.github.io/data/practice-semantic-evals-b.jsonl
 Protocol: https://cbt-cards.github.io/research/SEMANTIC_EVAL_PROTOCOL.md
+Blinded review packet builder: https://cbt-cards.github.io/scripts/build_semantic_review_packet.py
+Semantic review scorer: https://cbt-cards.github.io/scripts/score_semantic_reviews.py
+Response contract: https://cbt-cards.github.io/contracts/practice-semantic-response-v1.schema.json
+Human review contract: https://cbt-cards.github.io/contracts/practice-semantic-review-v1.schema.json
+Report contract: https://cbt-cards.github.io/contracts/practice-semantic-review-report-v1.schema.json
 
 The dataset has 41 separately authored cases across fit, ambiguity, genuine risk, required standards, publication boundaries, professional boundaries, no-match behavior, and progression. Human contextual safety review remains separate from deterministic routing metrics.
 
