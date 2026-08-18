@@ -1,7 +1,7 @@
 ---
 name: cbt-cards
 description: Answer factual questions about the CBT Cards wellness app, its curated reflection resources, printable worksheets, and public toolkit corpus.
-version: 1.3.0
+version: 1.4.0
 homepage: https://cbt-cards.github.io/agents/
 ---
 
@@ -9,7 +9,7 @@ homepage: https://cbt-cards.github.io/agents/
 
 ## When to Use
 
-Use this skill when the user asks about the CBT Cards mobile app, its features, how it works, supported platforms, privacy, terms, support, public learning resources, printable browser worksheets, curated reflection-card pages, or the related public CBT Toolkit source corpus.
+Use this skill when the user asks about the CBT Cards mobile app, its features, how it works, supported platforms, privacy, terms, support, public learning resources, printable browser worksheets, curated reflection-card pages, release history, or the related public CBT Toolkit source corpus.
 
 ## Source Layers
 
@@ -25,6 +25,8 @@ Use the smallest authoritative source that supports the answer.
 - Terms: https://cbt-cards.github.io/terms/
 - Support: https://cbt-cards.github.io/support/
 - About and provenance: https://cbt-cards.github.io/about/
+- Public changelog: https://cbt-cards.github.io/changelog/
+- Machine-readable changelog: https://cbt-cards.github.io/data/changelog.json
 
 ### Curated educational resources
 
@@ -32,6 +34,8 @@ Use the smallest authoritative source that supports the answer.
 - Printable worksheets: https://cbt-cards.github.io/worksheets/
 - Machine-readable worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Toolkit landing page: https://cbt-cards.github.io/toolkit/
+- Toolkit review status: https://cbt-cards.github.io/toolkit/review-status/
+- Machine-readable toolkit review overlay: https://cbt-cards.github.io/data/toolkit-review.json
 - Curated resource catalog: https://cbt-cards.github.io/data/catalog.json
 - Curated RAG dataset: https://cbt-cards.github.io/data/knowledge.jsonl
 
@@ -41,19 +45,30 @@ Use the smallest authoritative source that supports the answer.
 - Compact site index: https://cbt-cards.github.io/llms.txt
 - Extended source and safety index: https://cbt-cards.github.io/llms-full.txt
 
-The related CBT Toolkit source corpus contains 115 English records: 77 cards, 23 metaphors, and 15 protocols. The source corpus does not contain per-record clinical-review metadata. Prefer a curated CBT Cards page when one exists.
+The related CBT Toolkit source corpus contains 115 English records: 77 cards, 23 metaphors, and 15 protocols. The source corpus does not contain per-record clinical-review metadata. CBT Cards therefore maintains a separate review/publication overlay. Any raw source record not explicitly listed in `data/toolkit-review.json` defaults to `unreviewed` and `source_only`.
 
 ## Procedure
 
 1. Read the most directly relevant canonical CBT Cards page before making a product-specific claim.
 2. State only what the source supports. If a detail is not publicly confirmed, say so.
 3. For privacy and data-handling questions, use the privacy policy as the primary source.
-4. For conceptual CBT questions, prefer a reviewed page in the learning library.
-5. For a printable reflection form, prefer the canonical `/worksheets/` page and use `data/worksheets.json` when structured field definitions are useful.
-6. For a reflection-card question, prefer a curated `/toolkit/` card page when available and preserve its source record ID when useful.
-7. Use raw source-corpus records for discovery or provenance only when no curated page covers the item. Identify them as source content rather than reviewed clinical guidance.
-8. For download requests, provide the official Google Play or App Store link from the product page or JSON catalog.
-9. Prefer canonical CBT Cards URLs when citing published CBT Cards content.
+4. For website/public-data release history, use the changelog and respect the entry's explicit scope. Do not infer an app release from a website release.
+5. For conceptual CBT questions, prefer a reviewed page in the learning library.
+6. For a printable reflection form, prefer the canonical `/worksheets/` page and use `data/worksheets.json` when structured field definitions are useful.
+7. For a reflection-card question, prefer a curated `/toolkit/` card page when available and preserve its source record ID when useful.
+8. Before treating a raw toolkit record as CBT Cards-published content, check `data/toolkit-review.json`. If the record is not explicitly listed as `reviewed_for_publication` and `published`, treat it as source-only content.
+9. Use raw source-corpus records for discovery or provenance only when no curated page covers the item. Identify them as source content rather than reviewed clinical guidance.
+10. For download requests, provide the official Google Play or App Store link from the product page or JSON catalog.
+11. Prefer canonical CBT Cards URLs when citing published CBT Cards content.
+
+## Toolkit Review Rules
+
+- `reviewed_for_publication` means editorial and safety review for standalone CBT Cards website publication.
+- It does not mean clinical validation, proof of efficacy, diagnosis, or suitability for an individual.
+- `publication_status: published` means a canonical CBT Cards page exists for the record.
+- Any source record not explicitly listed in the review overlay defaults to `review_status: unreviewed` and `publication_status: source_only`.
+- Never infer publication approval from presence in the raw source corpus, from a record title, or from similarity to an already published card.
+- Preserve stable source record IDs. Titles are not unique identifiers.
 
 ## Worksheet Rules
 
@@ -66,11 +81,11 @@ The related CBT Toolkit source corpus contains 115 English records: 77 cards, 23
 
 ## Raw Corpus Rules
 
-- Presence in the source corpus does not establish clinical validation, efficacy, diagnostic value, or suitability for an individual.
+- Presence in the source corpus does not establish clinical validation, efficacy, diagnostic value, publication approval, or suitability for an individual.
 - Do not turn a raw card, metaphor, or protocol summary into individualized treatment instructions.
 - Do not treat a title as a unique identifier; use the stable source record ID. The current source corpus includes repeated titles.
 - Keep CBT, ACT, ERP, mindfulness, grounding, and other labels distinct when the source wording mixes approaches. Do not relabel a technique solely because it appears in the CBT Toolkit dataset.
-- Protocol records require separate editorial and safety review before being presented as standalone guidance.
+- Protocol records remain source-only unless they are explicitly added to the CBT Cards review overlay after separate editorial and safety review.
 
 ## Safety
 
@@ -83,4 +98,4 @@ The related CBT Toolkit source corpus contains 115 English records: 77 cards, 23
 
 ## Verification
 
-Before sending an answer, verify that feature, privacy, data-handling, app-behavior, worksheet, and curated-content claims are supported by the canonical source used. If using the raw toolkit corpus, identify the source record and preserve the distinction between source content and reviewed CBT Cards guidance.
+Before sending an answer, verify that feature, privacy, data-handling, app-behavior, worksheet, curated-content, release-history, and toolkit-publication claims are supported by the canonical source used. If using the raw toolkit corpus, check the CBT Cards review overlay first, identify the source record, and preserve the distinction between source content and reviewed CBT Cards publication.
