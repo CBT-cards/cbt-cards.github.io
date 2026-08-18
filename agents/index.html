@@ -26,7 +26,7 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/agents/">For AI</a><a href="/about/">About</a></nav><a class="download" href="/toolkit/">Explore tools</a></div></header>
+<header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/languages/">Languages</a><a href="/agents/">For AI</a><a href="/about/">About</a></nav><a class="download" href="/toolkit/">Explore tools</a></div></header>
 <main id="main">
 <section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / For AI assistants</div><h1>Give an assistant a source it can inspect.</h1><p class="lede">CBT Cards publishes practical reflection resources in human-readable and machine-readable forms. An assistant can discover a relevant card, guide, or worksheet, check its language and publication status, preserve its source and safety context, and present it without needing access to a user's CBT Cards account or private journal.</p></div></section>
 <section class="section alt"><div class="wrap prose agent-guide">
@@ -38,7 +38,7 @@
 <ol>
 <li>Discover available resources through <a href="/llms.txt"><code>llms.txt</code></a> or <a href="/data/catalog.json"><code>data/catalog.json</code></a>.</li>
 <li>Choose a reviewed learning page, published toolkit record, or worksheet definition that fits the user's request.</li>
-<li>If a language is requested, check <a href="/data/locales.json"><code>data/locales.json</code></a> and any matching record in <a href="/data/translations.jsonl"><code>data/translations.jsonl</code></a>.</li>
+<li>If a language is requested, check <a href="/languages/">human language status</a>, <a href="/data/locales.json"><code>data/locales.json</code></a>, and any matching record in <a href="/data/translations.jsonl"><code>data/translations.jsonl</code></a>.</li>
 <li>Preserve the canonical URL and stable source ID when one is available.</li>
 <li>Check publication status before presenting raw toolkit material or a localized record as CBT Cards-published content.</li>
 <li>Keep the resource's safety scope and privacy behavior intact when summarizing, translating, or rendering it.</li>
@@ -50,6 +50,7 @@
 <li><strong><a href="/llms-full.txt">llms-full.txt</a>:</strong> extended source-priority, language, release, and safety guidance.</li>
 <li><strong><a href="/data/catalog.json">JSON catalog</a>:</strong> stable resource IDs, canonical URLs, formats, locale metadata, and <code>schema_url</code> where applicable.</li>
 <li><strong><a href="/data/knowledge.jsonl">Curated JSONL</a>:</strong> self-contained reviewed English source records for learning resources and published toolkit records.</li>
+<li><strong><a href="/languages/">Language status page</a>:</strong> human-readable source, pilot, planned, reviewed, and published counts.</li>
 <li><strong><a href="/data/locales.json">Locale registry</a>:</strong> source, pilot, and planned language status.</li>
 <li><strong><a href="/data/translations.jsonl">Translation overlays</a>:</strong> localized records keyed by stable resource ID, with explicit translation, review, publication, and source-snapshot status.</li>
 <li><strong><a href="/data/worksheets.json">Worksheet definitions</a>:</strong> ordered form definitions, canonical links, safety scope, and privacy behavior.</li>
@@ -60,9 +61,10 @@
 </ul>
 
 <h2>Languages and translation status</h2>
-<p>English is currently the source language for the curated knowledge dataset. Russian is a pilot locale with initial machine-readable draft translations. German is planned and currently has no translation records.</p>
+<p>English is currently the source language for the curated knowledge dataset. Russian is a pilot locale with machine-readable drafts for all 12 records in the current curated knowledge set; none is currently human-reviewed or published. German is planned and currently has no translation records.</p>
 <p>A machine translation draft is deliberately not treated as a published CBT Cards localization. A localized record becomes official public CBT Cards content only after separate human language and editorial review, an explicit published status, and a canonical CBT Cards URL. Until then, an assistant can translate the canonical English resource for a user, but that translation belongs to the assistant rather than to CBT Cards.</p>
-<p>Each translation records the review date of the source-language record it was based on. Repository checks reject a translation when that source snapshot no longer matches the current English record, which is considerably less glamorous than multilingual drift and considerably more useful.</p>
+<p>Each translation records the review date of the source-language record it was based on. Repository checks reject a translation when that source snapshot no longer matches the current English record.</p>
+<p>Published localized records are generated from reviewed translation data at <code>/&lt;locale&gt;/resources/&lt;resource_id&gt;/</code>. Locale-level <code>public_html</code> allows gradual publication: reviewed published records can coexist with machine drafts, which remain unpublished.</p>
 
 <h2>Human pages remain canonical</h2>
 <p>Structured data exists to make the same material easier for software to consume, not to create a second editorial universe. When a record has a canonical public page, keep that URL attached to the answer. For conceptual explanations, prefer reviewed pages in the <a href="/learn/">learning library</a>. For practical exercises, prefer published <a href="/toolkit/">toolkit resources</a> or <a href="/worksheets/">worksheet definitions</a>.</p>
@@ -94,6 +96,6 @@
 </ul>
 </div></section>
 </main>
-<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/toolkit/review-status/">Review status</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a></nav></div></footer>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/languages/">Languages</a><a href="/toolkit/review-status/">Review status</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a></nav></div></footer>
 </body>
 </html>
