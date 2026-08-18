@@ -5,6 +5,45 @@
   "updated": "2026-08-18",
   "entries": [
     {
+      "id": "agent-2026-08-18-localization-aware-skill",
+      "date": "2026-08-18",
+      "scope": "agent",
+      "title": "Localization-aware agent skill v1.6.0",
+      "summary": "Added explicit language and translation-status handling to the CBT Cards agent skill so assistants can distinguish source content, machine drafts, reviewed translations, and published localized resources.",
+      "changes": [
+        {"type": "added", "resource_id": "agent-skill-v1.6.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.6.0/SKILL.md"},
+        {"type": "changed", "resource_id": "agent-skill-latest", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md"},
+        {"type": "changed", "resource_id": "agent-skill-manifest", "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"},
+        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+      ],
+      "notes": [
+        "The skill checks the locale registry and translation overlay before treating localized text as official CBT Cards content.",
+        "Machine-draft translations are development data and must not be presented as reviewed or published CBT Cards localizations.",
+        "When no reviewed localization exists, an assistant may translate the canonical source for the user but must not misattribute that output as an official CBT Cards translation.",
+        "This is an agent-interface release and does not imply an Android or iOS app release."
+      ]
+    },
+    {
+      "id": "data-2026-08-18-localization-foundation",
+      "date": "2026-08-18",
+      "scope": "data",
+      "title": "Locale registry and translation overlay foundation",
+      "summary": "Added a source-locale registry, versioned translation-record contract, Russian pilot translation overlays, and CI rules that keep localized review and publication status separate from source content.",
+      "changes": [
+        {"type": "added", "resource_id": "locale-registry", "url": "https://cbt-cards.github.io/data/locales.json"},
+        {"type": "added", "resource_id": "translation-dataset", "url": "https://cbt-cards.github.io/data/translations.jsonl"},
+        {"type": "changed", "resource_id": "schema-manifest", "url": "https://cbt-cards.github.io/schemas/index.json"},
+        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+      ],
+      "notes": [
+        "English is the current canonical source locale for curated knowledge records.",
+        "Russian is a pilot locale with three initial machine-draft records: CBT thought record, Thought vs Fact, and Worry Time.",
+        "The Russian drafts are explicitly unreviewed and not published; they have no canonical localized pages.",
+        "German is registered as planned and has no translation records yet.",
+        "Each translation records the source review date it was based on; CI rejects translations when that source snapshot no longer matches the current English record."
+      ]
+    },
+    {
       "id": "agent-2026-08-18-public-resource-skill",
       "date": "2026-08-18",
       "scope": "agent",
