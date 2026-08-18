@@ -8,6 +8,14 @@ Report these independently: situation/mechanism fit, practice appropriateness, s
 
 The canonical dataset contains 41 separately authored situations across fit, ambiguity, genuine risk, required standards, publication boundaries, professional boundaries, no-match behavior, and progression.
 
+## Frozen-context real-provider path
+
+For the first publishable practice-semantic provider run, CBT Cards uses a separate frozen-context adapter: `scripts/run_practice_semantic_openai.py`. It does not enable web search. Every request receives only the case `user_message` plus the fixed semantic prompt, Agent Skill, and committed reviewed-practice context files.
+
+The execution artifact records SHA-256 values for the semantic manifest and both case shards, the fixed prompt, the current Agent Skill, and each frozen context resource (`practice.json`, `practice-recommendations.json`, `practice-evidence.json`, and `practice-rag.ndjson`). `scripts/check_practice_semantic_execution.py` requires all 41 case IDs in canonical order before an execution is accepted as a full review candidate.
+
+The manual GitHub Actions workflow `run-practice-semantic-model-eval.yml` requires repository secret `OPENAI_API_KEY`, generates responses, validates execution provenance, then builds the blinded human-review packet. It uploads artifacts and does not publish or semantically score the run automatically.
+
 ## Stage 1: generation
 
 Capture model/runtime responses before semantic benchmark annotations are opened. A practice semantic response contains only:
@@ -59,5 +67,6 @@ The scorer fails on incomplete reviews by default. `--allow-incomplete` may be u
 - `contracts/practice-semantic-response-v1.schema.json`
 - `contracts/practice-semantic-review-v1.schema.json`
 - `contracts/practice-semantic-review-report-v1.schema.json`
+- `contracts/practice-semantic-execution-v1.schema.json`
 
 These contracts support reproducible real-model runs but do not themselves claim that a hosted model has been evaluated.
