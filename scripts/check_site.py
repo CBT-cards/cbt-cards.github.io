@@ -77,6 +77,17 @@ def url_to_local(url):
     return candidate
 
 
+def require_local_target(label, url, errors):
+    target = url_to_local(url)
+    if target is None:
+        errors.append(f"{label}: URL is outside site origin: {url}")
+        return None
+    if not target.exists():
+        errors.append(f"{label}: missing local target: {url}")
+        return None
+    return target
+
+
 errors = []
 html_files = sorted(
     p for p in ROOT.rglob("*.html")
@@ -127,15 +138,13 @@ else:
             if canonical not in locs:
                 errors.append(f"sitemap missing canonical {canonical}")
         for loc in sorted(locs):
-            target = url_to_local(loc)
-            if target is None:
-                errors.append(f"sitemap contains URL outside site origin: {loc}")
-            elif not target.exists():
-                errors.append(f"sitemap URL has no local target: {loc}")
+            require_local_target("sitemap", loc, errors)
     except Exception as exc:
         errors.append(f"invalid sitemap.xml: {exc}")
 
 catalog_path = ROOT / "data/catalog.json"
+catalog = None
+catalog_by_id = {}
 if not catalog_path.exists():
     errors.append("missing data/catalog.json")
 else:
@@ -144,15 +153,108 @@ else:
         if catalog.get("canonical") != f"{SITE_ORIGIN}/data/catalog.json":
             errors.append("data/catalog.json: unexpected canonical URL")
         for resource in catalog.get("resources", []):
+            resource_id = resource.get("id")
             url = resource.get("url")
-            if not url:
-                errors.append(f"data/catalog.json: resource missing url: {resource.get('id', '<unknown>')}")
+            if not resource_id:
+                errors.append("data/catalog.json: resource missing id")
                 continue
-            target = url_to_local(url)
-            if target is not None and not target.exists():
-                errors.append(f"data/catalog.json: missing local target for {resource.get('id')}: {url}")
+            if resource_id in catalog_by_id:
+                errors.append(f"data/catalog.json: duplicate resource id {resource_id}")
+            catalog_by_id[resource_id] = resource
+            if not url:
+                errors.append(f"data/catalog.json: resource missing url: {resource_id}")
+                continue
+            require_local_target(f"data/catalog.json resource {resource_id}", url, errors)
     except json.JSONDecodeError as exc:
         errors.append(f"data/catalog.json: invalid JSON: {exc}")
+
+knowledge_path = ROOT / "data/knowledge.jsonl"
+knowledge_ids = set()
+if not knowledge_path.exists():
+    errors.append("missing data/knowledge.jsonl")
+else:
+    for line_number, raw_line in enumerate(knowledge_path.read_text(encoding="utf-8").splitlines(), start=1):
+        line = raw_line.strip()
+        if not line:
+            continue
+        try:
+            record = json.loads(line)
+        except json.JSONDecodeError as exc:
+            errors.append(f"data/knowledge.jsonl:{line_number}: invalid JSON: {exc}")
+            continue
+
+        required = {
+            "id", "locale", "type", "title", "canonical_url", "summary",
+            "key_points", "product_relation", "safety_scope", "reviewed", "sources"
+        }
+        missing = sorted(required - set(record))
+        if missing:
+            errors.append(f"data/knowledge.jsonl:{line_number}: missing fields: {', '.join(missing)}")
+
+        record_id = record.get("id")
+        if not record_id:
+            continue
+        if record_id in knowledge_ids:
+            errors.append(f"data/knowledge.jsonl:{line_number}: duplicate id {record_id}")
+        knowledge_ids.add(record_id)
+
+        catalog_resource = catalog_by_id.get(record_id)
+        if catalog_resource is None:
+            errors.append(f"data/knowledge.jsonl:{line_number}: id {record_id} missing from catalog")
+        elif catalog_resource.get("type") != "learning":
+            errors.append(f"data/knowledge.jsonl:{line_number}: catalog resource {record_id} is not type learning")
+        elif catalog_resource.get("url") != record.get("canonical_url"):
+            errors.append(f"data/knowledge.jsonl:{line_number}: canonical URL differs from catalog for {record_id}")
+
+        canonical_url = record.get("canonical_url")
+        if canonical_url:
+            require_local_target(f"data/knowledge.jsonl record {record_id}", canonical_url, errors)
+
+        key_points = record.get("key_points")
+        if not isinstance(key_points, list) or not key_points:
+            errors.append(f"data/knowledge.jsonl:{line_number}: key_points must be a non-empty list")
+        sources = record.get("sources")
+        if not isinstance(sources, list) or not sources:
+            errors.append(f"data/knowledge.jsonl:{line_number}: sources must be a non-empty list")
+
+for resource_id, resource in catalog_by_id.items():
+    if resource.get("type") == "learning" and resource_id not in knowledge_ids:
+        errors.append(f"data/catalog.json: learning resource {resource_id} missing from knowledge.jsonl")
+
+manifest_path = ROOT / "agents/cbt-cards/manifest.json"
+if not manifest_path.exists():
+    errors.append("missing agents/cbt-cards/manifest.json")
+else:
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        latest = manifest.get("latest")
+        latest_url = manifest.get("latest_url")
+        if not latest:
+            errors.append("agents/cbt-cards/manifest.json: missing latest version")
+        if not latest_url:
+            errors.append("agents/cbt-cards/manifest.json: missing latest_url")
+        else:
+            require_local_target("agents/cbt-cards/manifest.json latest_url", latest_url, errors)
+
+        versions = manifest.get("versions")
+        if not isinstance(versions, list) or not versions:
+            errors.append("agents/cbt-cards/manifest.json: versions must be a non-empty list")
+        else:
+            version_names = set()
+            for item in versions:
+                version = item.get("version")
+                url = item.get("url")
+                if not version or not url:
+                    errors.append("agents/cbt-cards/manifest.json: each version needs version and url")
+                    continue
+                if version in version_names:
+                    errors.append(f"agents/cbt-cards/manifest.json: duplicate version {version}")
+                version_names.add(version)
+                require_local_target(f"agents/cbt-cards/manifest.json version {version}", url, errors)
+            if latest and latest not in version_names:
+                errors.append(f"agents/cbt-cards/manifest.json: latest {latest} not present in versions")
+    except json.JSONDecodeError as exc:
+        errors.append(f"agents/cbt-cards/manifest.json: invalid JSON: {exc}")
 
 if errors:
     print("Site quality checks failed:")
@@ -162,5 +264,5 @@ if errors:
 
 print(
     f"OK: {len(html_files)} HTML pages checked; {len(canonicals)} canonical URLs; "
-    "internal links, sitemap, catalog, JSON and JSON-LD parsed."
+    f"{len(knowledge_ids)} knowledge records; internal links, sitemap, catalog, manifest, JSON and JSON-LD parsed."
 )
