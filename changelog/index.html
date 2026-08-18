@@ -25,8 +25,21 @@
 <main id="main">
 <section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / Changelog</div><h1>CBT Cards public changelog</h1><p class="lede">Website and public-data changes, recorded separately from mobile-app releases.</p></div></section>
 <section class="section alt"><div class="wrap prose">
-<p>This changelog tracks changes to the public CBT Cards website, learning library, printable browser worksheets, schemas, toolkit pages, structured data, feeds, and agent interfaces. A website or data entry does <strong>not</strong> imply that an Android or iOS app version shipped on the same date.</p>
+<p>This changelog tracks changes to the public CBT Cards website, learning library, printable browser worksheets, schemas, toolkit pages, structured data, feeds, and agent interfaces. A website, data, or agent entry does <strong>not</strong> imply that an Android or iOS app version shipped on the same date.</p>
 <p>Agents and tooling can read the same history from <a href="/data/changelog.json"><code>data/changelog.json</code></a>. Versioned data contracts are listed in <a href="/schemas/index.json"><code>schemas/index.json</code></a>.</p>
+
+<article id="agent-2026-08-18-public-resource-skill">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Agent interface</p>
+<h2>Public reflection resource skill v1.5.0</h2>
+<p>Reframed the CBT Cards agent skill around using the public reflection library rather than treating the mobile app as the primary resource surface.</p>
+<ul>
+<li>Published immutable <a href="/agents/cbt-cards/v1.5.0/SKILL.md">skill v1.5.0</a> and updated the version manifest.</li>
+<li>Made published cards, worksheets, and reviewed learning pages first-class choices for human-facing reflection tasks.</li>
+<li>Added guidance to keep human answers in ordinary language and expose machine details only when they are useful.</li>
+<li>Kept the mobile app as the canonical source for app-specific behavior, privacy, support, and download questions.</li>
+</ul>
+<p>This is an agent-interface release. It does not imply a new Android or iOS app version.</p>
+</article>
 
 <article id="web-2026-08-18-crawl-graph-quality">
 <p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Website</p>
