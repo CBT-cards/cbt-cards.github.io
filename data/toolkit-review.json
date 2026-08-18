@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "name": "CBT Cards toolkit review overlay",
+  "canonical": "https://cbt-cards.github.io/data/toolkit-review.json",
+  "updated": "2026-08-18",
+  "source_dataset_id": "metalhatscats-cbt-toolkit-v0.1.0",
+  "source_manifest": "https://cbt-cards.github.io/data/toolkit-source.json",
+  "default_for_unlisted_records": {
+    "review_status": "unreviewed",
+    "publication_status": "source_only",
+    "clinical_validation_status": "not_claimed"
+  },
+  "review_semantics": {
+    "reviewed_for_publication": "Editorial and safety review for standalone publication on the CBT Cards website. This status is not clinical validation, evidence of efficacy, or an individualized recommendation.",
+    "published": "A canonical CBT Cards page currently exists for this source record.",
+    "source_only": "The record may exist in the pinned source corpus but is not approved by CBT Cards for standalone publication.",
+    "not_claimed": "CBT Cards makes no claim that the record has been clinically validated."
+  },
+  "records": [
+    {
+      "source_record_id": "card-4",
+      "catalog_resource_id": "source-card-4",
+      "title": "Challenge Your Thoughts",
+      "review_status": "reviewed_for_publication",
+      "reviewed_at": "2026-08-18",
+      "reviewed_by": "CBT Cards project",
+      "review_scope": "editorial_and_safety_for_public_web_use",
+      "publication_status": "published",
+      "clinical_validation_status": "not_claimed",
+      "canonical_url": "https://cbt-cards.github.io/toolkit/cards/challenge-your-thoughts/"
+    },
+    {
+      "source_record_id": "card-15",
+      "catalog_resource_id": "source-card-15",
+      "title": "Worry Box",
+      "review_status": "reviewed_for_publication",
+      "reviewed_at": "2026-08-18",
+      "reviewed_by": "CBT Cards project",
+      "review_scope": "editorial_and_safety_for_public_web_use",
+      "publication_status": "published",
+      "clinical_validation_status": "not_claimed",
+      "canonical_url": "https://cbt-cards.github.io/toolkit/cards/worry-box/"
+    },
+    {
+      "source_record_id": "card-16",
+      "catalog_resource_id": "source-card-16",
+      "title": "Big Goals, Small Steps",
+      "review_status": "reviewed_for_publication",
+      "reviewed_at": "2026-08-18",
+      "reviewed_by": "CBT Cards project",
+      "review_scope": "editorial_and_safety_for_public_web_use",
+      "publication_status": "published",
+      "clinical_validation_status": "not_claimed",
+      "canonical_url": "https://cbt-cards.github.io/toolkit/cards/big-goals-small-steps/"
+    },
+    {
+      "source_record_id": "card-21",
+      "catalog_resource_id": "source-card-21",
+      "title": "Thoughts ≠ Facts",
+      "review_status": "reviewed_for_publication",
+      "reviewed_at": "2026-08-18",
+      "reviewed_by": "CBT Cards project",
+      "review_scope": "editorial_and_safety_for_public_web_use",
+      "publication_status": "published",
+      "clinical_validation_status": "not_claimed",
+      "canonical_url": "https://cbt-cards.github.io/toolkit/cards/thoughts-are-not-facts/"
+    },
+    {
+      "source_record_id": "card-27",
+      "catalog_resource_id": "source-card-27",
+      "title": "Socratic Questioning",
+      "review_status": "reviewed_for_publication",
+      "reviewed_at": "2026-08-18",
+      "reviewed_by": "CBT Cards project",
+      "review_scope": "editorial_and_safety_for_public_web_use",
+      "publication_status": "published",
+      "clinical_validation_status": "not_claimed",
+      "canonical_url": "https://cbt-cards.github.io/toolkit/cards/socratic-questioning/"
+    },
+    {
+      "source_record_id": "card-32",
+      "catalog_resource_id": "source-card-32",
+      "title": "Ground Yourself",
+      "review_status": "reviewed_for_publication",
+      "reviewed_at": "2026-08-18",
+      "reviewed_by": "CBT Cards project",
+      "review_scope": "editorial_and_safety_for_public_web_use",
+      "publication_status": "published",
+      "clinical_validation_status": "not_claimed",
+      "canonical_url": "https://cbt-cards.github.io/toolkit/cards/ground-yourself/"
+    }
+  ],
+  "known_source_quality_notes": [
+    "Source records protocol-1 and protocol-8 share the title Burnout Recovery Protocol.",
+    "The source corpus includes CBT-adjacent terminology and techniques; source inclusion does not justify relabeling every record as CBT.",
+    "Protocol records remain source-only unless explicitly added to this review overlay after separate editorial and safety review."
+  ]
+}
