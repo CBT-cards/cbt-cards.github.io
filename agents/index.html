@@ -4,10 +4,11 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CBT Cards for AI agents: skill, llms.txt, JSON &amp; schemas</title>
-<meta name="description" content="Use official CBT Cards facts, curated resources, JSON/JSONL data, versioned JSON Schema contracts, toolkit publication status, and agent skills." />
+<meta name="description" content="Use official CBT Cards facts, content freshness metadata, JSON/JSONL data, versioned schemas, toolkit publication status, and agent skills." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href="https://cbt-cards.github.io/agents/" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/catalog.json" title="CBT Cards public resource catalog" />
+<link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/content-review.json" title="CBT Cards content review registry" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/schemas/index.json" title="CBT Cards public JSON Schema manifest" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/changelog.json" title="CBT Cards machine-readable changelog" />
 <link rel="alternate" type="application/x-ndjson" href="https://cbt-cards.github.io/data/knowledge.jsonl" title="CBT Cards curated knowledge dataset" />
@@ -18,33 +19,37 @@
 <link rel="icon" href="/assets/app-icon.png" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="CBT Cards for AI agents" />
-<meta property="og:description" content="Canonical public sources, versioned JSON Schema contracts, release provenance, toolkit publication status, worksheet definitions, and agent skills." />
+<meta property="og:description" content="Canonical public sources, content review freshness, versioned data contracts, toolkit publication status, worksheet definitions, and agent skills." />
 <meta property="og:url" content="https://cbt-cards.github.io/agents/" />
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"For AI agents","item":"https://cbt-cards.github.io/agents/"}]},{"@type":"TechArticle","headline":"CBT Cards for AI agents","description":"How to consume CBT Cards public facts, schemas, release provenance, toolkit publication status, learning resources, worksheet definitions, source metadata, and versioned agent instructions.","mainEntityOfPage":"https://cbt-cards.github.io/agents/","dateModified":"2026-08-18"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"For AI agents","item":"https://cbt-cards.github.io/agents/"}]},{"@type":"TechArticle","headline":"CBT Cards for AI agents","description":"How to consume CBT Cards public facts, review freshness, schemas, release provenance, toolkit publication status, learning resources, worksheet definitions, source metadata, and versioned agent instructions.","mainEntityOfPage":"https://cbt-cards.github.io/agents/","dateModified":"2026-08-18"}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/how-it-works/">How it works</a><a href="/features/">Features</a><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/about/">About</a></nav><a class="download" href="/#download">Download</a></div></header>
 <main id="main">
-<section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / For AI agents</div><h1>Use CBT Cards as a public agent resource.</h1><p class="lede">Official product facts, versioned data contracts, release provenance, curated learning resources, worksheet definitions, toolkit review status, source metadata, and agent skills are available as canonical public resources. None provides access to a user's journal, check-ins, or app data.</p></div></section>
+<section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / For AI agents</div><h1>Use CBT Cards as a public agent resource.</h1><p class="lede">Official product facts, editorial freshness metadata, versioned data contracts, release provenance, curated learning resources, worksheet definitions, toolkit review status, source metadata, and agent skills are available as canonical public resources. None provides access to a user's journal, check-ins, or app data.</p></div></section>
 <section class="section alt"><div class="wrap prose agent-guide">
 <h2>Choose the smallest useful interface</h2>
 <ul>
 <li><strong><a href="/llms.txt">llms.txt</a>:</strong> compact discovery index.</li>
 <li><strong><a href="/llms-full.txt">llms-full.txt</a>:</strong> extended source-priority and safety guidance.</li>
-<li><strong><a href="/data/catalog.json">JSON catalog</a>:</strong> stable resource IDs, canonical URLs, and <code>schema_url</code> where applicable.</li>
-<li><strong><a href="/schemas/index.json">JSON Schema manifest</a>:</strong> versioned JSON Schema 2020-12 contracts mapped to CBT Cards-owned JSON/JSONL instances.</li>
+<li><strong><a href="/data/catalog.json">JSON catalog</a>:</strong> stable resource IDs, canonical URLs, and schema links.</li>
+<li><strong><a href="/data/content-review.json">Content review registry</a>:</strong> review coverage, last-reviewed dates, and next-review deadlines for learning, worksheet, and curated toolkit-card resources.</li>
+<li><strong><a href="/schemas/index.json">JSON Schema manifest</a>:</strong> versioned JSON Schema 2020-12 contracts.</li>
 <li><strong><a href="/data/changelog.json">Changelog JSON</a>:</strong> scoped website/public-data release provenance.</li>
 <li><strong><a href="/data/knowledge.jsonl">Curated JSONL</a>:</strong> reviewed learning resources and published toolkit cards.</li>
 <li><strong><a href="/data/worksheets.json">Worksheet definitions</a>:</strong> ordered form definitions and privacy behavior.</li>
 <li><strong><a href="/data/toolkit-review.json">Toolkit review overlay</a>:</strong> explicit CBT Cards publication status keyed by stable source record ID.</li>
-<li><strong><a href="/data/toolkit-source.json">Toolkit source metadata</a>:</strong> pinned source version, counts, license, and quality notes.</li>
 <li><strong><a href="/agents/cbt-cards/SKILL.md">SKILL.md</a>:</strong> latest portable agent instructions.</li>
 </ul>
 
+<h2>Editorial freshness</h2>
+<p>For a health-adjacent learning page, worksheet, or curated toolkit card, join the resource to <a href="/data/content-review.json"><code>data/content-review.json</code></a> by catalog <code>resource_id</code>. The registry currently uses a 365-day internal review target. That cadence is a project maintenance policy, not a clinical standard.</p>
+<p>If the current date is later than <code>next_review_due</code>, describe the editorial review as overdue instead of claiming a current review. Do not manufacture a later review date from sitemap <code>lastmod</code>, changelog activity, Git history, or a newer agent skill.</p>
+<p>See the <a href="/about/editorial-review/">human-readable editorial review policy</a>. “Reviewed” means source, wording, safety boundary, product relationship, and relevant privacy statements were checked for web publication. It is not clinical validation or efficacy evidence.</p>
+
 <h2>Versioned data contracts</h2>
-<p>Use <a href="/schemas/index.json"><code>schemas/index.json</code></a> to discover the contract for a CBT Cards-owned JSON or JSONL resource. The manifest currently covers the resource catalog, changelog, worksheet definitions, toolkit review overlay, toolkit source manifest, one curated knowledge-record line, and the agent skill manifest.</p>
-<p>The schema files use JSON Schema draft 2020-12. They describe portable field-level contracts. CBT Cards also keeps purpose-specific CI checks for invariants that generic JSON Schema does not capture well, such as canonical target existence, sequential worksheet fields, publication-set equality, and privacy wording.</p>
+<p>Use <a href="/schemas/index.json"><code>schemas/index.json</code></a> to discover the contract for a CBT Cards-owned JSON or JSONL resource. Purpose-specific CI checks still enforce semantic invariants beyond generic JSON Schema.</p>
 
 <h2>Toolkit publication status</h2>
 <p>Before presenting a raw source record as CBT Cards-published content, consult <a href="/data/toolkit-review.json"><code>data/toolkit-review.json</code></a>. Any unlisted source record defaults to <code>unreviewed</code> and <code>source_only</code>. <code>reviewed_for_publication</code> is editorial and safety review for web publication, not clinical validation or efficacy evidence.</p>
@@ -53,23 +58,24 @@
 <p>Use the <a href="/changelog/">public changelog</a> or <a href="/data/changelog.json"><code>data/changelog.json</code></a> for website/public-data changes. A <code>scope: website</code> entry is not a mobile-app release.</p>
 
 <h2>Printable worksheet interface</h2>
-<p>The public worksheets have no submit action. Text entered there remains in the current browser page unless the user independently prints or saves it. Structured definitions are in <a href="/data/worksheets.json"><code>data/worksheets.json</code></a>; preserve field order, labels, canonical URL, safety scope, and privacy behavior.</p>
+<p>The public worksheets have no submit action. Text entered there remains in the current browser page unless the user independently prints or saves it. Structured definitions are in <a href="/data/worksheets.json"><code>data/worksheets.json</code></a>.</p>
 
 <h2>Versioned skills</h2>
-<p>The unversioned <a href="/agents/cbt-cards/SKILL.md"><code>SKILL.md</code></a> is a moving alias. For reproducibility, resolve <a href="/agents/cbt-cards/manifest.json"><code>manifest.json</code></a> and pin <a href="/agents/cbt-cards/v1.4.0/SKILL.md"><code>v1.4.0/SKILL.md</code></a>.</p>
+<p>The unversioned <a href="/agents/cbt-cards/SKILL.md"><code>SKILL.md</code></a> is a moving alias. For reproducibility, resolve <a href="/agents/cbt-cards/manifest.json"><code>manifest.json</code></a> and pin <a href="/agents/cbt-cards/v1.5.0/SKILL.md"><code>v1.5.0/SKILL.md</code></a>. Version 1.5.0 adds editorial-freshness rules.</p>
 
 <h2>Use it safely</h2>
 <ul>
 <li>This is a public, read-only resource. It does not connect to a user's account or app data.</li>
+<li>Do not turn editorial review into a clinical-validation claim.</li>
+<li>Do not infer review freshness from unrelated modification timestamps.</li>
 <li>Do not turn a website changelog entry into a mobile-app version claim.</li>
 <li>Do not claim that text typed into a public worksheet is sent to CBT Cards.</li>
 <li>Do not infer publication approval from raw-corpus presence.</li>
-<li>Do not equate editorial publication review with clinical validation.</li>
 <li>Do not infer clinical meaning from journal entries, worksheet responses, mood, stress, energy, or toolkit-record wording.</li>
 <li>CBT Cards is for general wellness and self-reflection, not diagnosis, treatment, emergency support, or a substitute for professional care.</li>
 </ul>
 </div></section>
 </main>
-<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/toolkit/review-status/">Review status</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a></nav></div></footer>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/toolkit/review-status/">Review status</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/about/editorial-review/">Editorial review</a><a href="/privacy/">Privacy</a></nav></div></footer>
 </body>
 </html>
