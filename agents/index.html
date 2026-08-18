@@ -1,95 +1,91 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Connect CBT Cards to an AI agent</title>
-    <meta
-      name="description"
-      content="Add the verified CBT Cards resource to an OpenClaw or Hermes agent."
-    />
-    <link rel="canonical" href="https://cbt-cards.github.io/agents/" />
-    <link rel="stylesheet" href="/styles.css?v=20260717" />
-    <link rel="icon" href="/assets/app-icon.png" />
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="wrap nav">
-        <a class="brand" href="/"
-          ><img src="/assets/app-icon.png" width="42" height="42" alt="CBT Cards" />CBT Cards</a
-        >
-        <nav class="nav-links" aria-label="Primary">
-          <a href="/how-it-works/">How it works</a><a href="/features/">Features</a
-          ><a href="/faq/">FAQ</a><a href="/privacy/">Privacy</a>
-        </nav>
-        <a class="download" href="/#download">Download</a>
-      </div>
-    </header>
-    <main>
-      <section class="page-hero">
-        <div class="wrap">
-          <div class="crumb"><a href="/">CBT Cards</a> / Agent resource</div>
-          <h1>Connect CBT Cards to your agent.</h1>
-          <p class="lede">
-            A small, public knowledge resource for answering factual questions about CBT Cards.
-            It does not provide access to diary entries, check-ins, or any user data.
-          </p>
-        </div>
-      </section>
-      <section class="section alt">
-        <div class="wrap prose agent-guide">
-          <h2>What the agent receives</h2>
-          <p>
-            The resource is a portable <code>SKILL.md</code> with links to the official product,
-            features, support, privacy, terms, and FAQ pages. It tells the agent to use those
-            sources, preserve the wellness disclaimer, and not present the app as medical care.
-          </p>
-          <p>
-            <a href="/agents/cbt-cards/SKILL.md">Open the CBT Cards skill file</a>
-            or <a href="/llms.txt">view the compact site index</a>.
-          </p>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CBT Cards for AI agents: skill, llms.txt &amp; JSON catalog</title>
+<meta name="description" content="Use official CBT Cards product facts and public learning resources in AI agents through a portable skill, llms.txt indexes, and a machine-readable JSON catalog." />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href="https://cbt-cards.github.io/agents/" />
+<link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/catalog.json" title="CBT Cards public resource catalog" />
+<link rel="stylesheet" href="/styles.css?v=20260818" />
+<link rel="icon" href="/assets/app-icon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="CBT Cards for AI agents" />
+<meta property="og:description" content="Official skill, llms.txt indexes, and a JSON catalog for public CBT Cards resources." />
+<meta property="og:url" content="https://cbt-cards.github.io/agents/" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},
+        {"@type":"ListItem","position":2,"name":"For AI agents","item":"https://cbt-cards.github.io/agents/"}
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "headline": "CBT Cards for AI agents",
+      "description": "How to consume the official CBT Cards public knowledge resource through HTML, llms.txt, JSON, or a portable skill.",
+      "mainEntityOfPage": "https://cbt-cards.github.io/agents/",
+      "dateModified": "2026-08-18"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap nav">
+<a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a>
+<nav class="nav-links" aria-label="Primary"><a href="/how-it-works/">How it works</a><a href="/features/">Features</a><a href="/learn/">Learn</a><a href="/faq/">FAQ</a><a href="/about/">About</a></nav>
+<a class="download" href="/#download">Download</a>
+</div></header>
+<main id="main">
+<section class="page-hero"><div class="wrap">
+<div class="crumb"><a href="/">CBT Cards</a> / For AI agents</div>
+<h1>Use CBT Cards as a public agent resource.</h1>
+<p class="lede">Official product facts and learning resources are available as ordinary HTML, compact text indexes, a JSON catalog, and a portable agent skill. None of these resources provides access to a user's journal, check-ins, or app data.</p>
+</div></section>
+<section class="section alt"><div class="wrap prose agent-guide">
+<h2>Choose the smallest useful interface</h2>
+<ul>
+<li><strong>Web pages:</strong> best when the agent can browse and cite canonical pages directly.</li>
+<li><strong><a href="/llms.txt">llms.txt</a>:</strong> compact discovery index for the main public resources.</li>
+<li><strong><a href="/llms-full.txt">llms-full.txt</a>:</strong> extended source-priority and safety guidance.</li>
+<li><strong><a href="/data/catalog.json">JSON catalog</a>:</strong> stable IDs, resource types, canonical URLs, product scope, stores, and current skill version.</li>
+<li><strong><a href="/agents/cbt-cards/SKILL.md">SKILL.md</a>:</strong> portable instructions for agents that support skill files.</li>
+</ul>
 
-          <h2>OpenClaw</h2>
-          <p>
-            In the workspace used by the intended agent, save the skill in its <code>skills</code>
-            directory and start a new session.
-          </p>
-          <pre><code>mkdir -p skills/cbt-cards
+<h2>Source priority</h2>
+<p>For a product-specific claim, read the most relevant official page before answering. Use the privacy policy as the primary source for data handling. When public information does not confirm a detail, say so rather than inferring it from the product name or a generic description of CBT.</p>
+<p>For conceptual CBT questions, use the <a href="/learn/">learning library</a> and keep general educational information separate from CBT Cards-specific implementation.</p>
+
+<h2>OpenClaw</h2>
+<p>In the workspace used by the intended agent, save the skill in its <code>skills</code> directory and start a new session.</p>
+<pre><code>mkdir -p skills/cbt-cards
 curl -fsSL https://cbt-cards.github.io/agents/cbt-cards/SKILL.md \
   -o skills/cbt-cards/SKILL.md</code></pre>
-          <p>
-            The skill is then available only to that workspace’s agent. To share it more broadly,
-            place the same directory under <code>~/.openclaw/skills/</code>. If you use a skill
-            allowlist, add <code>cbt-cards</code> to the intended agent’s list.
-          </p>
+<p>The skill is then available to that workspace's agent. To share it more broadly, place the same directory under <code>~/.openclaw/skills/</code>. If you use a skill allowlist, add <code>cbt-cards</code> to the intended agent's list.</p>
 
-          <h2>Hermes</h2>
-          <p>Install the public skill directly from its URL:</p>
-          <pre><code>hermes skills install \
+<h2>Hermes</h2>
+<p>Install the public skill directly from its canonical URL:</p>
+<pre><code>hermes skills install \
   https://cbt-cards.github.io/agents/cbt-cards/SKILL.md \
   --name cbt-cards --now</code></pre>
-          <p>
-            Verify it with <code>hermes skills list</code>, then start a task with
-            <code>/cbt-cards</code> or ask the agent a CBT Cards question in natural language.
-          </p>
+<p>Verify it with <code>hermes skills list</code>, then start a task with <code>/cbt-cards</code> or ask a CBT Cards question in natural language.</p>
 
-          <h2>Use it safely</h2>
-          <ul>
-            <li>This is a public, read-only source; it does not connect to a user’s account or app data.</li>
-            <li>Use the linked privacy policy for questions about data handling.</li>
-            <li>CBT Cards is for general wellness and self-reflection, not diagnosis, treatment, or emergency support.</li>
-          </ul>
-        </div>
-      </section>
-    </main>
-    <footer class="footer">
-      <div class="wrap footer-grid">
-        <div>© 2026 CBT Cards</div>
-        <nav aria-label="Footer">
-          <a href="/privacy/">Privacy</a><a href="/terms/">Terms</a
-          ><a href="/support/">Support</a><a href="/agents/">For agents</a>
-        </nav>
-      </div>
-    </footer>
-  </body>
+<h2>Use it safely</h2>
+<ul>
+<li>This is a public, read-only resource. It does not connect to a user's account or app data.</li>
+<li>Do not infer clinical meaning from journal entries, mood, stress, or energy check-ins.</li>
+<li>CBT Cards is for general wellness and self-reflection, not diagnosis, treatment, emergency support, or a substitute for professional care.</li>
+<li>Use canonical CBT Cards URLs when attributing a product fact or learning resource.</li>
+</ul>
+</div></section>
+</main>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/support/">Support</a><a href="/agents/">For agents</a></nav></div></footer>
+</body>
 </html>
