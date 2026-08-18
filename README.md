@@ -2,89 +2,74 @@
 
 Official static website and public knowledge resource for CBT Cards.
 
-The site is intentionally dependency-free: plain HTML, CSS, text, JSON, JSONL, and product-owned assets deploy directly to GitHub Pages. There is no JavaScript application bundle or build step required to render public content.
+The site is intentionally dependency-free: plain HTML, CSS, text, JSON, JSONL, and product-owned assets deploy directly to GitHub Pages.
 
 ## Public structure
 
-Core product documentation:
+Core documentation:
 
-- `/` — product overview, learning/worksheet/toolkit entry points, and store links
-- `/features/` — cards, guided tools, structured journal, check-ins, privacy controls, and backup
-- `/how-it-works/` — product workflow
-- `/faq/` — product questions with matching FAQ structured data
-- `/privacy/`, `/terms/`, `/support/` — policy and support pages
-- `/about/` — publisher, provenance, and editorial approach
-- `/changelog/` — website/public-data release history, explicitly separate from mobile-app releases
-- `/data/changelog.json` — machine-readable changelog with stable release IDs, dates, scopes, and changed resource IDs
+- `/` — product overview and public-resource entry points
+- `/features/`, `/how-it-works/`, `/faq/`
+- `/privacy/`, `/terms/`, `/support/`
+- `/about/` — publisher and provenance
+- `/about/editorial-review/` — editorial review/freshness policy
+- `/about/localization/` — website locale publication policy
+- `/changelog/` — website/public-data release history
 
-Learning library:
+Knowledge and tools:
 
-- `/learn/` — learning hub
-- `/learn/cbt-thought-record/`
-- `/learn/automatic-thoughts/`
-- `/learn/thought-vs-fact/`
-- `/learn/worry-time/`
-- `/learn/activity-planning/`
-- `/learn/cbt-journaling/`
+- `/learn/` — sourced learning library
+- `/worksheets/` — static browser-local printable worksheets
+- `/toolkit/` — curated public toolkit and source-corpus provenance
+- `/toolkit/review-status/` — raw-source vs published-resource boundary
 
-Printable browser worksheets:
+## Website localization
 
-- `/worksheets/` — worksheet hub
-- `/worksheets/cbt-thought-record/` — seven-step thought record
-- `/worksheets/worry-time/` — six-step worry-time worksheet
-- `/worksheets/activity-planning/` — seven-step activity-planning worksheet
-- `/data/worksheets.json` — ordered machine-readable worksheet definitions, source links, safety scope, and privacy behavior
+`data/locales.json` is the canonical source of truth for **website** locales. It currently records English (`en`) as the only published locale, served at the root URL.
 
-Worksheet pages are static HTML forms with no submit action. Text typed into them is not sent to CBT Cards. It remains in the current browser page and disappears when the page is refreshed or closed unless the user independently prints or saves it. Do not confuse public worksheet behavior with storage inside the CBT Cards mobile app.
+The locale registry does not assert Android or iOS language support. Mobile-app language claims require separate verification from the application/build or current store metadata.
 
-Public toolkit:
+Before a second web locale ships:
 
-- `/toolkit/` — human-readable dataset landing page with `Dataset` structured data
-- `/toolkit/review-status/` — CBT Cards publication-review boundary for source records
-- `/data/toolkit-review.json` — machine-readable review/publication overlay keyed by stable source record ID
-- `/toolkit/cards/` — source index for 77 reflection-card records
-- `/toolkit/metaphors/` — source index for 23 metaphor records
-- `/toolkit/protocols/` — source index for 15 protocol records with an explicit review boundary
-- `/toolkit/cards/.../` — curated standalone pages for selected reviewed card records
-- `/data/toolkit-source.json` — pinned source-corpus version, commit, blob SHA, record counts, license, distribution URL, review-overlay pointer, and quality notes
+- use stable locale URLs and self-canonical pages;
+- add reciprocal `hreflang` and `x-default` where appropriate;
+- update sitemap, catalog, agent indexes, navigation, and locale discovery together;
+- preserve stable resource identity and provenance;
+- implement reciprocal locale validation in CI;
+- require human publication review for health-adjacent translations;
+- use the correct document direction and layout review for RTL locales.
 
-The related source corpus is MetalHatsCats CBT Toolkit v0.1.0. The pinned source contains 115 English records: 77 cards, 23 metaphors, and 15 protocols. The source corpus has no CBT Cards-specific per-record publication or clinical-review metadata.
+Machine translation may assist drafting, but is not sufficient review for health-adjacent public content.
 
-Any source record not explicitly listed in `data/toolkit-review.json` defaults to `review_status: unreviewed` and `publication_status: source_only`. `reviewed_for_publication` means editorial and safety review for a standalone CBT Cards website page. It does not mean clinical validation, evidence of efficacy, diagnosis, or suitability for an individual.
+## Editorial review freshness
 
-Agent, discovery, and machine-readable resources:
+`data/content-review.json` covers all catalog resources with type `learning`, `worksheet`, or `toolkit-card`. The project target is review at least every 365 days. This is an editorial-maintenance policy, not a clinical standard.
+
+The deploy gate derives `next_review_due` from `last_reviewed + target_interval_days` and blocks overdue covered resources. Editorial review is not clinical validation, efficacy evidence, diagnosis, or individualized treatment review.
+
+## Toolkit publication boundary
+
+`data/toolkit-review.json` separates the related raw source corpus from CBT Cards-published standalone pages. Any unlisted source record defaults to `unreviewed` and `source_only`. `reviewed_for_publication` means editorial and safety review for public web use, not clinical validation.
+
+## Agent and machine-readable interfaces
 
 - `/agents/` — integration guide
-- `/agents/cbt-cards/SKILL.md` — latest mutable skill alias, currently v1.4.0
+- `/agents/cbt-cards/SKILL.md` — latest mutable skill alias, currently v1.6.0
 - `/agents/cbt-cards/manifest.json` — skill version manifest
-- `/agents/cbt-cards/v1.1.0/SKILL.md` through `/v1.4.0/SKILL.md` — immutable skill versions
-- `/llms.txt` — compact public index
-- `/llms-full.txt` — extended source-priority, release, schema, worksheet, corpus, publication-status, and safety index
-- `/data/catalog.json` — canonical public resource catalog with stable IDs and `schema_url` for CBT Cards-owned structured formats
-- `/data/changelog.json` — scoped website/public-data release provenance
-- `/data/knowledge.jsonl` — RAG-friendly curated prose knowledge records
-- `/data/worksheets.json` — structured form definitions
-- `/data/toolkit-review.json` — CBT Cards-owned source-record publication status
-- `/schemas/index.json` — public JSON Schema manifest
-- `/feed.xml` — Atom discovery feed
-- `/feed.json` — JSON Feed 1.1 discovery feed
-- `/.well-known/security.txt` — standard public security contact
+- `/agents/cbt-cards/v1.1.0/SKILL.md` through `/v1.6.0/SKILL.md` — immutable versions
+- `/llms.txt`, `/llms-full.txt`
+- `/data/catalog.json` — canonical resource catalog
+- `/data/changelog.json` — scoped release provenance
+- `/data/content-review.json` — editorial freshness registry
+- `/data/locales.json` — website locale registry
+- `/data/knowledge.jsonl` — curated prose records
+- `/data/worksheets.json` — worksheet definitions
+- `/data/toolkit-review.json`, `/data/toolkit-source.json`
+- `/schemas/index.json` — JSON Schema manifest
+- `/feed.xml`, `/feed.json`
+- `/.well-known/security.txt`
 
-## Public data contracts
-
-CBT Cards-owned structured formats have versioned JSON Schema draft 2020-12 contracts under `/schemas/`. `schemas/index.json` maps each schema to the public instance it describes.
-
-Current contracts cover:
-
-- `data/catalog.json`
-- `data/changelog.json`
-- `data/worksheets.json`
-- `data/toolkit-review.json`
-- `data/toolkit-source.json`
-- one record/line in `data/knowledge.jsonl`
-- `agents/cbt-cards/manifest.json`
-
-The public catalog exposes `schema_url` for these resources. JSON Schema is the portable field-level contract; purpose-specific repository checks remain responsible for semantic invariants such as canonical target existence, sequential worksheet fields, privacy wording, and exact review-overlay/catalog/JSONL alignment.
+CBT Cards-owned structured formats use versioned JSON Schema draft 2020-12 contracts. Breaking contract changes should publish a new schema-version URL rather than silently changing an existing contract.
 
 ## Local preview
 
@@ -92,14 +77,15 @@ The public catalog exposes `schema_url` for these resources. JSON Schema is the 
 python3 -m http.server 4173
 ```
 
-Open `http://localhost:4173/`.
-
 ## Quality checks
 
 Run the same static checks used by GitHub Actions:
 
 ```bash
 python3 scripts/check_site.py
+python3 scripts/check_crawl_graph.py
+python3 scripts/check_content_review.py
+python3 scripts/check_locales.py
 python3 scripts/check_worksheets.py
 python3 scripts/check_discovery.py
 python3 scripts/check_changelog.py
@@ -107,65 +93,25 @@ python3 scripts/check_toolkit_review.py
 python3 scripts/check_schemas.py
 ```
 
-The site checker verifies public HTML metadata, canonical uniqueness, JSON-LD parsing, internal links, crawler/IndexNow configuration, sitemap coverage/targets, resource catalog targets, curated JSONL alignment, toolkit source metadata, and agent skill/version targets.
-
-The worksheet checker verifies worksheet IDs, catalog alignment, canonical and learning-resource targets, field IDs, sequential field order, source URLs, and explicit no-submit/no-send privacy behavior.
-
-The discovery checker verifies Atom/JSON Feed parity, canonical feed targets, security metadata, and matching catalog entries.
-
-The changelog checker verifies schema version, stable release IDs, chronological order, allowed scopes/change types, catalog resource alignment, canonical local targets, sitemap inclusion, and discovery-feed presence.
-
-The toolkit-review checker verifies safe defaults for unlisted source records, published source-ID uniqueness, exact alignment between the review overlay, catalog toolkit cards, curated JSONL toolkit records and canonical pages, plus latest-skill awareness of the overlay.
-
-The schema checker verifies schema-manifest completeness, JSON Schema 2020-12 declarations, stable `$id` values, local instance/schema targets, catalog `schema_url` discovery, and safety-critical constants in the toolkit-review contract.
+The checks cover metadata/canonicals/JSON-LD/internal links, sitemap crawl reachability, review freshness, locale language signals, worksheet privacy and structure, feed parity, changelog provenance, toolkit publication status, schema discovery, and agent skill-version consistency.
 
 ## Deployment and discovery
 
-`.github/workflows/deploy-pages.yml` publishes `main` to GitHub Pages after the quality jobs pass. After successful push deployments, a non-blocking IndexNow job submits changed/deleted public HTML URLs rather than repeatedly submitting the whole sitemap.
-
-In repository settings use **Pages → Build and deployment → Source → GitHub Actions**.
-
-The repository must remain `CBT-cards/cbt-cards.github.io` to serve the user-site root at `https://cbt-cards.github.io/` without a base-path prefix.
+`.github/workflows/deploy-pages.yml` publishes `main` to GitHub Pages only after quality checks pass. Successful push deployments trigger a non-blocking IndexNow notification for changed/deleted public HTML URLs.
 
 ## Content and data rules
 
-- Keep product feature, privacy, support, and data-handling claims consistent with the current application source and store metadata.
-- Use the privacy policy as the canonical public source for mobile-app data-handling behavior.
-- Learning pages must distinguish general CBT concepts from CBT Cards-specific implementation.
-- Health-adjacent learning content should link to authoritative sources and record a review date.
-- Worksheet prompts are educational form fields, not clinical assessments or validated rating scales.
-- Public worksheet pages must remain static/no-submit unless the privacy documentation and product architecture are deliberately changed first.
-- Do not claim that CBT Cards diagnoses, treats, cures, or prevents a condition. It is a general wellness and self-reflection product.
-- Keep internal links root-relative so GitHub Pages serves them correctly.
-- When adding or removing an indexed page, update `sitemap.xml`, `llms.txt`, `llms-full.txt`, `data/catalog.json`, and the relevant machine-readable dataset.
-- When adding or changing a CBT Cards-owned structured format, update its versioned schema, `schemas/index.json`, the catalog `schema_url`, and `scripts/check_schemas.py` as needed.
-- Treat schema changes that break existing consumers as a new schema-version URL rather than silently mutating the old contract.
-- Record meaningful public website/data changes in `/data/changelog.json` and `/changelog/` using a stable release ID and explicit `scope`.
-- Never infer a mobile-app release from a website, dataset, worksheet, feed, or agent-skill change. Mobile release entries require separately verified release metadata.
-- Keep each curated JSONL knowledge record self-contained and aligned with its canonical page.
-- A raw toolkit record must not become a standalone published resource unless its stable source ID is explicitly added to `data/toolkit-review.json` as `reviewed_for_publication` and `published`.
-- Any raw toolkit source ID absent from the review overlay is `unreviewed` and `source_only` by default.
-- Never describe `reviewed_for_publication` as clinical validation or efficacy evidence.
-- Do not generate standalone protocol/health-guidance pages from raw corpus records unless the record has gone through explicit editorial and safety review and is added to the review overlay.
-- Do not treat record titles as unique identifiers. Stable IDs are authoritative.
-- When changing the agent skill, publish an immutable version and update the manifest, catalog, and llms indexes before moving the latest alias.
-
-## Crawlers
-
-`robots.txt` keeps public content crawlable and explicitly allows `OAI-SearchBot` for ChatGPT search discovery. The wildcard policy remains open for other compliant crawlers. Decisions about training-specific crawler access should be treated as a separate publisher policy rather than being silently coupled to search discoverability.
-
-## Assets
-
-Product-owned images and fonts are stored in `/assets/`. Prefer optimized web formats for new imagery and include explicit dimensions and meaningful alt text where an image conveys content.
-
-Large legacy PNG/TTF payload optimization is tracked separately because binary asset conversion should preserve product artwork and licensing rather than be done through text-only repository mutations.
-
-## Migration
-
-See [MIGRATION.md](MIGRATION.md) for legacy URL mappings. Changes to legacy hosts are external dependencies and are outside this repository's modification scope.
+- Keep product, privacy, support, and data-handling claims consistent with verified current sources.
+- Use the privacy policy as primary for mobile-app data handling.
+- Do not claim diagnosis, treatment, cure, prevention, or clinical validation that the sources do not establish.
+- Do not infer app languages from website locale metadata.
+- Do not infer a mobile-app release from website/data/agent changes.
+- Keep health-adjacent translations under human publication review.
+- Keep public worksheets static/no-submit unless privacy documentation and architecture deliberately change.
+- A raw toolkit record must not become a standalone published page without explicit review-overlay approval.
+- Stable resource/source IDs are authoritative; titles are not guaranteed unique.
+- When changing the agent skill, publish an immutable version, update manifest/catalog/llms indexes, and preserve older semantic validators as forward-compatible checks.
 
 ## License
 
-The original CBT Cards website content is licensed under [CC BY-NC-SA 4.0](LICENSE): attribution and the same license are required for sharing or adaptations, and commercial use is not permitted without prior written permission from MetalHatsCats. CBT Cards names and logos are not licensed for reuse.
-
-The source CBT Toolkit v0.1.0 is also documented as CC BY-NC-SA 4.0. Any future change to the reuse license for machine-readable agent/RAG data must be explicit and publisher-approved rather than inferred from technical accessibility.
+Original CBT Cards website content is licensed under [CC BY-NC-SA 4.0](LICENSE). CBT Cards names and logos are not licensed for reuse. The related CBT Toolkit source corpus has separate documented provenance and licensing in `data/toolkit-source.json`.
