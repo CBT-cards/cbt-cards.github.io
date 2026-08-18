@@ -41,7 +41,11 @@ Learning pages distinguish general CBT concepts from CBT Cards-specific implemen
 - Resource catalog: https://cbt-cards.github.io/data/catalog.json
 - Compact index: https://cbt-cards.github.io/llms.txt
 - Agent guide: https://cbt-cards.github.io/agents/
-- CBT Cards skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
+- Latest CBT Cards skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
+- Skill version manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
+- Immutable skill v1.1.0: https://cbt-cards.github.io/agents/cbt-cards/v1.1.0/SKILL.md
+
+The unversioned SKILL.md URL is a moving alias for the latest published version. Use a versioned URL when reproducibility matters.
 
 ## Agent behavior
 
