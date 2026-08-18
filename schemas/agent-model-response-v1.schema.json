@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cbt-cards.github.io/schemas/agent-model-response-v1.schema.json",
+  "title": "CBT Cards agent model response v1",
+  "description": "Contract for one model-generated CBT Cards evaluation response envelope before benchmark scoring.",
+  "type": "object",
+  "required": ["schema_version", "case_id", "answer", "route", "resource_ids", "source_record_ids", "locale_behavior"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "case_id": {"type": "string", "pattern": "^eval-[a-z0-9][a-z0-9-]*$"},
+    "answer": {"type": "string", "minLength": 1},
+    "route": {
+      "enum": [
+        "published_resource",
+        "reviewed_learning",
+        "published_worksheet",
+        "source_language_resource",
+        "explain_status",
+        "source_only",
+        "no_private_access",
+        "host_safety",
+        "answer_without_resource"
+      ]
+    },
+    "resource_ids": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+      "uniqueItems": true
+    },
+    "source_record_ids": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^(?:card|metaphor|protocol)-[0-9]+$"},
+      "uniqueItems": true
+    },
+    "locale_behavior": {
+      "enum": ["none", "source", "official_localization", "host_translation_not_official", "status_only"]
+    },
+    "runtime_metadata": {
+      "type": "object",
+      "description": "Optional observable runtime metadata such as token counts, request IDs, or exposed decoding settings. Do not invent unavailable values.",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}
