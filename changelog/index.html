@@ -4,10 +4,11 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CBT Cards changelog: website &amp; public data updates</title>
-<meta name="description" content="Track CBT Cards website, learning-library, worksheet, toolkit, public-data, and agent-interface updates without confusing them with mobile-app releases." />
+<meta name="description" content="Track CBT Cards website, public-data, schema, worksheet, toolkit, and agent-interface updates without confusing them with mobile-app releases." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href="https://cbt-cards.github.io/changelog/" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/changelog.json" title="CBT Cards machine-readable changelog" />
+<link rel="alternate" type="application/json" href="https://cbt-cards.github.io/schemas/index.json" title="CBT Cards public JSON Schema manifest" />
 <link rel="alternate" type="application/atom+xml" href="https://cbt-cards.github.io/feed.xml" title="CBT Cards public resource feed" />
 <link rel="alternate" type="application/feed+json" href="https://cbt-cards.github.io/feed.json" title="CBT Cards JSON Feed" />
 <link rel="stylesheet" href="/styles.css?v=20260818" />
@@ -16,7 +17,7 @@
 <meta property="og:title" content="CBT Cards changelog" />
 <meta property="og:description" content="Website and public-data updates, separated from mobile-app release history." />
 <meta property="og:url" content="https://cbt-cards.github.io/changelog/" />
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://cbt-cards.github.io/changelog/"}]},{"@type":"CollectionPage","name":"CBT Cards public changelog","url":"https://cbt-cards.github.io/changelog/","description":"Website, public knowledge, worksheet, dataset, toolkit-review, and agent-interface release history for CBT Cards.","dateModified":"2026-08-18","publisher":{"@id":"https://cbt-cards.github.io/#publisher"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://cbt-cards.github.io/changelog/"}]},{"@type":"CollectionPage","name":"CBT Cards public changelog","url":"https://cbt-cards.github.io/changelog/","description":"Website, public knowledge, schema, worksheet, dataset, toolkit-review, and agent-interface release history for CBT Cards.","dateModified":"2026-08-18","publisher":{"@id":"https://cbt-cards.github.io/#publisher"}}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -24,8 +25,21 @@
 <main id="main">
 <section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / Changelog</div><h1>CBT Cards public changelog</h1><p class="lede">Website and public-data changes, recorded separately from mobile-app releases.</p></div></section>
 <section class="section alt"><div class="wrap prose">
-<p>This changelog tracks changes to the public CBT Cards website, learning library, printable browser worksheets, toolkit pages, structured data, feeds, and agent interfaces. A website entry does <strong>not</strong> imply that an Android or iOS app version shipped on the same date.</p>
-<p>Agents and tooling can read the same history from <a href="/data/changelog.json"><code>data/changelog.json</code></a>. New and updated public resources are also available through <a href="/feed.xml">Atom</a> and <a href="/feed.json">JSON Feed</a>.</p>
+<p>This changelog tracks changes to the public CBT Cards website, learning library, printable browser worksheets, schemas, toolkit pages, structured data, feeds, and agent interfaces. A website or data entry does <strong>not</strong> imply that an Android or iOS app version shipped on the same date.</p>
+<p>Agents and tooling can read the same history from <a href="/data/changelog.json"><code>data/changelog.json</code></a>. Versioned data contracts are listed in <a href="/schemas/index.json"><code>schemas/index.json</code></a>.</p>
+
+<article id="web-2026-08-18-public-json-schemas">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Public data</p>
+<h2>Versioned public JSON Schema contracts</h2>
+<p>Published JSON Schema draft 2020-12 contracts for CBT Cards-owned machine-readable formats and made them discoverable from the public resource catalog.</p>
+<ul>
+<li>Added <a href="/schemas/index.json">a schema manifest</a> mapping versioned contracts to their instance URLs.</li>
+<li>Added contracts for the resource catalog, changelog, worksheets, toolkit review overlay, toolkit source manifest, curated knowledge-record lines, and agent skill manifest.</li>
+<li>Added <code>schema_url</code> links to applicable public catalog resources.</li>
+<li>Added a CI checker for schema IDs, JSON Schema version, local targets, catalog discovery, and safety-critical toolkit-review constants.</li>
+</ul>
+<p>Purpose-specific validators remain in place for invariants that generic JSON Schema does not express well, including canonical target existence, worksheet ordering, privacy behavior, and toolkit publication-set equality.</p>
+</article>
 
 <article id="web-2026-08-18-toolkit-review-overlay">
 <p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Website/public data</p>
@@ -36,7 +50,6 @@
 <li>Defined the safe default for unlisted source records as <code>unreviewed</code> and <code>source_only</code>.</li>
 <li>Recorded six currently published source IDs: <code>card-4</code>, <code>card-15</code>, <code>card-16</code>, <code>card-21</code>, <code>card-27</code>, and <code>card-32</code>.</li>
 <li>Published agent skill v1.4.0, which requires checking the review overlay before treating a raw toolkit record as CBT Cards-published content.</li>
-<li>Added CI checks that require the published source-ID set to match the catalog, canonical pages, and curated JSONL records.</li>
 </ul>
 <p><code>reviewed_for_publication</code> means editorial and safety review for public web use. It is not clinical validation, proof of efficacy, diagnosis, or an individualized recommendation.</p>
 </article>
@@ -49,11 +62,9 @@
 <li>Added six sourced learning guides and a learning hub.</li>
 <li>Added printable browser-local worksheets for thought records, worry time, and activity planning.</li>
 <li>Added a public toolkit landing page, curated card pages, and source-corpus provenance.</li>
-<li>Added a stable resource catalog, curated JSONL knowledge records, worksheet schemas, and versioned agent skills through v1.3.0.</li>
+<li>Added a stable resource catalog, curated JSONL knowledge records, worksheet schemas, and versioned agent skills.</li>
 <li>Added Atom/JSON feeds and a standard security contact endpoint.</li>
-<li>Added static quality checks for canonical URLs, structured data, internal links, datasets, worksheet schemas, discovery feeds, and agent-version consistency.</li>
 </ul>
-<p>This release does not claim that every raw toolkit record has been clinically reviewed. Learning and worksheet material remains educational and within the general-wellness boundary.</p>
 </article>
 
 <article id="web-2026-07-14-standalone-site">
