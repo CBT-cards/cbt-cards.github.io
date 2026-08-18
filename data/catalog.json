@@ -28,6 +28,8 @@
     {"id": "privacy", "type": "policy", "url": "https://cbt-cards.github.io/privacy/", "title": "Privacy policy"},
     {"id": "faq", "type": "support", "url": "https://cbt-cards.github.io/faq/", "title": "FAQ"},
     {"id": "about", "type": "provenance", "url": "https://cbt-cards.github.io/about/", "title": "About CBT Cards"},
+    {"id": "content-review-page", "type": "provenance", "url": "https://cbt-cards.github.io/about/editorial-review/", "title": "Editorial review policy", "updated": "2026-08-18"},
+    {"id": "content-review-data", "type": "dataset", "url": "https://cbt-cards.github.io/data/content-review.json", "title": "CBT Cards content review registry", "format": "application/json", "updated": "2026-08-18", "schema_url": "https://cbt-cards.github.io/schemas/content-review-v1.schema.json"},
     {"id": "changelog", "type": "provenance", "url": "https://cbt-cards.github.io/changelog/", "title": "CBT Cards public changelog", "updated": "2026-08-18"},
     {"id": "changelog-data", "type": "dataset", "url": "https://cbt-cards.github.io/data/changelog.json", "title": "CBT Cards machine-readable changelog", "format": "application/json", "updated": "2026-08-18", "schema_url": "https://cbt-cards.github.io/schemas/changelog-v1.schema.json"},
     {"id": "learn", "type": "collection", "url": "https://cbt-cards.github.io/learn/", "title": "Learning library"},
