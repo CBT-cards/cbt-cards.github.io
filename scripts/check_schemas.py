@@ -34,10 +34,14 @@ def local_path(url: str) -> Path | None:
 
 def main() -> None:
     manifest_path = ROOT / "schemas" / "index.json"
+    catalog_path = ROOT / "data" / "catalog.json"
     if not manifest_path.exists():
         fail("missing schemas/index.json")
+    if not catalog_path.exists():
+        fail("missing data/catalog.json")
 
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
     if manifest.get("schema_version") != "1.0":
         fail("unexpected schema manifest version")
 
@@ -50,6 +54,16 @@ def main() -> None:
         fail("duplicate schema IDs")
     if set(ids) != EXPECTED_IDS:
         fail(f"schema manifest IDs differ from expected set: {sorted(set(ids))}")
+
+    resources = catalog.get("resources")
+    if not isinstance(resources, list):
+        fail("catalog resources must be a list")
+    resource_by_url = {resource.get("url"): resource for resource in resources}
+    resource_by_id = {resource.get("id"): resource for resource in resources}
+
+    schema_manifest_resource = resource_by_id.get("schema-manifest")
+    if not schema_manifest_resource or schema_manifest_resource.get("url") != f"{ORIGIN}/schemas/index.json":
+        fail("catalog does not expose schema manifest")
 
     seen_schema_urls: set[str] = set()
     seen_instances: set[str] = set()
@@ -85,6 +99,12 @@ def main() -> None:
         if not isinstance(required, list) or not required:
             fail(f"schema has no required properties: {schema_id}")
 
+        resource = resource_by_url.get(instance_url)
+        if resource is None:
+            fail(f"catalog missing schema-mapped instance: {instance_url}")
+        if resource.get("schema_url") != schema_url:
+            fail(f"catalog schema_url mismatch for {instance_url}")
+
     toolkit_review = json.loads((ROOT / "schemas" / "toolkit-review-v1.schema.json").read_text(encoding="utf-8"))
     default_props = toolkit_review["properties"]["default_for_unlisted_records"]["properties"]
     if default_props["review_status"].get("const") != "unreviewed":
@@ -100,7 +120,7 @@ def main() -> None:
         if key not in required_knowledge:
             fail(f"knowledge record schema must require {key}")
 
-    print(f"schema check passed: {len(entries)} versioned contracts")
+    print(f"schema check passed: {len(entries)} versioned contracts discoverable from catalog")
 
 
 if __name__ == "__main__":
