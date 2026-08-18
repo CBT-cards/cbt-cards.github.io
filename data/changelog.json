@@ -5,6 +5,21 @@
   "updated": "2026-08-18",
   "entries": [
     {
+      "id": "web-2026-08-18-crawl-graph-quality",
+      "date": "2026-08-18",
+      "scope": "website",
+      "title": "Indexed-page crawl graph quality gate",
+      "summary": "Added homepage links to key public resource hubs and a CI check that rejects orphaned or excessively deep indexable pages.",
+      "changes": [
+        {"type": "changed", "resource_id": "product-overview", "url": "https://cbt-cards.github.io/"}
+      ],
+      "notes": [
+        "Every sitemap HTML URL except the homepage must have an inbound link from another indexed page.",
+        "Every indexed page must be reachable from the homepage in at most three internal-link hops.",
+        "Learn, Worksheets, Toolkit, About, Changelog, and Agents are required as direct homepage-linked hubs."
+      ]
+    },
+    {
       "id": "web-2026-08-18-public-json-schemas",
       "date": "2026-08-18",
       "scope": "data",
