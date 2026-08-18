@@ -72,11 +72,16 @@ The source corpus contains CBT-adjacent terminology in addition to core CBT conc
 - RAG-friendly curated JSONL knowledge dataset: https://cbt-cards.github.io/data/knowledge.jsonl
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
+- Atom feed: https://cbt-cards.github.io/feed.xml
+- JSON Feed 1.1: https://cbt-cards.github.io/feed.json
+- Security contact: https://cbt-cards.github.io/.well-known/security.txt
 - Compact index: https://cbt-cards.github.io/llms.txt
 - Agent guide: https://cbt-cards.github.io/agents/
 - Latest CBT Cards skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 - Skill version manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
 - Immutable skill v1.3.0: https://cbt-cards.github.io/agents/cbt-cards/v1.3.0/SKILL.md
+
+The Atom and JSON feeds expose the same canonical public-resource IDs in two standard syndication formats. They are discovery/change-following interfaces; the canonical resource pages remain authoritative for content details.
 
 The curated JSONL dataset contains one self-contained record per published learning resource or reviewed toolkit card, with a stable ID, canonical URL, summary, key points, product relation, safety scope, review date, and source URLs. Worksheet UI schemas are intentionally kept separately in `data/worksheets.json` so form fields do not drift from their printable pages.
 
