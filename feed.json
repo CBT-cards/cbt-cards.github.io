@@ -3,12 +3,20 @@
   "title": "CBT Cards public resources",
   "home_page_url": "https://cbt-cards.github.io/",
   "feed_url": "https://cbt-cards.github.io/feed.json",
-  "description": "New and updated CBT Cards learning guides, worksheets, toolkit resources, and agent-facing public data.",
+  "description": "New and updated CBT Cards learning guides, worksheets, toolkit resources, changelog entries, and agent-facing public data.",
   "language": "en",
   "authors": [
     {"name": "CBT Cards", "url": "https://cbt-cards.github.io/about/"}
   ],
   "items": [
+    {
+      "id": "https://cbt-cards.github.io/changelog/",
+      "url": "https://cbt-cards.github.io/changelog/",
+      "title": "CBT Cards public changelog",
+      "content_text": "Website and public-data release history, explicitly separated from CBT Cards mobile-app releases.",
+      "date_modified": "2026-08-18T00:00:00Z",
+      "tags": ["changelog", "provenance", "website"]
+    },
     {
       "id": "https://cbt-cards.github.io/worksheets/",
       "url": "https://cbt-cards.github.io/worksheets/",
