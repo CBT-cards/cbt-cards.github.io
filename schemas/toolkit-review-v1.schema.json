@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cbt-cards.github.io/schemas/toolkit-review-v1.schema.json",
+  "title": "CBT Cards toolkit review overlay v1",
+  "type": "object",
+  "required": ["schema_version", "name", "canonical", "updated", "source_dataset_id", "source_manifest", "default_for_unlisted_records", "review_semantics", "records", "known_source_quality_notes"],
+  "properties": {
+    "$schema": {"type": "string", "format": "uri"},
+    "schema_version": {"const": "1.0"},
+    "name": {"type": "string", "minLength": 1},
+    "canonical": {"const": "https://cbt-cards.github.io/data/toolkit-review.json"},
+    "updated": {"type": "string", "format": "date"},
+    "source_dataset_id": {"type": "string", "minLength": 1},
+    "source_manifest": {"type": "string", "format": "uri"},
+    "default_for_unlisted_records": {
+      "type": "object",
+      "required": ["review_status", "publication_status", "clinical_validation_status"],
+      "properties": {
+        "review_status": {"const": "unreviewed"},
+        "publication_status": {"const": "source_only"},
+        "clinical_validation_status": {"const": "not_claimed"}
+      },
+      "additionalProperties": false
+    },
+    "review_semantics": {"type": "object", "additionalProperties": {"type": "string", "minLength": 1}},
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_record_id", "catalog_resource_id", "title", "review_status", "reviewed_at", "reviewed_by", "review_scope", "publication_status", "clinical_validation_status", "canonical_url"],
+        "properties": {
+          "source_record_id": {"type": "string", "minLength": 1},
+          "catalog_resource_id": {"type": "string", "minLength": 1},
+          "title": {"type": "string", "minLength": 1},
+          "review_status": {"const": "reviewed_for_publication"},
+          "reviewed_at": {"type": "string", "format": "date"},
+          "reviewed_by": {"type": "string", "minLength": 1},
+          "review_scope": {"const": "editorial_and_safety_for_public_web_use"},
+          "publication_status": {"const": "published"},
+          "clinical_validation_status": {"const": "not_claimed"},
+          "canonical_url": {"type": "string", "format": "uri"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "known_source_quality_notes": {"type": "array", "items": {"type": "string", "minLength": 1}}
+  },
+  "additionalProperties": false
+}
