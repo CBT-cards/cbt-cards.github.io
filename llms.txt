@@ -1,22 +1,20 @@
 # CBT Cards
 
-CBT Cards is a mobile app for general wellness and self-reflection. It includes short CBT-inspired cards, guided tools, a structured journal, and mood, stress, and energy check-ins. It is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
+CBT Cards is a public library of practical reflection resources for people and the AI assistants they choose to use. It publishes short CBT-inspired cards, plain-language learning guides, printable browser worksheets, structured public data, review metadata, and versioned agent instructions. The original CBT Cards mobile app remains documented as a separate product surface. CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
 
-## Canonical product pages
+## Public reflection resources
 
-- https://cbt-cards.github.io/
-- https://cbt-cards.github.io/features/
-- https://cbt-cards.github.io/how-it-works/
-- https://cbt-cards.github.io/privacy/
-- https://cbt-cards.github.io/terms/
-- https://cbt-cards.github.io/support/
-- https://cbt-cards.github.io/faq/
-- https://cbt-cards.github.io/about/
+- Project overview: https://cbt-cards.github.io/
+- Toolkit: https://cbt-cards.github.io/toolkit/
+- Cards index: https://cbt-cards.github.io/toolkit/cards/
+- Toolkit review status: https://cbt-cards.github.io/toolkit/review-status/
+- Learning library: https://cbt-cards.github.io/learn/
+- Worksheets: https://cbt-cards.github.io/worksheets/
+- About / provenance: https://cbt-cards.github.io/about/
 - Changelog: https://cbt-cards.github.io/changelog/
 
 ## Learning library
 
-- https://cbt-cards.github.io/learn/
 - https://cbt-cards.github.io/learn/cbt-thought-record/
 - https://cbt-cards.github.io/learn/automatic-thoughts/
 - https://cbt-cards.github.io/learn/thought-vs-fact/
@@ -51,7 +49,7 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - JSON resource catalog: https://cbt-cards.github.io/data/catalog.json
 - JSON Schema manifest: https://cbt-cards.github.io/schemas/index.json
 - Machine-readable changelog: https://cbt-cards.github.io/data/changelog.json
-- RAG-friendly curated knowledge dataset (JSONL): https://cbt-cards.github.io/data/knowledge.jsonl
+- Curated knowledge dataset (JSONL): https://cbt-cards.github.io/data/knowledge.jsonl
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Toolkit review overlay: https://cbt-cards.github.io/data/toolkit-review.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
@@ -62,13 +60,19 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - Agent integration guide: https://cbt-cards.github.io/agents/
 - Latest agent skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 - Skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
-- Immutable skill v1.4.0: https://cbt-cards.github.io/agents/cbt-cards/v1.4.0/SKILL.md
+- Immutable skill v1.5.0: https://cbt-cards.github.io/agents/cbt-cards/v1.5.0/SKILL.md
 
 For CBT Cards-owned JSON/JSONL formats, use the versioned contracts listed in schemas/index.json. Catalog entries expose schema_url where applicable.
 
-Website changelog entries are separate from mobile-app releases. Do not infer an Android/iOS app version from website, dataset, worksheet, or agent-skill changes.
+Website, dataset, schema, worksheet, and agent-skill changes are separate from mobile-app releases. Do not infer an Android/iOS app version from public-site release metadata.
 
-## Store listings
+## Original mobile app documentation
 
+- Features: https://cbt-cards.github.io/features/
+- How it works: https://cbt-cards.github.io/how-it-works/
+- Privacy: https://cbt-cards.github.io/privacy/
+- Terms: https://cbt-cards.github.io/terms/
+- Support: https://cbt-cards.github.io/support/
+- FAQ: https://cbt-cards.github.io/faq/
 - Android: https://play.google.com/store/apps/details?id=cbt.cbtcards.stressrelief
 - iOS: https://apps.apple.com/us/app/cbt-cards-%D1%81bt-for-daily-use/id6737169041
