@@ -30,6 +30,9 @@
     {"id": "cbt-thought-record", "type": "learning", "url": "https://cbt-cards.github.io/learn/cbt-thought-record/", "title": "CBT thought record", "reviewed": "2026-08-18"},
     {"id": "automatic-thoughts", "type": "learning", "url": "https://cbt-cards.github.io/learn/automatic-thoughts/", "title": "Automatic thoughts in CBT", "reviewed": "2026-08-18"},
     {"id": "thought-vs-fact", "type": "learning", "url": "https://cbt-cards.github.io/learn/thought-vs-fact/", "title": "Thought vs fact", "reviewed": "2026-08-18"},
+    {"id": "worry-time", "type": "learning", "url": "https://cbt-cards.github.io/learn/worry-time/", "title": "Worry time", "reviewed": "2026-08-18"},
+    {"id": "activity-planning", "type": "learning", "url": "https://cbt-cards.github.io/learn/activity-planning/", "title": "Activity planning", "reviewed": "2026-08-18"},
+    {"id": "cbt-journaling", "type": "learning", "url": "https://cbt-cards.github.io/learn/cbt-journaling/", "title": "CBT journaling", "reviewed": "2026-08-18"},
     {"id": "agent-skill", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md", "title": "CBT Cards agent skill", "version": "1.1.0"}
   ]
 }
