@@ -48,6 +48,9 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - RAG-friendly curated knowledge dataset (JSONL): https://cbt-cards.github.io/data/knowledge.jsonl
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
+- Atom feed: https://cbt-cards.github.io/feed.xml
+- JSON Feed 1.1: https://cbt-cards.github.io/feed.json
+- Security contact: https://cbt-cards.github.io/.well-known/security.txt
 - Extended index: https://cbt-cards.github.io/llms-full.txt
 - Agent integration guide: https://cbt-cards.github.io/agents/
 - Latest agent skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
