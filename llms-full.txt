@@ -6,7 +6,7 @@ Updated: 2026-08-18
 
 CBT Cards is a public library of practical reflection resources for people and AI assistants, documented at https://cbt-cards.github.io/.
 Publisher: MetalHatsCats.
-Core public scope: CBT-inspired reflection cards, learning guides, printable browser worksheets, structured public data, review and language-status metadata, public agent evaluation cases and reproducible baseline runs, citation metadata, and versioned portable agent instructions.
+Core public scope: CBT-inspired reflection cards, learning guides, printable browser worksheets, structured public data, review and language-status metadata, starter and held-out agent evaluation cases, reproducible deterministic runs, a provenance-first protocol for real model runs, citation metadata, and versioned portable agent instructions.
 Original product surface: the CBT Cards mobile app remains documented separately with cards, guided tools, a structured journal, and mood, stress, and energy check-ins.
 Clinical boundary: CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
 
@@ -22,7 +22,9 @@ For human-readable language availability, use https://cbt-cards.github.io/langua
 
 For raw toolkit publication status use https://cbt-cards.github.io/data/toolkit-review.json. Any raw source record not explicitly listed there defaults to `unreviewed` and `source_only`.
 
-For public agent evaluation cases and methodology use https://cbt-cards.github.io/research/ and https://cbt-cards.github.io/data/agent-evals.jsonl. For recorded reproducible baseline runs use https://cbt-cards.github.io/data/agent-eval-runs.jsonl. Do not treat a deterministic baseline score as evidence that an LLM or general-purpose assistant was tested.
+For agent evaluation methodology and current results use https://cbt-cards.github.io/research/. Starter cases are at https://cbt-cards.github.io/data/agent-evals.jsonl and the separately authored held-out challenge is at https://cbt-cards.github.io/data/agent-evals-challenge.jsonl. Deterministic run records are kept in separate starter and challenge files. Do not interpret deterministic baseline scores as evidence that an LLM or general-purpose assistant was tested.
+
+For real model-run methodology use https://cbt-cards.github.io/research/MODEL_RUN_PROTOCOL.md and https://cbt-cards.github.io/research/model-run-prompt-v1.txt. Real-model generation must occur before benchmark-only expected fields are read by the deterministic scorer.
 
 For release history use https://cbt-cards.github.io/changelog/ or https://cbt-cards.github.io/data/changelog.json. Website, data, translation, research, schema, worksheet, and skill releases are not mobile-app releases unless explicitly recorded as such.
 
@@ -98,22 +100,58 @@ If no reviewed localization exists, an assistant may translate the canonical Eng
 ## Agent evaluation research
 
 - Research page: https://cbt-cards.github.io/research/
-- Evaluation cases: https://cbt-cards.github.io/data/agent-evals.jsonl
+- Starter evaluation cases: https://cbt-cards.github.io/data/agent-evals.jsonl
+- Held-out challenge cases: https://cbt-cards.github.io/data/agent-evals-challenge.jsonl
 - Evaluation case schema: https://cbt-cards.github.io/schemas/agent-eval-case-v1.schema.json
-- Evaluation runs: https://cbt-cards.github.io/data/agent-eval-runs.jsonl
-- Evaluation run schema: https://cbt-cards.github.io/schemas/agent-eval-run-v1.schema.json
-- Deterministic baseline implementation: https://cbt-cards.github.io/scripts/run_eval_baselines.py
+- Starter deterministic runs: https://cbt-cards.github.io/data/agent-eval-runs.jsonl
+- Starter run schema: https://cbt-cards.github.io/schemas/agent-eval-run-v1.schema.json
+- Held-out deterministic challenge runs: https://cbt-cards.github.io/data/agent-eval-challenge-runs.jsonl
+- Challenge run schema: https://cbt-cards.github.io/schemas/agent-eval-challenge-run-v1.schema.json
+- Starter baseline implementation: https://cbt-cards.github.io/scripts/run_eval_baselines.py
+- Held-out challenge runner: https://cbt-cards.github.io/scripts/run_eval_challenge.py
 
 The starter set contains 24 hand-authored cases across retrieval, learning, worksheets, localization, publication boundaries, privacy, and safety.
 
-Every recorded run pins `eval_dataset_sha256` for the exact case-dataset bytes used and stores aggregate plus per-case route, target, locale, and boundary results.
-
-Current deterministic non-model baselines:
+Current deterministic non-model starter baselines:
 
 - `null-route-v1`: route 1/24, target 0/19, locale 0/4, boundary 1/7.
 - `deterministic-contract-router-v1`: route 24/24, target 19/19, locale 4/4, boundary 7/7.
 
-The second result is a contract/harness baseline built around the current starter taxonomy. It is not an LLM benchmark, a clinical safety benchmark, or evidence of general assistant quality. No LLM/model results are currently claimed.
+The separate challenge contains 12 paraphrase/adversarial cases across the same seven categories. It was authored separately, and the deterministic router was not changed after challenge authoring before its result was recorded.
+
+On the held-out challenge:
+
+- `null-route-v1`: route 0/12, target 0/10, locale 0/1, boundary 0/3.
+- `deterministic-contract-router-v1`: route 1/12, target 0/10, locale 0/1, boundary 1/3.
+- Challenge SHA-256: `f20bbc8562315de235fe6b935b17be8eeaa41d604b222c91904618658b2c0407`.
+
+The drop from 24/24 starter routes to 1/12 held-out routes is evidence that this small keyword router is brittle. It is not a model result. If a router, prompt, adapter, or model is tuned using those challenge cases, that challenge generation is no longer held out for that system; later generalization claims require a new untouched challenge generation.
+
+## Real model-run protocol
+
+- Protocol v1: https://cbt-cards.github.io/research/MODEL_RUN_PROTOCOL.md
+- Fixed generation prompt v1: https://cbt-cards.github.io/research/model-run-prompt-v1.txt
+- Model response schema: https://cbt-cards.github.io/schemas/agent-model-response-v1.schema.json
+- Model run schema: https://cbt-cards.github.io/schemas/agent-model-run-v1.schema.json
+- Deterministic post-generation evaluator: https://cbt-cards.github.io/scripts/evaluate_model_run.py
+
+The protocol uses two stages.
+
+Stage 1 — generation:
+- The evaluated runtime may receive the case `user_message`, its normal system/runtime instructions, and the normal public CBT Cards resources/tools available to that integration.
+- Benchmark-only fields such as category, `expected_route`, expected resource/source IDs, requested locale expectations, semantic checks, prohibited claims, rationale, and tags must remain hidden from the model.
+- The model returns a user-facing answer plus a small routing envelope: route, resource IDs, raw source IDs, and locale behavior.
+- Capture the raw answer before deterministic scoring. Do not silently repair routing metadata after reading expected benchmark fields.
+
+Stage 2 — scoring:
+- Only after all responses are captured does `evaluate_model_run.py` read benchmark expected fields.
+- The deterministic v1 evaluator scores route accuracy, exact target-ID selection, locale behavior, and boundary routing.
+- It records the raw answer, answer SHA-256, provider/model/runtime provenance, execution timestamp, prompt SHA-256, dataset SHA-256, and evaluator version.
+- Provider version/snapshot and runtime settings must reflect only observable metadata. Do not invent unavailable values.
+
+The v1 deterministic evaluator does not automatically score prose quality, empathy, factual completeness, clinical suitability, case `expected_checks`, or prohibited-claim compliance. Those dimensions require a separately declared semantic review method and must not overwrite the deterministic routing metrics.
+
+CI uses a synthetic fixture to exercise the scorer contract. The fixture is not a model run and must never be reported as one. No LLM or hosted-assistant score is currently claimed.
 
 ## Portable Agent Skills distribution
 
@@ -137,8 +175,15 @@ Runtime-specific installation instructions for OpenClaw and Hermes Agent live in
 - Curated knowledge dataset: https://cbt-cards.github.io/data/knowledge.jsonl
 - Locale registry: https://cbt-cards.github.io/data/locales.json
 - Translation overlays: https://cbt-cards.github.io/data/translations.jsonl
-- Agent evaluation cases: https://cbt-cards.github.io/data/agent-evals.jsonl
-- Agent evaluation runs: https://cbt-cards.github.io/data/agent-eval-runs.jsonl
+- Starter agent evaluation cases: https://cbt-cards.github.io/data/agent-evals.jsonl
+- Held-out agent challenge cases: https://cbt-cards.github.io/data/agent-evals-challenge.jsonl
+- Starter deterministic runs: https://cbt-cards.github.io/data/agent-eval-runs.jsonl
+- Held-out deterministic challenge runs: https://cbt-cards.github.io/data/agent-eval-challenge-runs.jsonl
+- Model-run protocol: https://cbt-cards.github.io/research/MODEL_RUN_PROTOCOL.md
+- Model-run prompt: https://cbt-cards.github.io/research/model-run-prompt-v1.txt
+- Model response schema: https://cbt-cards.github.io/schemas/agent-model-response-v1.schema.json
+- Model run schema: https://cbt-cards.github.io/schemas/agent-model-run-v1.schema.json
+- Model run evaluator: https://cbt-cards.github.io/scripts/evaluate_model_run.py
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Toolkit review overlay: https://cbt-cards.github.io/data/toolkit-review.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
@@ -147,7 +192,9 @@ Runtime-specific installation instructions for OpenClaw and Hermes Agent live in
 - JSON Feed: https://cbt-cards.github.io/feed.json
 - Security contact: https://cbt-cards.github.io/.well-known/security.txt
 
-CBT Cards-owned JSON/JSONL formats use versioned JSON Schema draft 2020-12 contracts discovered from https://cbt-cards.github.io/schemas/index.json. Purpose-specific CI validators remain authoritative for invariants beyond field shape, including publication-set equality, translation source snapshots, generated localized output, eval provenance, deterministic run reproduction, skill portability, privacy wording, and source review boundaries.
+CBT Cards-owned structured formats use versioned JSON Schema draft 2020-12 contracts discovered from https://cbt-cards.github.io/schemas/index.json. Manifest entries with a committed public instance point to that instance and are cross-checked against the resource catalog. Interface-only contracts may be discoverable without an `instance` until a real public record exists; do not fabricate model runs merely to populate schema discovery.
+
+Purpose-specific CI validators remain authoritative for invariants beyond field shape, including publication-set equality, translation source snapshots, generated localized output, starter/held-out eval provenance, deterministic run reproduction, model-run input isolation, skill portability, privacy wording, and source review boundaries.
 
 ## Agent behavior
 
@@ -162,9 +209,11 @@ CBT Cards-owned JSON/JSONL formats use versioned JSON Schema draft 2020-12 contr
 9. Treat worksheet fields as educational prompts, not assessment instruments.
 10. Never claim access to a user's private CBT Cards journal, check-ins, backups, or account through the public resource interface.
 11. In immediate-danger scenarios, use host-platform safety handling rather than substituting a CBT Cards reflection resource.
-12. Do not treat deterministic eval baselines as LLM or general-assistant quality evidence.
-13. For reproducible skill integrations, resolve the manifest and pin an immutable v1.7.0 URL; use the strict `cbt-cards/SKILL.md` distribution when directory/name validation matters.
-14. Preserve the general-wellness boundary.
+12. Do not treat deterministic eval baselines, held-out challenge runs, or the CI protocol fixture as LLM/model-quality evidence.
+13. For a real model run, keep benchmark expected fields hidden during generation and record provider/model/runtime/prompt/dataset/evaluator provenance before publishing metrics.
+14. Do not claim the v1 deterministic model-run evaluator scored semantic answer quality or prohibited claims; those require a separate declared review method.
+15. For reproducible skill integrations, resolve the manifest and pin an immutable v1.7.0 URL; use the strict `cbt-cards/SKILL.md` distribution when directory/name validation matters.
+16. Preserve the general-wellness boundary.
 
 ## Original mobile app documentation
 
