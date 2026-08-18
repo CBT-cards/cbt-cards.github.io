@@ -1,10 +1,15 @@
 @font-face {
   font-family: Nunito;
   src: url("/assets/Nunito-Regular.ttf");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
 }
 @font-face {
   font-family: Nunito;
   src: url("/assets/Nunito-ExtraBold.ttf");
+  font-display: swap;
+  font-style: normal;
   font-weight: 800;
 }
 * {
@@ -23,6 +28,15 @@ body {
 }
 a {
   color: inherit;
+}
+a:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #17130e;
+  outline-offset: 4px;
+}
+img {
+  max-width: 100%;
+  height: auto;
 }
 .wrap {
   width: min(1120px, calc(100% - 40px));
@@ -312,8 +326,12 @@ a {
 .prose h3 {
   margin-top: 28px;
 }
-.prose ul {
-  padding-left: 20px;
+.prose ul,
+.prose ol {
+  padding-left: 22px;
+}
+.prose li + li {
+  margin-top: 8px;
 }
 .prose code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -339,6 +357,13 @@ a {
   color: inherit;
   font-size: inherit;
 }
+.source-note {
+  margin-top: 36px;
+  padding-top: 18px;
+  border-top: 1px solid #b6a887;
+  color: #5c4c35;
+  font-size: 15px;
+}
 .crumb {
   font-size: 15px;
 }
@@ -355,6 +380,11 @@ a {
 .muted {
   color: #5c4c35;
 }
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
 @media (max-width: 760px) {
   body {
     font-size: 17px;
@@ -363,10 +393,21 @@ a {
     width: min(calc(100% - 28px), 1120px);
   }
   .nav {
-    align-items: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
   }
   .nav-links {
-    display: none;
+    display: flex;
+    order: 3;
+    width: 100%;
+    gap: 14px;
+    overflow-x: auto;
+    padding: 4px 0 2px;
+    scrollbar-width: thin;
+  }
+  .nav-links a {
+    white-space: nowrap;
   }
   .hero {
     padding: 43px 0;
@@ -375,6 +416,9 @@ a {
   .split {
     grid-template-columns: 1fr;
     gap: 31px;
+  }
+  .hero h1 {
+    font-size: clamp(44px, 14vw, 66px);
   }
   .hero-art {
     justify-self: center;
