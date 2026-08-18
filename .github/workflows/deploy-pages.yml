@@ -39,3 +39,18 @@ jobs:
           path: .
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  notify-indexnow:
+    if: github.event_name == 'push'
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Notify IndexNow about changed public pages
+        continue-on-error: true
+        run: >-
+          python3 scripts/notify_indexnow.py
+          --base "${{ github.event.before }}"
+          --head "${{ github.sha }}"
