@@ -28,6 +28,20 @@
 <p>This changelog tracks changes to the public CBT Cards website, learning library, printable browser worksheets, schemas, language data, research datasets, toolkit pages, structured data, feeds, and agent interfaces. A website, data, translation, research, or agent entry does <strong>not</strong> imply that an Android or iOS app version shipped on the same date.</p>
 <p>Agents and tooling can read the same history from <a href="/data/changelog.json"><code>data/changelog.json</code></a>. Versioned data contracts are listed in <a href="/schemas/index.json"><code>schemas/index.json</code></a>.</p>
 
+<article id="agent-2026-08-18-portable-skill-v1-7">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Agent interface</p>
+<h2>Portable Agent Skills release v1.7.0</h2>
+<p>Published a stricter portable skill distribution without rewriting historical skill releases or breaking the existing immutable URL convention.</p>
+<ul>
+<li>Advanced the mutable <a href="/agents/cbt-cards/SKILL.md">latest skill</a> to v1.7.0 and published the normal immutable <a href="/agents/cbt-cards/v1.7.0/SKILL.md">v1.7.0 compatibility URL</a>.</li>
+<li>Added a strict portable copy at <a href="/agents/cbt-cards/v1.7.0/cbt-cards/SKILL.md"><code>v1.7.0/cbt-cards/SKILL.md</code></a>, where the immediate directory matches <code>name: cbt-cards</code>.</li>
+<li>Restricted v1.7.0 frontmatter to the portable Agent Skills field set and moved release version into string-valued <code>metadata.version</code>.</li>
+<li>Added <a href="/agents/cbt-cards/INSTALL.md">installation and pinning notes</a> for OpenClaw, Hermes Agent, and generic Agent Skills clients.</li>
+<li>Added a CI portability check that requires the mutable alias, compatibility mirror, and strict portable distribution to contain identical skill content.</li>
+</ul>
+<p>Runtime-specific install details remain outside the portable skill core. This is an agent-interface release and does not imply a new Android or iOS app version.</p>
+</article>
+
 <article id="data-2026-08-18-reproducible-eval-baselines">
 <p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Public data/research</p>
 <h2>Reproducible agent eval baselines and citation metadata</h2>
@@ -67,7 +81,7 @@
 <li>Machine drafts never produce localized public HTML. Generated resource pages require <code>human_reviewed</code>, <code>reviewed_for_publication</code>, and <code>published</code>.</li>
 <li>The generator also keeps localization sitemap entries synchronized with the data.</li>
 </ul>
-<p>The locale-level <code>public_html</code> flag now supports gradual rollout: a locale may contain reviewed published records and unpublished machine drafts at the same time.</p>
+<p>The locale-level <code>public_html</code> flag supports gradual rollout: a locale may contain reviewed published records and unpublished machine drafts at the same time.</p>
 </article>
 
 <article id="agent-2026-08-18-localization-aware-skill">
