@@ -9,7 +9,7 @@ The evaluation harness may provide the model with:
 - the normal CBT Cards public skill, public website, public datasets, and runtime tools being evaluated;
 - ordinary runtime/system instructions that would exist for that integration.
 
-The harness must not provide the model with benchmark-only fields from the eval dataset, including category, expected_route, expected_resource_ids, expected_source_record_ids, requested_locale, locale_behavior, expected_checks, prohibited_claims, rationale, or tags.
+The harness must not provide the model with benchmark-only fields from the eval dataset, including category, expected_route, expected_resource_ids, expected_source_record_ids, requested_locale, locale_behavior, expected_checks, prohibited_claims, rationale, or tags. The model may infer a requested language from the user's own message; the hidden-field rule applies to benchmark annotations, not information present in user_message.
 
 Required output envelope
 Return one JSON object with these fields:
