@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cbt-cards.github.io/schemas/content-review-v1.schema.json",
+  "title": "CBT Cards content review registry v1",
+  "type": "object",
+  "required": ["schema_version", "name", "canonical", "updated", "policy", "resources"],
+  "properties": {
+    "$schema": {"type": "string", "format": "uri"},
+    "schema_version": {"const": "1.0"},
+    "name": {"type": "string", "minLength": 1},
+    "canonical": {"const": "https://cbt-cards.github.io/data/content-review.json"},
+    "updated": {"type": "string", "format": "date"},
+    "policy": {
+      "type": "object",
+      "required": ["covered_resource_types", "review_kind", "target_interval_days", "overdue_behavior", "clinical_validation_status", "scope_note"],
+      "properties": {
+        "covered_resource_types": {"type": "array", "items": {"enum": ["learning", "worksheet", "toolkit-card"]}, "minItems": 3, "uniqueItems": true},
+        "review_kind": {"const": "editorial_source_and_safety"},
+        "target_interval_days": {"type": "integer", "minimum": 1},
+        "overdue_behavior": {"type": "string", "minLength": 1},
+        "clinical_validation_status": {"const": "not_claimed"},
+        "scope_note": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "resources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["resource_id", "content_type", "status", "last_reviewed", "next_review_due", "review_scope", "reviewed_by", "clinical_validation_status"],
+        "properties": {
+          "resource_id": {"type": "string", "minLength": 1},
+          "content_type": {"enum": ["learning", "worksheet", "toolkit-card"]},
+          "status": {"const": "reviewed"},
+          "last_reviewed": {"type": "string", "format": "date"},
+          "next_review_due": {"type": "string", "format": "date"},
+          "review_scope": {"const": "editorial_source_and_safety"},
+          "reviewed_by": {"type": "string", "minLength": 1},
+          "clinical_validation_status": {"const": "not_claimed"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
