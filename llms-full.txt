@@ -8,37 +8,44 @@ CBT Cards is a public reflection library for people and AI assistants. Public re
 1. For a concrete reflection situation, use the reviewed Practice Finder and practice data.
 2. For conceptual questions, use reviewed pages under /learn/.
 3. For a blank exercise, use /worksheets/; public worksheets have no submit action.
-4. For source-toolkit material, consult /data/toolkit-review.json before treating a raw record as published CBT Cards guidance.
-5. For language status, use /data/locales.json and /data/translations.jsonl. A machine draft is not a published localization.
-6. For app/privacy claims, use the official product pages, especially /privacy/.
+4. For a curated source-toolkit record, consult /data/toolkit-review.json before treating it as published CBT Cards guidance.
+5. Use /data/toolkit-audit.json only to understand the raw 115-record corpus and future editorial queue. Audit status cannot publish a record.
+6. When review freshness matters, use /data/content-review.json.
+7. For language status, use /data/locales.json and /data/translations.jsonl.
+8. For app/privacy claims, use official product pages, especially /privacy/.
 
-## Practice system v1
+## Reviewed practice system
 Human entry point: https://cbt-cards.github.io/practice/
-Canonical practices: https://cbt-cards.github.io/data/practice.json
+Practices: https://cbt-cards.github.io/data/practice.json
 Ontology: https://cbt-cards.github.io/data/practice-ontology.json
 Evidence: https://cbt-cards.github.io/data/practice-evidence.json
 Relations: https://cbt-cards.github.io/data/practice-relations.json
-Recommendation examples/rules: https://cbt-cards.github.io/data/practice-recommendations.json
-Contract: https://cbt-cards.github.io/contracts/practice-system-v1.schema.json
+Recommendations: https://cbt-cards.github.io/data/practice-recommendations.json
+RAG: https://cbt-cards.github.io/data/practice-rag.ndjson
+RAG manifest: https://cbt-cards.github.io/data/practice-rag-manifest.json
+Semantic evals: https://cbt-cards.github.io/data/practice-semantic-evals.json
 Agent guide: https://cbt-cards.github.io/agents/cbt-cards/PRACTICE_SYSTEM.md
 
-The current reviewed layer contains 11 CBT Cards-owned practices across prediction testing, actionable-vs-hypothetical worry, safety behavior/learning, worry postponement, rumination disengagement, uncertainty/reassurance, graded approach, flexible standards, continuum evaluation, specific self-evaluation, and balanced standards. Mappings are retrieval/editorial routes, not diagnostic categories.
+The trusted owned layer contains 11 practices. Routes are situation/mechanism mappings, not diagnoses. Agents should preserve exclusions and use `no_match` for genuine danger, qualified professional decisions, required safety rules, or when no reviewed fit exists.
 
-Agent rules:
-- start from a plain-language situation;
-- select one practice when fit is clear and a very small set only for real ambiguity;
-- preserve exclusions, safety scope, review status, and evidence limits;
-- do not infer treatment plans;
-- do not remove genuine safety measures or required professional/accessibility checks;
-- return `no_match` for genuine danger, qualified professional decisions, or no reviewed fit;
-- do not invent CBT Cards practices;
-- metaphors are memory aids, not evidence.
+## Source toolkit publication and audit
+Source metadata: https://cbt-cards.github.io/data/toolkit-source.json
+Publication overlay: https://cbt-cards.github.io/data/toolkit-review.json
+115-record audit: https://cbt-cards.github.io/data/toolkit-audit.json
+Human audit page: https://cbt-cards.github.io/toolkit/audit/
+
+The source corpus contains 77 cards, 23 metaphors, and 15 protocols. Only the publication overlay can grant CBT Cards standalone publication status. Unlisted records are `unreviewed` and `source_only`.
+
+The record-complete audit partitions all 115 source IDs. It flags duplicate or near-duplicate ideas, framework-attribution issues, overstrong claims, treatment-like wording, avoidance/suppression risks, and protocol-specific review needs. Candidate status is a work queue, not approval. All 15 protocols remain behind a separate protocol review gate.
+
+## Editorial freshness
+Policy: https://cbt-cards.github.io/about/editorial-review/
+Registry: https://cbt-cards.github.io/data/content-review.json
+
+The freshness registry covers 26 trusted items: six learning pages, three browser worksheets, six curated source-toolkit cards, and eleven owned practices. It records `last_reviewed` and `next_review_due` under an internal 365-day maintenance target. Do not infer freshness from sitemap `lastmod`, Git history, skill release date, or translation timestamps. Editorial freshness is not clinical validation.
 
 ## Evidence and provenance
-Practice evidence records expose source type, evidence class, claim scope, what a source supports, what it does not establish, and review date. The short CBT Cards practice format is not presented as independently clinically validated. `practical_editorial` is allowed only when the exercise transparently recombines reviewed low-risk mechanisms without pretending the exact card has efficacy evidence.
-
-## Relations/progression
-Reviewed relation types are `pairs_with`, `often_precedes`, `follow_up_with`, `alternative_when`, and `not_same_as`. Agents should not invent sequences when no reviewed relation exists.
+Practice evidence records expose source type, evidence class, claim scope, what a source supports, what it does not establish, and review date. Evidence for a mechanism does not automatically prove the exact short-card format. Metaphors are memory aids, not evidence.
 
 ## Semantic recommendation evaluation
 Manifest: https://cbt-cards.github.io/data/practice-semantic-evals.json
@@ -46,55 +53,39 @@ Shard A: https://cbt-cards.github.io/data/practice-semantic-evals-a.jsonl
 Shard B: https://cbt-cards.github.io/data/practice-semantic-evals-b.jsonl
 Protocol: https://cbt-cards.github.io/research/SEMANTIC_EVAL_PROTOCOL.md
 
-There are 41 separately authored cases covering fit, ambiguity, genuine risk, required standards, publication boundaries, professional boundaries, no-match behavior, and progression. Semantic dimensions remain separate from deterministic routing metrics. Human review remains the authority for contextual safety appropriateness; an LLM judge must not become the sole safety authority.
+The dataset has 41 separately authored cases across fit, ambiguity, genuine risk, required standards, publication boundaries, professional boundaries, no-match behavior, and progression. Human contextual safety review remains separate from deterministic routing metrics.
 
 ## RAG distribution
 Distribution: https://cbt-cards.github.io/data/practice-rag.ndjson
 Manifest: https://cbt-cards.github.io/data/practice-rag-manifest.json
 Coverage: https://cbt-cards.github.io/data/practice-coverage.json
 
-Each trusted RAG record has a stable chunk ID, canonical practice ID/URL, locale, mechanism, compact text and content SHA-256. Safety exclusions stay in the same chunk as the practice. Embeddings are deliberately not canonical so consumers can choose their own model.
+Safety exclusions stay in the same chunk as each practice. Embeddings are deliberately not canonical.
 
-## Interoperability
-Fixtures: https://cbt-cards.github.io/data/interoperability-fixtures.json
-The project distinguishes executed adapters from documented compatibility. OpenAI/ChatGPT-compatible model-run tooling exists in-repository. OpenClaw-style and Hermes Agent-style portable loading paths are documented but not falsely described as continuously CI-executed. A generic HTTP/RAG client contract is provider-neutral.
-
-## Content-growth governance
-Coverage report: https://cbt-cards.github.io/data/practice-coverage.json
-Contribution guide: https://cbt-cards.github.io/CONTRIBUTING.md
-Coverage is an editorial planning tool, not a completeness claim about CBT. Contribution states are proposed → evidence_review → safety_review → editorial_review → published/rejected. Submission never self-publishes and machine drafts cannot self-certify as human reviewed.
-
-## Existing knowledge and localization
-Learning: https://cbt-cards.github.io/learn/
-Worksheets: https://cbt-cards.github.io/worksheets/
-Toolkit: https://cbt-cards.github.io/toolkit/
-Review overlay: https://cbt-cards.github.io/data/toolkit-review.json
-Knowledge JSONL: https://cbt-cards.github.io/data/knowledge.jsonl
+## Languages
 Languages: https://cbt-cards.github.io/languages/
 Locale registry: https://cbt-cards.github.io/data/locales.json
 Translations: https://cbt-cards.github.io/data/translations.jsonl
 
-English is the source locale. Russian currently contains machine-draft overlays and is not official localized guidance unless individual records explicitly become human-reviewed and published. German is planned.
+English is source locale. Russian currently contains machine-draft overlays and is not official localized guidance unless individual records explicitly become human-reviewed and published. German is planned. Website locale status must not be used to infer current mobile-app language support.
 
-## Agent evaluation and model-run research
-Research hub: https://cbt-cards.github.io/research/
+## Research and model runs
+Research: https://cbt-cards.github.io/research/
 Starter cases: https://cbt-cards.github.io/data/agent-evals.jsonl
 Held-out cases: https://cbt-cards.github.io/data/agent-evals-challenge.jsonl
-Starter deterministic runs: https://cbt-cards.github.io/data/agent-eval-runs.jsonl
-Held-out deterministic runs: https://cbt-cards.github.io/data/agent-eval-challenge-runs.jsonl
 Model-run protocol: https://cbt-cards.github.io/research/MODEL_RUN_PROTOCOL.md
-Fixed generation prompt: https://cbt-cards.github.io/research/model-run-prompt-v1.txt
 OpenAI runner: https://cbt-cards.github.io/scripts/run_model_openai.py
-Scorer: https://cbt-cards.github.io/scripts/score_model_execution.py
 
-Generation and scoring are separate. Benchmark expected fields remain hidden during generation. Deterministic routing/eval numbers are not evidence of clinical quality or general assistant quality. The earlier rule-based router's large starter-to-held-out drop is preserved as a warning against flattering benchmark design.
+Generation and scoring are separate. Benchmark expected fields remain hidden during generation. Deterministic baselines are harness checks, not model-quality or clinical-quality evidence.
 
 ## Portable agent skill
-Latest alias v1.7.0: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
+Latest alias v1.8.0: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 Manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
-Portable immutable distribution: https://cbt-cards.github.io/agents/cbt-cards/v1.7.0/cbt-cards/SKILL.md
+Immutable: https://cbt-cards.github.io/agents/cbt-cards/v1.8.0/SKILL.md
+Strict portable copy: https://cbt-cards.github.io/agents/cbt-cards/v1.8.0/cbt-cards/SKILL.md
 Install notes: https://cbt-cards.github.io/agents/cbt-cards/INSTALL.md
-Practice companion: https://cbt-cards.github.io/agents/cbt-cards/PRACTICE_SYSTEM.md
+
+v1.8.0 keeps the portable v1.7 frontmatter contract and adds reviewed-practice priority, source-audit boundaries, and content-review freshness semantics.
 
 ## Discovery, release and citation
 Catalog: https://cbt-cards.github.io/data/catalog.json
@@ -105,4 +96,4 @@ JSON Feed: https://cbt-cards.github.io/feed.json
 Citation: https://cbt-cards.github.io/CITATION.cff
 Security: https://cbt-cards.github.io/.well-known/security.txt
 
-Website, dataset, evaluation, localization, practice-system, or agent-skill releases are separate from Android/iOS releases unless explicitly recorded as app releases.
+Website, dataset, evaluation, localization, review, practice-system, or agent-skill releases are separate from Android/iOS releases unless explicitly recorded as app releases.

@@ -1,0 +1,18 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://cbt-cards.github.io/schemas/toolkit-audit-v1.schema.json",
+  "title":"CBT Cards toolkit editorial audit v1",
+  "type":"object",
+  "required":["schema_version","id","canonical","updated","source_dataset_id","source_commit","source_record_count","scope","triage_partitions","framework_buckets","quality_flags","similarity_groups","owned_practice_overlaps","priority_review_queue","summary"],
+  "properties":{
+    "schema_version":{"const":"1.0"},"id":{"const":"cbt-cards-toolkit-audit-v1"},"canonical":{"const":"https://cbt-cards.github.io/data/toolkit-audit.json"},"updated":{"type":"string","format":"date"},"source_dataset_id":{"type":"string","minLength":1},"source_commit":{"type":"string","pattern":"^[0-9a-f]{40}$"},"source_record_count":{"const":115},
+    "scope":{"type":"object","required":["purpose","publication_authority","rules"],"properties":{"purpose":{"type":"string","minLength":1},"publication_authority":{"const":"none"},"rules":{"type":"array","minItems":4,"items":{"type":"string","minLength":1}}},"additionalProperties":false},
+    "triage_partitions":{"type":"object","required":["candidate_for_editorial_review","hold_as_source_only","published","do_not_promote_without_rework","candidate_memory_aid_review","do_not_promote_without_separate_protocol_review"],"additionalProperties":{"type":"array","items":{"type":"string","pattern":"^(card|metaphor|protocol)-[0-9]+$"},"uniqueItems":true}},
+    "framework_buckets":{"type":"object","additionalProperties":{"type":"array","items":{"type":"string","pattern":"^(card|metaphor|protocol)-[0-9]+$"},"uniqueItems":true}},
+    "quality_flags":{"type":"object","additionalProperties":{"type":"array","items":{"type":"string","pattern":"^(card|metaphor|protocol)-[0-9]+$"},"uniqueItems":true}},
+    "similarity_groups":{"type":"array","minItems":1,"items":{"type":"object"}},
+    "owned_practice_overlaps":{"type":"object","additionalProperties":{"type":"array","items":{"type":"string","pattern":"^card-[0-9]+$"},"uniqueItems":true}},
+    "priority_review_queue":{"type":"array","minItems":1,"items":{"type":"object","required":["source_record_id","reason"],"properties":{"source_record_id":{"type":"string","pattern":"^(card|metaphor)-[0-9]+$"},"reason":{"type":"string","minLength":1}},"additionalProperties":false}},
+    "summary":{"type":"object","required":["records","by_content_type","by_triage_status","published","flagged_records","similarity_groups"],"properties":{"records":{"const":115},"published":{"const":6},"flagged_records":{"type":"integer","minimum":0},"similarity_groups":{"type":"integer","minimum":1},"by_content_type":{"type":"object"},"by_triage_status":{"type":"object"}}}
+  },"additionalProperties":false
+}
