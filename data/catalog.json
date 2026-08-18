@@ -26,6 +26,8 @@
     {"id": "privacy", "type": "policy", "url": "https://cbt-cards.github.io/privacy/", "title": "Privacy policy"},
     {"id": "faq", "type": "support", "url": "https://cbt-cards.github.io/faq/", "title": "FAQ"},
     {"id": "about", "type": "provenance", "url": "https://cbt-cards.github.io/about/", "title": "About CBT Cards"},
+    {"id": "changelog", "type": "provenance", "url": "https://cbt-cards.github.io/changelog/", "title": "CBT Cards public changelog", "updated": "2026-08-18"},
+    {"id": "changelog-data", "type": "dataset", "url": "https://cbt-cards.github.io/data/changelog.json", "title": "CBT Cards machine-readable changelog", "format": "application/json", "updated": "2026-08-18"},
     {"id": "learn", "type": "collection", "url": "https://cbt-cards.github.io/learn/", "title": "Learning library"},
     {"id": "cbt-thought-record", "type": "learning", "url": "https://cbt-cards.github.io/learn/cbt-thought-record/", "title": "CBT thought record", "reviewed": "2026-08-18"},
     {"id": "automatic-thoughts", "type": "learning", "url": "https://cbt-cards.github.io/learn/automatic-thoughts/", "title": "Automatic thoughts in CBT", "reviewed": "2026-08-18"},
