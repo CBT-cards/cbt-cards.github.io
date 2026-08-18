@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Localization policy — CBT Cards</title>
+<meta name="description" content="Current CBT Cards website language status and the publication rules for future translated pages, hreflang, human review, and right-to-left layouts." />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href="https://cbt-cards.github.io/about/localization/" />
+<link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/locales.json" title="CBT Cards website locale registry" />
+<link rel="stylesheet" href="/styles.css?v=20260818" />
+<link rel="icon" href="/assets/app-icon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Localization policy — CBT Cards" />
+<meta property="og:description" content="English-only website status today, plus the rules required before future localized CBT Cards pages are published." />
+<meta property="og:url" content="https://cbt-cards.github.io/about/localization/" />
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"About","item":"https://cbt-cards.github.io/about/"},{"@type":"ListItem","position":3,"name":"Localization policy","item":"https://cbt-cards.github.io/about/localization/"}]},{"@type":"Article","headline":"CBT Cards website localization policy","mainEntityOfPage":"https://cbt-cards.github.io/about/localization/","dateModified":"2026-08-18","publisher":{"@id":"https://cbt-cards.github.io/#publisher"}}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/how-it-works/">How it works</a><a href="/features/">Features</a><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/about/">About</a></nav><a class="download" href="/#download">Download</a></div></header>
+<main id="main">
+<section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / <a href="/about/">About</a> / Localization</div><h1>Website localization policy</h1><p class="lede">What languages this website actually publishes today, and what must happen before another locale becomes public.</p></div></section>
+<section class="section alt"><div class="wrap prose">
+<h2>Current website language</h2>
+<p>The public website at <code>cbt-cards.github.io</code> currently publishes one locale: <strong>English (<code>en</code>)</strong>. English pages use the root URL structure rather than an <code>/en/</code> prefix.</p>
+<p>The machine-readable source of truth is <a href="/data/locales.json"><code>data/locales.json</code></a>.</p>
+
+<h2>This does not define mobile-app languages</h2>
+<p>The website locale registry describes this website only. It must not be used to infer which languages are currently available in the Android or iOS application. App-language claims require separately verified product or store release information.</p>
+
+<h2>Why there is no hreflang yet</h2>
+<p>Only one web locale is published, so the site does not currently emit <code>hreflang</code> alternates. Adding English-only <code>hreflang</code> markup would not create another language version; it would mostly create more markup for humans to maintain, a beloved industry pastime.</p>
+
+<h2>Requirements before a second web locale ships</h2>
+<ul>
+<li>Give every translated page a stable locale-specific URL.</li>
+<li>Keep each localized page self-canonical.</li>
+<li>Add self-referencing and reciprocal <code>hreflang</code> links between locale counterparts.</li>
+<li>Add <code>x-default</code> where a global/default entry point is appropriate.</li>
+<li>Update sitemap, locale registry, resource catalog, agent indexes, and internal navigation in the same release.</li>
+<li>Preserve authoritative source links, safety wording, privacy boundaries, and resource provenance.</li>
+</ul>
+
+<h2>Health-adjacent translation review</h2>
+<p>Machine translation may assist drafting, but it is not sufficient publication review for health-adjacent learning pages, worksheets, or curated toolkit content. Those translations require human review before publication and must then enter the normal <a href="/about/editorial-review/">editorial freshness process</a>.</p>
+
+<h2>Right-to-left locales</h2>
+<p>If a future locale uses a right-to-left script, localized HTML must declare <code>dir="rtl"</code> and receive layout review. Direction is a content-layout property, not merely a string substitution problem.</p>
+
+<h2>For agents and tooling</h2>
+<p>Use the locale registry for website-language claims. Do not merge website locale status with mobile-app language support, historical release notes, or unverified external metadata.</p>
+</div></section>
+</main>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/about/editorial-review/">Editorial review</a><a href="/about/localization/">Localization</a><a href="/privacy/">Privacy</a><a href="/agents/">For agents</a></nav></div></footer>
+</body>
+</html>
