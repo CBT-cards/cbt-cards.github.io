@@ -4,7 +4,7 @@ Official static website and public reflection resource for CBT Cards.
 
 CBT Cards began as a mobile app and is evolving into an open public library that can be used directly by people and consumed by AI assistants through ordinary web pages, JSON/JSONL data, versioned schemas, review metadata, portable agent instructions, and inspectable evaluation data.
 
-The deployed site remains intentionally dependency-free: plain HTML, CSS, text, JSON, JSONL, and product-owned assets publish directly to GitHub Pages. There is no JavaScript application bundle or runtime service required to render public content. Small Python scripts are used only for validation, deterministic generation, and reproducible baseline evaluation before deployment.
+The deployed site remains intentionally dependency-free: plain HTML, CSS, text, JSON, JSONL, and product-owned assets publish directly to GitHub Pages. There is no JavaScript application bundle or runtime service required to render public content. Small Python scripts are used only for validation, deterministic generation, reproducible baseline evaluation, and post-generation model-run scoring before deployment.
 
 ## Public structure
 
@@ -15,7 +15,7 @@ Public reflection library:
 - `/worksheets/` — printable browser-local worksheets
 - `/toolkit/` — public toolkit and dataset entry point
 - `/languages/` — human-readable language, translation-review, and publication status
-- `/research/` — public agent evaluation cases, reproducible baselines, and methodology notes
+- `/research/` — starter and held-out agent evals, reproducible baselines, model-run protocol, and methodology notes
 - `/about/` — project origin, direction, publisher, and editorial approach
 - `/changelog/` — website/public-data/agent release history, separate from mobile-app releases
 
@@ -88,24 +88,47 @@ Generated localized pages use the canonical pattern `/<locale>/resources/<resour
 
 ## Public agent evaluation research
 
-CBT Cards publishes a small, inspectable evaluation surface for assistants and integrations:
+CBT Cards publishes an inspectable evaluation surface for assistants and integrations:
 
-- `/research/` — methodology, scope, current deterministic baselines, and limitations
-- `/data/agent-evals.jsonl` — 24 hand-authored v1 evaluation cases across retrieval, learning, worksheets, localization, publication boundaries, privacy, and safety
-- `/schemas/agent-eval-case-v1.schema.json` — one evaluation-case contract
-- `/data/agent-eval-runs.jsonl` — reproducible run records kept separate from the test cases
-- `/schemas/agent-eval-run-v1.schema.json` — one evaluation-run contract
-- `scripts/check_evals.py` — semantic consistency check against live catalog/review/localization state
-- `scripts/run_eval_baselines.py` — deterministic non-model baseline runner and exact-output verifier
+- `/research/` — methodology, starter/held-out results, model-run protocol, and limitations
+- `/data/agent-evals.jsonl` — 24 hand-authored starter cases across retrieval, learning, worksheets, localization, publication boundaries, privacy, and safety
+- `/data/agent-evals-challenge.jsonl` — 12 separately authored paraphrase/adversarial challenge cases across the same seven categories
+- `/schemas/agent-eval-case-v1.schema.json` — one evaluation-case contract shared by starter and challenge cases
+- `/data/agent-eval-runs.jsonl` — reproducible deterministic starter runs
+- `/data/agent-eval-challenge-runs.jsonl` — reproducible deterministic challenge runs
+- `/schemas/agent-eval-run-v1.schema.json` and `/schemas/agent-eval-challenge-run-v1.schema.json` — starter/challenge deterministic run contracts
+- `scripts/check_evals.py` and `scripts/check_evals_challenge.py` — semantic consistency checks against live catalog/review/localization state
+- `scripts/run_eval_baselines.py` and `scripts/run_eval_challenge.py` — deterministic non-model runners and exact-output verifiers
 
-Every run record pins the SHA-256 of the exact `data/agent-evals.jsonl` bytes used. `scripts/run_eval_baselines.py --check` regenerates the deterministic baselines and requires the committed run dataset to match exactly.
+Every deterministic run pins the SHA-256 of the exact evaluation dataset bytes used. CI regenerates the starter and challenge baseline files and requires the committed run datasets to match exactly.
 
-The initial baselines are intentionally different kinds of reference points:
+The starter baselines are reference points, not model-quality claims:
 
-- `null-route-v1` is an intentionally weak floor: 1/24 correct routes, 0/19 expected target selections, 0/4 locale behaviors, and 1/7 boundary routes.
-- `deterministic-contract-router-v1` is a small rule-based contract/harness baseline that reads only `user_message`. On the current starter set it reaches 24/24 routes, 19/19 targets, 4/4 locale behaviors, and 7/7 boundary routes.
+- `null-route-v1` is an intentionally weak starter floor: 1/24 correct routes, 0/19 expected target selections, 0/4 locale behaviors, and 1/7 boundary routes.
+- `deterministic-contract-router-v1` is a small rule-based contract/harness baseline that reads only `user_message`. On the friendly starter set it reaches 24/24 routes, 19/19 targets, 4/4 locale behaviors, and 7/7 boundary routes.
 
-The deterministic router's perfect score is not a model benchmark or claim about general assistant quality. It verifies that the current routing taxonomy, stable IDs, result format, hashing, and scoring pipeline can reproduce a known result. Future model runs must identify their own model/provider/version or snapshot, execution date, evaluator version, and per-case results rather than inheriting these baseline numbers.
+The separate held-out challenge demonstrates why the perfect starter score should not be generalized. Without changing the router after challenge authoring, `deterministic-contract-router-v1` drops to 1/12 challenge routes, 0/10 target selections, 0/1 locale behaviors, and 1/3 boundary routes. The challenge dataset SHA-256 is `f20bbc8562315de235fe6b935b17be8eeaa41d604b222c91904618658b2c0407`.
+
+If a router, prompt, model, or adapter is tuned on those 12 challenge cases, that challenge generation is no longer held out for that system. A later generalization claim requires a new untouched challenge generation.
+
+### Real model-run protocol
+
+The repository defines a two-stage protocol for recording actual ChatGPT/API/OpenClaw/Hermes/other assistant runs without giving benchmark answers to the model during generation:
+
+- `/research/MODEL_RUN_PROTOCOL.md` — execution, provenance, held-out, and publication rules
+- `/research/model-run-prompt-v1.txt` — fixed generation instruction
+- `/schemas/agent-model-response-v1.schema.json` — one captured model response envelope
+- `/schemas/agent-model-run-v1.schema.json` — one scored real-model run record
+- `scripts/evaluate_model_run.py` — deterministic post-generation route/target/locale/boundary scorer
+- `scripts/check_model_run_protocol.py` — CI contract/self-test using a synthetic fixture, not a model result
+
+Generation and scoring are separate. The generation stage may expose `user_message`, the normal public CBT Cards sources, and normal runtime/system instructions being evaluated. It must not expose benchmark-only fields such as `expected_route`, expected IDs, checks, prohibited claims, rationale, or tags. Only after responses are captured does the deterministic evaluator read expected fields.
+
+A published model run must record provider, model, exposed version/snapshot when available, runtime, execution timestamp, prompt URL/hash, evaluation dataset URL/hash, evaluator identity/version, raw answer text and answer hashes, plus per-case routing results. Do not invent provider snapshots or runtime settings that were not observable.
+
+The v1 deterministic evaluator scores route, exact target IDs, locale behavior, and boundary routing. It explicitly does not automatically score empathy, prose quality, factual completeness, clinical suitability, `expected_checks`, or prohibited-claim compliance. Those require a separately declared semantic review method.
+
+No LLM or hosted-assistant score is currently published. The CI fixture verifies plumbing only and must never be relabeled as a model result.
 
 ## Citation and archival provenance
 
@@ -137,13 +160,18 @@ Historical v1.1.0 through v1.6.0 skill files remain unchanged at their original 
 - `/agents/cbt-cards/v1.7.0/cbt-cards/SKILL.md` — strict portable Agent Skills distribution for v1.7.0
 - `/llms.txt` — compact public index
 - `/llms-full.txt` — extended source-priority, localization, research, release, schema, worksheet, corpus, publication-status, and safety index
-- `/data/catalog.json` — canonical public resource catalog with stable IDs and `schema_url` for CBT Cards-owned structured formats
+- `/data/catalog.json` — canonical public resource catalog with stable IDs and `schema_url` for CBT Cards-owned structured instances
 - `/data/changelog.json` — scoped website/public-data/agent release provenance
 - `/data/knowledge.jsonl` — curated English source-language knowledge records
 - `/data/locales.json` — language registry
 - `/data/translations.jsonl` — localized content overlays with independent review/publication status
-- `/data/agent-evals.jsonl` — public agent evaluation cases
-- `/data/agent-eval-runs.jsonl` — reproducible deterministic baselines and future recorded evaluation runs
+- `/data/agent-evals.jsonl` — starter public agent evaluation cases
+- `/data/agent-evals-challenge.jsonl` — held-out paraphrase/adversarial challenge cases
+- `/data/agent-eval-runs.jsonl` — reproducible starter deterministic baselines
+- `/data/agent-eval-challenge-runs.jsonl` — reproducible held-out deterministic challenge baselines
+- `/research/MODEL_RUN_PROTOCOL.md` — real-model execution/provenance protocol
+- `/research/model-run-prompt-v1.txt` — fixed model-run prompt
+- `/schemas/agent-model-response-v1.schema.json` and `/schemas/agent-model-run-v1.schema.json` — interface contracts for future real-model responses/runs
 - `/data/worksheets.json` — structured form definitions
 - `/data/toolkit-review.json` — CBT Cards-owned source-record publication status
 - `/schemas/index.json` — public JSON Schema manifest
@@ -154,9 +182,9 @@ Historical v1.1.0 through v1.6.0 skill files remain unchanged at their original 
 
 ## Public data contracts
 
-CBT Cards-owned structured formats have versioned JSON Schema draft 2020-12 contracts under `/schemas/`. `schemas/index.json` maps each schema to the public instance it describes.
+CBT Cards-owned structured formats have versioned JSON Schema draft 2020-12 contracts under `/schemas/`. `schemas/index.json` maps schemas with committed instances to those instances and may also list interface-only schemas before a real public instance exists.
 
-Current contracts cover:
+Current committed-instance contracts cover:
 
 - `data/catalog.json`
 - `data/changelog.json`
@@ -168,9 +196,12 @@ Current contracts cover:
 - one record/line in `data/translations.jsonl`
 - one record/line in `data/agent-evals.jsonl`
 - one record/line in `data/agent-eval-runs.jsonl`
+- one record/line in `data/agent-eval-challenge-runs.jsonl`
 - `agents/cbt-cards/manifest.json`
 
-The public catalog exposes `schema_url` for these resources. JSON Schema is the portable field-level contract; purpose-specific repository checks remain responsible for semantic invariants such as canonical target existence, sequential worksheet fields, privacy wording, translation source snapshots, eval source expectations, run reproducibility, skill portability, and exact review-overlay/catalog/JSONL alignment.
+Interface-only contracts currently include one model response and one real-model run. They intentionally have no fabricated instance merely to satisfy discovery.
+
+The public catalog exposes `schema_url` for resources with committed schema-mapped instances. JSON Schema is the portable field-level contract; purpose-specific repository checks remain responsible for semantic invariants such as canonical target existence, sequential worksheet fields, privacy wording, translation source snapshots, eval source expectations, run reproducibility, held-out boundaries, model-run input isolation, skill portability, and exact review-overlay/catalog/JSONL alignment.
 
 ## Local preview
 
@@ -196,19 +227,35 @@ See [LOCALIZATION.md](LOCALIZATION.md) for the human review checklist and state 
 
 ## Reproducing evaluation baselines
 
-To regenerate the deterministic non-model baselines:
+To regenerate the deterministic non-model starter baselines:
 
 ```bash
 python3 scripts/run_eval_baselines.py
 ```
 
-To verify that the committed `data/agent-eval-runs.jsonl` matches the current eval cases and baseline code exactly:
+To verify starter and held-out deterministic run records:
 
 ```bash
 python3 scripts/run_eval_baselines.py --check
+python3 scripts/run_eval_challenge.py --check
 ```
 
 Do not edit deterministic baseline records by hand. Change the eval cases or runner intentionally, regenerate, inspect the metric changes, and record the public change in the changelog.
+
+For a real model run, first generate one response-envelope JSONL record per case according to `schemas/agent-model-response-v1.schema.json` without exposing benchmark expected fields. Then score the captured file, for example:
+
+```bash
+python3 scripts/evaluate_model_run.py \
+  --dataset challenge \
+  --responses /path/to/responses.jsonl \
+  --provider <provider> \
+  --model <model> \
+  --runtime <runtime> \
+  --executed 2026-08-18T12:00:00Z \
+  --run-id model-run-example
+```
+
+Use an actual execution timestamp and real provider/model/runtime values. Do not publish the placeholder values above as a run.
 
 ## Quality checks
 
@@ -218,7 +265,10 @@ Run the same static checks used by GitHub Actions:
 python3 scripts/check_localization.py
 python3 scripts/build_localized_pages.py --check
 python3 scripts/check_evals.py
+python3 scripts/check_evals_challenge.py
 python3 scripts/run_eval_baselines.py --check
+python3 scripts/run_eval_challenge.py --check
+python3 scripts/check_model_run_protocol.py
 python3 scripts/check_citation.py
 python3 scripts/check_skill_portability.py
 python3 scripts/check_site.py
@@ -234,9 +284,11 @@ The localization checker verifies the locale registry, stable knowledge IDs, tra
 
 The localized-page generator check verifies that `/languages/`, any enabled locale hubs, published localized resource pages, and the generated localization block in `sitemap.xml` exactly match source data. Stale generated localized pages fail validation.
 
-The agent-eval checker verifies stable case IDs, category coverage, expected catalog/raw-source IDs, publication-boundary expectations, privacy/safety routes, and localization expectations against current public state.
+The starter and challenge eval checkers verify stable case IDs, category coverage, expected catalog/raw-source IDs, publication-boundary expectations, privacy/safety routes, localization expectations, and the held-out challenge's distinct case IDs against current public state.
 
-The eval-baseline check regenerates deterministic non-model runs from the current case dataset, pins its SHA-256, recalculates route/target/locale/boundary metrics, and rejects any checked-in result that differs from the reproducible output.
+The deterministic run checks regenerate starter and held-out non-model runs from the current case datasets, pin exact SHA-256 values, recalculate route/target/locale/boundary metrics, and reject any checked-in result that differs from reproducible output.
+
+The model-run protocol check verifies prompt input isolation, model response/run provenance contracts, and a synthetic full starter-set scorer fixture. The fixture uses benchmark expectations only to test the scorer after generation and is not a model result or benchmark score.
 
 The citation checker verifies the repository's CFF 1.2.0 dataset metadata and rejects an invented DOI or project-wide semantic version.
 
@@ -254,7 +306,7 @@ The changelog checker verifies schema version, stable release IDs, chronological
 
 The toolkit-review checker verifies safe defaults for unlisted source records, published source-ID uniqueness, exact alignment between the review overlay, catalog toolkit cards, curated JSONL toolkit records and canonical pages, plus manifest-driven latest-skill alignment.
 
-The schema checker verifies schema-manifest completeness, JSON Schema 2020-12 declarations, stable `$id` values, local instance/schema targets, catalog `schema_url` discovery, localization contracts, evaluation contracts, and safety-critical constants.
+The schema checker verifies schema-manifest completeness, JSON Schema 2020-12 declarations, stable `$id` values, local committed-instance targets, interface-only schema discovery, catalog `schema_url` alignment where applicable, localization contracts, evaluation contracts, model-run contracts, and safety-critical constants.
 
 ## Deployment and discovery
 
@@ -277,7 +329,8 @@ The repository must remain `CBT-cards/cbt-cards.github.io` to serve the user-sit
 - Keep internal links root-relative so GitHub Pages serves them correctly.
 - When adding or removing an indexed non-generated page, update `sitemap.xml`, `llms.txt`, `llms-full.txt`, `data/catalog.json`, and the relevant machine-readable dataset.
 - Generated localized pages and their sitemap entries must be changed through locale/translation data and `scripts/build_localized_pages.py`, not by hand.
-- When adding or changing a CBT Cards-owned structured format, update its versioned schema, `schemas/index.json`, the catalog `schema_url`, and `scripts/check_schemas.py` as needed.
+- When adding or changing a CBT Cards-owned structured format, update its versioned schema, `schemas/index.json`, catalog discovery where a committed instance exists, and `scripts/check_schemas.py` as needed.
+- Interface-only schemas may be published before a real instance exists; do not invent a model result or other fake instance merely to satisfy schema discovery.
 - Treat schema changes that break existing consumers as a new schema-version URL rather than silently mutating the old contract.
 - Record meaningful public website/data/agent changes in `/data/changelog.json` and `/changelog/` using a stable release ID and explicit `scope`.
 - Never infer a mobile-app release from a website, dataset, translation, worksheet, feed, research, or agent-skill change. Mobile release entries require separately verified release metadata.
@@ -292,8 +345,12 @@ The repository must remain `CBT-cards/cbt-cards.github.io` to serve the user-sit
 - Do not create records for a `planned` locale until it is deliberately promoted to `pilot`.
 - Keep eval cases separate from recorded runs; do not change expected cases to make a particular runner look better.
 - Deterministic baseline runners must use only their declared `input_fields` and must not inspect expected routes, resource IDs, rationales, tags, or checks as prediction inputs.
-- Every recorded eval run must identify the exact eval dataset bytes through `eval_dataset_sha256` and preserve per-case results.
+- Every recorded deterministic eval run must identify the exact eval dataset bytes through `eval_dataset_sha256` and preserve per-case results.
 - Do not describe a deterministic routing baseline as an LLM benchmark or general model-quality score.
+- If a system is tuned on the held-out challenge cases, stop describing that challenge generation as held out for that system and create a new untouched challenge for later generalization claims.
+- For real model runs, generation must occur before benchmark expected fields are read by the scorer; record provider/model/runtime, prompt hash, dataset hash, execution timestamp, raw answers, and evaluator provenance.
+- Do not claim the v1 deterministic model-run scorer evaluated prose quality, expected semantic checks, or prohibited claims; those require a separately declared semantic review.
+- Never relabel the model-run CI fixture as a model result.
 - Do not publish a DOI in `CITATION.cff` until an archival service has actually assigned it.
 - Keep runtime-specific skill installation details outside portable `SKILL.md` frontmatter unless they are part of the common Agent Skills field set.
 - Keep the v1.7.0 alias, compatibility immutable mirror, and strict `cbt-cards/SKILL.md` portable distribution identical; change them together through a deliberate skill release.
