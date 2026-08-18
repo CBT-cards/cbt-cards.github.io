@@ -19,6 +19,9 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - https://cbt-cards.github.io/learn/cbt-thought-record/
 - https://cbt-cards.github.io/learn/automatic-thoughts/
 - https://cbt-cards.github.io/learn/thought-vs-fact/
+- https://cbt-cards.github.io/learn/worry-time/
+- https://cbt-cards.github.io/learn/activity-planning/
+- https://cbt-cards.github.io/learn/cbt-journaling/
 
 ## Machine-readable resources
 
