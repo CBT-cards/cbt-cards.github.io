@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cbt-cards.github.io/schemas/locales-v1.schema.json",
+  "title": "CBT Cards website locale registry v1",
+  "type": "object",
+  "required": ["schema_version", "name", "canonical", "updated", "default_locale", "published_web_locales", "hreflang", "translation_policy", "mobile_app_languages"],
+  "properties": {
+    "$schema": {"type": "string", "format": "uri"},
+    "schema_version": {"const": "1.0"},
+    "name": {"type": "string", "minLength": 1},
+    "canonical": {"const": "https://cbt-cards.github.io/data/locales.json"},
+    "updated": {"type": "string", "format": "date"},
+    "default_locale": {"type": "string", "pattern": "^[a-z]{2,3}(?:-[A-Za-z0-9]+)?$"},
+    "published_web_locales": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["code", "language_name", "status", "base_url", "path_prefix", "direction", "html_lang"],
+        "properties": {
+          "code": {"type": "string", "minLength": 2},
+          "language_name": {"type": "string", "minLength": 1},
+          "status": {"const": "published"},
+          "base_url": {"type": "string", "format": "uri"},
+          "path_prefix": {"type": "string", "pattern": "^/.*"},
+          "direction": {"enum": ["ltr", "rtl"]},
+          "html_lang": {"type": "string", "minLength": 2}
+        },
+        "additionalProperties": false
+      }
+    },
+    "hreflang": {
+      "type": "object",
+      "required": ["enabled", "reason", "future_requirements"],
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "reason": {"type": "string", "minLength": 1},
+        "future_requirements": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+      },
+      "additionalProperties": false
+    },
+    "translation_policy": {
+      "type": "object",
+      "required": ["health_adjacent_content", "machine_translation", "rtl", "source_preservation"],
+      "properties": {
+        "health_adjacent_content": {"const": "human_review_required_before_publication"},
+        "machine_translation": {"type": "string", "minLength": 1},
+        "rtl": {"type": "string", "minLength": 1},
+        "source_preservation": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "mobile_app_languages": {
+      "type": "object",
+      "required": ["status", "note"],
+      "properties": {
+        "status": {"const": "not_asserted_by_this_repository"},
+        "note": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
