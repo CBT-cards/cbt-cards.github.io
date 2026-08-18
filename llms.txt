@@ -23,6 +23,15 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - https://cbt-cards.github.io/learn/activity-planning/
 - https://cbt-cards.github.io/learn/cbt-journaling/
 
+## Printable worksheets
+
+- Worksheet hub: https://cbt-cards.github.io/worksheets/
+- CBT thought record: https://cbt-cards.github.io/worksheets/cbt-thought-record/
+- Worry time: https://cbt-cards.github.io/worksheets/worry-time/
+- Activity planning: https://cbt-cards.github.io/worksheets/activity-planning/
+- Machine-readable worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
+- Public worksheet pages have no submit action; typed text remains in the current browser page unless the user independently prints or saves it.
+
 ## Public toolkit corpus
 
 - Toolkit landing page: https://cbt-cards.github.io/toolkit/
@@ -37,12 +46,13 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 
 - JSON resource catalog: https://cbt-cards.github.io/data/catalog.json
 - RAG-friendly curated knowledge dataset (JSONL): https://cbt-cards.github.io/data/knowledge.jsonl
+- Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
 - Extended index: https://cbt-cards.github.io/llms-full.txt
 - Agent integration guide: https://cbt-cards.github.io/agents/
 - Latest agent skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 - Skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
-- Immutable skill v1.2.0: https://cbt-cards.github.io/agents/cbt-cards/v1.2.0/SKILL.md
+- Immutable skill v1.3.0: https://cbt-cards.github.io/agents/cbt-cards/v1.3.0/SKILL.md
 
 ## Store listings
 
