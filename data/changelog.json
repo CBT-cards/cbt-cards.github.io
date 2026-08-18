@@ -5,6 +5,25 @@
   "updated": "2026-08-18",
   "entries": [
     {
+      "id": "data-2026-08-18-agent-eval-foundation",
+      "date": "2026-08-18",
+      "scope": "data",
+      "title": "Public agent routing and boundary evals",
+      "summary": "Published a starter set of 24 evaluation cases for testing CBT Cards resource routing, localization status, publication boundaries, privacy boundaries, and safety abstention without prescribing exact model wording.",
+      "changes": [
+        {"type": "added", "resource_id": "research", "url": "https://cbt-cards.github.io/research/"},
+        {"type": "added", "resource_id": "agent-evals", "url": "https://cbt-cards.github.io/data/agent-evals.jsonl"},
+        {"type": "changed", "resource_id": "schema-manifest", "url": "https://cbt-cards.github.io/schemas/index.json"},
+        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+      ],
+      "notes": [
+        "The starter set contains 24 hand-authored cases across retrieval, learning, worksheets, localization, publication boundaries, privacy, and safety.",
+        "Cases record expected routes, stable resource or source IDs, semantic checks, prohibited claims, and rationales rather than one exact reference answer.",
+        "CI validates that expected resource IDs exist, raw source-only IDs remain source-only, localization expectations match current publication state, and required boundary categories remain represented.",
+        "No public model scores are claimed in this release; recorded model runs should be published separately with explicit model, version, and date metadata."
+      ]
+    },
+    {
       "id": "web-2026-08-18-localization-publication-pipeline",
       "date": "2026-08-18",
       "scope": "website",
