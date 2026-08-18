@@ -113,12 +113,28 @@ The deterministic router's perfect score is not a model benchmark or claim about
 
 CBT Cards is currently described there as a dataset with MetalHatsCats as the authoring entity. No DOI or project-wide semantic version is claimed. Add a DOI only after an archival service actually assigns one to a release, and record any future project-wide version deliberately rather than inferring one from website, data, app, or skill versions.
 
+## Portable agent skill
+
+Skill v1.7.0 is the first CBT Cards release deliberately restricted to the portable Agent Skills frontmatter field set. The skill keeps version information in string-valued `metadata.version` instead of a custom top-level `version` field, and runtime-specific installation details live in a separate document rather than in runtime-specific frontmatter extensions.
+
+Three v1.7.0 paths deliberately contain identical skill content:
+
+- `/agents/cbt-cards/SKILL.md` — mutable latest alias
+- `/agents/cbt-cards/v1.7.0/SKILL.md` — backward-compatible immutable URL used by the CBT Cards manifest and existing consumers
+- `/agents/cbt-cards/v1.7.0/cbt-cards/SKILL.md` — strict portable immutable distribution whose immediate parent directory matches `name: cbt-cards`
+
+Installation and version-pinning notes are in `/agents/cbt-cards/INSTALL.md`, including examples for OpenClaw, Hermes Agent, and generic Agent Skills clients. `scripts/check_skill_portability.py` verifies the portable frontmatter profile, string-valued metadata, directory/name alignment, exact equality between all three current v1.7.0 copies, manifest/catalog discovery, and required installation notes.
+
+Historical v1.1.0 through v1.6.0 skill files remain unchanged at their original URLs. They are release history, not silently rewritten to fit a newer portability profile.
+
 ## Agent, discovery, and machine-readable resources
 
 - `/agents/` — integration guide for AI assistants and research tooling
-- `/agents/cbt-cards/SKILL.md` — latest mutable skill alias, currently v1.6.0
+- `/agents/cbt-cards/SKILL.md` — latest mutable skill alias, currently v1.7.0
+- `/agents/cbt-cards/INSTALL.md` — OpenClaw, Hermes Agent, generic Agent Skills, and version-pinning notes
 - `/agents/cbt-cards/manifest.json` — skill version manifest
-- `/agents/cbt-cards/v1.1.0/SKILL.md` through `/v1.6.0/SKILL.md` — immutable skill versions
+- `/agents/cbt-cards/v1.1.0/SKILL.md` through `/v1.7.0/SKILL.md` — immutable compatibility URLs
+- `/agents/cbt-cards/v1.7.0/cbt-cards/SKILL.md` — strict portable Agent Skills distribution for v1.7.0
 - `/llms.txt` — compact public index
 - `/llms-full.txt` — extended source-priority, localization, research, release, schema, worksheet, corpus, publication-status, and safety index
 - `/data/catalog.json` — canonical public resource catalog with stable IDs and `schema_url` for CBT Cards-owned structured formats
@@ -154,7 +170,7 @@ Current contracts cover:
 - one record/line in `data/agent-eval-runs.jsonl`
 - `agents/cbt-cards/manifest.json`
 
-The public catalog exposes `schema_url` for these resources. JSON Schema is the portable field-level contract; purpose-specific repository checks remain responsible for semantic invariants such as canonical target existence, sequential worksheet fields, privacy wording, translation source snapshots, eval source expectations, run reproducibility, and exact review-overlay/catalog/JSONL alignment.
+The public catalog exposes `schema_url` for these resources. JSON Schema is the portable field-level contract; purpose-specific repository checks remain responsible for semantic invariants such as canonical target existence, sequential worksheet fields, privacy wording, translation source snapshots, eval source expectations, run reproducibility, skill portability, and exact review-overlay/catalog/JSONL alignment.
 
 ## Local preview
 
@@ -204,6 +220,7 @@ python3 scripts/build_localized_pages.py --check
 python3 scripts/check_evals.py
 python3 scripts/run_eval_baselines.py --check
 python3 scripts/check_citation.py
+python3 scripts/check_skill_portability.py
 python3 scripts/check_site.py
 python3 scripts/check_crawl_graph.py
 python3 scripts/check_worksheets.py
@@ -222,6 +239,8 @@ The agent-eval checker verifies stable case IDs, category coverage, expected cat
 The eval-baseline check regenerates deterministic non-model runs from the current case dataset, pins its SHA-256, recalculates route/target/locale/boundary metrics, and rejects any checked-in result that differs from the reproducible output.
 
 The citation checker verifies the repository's CFF 1.2.0 dataset metadata and rejects an invented DOI or project-wide semantic version.
+
+The skill-portability checker validates the latest alias and strict portable distribution against the intended Agent Skills frontmatter profile, verifies string-valued metadata and directory/name alignment, requires the compatibility mirror and portable distribution to be byte-identical to the alias, and checks installation/catalog/manifest discovery.
 
 The site checker verifies public HTML metadata, canonical uniqueness, JSON-LD parsing, internal links, crawler/IndexNow configuration, sitemap coverage/targets, resource catalog targets, curated JSONL alignment, toolkit source metadata, and agent skill/version targets.
 
@@ -276,12 +295,14 @@ The repository must remain `CBT-cards/cbt-cards.github.io` to serve the user-sit
 - Every recorded eval run must identify the exact eval dataset bytes through `eval_dataset_sha256` and preserve per-case results.
 - Do not describe a deterministic routing baseline as an LLM benchmark or general model-quality score.
 - Do not publish a DOI in `CITATION.cff` until an archival service has actually assigned it.
+- Keep runtime-specific skill installation details outside portable `SKILL.md` frontmatter unless they are part of the common Agent Skills field set.
+- Keep the v1.7.0 alias, compatibility immutable mirror, and strict `cbt-cards/SKILL.md` portable distribution identical; change them together through a deliberate skill release.
 - A raw toolkit record must not become a standalone published resource unless its stable source ID is explicitly added to `data/toolkit-review.json` as `reviewed_for_publication` and `published`.
 - Any raw toolkit source ID absent from the review overlay is `unreviewed` and `source_only` by default.
 - Never describe `reviewed_for_publication` as clinical validation or efficacy evidence.
 - Do not generate standalone protocol/health-guidance pages from raw corpus records unless the record has gone through explicit editorial and safety review and is added to the review overlay.
 - Do not treat record titles as unique identifiers. Stable IDs are authoritative.
-- When changing the agent skill, publish an immutable version and update the manifest, catalog, llms indexes, and changelog before moving the latest alias.
+- When changing the agent skill, publish an immutable version, preserve a strict portable distribution, and update the manifest, catalog, llms indexes, changelog, and portability checks before moving the latest alias.
 
 ## Crawlers
 
