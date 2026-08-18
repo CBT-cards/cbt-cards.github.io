@@ -6,6 +6,7 @@
     {"id": "catalog-v1", "url": "https://cbt-cards.github.io/schemas/catalog-v1.schema.json", "instance": "https://cbt-cards.github.io/data/catalog.json"},
     {"id": "changelog-v1", "url": "https://cbt-cards.github.io/schemas/changelog-v1.schema.json", "instance": "https://cbt-cards.github.io/data/changelog.json"},
     {"id": "content-review-v1", "url": "https://cbt-cards.github.io/schemas/content-review-v1.schema.json", "instance": "https://cbt-cards.github.io/data/content-review.json"},
+    {"id": "locales-v1", "url": "https://cbt-cards.github.io/schemas/locales-v1.schema.json", "instance": "https://cbt-cards.github.io/data/locales.json"},
     {"id": "worksheets-v1", "url": "https://cbt-cards.github.io/schemas/worksheets-v1.schema.json", "instance": "https://cbt-cards.github.io/data/worksheets.json"},
     {"id": "toolkit-review-v1", "url": "https://cbt-cards.github.io/schemas/toolkit-review-v1.schema.json", "instance": "https://cbt-cards.github.io/data/toolkit-review.json"},
     {"id": "toolkit-source-v1", "url": "https://cbt-cards.github.io/schemas/toolkit-source-v1.schema.json", "instance": "https://cbt-cards.github.io/data/toolkit-source.json"},
