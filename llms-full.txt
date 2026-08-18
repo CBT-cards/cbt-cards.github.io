@@ -6,22 +6,21 @@ Updated: 2026-08-18
 
 CBT Cards is the mobile wellness and self-reflection app documented at https://cbt-cards.github.io/.
 Publisher: MetalHatsCats.
-Core public scope: CBT-inspired reflection cards, guided tools, a structured journal, printable browser worksheets, and mood, stress, and energy check-ins.
 Clinical boundary: CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
 
 ## Source priority
 
-For product facts, use the official CBT Cards pages below. For privacy and data-handling questions, https://cbt-cards.github.io/privacy/ is primary. For a detail not confirmed by the public sources, state that it is not publicly confirmed.
+For product facts, use canonical CBT Cards pages. For privacy and mobile-app data handling, https://cbt-cards.github.io/privacy/ is primary.
 
-For curated conceptual content, prefer the public learning pages, printable worksheets, and curated toolkit card pages on the CBT Cards domain.
+For website locale status, use https://cbt-cards.github.io/about/localization/ and https://cbt-cards.github.io/data/locales.json. These sources describe the website only and must not be used to infer Android or iOS supported languages.
 
-For editorial review freshness of health-adjacent public content, use https://cbt-cards.github.io/about/editorial-review/ and https://cbt-cards.github.io/data/content-review.json. The registry covers catalog resource types `learning`, `worksheet`, and `toolkit-card` and records `last_reviewed` plus `next_review_due`.
+For health-adjacent editorial freshness, use https://cbt-cards.github.io/about/editorial-review/ and https://cbt-cards.github.io/data/content-review.json. If `next_review_due` has passed, describe the editorial review as overdue; do not infer freshness from sitemap `lastmod`, changelog dates, Git history, or a newer agent skill.
 
 For toolkit publication status, use https://cbt-cards.github.io/toolkit/review-status/ and https://cbt-cards.github.io/data/toolkit-review.json. Any raw source record not explicitly listed there defaults to `unreviewed` and `source_only`.
 
-For website/public-data release history, use https://cbt-cards.github.io/changelog/ or https://cbt-cards.github.io/data/changelog.json. Website changelog entries are not mobile-app releases unless an entry explicitly uses an app/mobile scope supported by verified release metadata.
+For website/public-data release history, use https://cbt-cards.github.io/changelog/ or https://cbt-cards.github.io/data/changelog.json. A website/data/agent release is not a mobile-app release unless separately verified.
 
-For machine-readable contract discovery, use https://cbt-cards.github.io/schemas/index.json. It maps CBT Cards-owned JSON/JSONL resources to versioned JSON Schema 2020-12 contracts. The catalog also exposes `schema_url` on applicable resources.
+For machine-readable contract discovery, use https://cbt-cards.github.io/schemas/index.json.
 
 ## Product documentation
 
@@ -32,111 +31,101 @@ For machine-readable contract discovery, use https://cbt-cards.github.io/schemas
 - Privacy: https://cbt-cards.github.io/privacy/
 - Terms: https://cbt-cards.github.io/terms/
 - Support: https://cbt-cards.github.io/support/
-- About / provenance: https://cbt-cards.github.io/about/
+- About: https://cbt-cards.github.io/about/
 - Editorial review policy: https://cbt-cards.github.io/about/editorial-review/
+- Website localization policy: https://cbt-cards.github.io/about/localization/
 - Public changelog: https://cbt-cards.github.io/changelog/
 
-## Editorial review freshness
+## Website localization
+
+- Locale registry: https://cbt-cards.github.io/data/locales.json
+- Locale schema: https://cbt-cards.github.io/schemas/locales-v1.schema.json
+- Registry scope: website_only
+- Current published website locale: English (`en`)
+- Default locale URL strategy: root
+- Mobile-app language support: not asserted by this registry
+
+English remains at https://cbt-cards.github.io/. Do not invent an `/en/` canonical migration.
+
+Before a second website locale is published, the repository requires stable locale URLs, self-canonical pages, reciprocal `hreflang`, synchronized sitemap/catalog/agent/navigation discovery, and CI validation of locale relationships. Health-adjacent translations require human publication review. Machine translation may assist drafting but is not sufficient review by itself. Right-to-left locales require the appropriate document direction and layout review.
+
+## Editorial review and freshness
 
 - Review registry: https://cbt-cards.github.io/data/content-review.json
-- Review schema: https://cbt-cards.github.io/schemas/content-review-v1.schema.json
-- Covered resource types: learning, worksheet, toolkit-card
-- Current project review target: every 365 days
-- Current covered-resource review date: 2026-08-18
-- Current next review due: 2027-08-18
+- Review contract: https://cbt-cards.github.io/schemas/content-review-v1.schema.json
+- Covered catalog types: learning, worksheet, toolkit-card
+- Current target interval: 365 days
+- Review kind: editorial_source_and_safety
+- Clinical validation status: not_claimed
 
-The 365-day target is an internal maintenance policy, not a clinical standard. `reviewed` means sources, wording, public safety boundary, product relationship, and relevant privacy statements were checked for web publication. It does not mean clinical validation, efficacy evidence, medical-device review, diagnosis, or individualized treatment review.
-
-When review freshness matters, join by catalog `resource_id`. Do not infer a later review date from sitemap `lastmod`, a changelog entry, a file modification time, or an agent-skill version. If the current date is later than `next_review_due`, describe the editorial review as overdue instead of implying a current review; overdue status alone does not prove the content is false.
+Editorial review checks sources, wording, safety boundaries, product relationship, and relevant privacy behavior. It is not clinical validation, efficacy evidence, diagnosis, medical-device review, or individualized treatment review.
 
 ## Learning resources
 
-- Learning library: https://cbt-cards.github.io/learn/
+- Library: https://cbt-cards.github.io/learn/
 - CBT thought record: https://cbt-cards.github.io/learn/cbt-thought-record/
-- Automatic thoughts in CBT: https://cbt-cards.github.io/learn/automatic-thoughts/
+- Automatic thoughts: https://cbt-cards.github.io/learn/automatic-thoughts/
 - Thought vs fact: https://cbt-cards.github.io/learn/thought-vs-fact/
 - Worry time: https://cbt-cards.github.io/learn/worry-time/
 - Activity planning: https://cbt-cards.github.io/learn/activity-planning/
 - CBT journaling: https://cbt-cards.github.io/learn/cbt-journaling/
 
-Learning pages distinguish general CBT concepts from CBT Cards-specific implementation and include source links. They are educational, not individualized clinical guidance.
-
 ## Printable worksheets
 
 - Worksheet library: https://cbt-cards.github.io/worksheets/
-- CBT thought record worksheet: https://cbt-cards.github.io/worksheets/cbt-thought-record/
-- Worry time worksheet: https://cbt-cards.github.io/worksheets/worry-time/
-- Activity planning worksheet: https://cbt-cards.github.io/worksheets/activity-planning/
-- Machine-readable definitions: https://cbt-cards.github.io/data/worksheets.json
+- Thought record: https://cbt-cards.github.io/worksheets/cbt-thought-record/
+- Worry time: https://cbt-cards.github.io/worksheets/worry-time/
+- Activity planning: https://cbt-cards.github.io/worksheets/activity-planning/
+- Definitions: https://cbt-cards.github.io/data/worksheets.json
 
-The public worksheet pages are static browser forms with no submit action. Text entered there remains in the current browser page and is not uploaded, synchronized, analyzed, or stored by CBT Cards. Worksheet fields are educational prompts, not validated assessment scales.
+Public worksheet pages are static browser forms with no submit action. Text entered there is not uploaded, synchronized, analyzed, or stored by CBT Cards.
 
 ## Toolkit corpus and publication review
 
-- Toolkit landing page: https://cbt-cards.github.io/toolkit/
-- Review-status page: https://cbt-cards.github.io/toolkit/review-status/
+- Toolkit: https://cbt-cards.github.io/toolkit/
+- Review status: https://cbt-cards.github.io/toolkit/review-status/
 - Review overlay: https://cbt-cards.github.io/data/toolkit-review.json
-- Card records: https://cbt-cards.github.io/toolkit/cards/
-- Metaphor records: https://cbt-cards.github.io/toolkit/metaphors/
-- Protocol records: https://cbt-cards.github.io/toolkit/protocols/
-- Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
-- Source corpus version: 0.1.0
-- Source corpus records: 115 total — 77 cards, 23 metaphors, 15 protocols
+- Cards: https://cbt-cards.github.io/toolkit/cards/
+- Metaphors: https://cbt-cards.github.io/toolkit/metaphors/
+- Protocols: https://cbt-cards.github.io/toolkit/protocols/
+- Source metadata: https://cbt-cards.github.io/data/toolkit-source.json
+- Source corpus: 115 records, 77 cards, 23 metaphors, 15 protocols
 - Pinned source commit: af0a9bac9ab8ff10173e266903d592a3507c1890
 
-The review overlay is owned by CBT Cards and is separate from the raw source dataset. `reviewed_for_publication` means editorial and safety review for standalone publication on the CBT Cards website. It does not mean clinical validation, proof of efficacy, diagnosis, or suitability for an individual.
-
-Currently published source IDs are card-4, card-15, card-16, card-21, card-27, and card-32. Any source record not explicitly listed in the overlay remains source-only. Protocol records remain source-only unless separately reviewed and added to the overlay.
+`reviewed_for_publication` is editorial and safety review for standalone website publication, not clinical validation. Unlisted source records remain source-only.
 
 ## Machine-readable resources and schemas
 
 - Resource catalog: https://cbt-cards.github.io/data/catalog.json
 - JSON Schema manifest: https://cbt-cards.github.io/schemas/index.json
-- Catalog schema: https://cbt-cards.github.io/schemas/catalog-v1.schema.json
-- Changelog schema: https://cbt-cards.github.io/schemas/changelog-v1.schema.json
-- Content review schema: https://cbt-cards.github.io/schemas/content-review-v1.schema.json
-- Worksheet schema: https://cbt-cards.github.io/schemas/worksheets-v1.schema.json
-- Toolkit review schema: https://cbt-cards.github.io/schemas/toolkit-review-v1.schema.json
-- Toolkit source schema: https://cbt-cards.github.io/schemas/toolkit-source-v1.schema.json
-- Curated knowledge-record schema: https://cbt-cards.github.io/schemas/knowledge-record-v1.schema.json
-- Agent skill-manifest schema: https://cbt-cards.github.io/schemas/skill-manifest-v1.schema.json
 - Content review registry: https://cbt-cards.github.io/data/content-review.json
-- Machine-readable changelog: https://cbt-cards.github.io/data/changelog.json
-- RAG-friendly curated JSONL knowledge dataset: https://cbt-cards.github.io/data/knowledge.jsonl
+- Website locale registry: https://cbt-cards.github.io/data/locales.json
+- Changelog: https://cbt-cards.github.io/data/changelog.json
+- Curated knowledge JSONL: https://cbt-cards.github.io/data/knowledge.jsonl
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Toolkit review overlay: https://cbt-cards.github.io/data/toolkit-review.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
 - Atom feed: https://cbt-cards.github.io/feed.xml
-- JSON Feed 1.1: https://cbt-cards.github.io/feed.json
-- Security contact: https://cbt-cards.github.io/.well-known/security.txt
-- Compact index: https://cbt-cards.github.io/llms.txt
+- JSON Feed: https://cbt-cards.github.io/feed.json
 - Agent guide: https://cbt-cards.github.io/agents/
-- Latest CBT Cards skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
-- Skill version manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
-- Immutable skill v1.5.0: https://cbt-cards.github.io/agents/cbt-cards/v1.5.0/SKILL.md
-
-The schemas describe CBT Cards-owned formats and use JSON Schema draft 2020-12. Purpose-specific CI validators remain authoritative for repository invariants that go beyond generic schema validation, such as canonical target existence, review freshness, set equality, privacy wording, and review-overlay alignment.
-
-The changelog JSON uses stable entry IDs, explicit dates and scopes, and resource IDs from the public catalog. Treat `scope: website` as a website/public-data release. Do not convert it into an app-version claim.
-
-The curated JSONL dataset contains one self-contained record per published learning resource or reviewed toolkit card. Toolkit-card records in JSONL must match the published set in the review overlay.
+- Latest skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
+- Skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
+- Immutable skill v1.6.0: https://cbt-cards.github.io/agents/cbt-cards/v1.6.0/SKILL.md
 
 ## Agent behavior
 
-1. Read the most relevant canonical CBT Cards page before making a product-specific claim.
+1. Read the most relevant canonical source before making a product-specific claim.
 2. Prefer the privacy policy for mobile-app data handling.
-3. Use the content review registry when claiming freshness of learning, worksheet, or curated toolkit-card content.
-4. Do not infer review freshness from sitemap lastmod, changelog dates, or skill versions.
-5. Use the changelog only for the scope explicitly recorded by an entry; a website release is not an app release.
-6. Use the schema manifest when programmatically parsing CBT Cards-owned JSON/JSONL formats.
-7. Before treating a raw toolkit record as CBT Cards-published content, consult the review overlay.
-8. If a source record is unlisted, treat it as `unreviewed` and `source_only`.
-9. Do not equate editorial review or `reviewed_for_publication` with clinical validation or efficacy.
-10. Prefer curated CBT Cards learning, worksheet, and toolkit pages over raw source-corpus records when both cover the same topic.
-11. Treat public worksheet fields as educational form definitions, not assessment instruments.
-12. Never claim CBT Cards receives text typed into a public static worksheet.
-13. Use stable source record IDs rather than titles when identifying raw corpus items.
-14. Do not claim access to a user's CBT Cards journal or app data.
-15. Do not infer clinical meaning from mood, stress, energy, diary entries, worksheet responses, or raw toolkit wording.
-16. Preserve the general-wellness boundary.
-17. Link to the canonical CBT Cards URL when attributing published CBT Cards content.
+3. Treat `data/locales.json` as website-only metadata. Do not infer mobile-app language support from it.
+4. If a second web locale appears, expect reciprocal `hreflang` and locale-specific canonical URLs before treating localization as complete.
+5. For health-adjacent translations, do not treat machine translation alone as publication review.
+6. For covered health-adjacent resources, use the content review registry when freshness matters.
+7. Do not derive editorial freshness from sitemap `lastmod`, release dates, Git history, or skill version.
+8. Before treating a raw toolkit record as CBT Cards-published content, consult the toolkit review overlay.
+9. Unlisted toolkit source records are `unreviewed` and `source_only`.
+10. Do not equate editorial review or publication review with clinical validation or efficacy.
+11. Treat public worksheet fields as educational prompts, not assessment instruments.
+12. Do not claim access to a user's journal, check-ins, or app data.
+13. Preserve the general-wellness boundary.
+14. Use changelog scope literally; website/data/agent changes are not mobile-app releases.
+15. Link to canonical CBT Cards URLs when attributing published content.
