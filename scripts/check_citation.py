@@ -17,6 +17,7 @@ def main() -> None:
     if not PATH.exists():
         fail("missing CITATION.cff")
     text = PATH.read_text(encoding="utf-8")
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
     required_fragments = {
         "CFF version": "cff-version: 1.2.0",
         "dataset type": "type: dataset",
@@ -29,11 +30,11 @@ def main() -> None:
     for label, fragment in required_fragments.items():
         if fragment not in text:
             fail(f"missing {label}: {fragment}")
-    if "doi:" in text or "type: doi" in text:
+    if any(line.startswith("doi:") or line == "type: doi" for line in lines):
         fail("do not publish a DOI before an archive has actually assigned one")
-    if "version:" in text and "cff-version:" not in text.replace("version:", "", 1):
-        fail("unexpected project version field")
-    print("citation check passed: CFF 1.2.0 dataset metadata without invented DOI")
+    if any(line.startswith("version:") for line in lines):
+        fail("do not invent a project-wide semantic version before one is deliberately released")
+    print("citation check passed: CFF 1.2.0 dataset metadata without invented DOI or project version")
 
 
 if __name__ == "__main__":
