@@ -1,6 +1,6 @@
 # CBT Cards
 
-CBT Cards is a public library of practical reflection resources for people and the AI assistants they choose to use. It publishes short CBT-inspired cards, plain-language learning guides, printable browser worksheets, structured public data, review metadata, and versioned agent instructions. The original CBT Cards mobile app remains documented as a separate product surface. CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
+CBT Cards is a public library of practical reflection resources for people and the AI assistants they choose to use. It publishes short CBT-inspired cards, plain-language learning guides, printable browser worksheets, structured public data, review metadata, language-status metadata, and versioned agent instructions. The original CBT Cards mobile app remains documented as a separate product surface. CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
 
 ## Public reflection resources
 
@@ -44,12 +44,23 @@ CBT Cards is a public library of practical reflection resources for people and t
 - Any source record not explicitly listed in the review overlay defaults to unreviewed and source-only.
 - reviewed_for_publication means editorial/safety review for website publication, not clinical validation or proof of efficacy.
 
+## Languages
+
+- Locale registry: https://cbt-cards.github.io/data/locales.json
+- Translation overlays: https://cbt-cards.github.io/data/translations.jsonl
+- English (`en`) is the canonical source locale for the current curated knowledge dataset.
+- Russian (`ru`) is a pilot locale with machine-readable draft translations. Records marked `machine_draft`, `unreviewed`, and `not_published` are development data, not official published CBT Cards translations.
+- German (`de`) is planned and currently has no translation records.
+- A localized record is official published CBT Cards content only when its translation, review, publication status, and canonical URL explicitly say so.
+
 ## Machine-readable resources
 
 - JSON resource catalog: https://cbt-cards.github.io/data/catalog.json
 - JSON Schema manifest: https://cbt-cards.github.io/schemas/index.json
 - Machine-readable changelog: https://cbt-cards.github.io/data/changelog.json
-- Curated knowledge dataset (JSONL): https://cbt-cards.github.io/data/knowledge.jsonl
+- Curated source-language knowledge dataset (JSONL): https://cbt-cards.github.io/data/knowledge.jsonl
+- Locale registry: https://cbt-cards.github.io/data/locales.json
+- Translation overlays (JSONL): https://cbt-cards.github.io/data/translations.jsonl
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Toolkit review overlay: https://cbt-cards.github.io/data/toolkit-review.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
@@ -60,11 +71,11 @@ CBT Cards is a public library of practical reflection resources for people and t
 - Agent integration guide: https://cbt-cards.github.io/agents/
 - Latest agent skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 - Skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
-- Immutable skill v1.5.0: https://cbt-cards.github.io/agents/cbt-cards/v1.5.0/SKILL.md
+- Immutable skill v1.6.0: https://cbt-cards.github.io/agents/cbt-cards/v1.6.0/SKILL.md
 
 For CBT Cards-owned JSON/JSONL formats, use the versioned contracts listed in schemas/index.json. Catalog entries expose schema_url where applicable.
 
-Website, dataset, schema, worksheet, and agent-skill changes are separate from mobile-app releases. Do not infer an Android/iOS app version from public-site release metadata.
+Website, dataset, translation, schema, worksheet, and agent-skill changes are separate from mobile-app releases. Do not infer an Android/iOS app version from public-site release metadata.
 
 ## Original mobile app documentation
 
