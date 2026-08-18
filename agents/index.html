@@ -4,16 +4,17 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CBT Cards for AI agents: skill, llms.txt, JSON &amp; JSONL</title>
-<meta name="description" content="Use official CBT Cards product facts and public learning resources in AI agents through canonical web pages, llms.txt indexes, a JSON catalog, a JSONL knowledge dataset, and a portable skill." />
+<meta name="description" content="Use official CBT Cards product facts, curated learning content, and the public CBT toolkit corpus through canonical web pages, llms.txt, JSON/JSONL data, and versioned skills." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href="https://cbt-cards.github.io/agents/" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/catalog.json" title="CBT Cards public resource catalog" />
-<link rel="alternate" type="application/x-ndjson" href="https://cbt-cards.github.io/data/knowledge.jsonl" title="CBT Cards public knowledge dataset" />
+<link rel="alternate" type="application/x-ndjson" href="https://cbt-cards.github.io/data/knowledge.jsonl" title="CBT Cards curated knowledge dataset" />
+<link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/toolkit-source.json" title="CBT toolkit source metadata" />
 <link rel="stylesheet" href="/styles.css?v=20260818" />
 <link rel="icon" href="/assets/app-icon.png" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="CBT Cards for AI agents" />
-<meta property="og:description" content="Official web sources, llms.txt indexes, JSON/JSONL resources, and versioned agent skills for CBT Cards." />
+<meta property="og:description" content="Official web sources, curated JSON/JSONL resources, a public source corpus, and versioned agent skills for CBT Cards." />
 <meta property="og:url" content="https://cbt-cards.github.io/agents/" />
 <script type="application/ld+json">
 {
@@ -29,7 +30,7 @@
     {
       "@type": "TechArticle",
       "headline": "CBT Cards for AI agents",
-      "description": "How to consume the official CBT Cards public knowledge resource through canonical HTML, llms.txt, JSON, JSONL, or a versioned portable skill.",
+      "description": "How to consume CBT Cards public product facts, curated learning resources, source-corpus metadata, and versioned agent instructions.",
       "mainEntityOfPage": "https://cbt-cards.github.io/agents/",
       "dateModified": "2026-08-18"
     }
@@ -41,14 +42,14 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header"><div class="wrap nav">
 <a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a>
-<nav class="nav-links" aria-label="Primary"><a href="/how-it-works/">How it works</a><a href="/features/">Features</a><a href="/learn/">Learn</a><a href="/faq/">FAQ</a><a href="/about/">About</a></nav>
+<nav class="nav-links" aria-label="Primary"><a href="/how-it-works/">How it works</a><a href="/features/">Features</a><a href="/learn/">Learn</a><a href="/toolkit/">Toolkit</a><a href="/about/">About</a></nav>
 <a class="download" href="/#download">Download</a>
 </div></header>
 <main id="main">
 <section class="page-hero"><div class="wrap">
 <div class="crumb"><a href="/">CBT Cards</a> / For AI agents</div>
 <h1>Use CBT Cards as a public agent resource.</h1>
-<p class="lede">Official product facts and learning resources are available as canonical HTML, compact text indexes, JSON/JSONL data, and versioned agent skills. None of these resources provides access to a user's journal, check-ins, or app data.</p>
+<p class="lede">Official product facts, curated learning resources, toolkit records, and source metadata are available as canonical HTML, compact text indexes, JSON/JSONL data, and versioned agent skills. None of these resources provides access to a user's journal, check-ins, or app data.</p>
 </div></section>
 <section class="section alt"><div class="wrap prose agent-guide">
 <h2>Choose the smallest useful interface</h2>
@@ -56,17 +57,23 @@
 <li><strong>Web pages:</strong> best when an agent can browse and cite canonical pages directly.</li>
 <li><strong><a href="/llms.txt">llms.txt</a>:</strong> compact discovery index for the main public resources.</li>
 <li><strong><a href="/llms-full.txt">llms-full.txt</a>:</strong> extended source-priority, dataset, versioning, and safety guidance.</li>
-<li><strong><a href="/data/catalog.json">JSON catalog</a>:</strong> stable IDs, resource types, canonical URLs, product scope, store links, and agent version metadata.</li>
-<li><strong><a href="/data/knowledge.jsonl">JSONL knowledge dataset</a>:</strong> one self-contained record per public learning resource, suitable for retrieval and indexing without scraping presentation HTML.</li>
+<li><strong><a href="/data/catalog.json">JSON catalog</a>:</strong> stable IDs, resource types, canonical URLs, product scope, store links, toolkit pages, and agent version metadata.</li>
+<li><strong><a href="/data/knowledge.jsonl">Curated JSONL knowledge dataset</a>:</strong> one self-contained record per reviewed learning resource or published toolkit card.</li>
+<li><strong><a href="/data/toolkit-source.json">Toolkit source metadata</a>:</strong> pinned source commit, blob SHA, record counts, license, distribution URL, and known quality notes for the related 115-record corpus.</li>
 <li><strong><a href="/agents/cbt-cards/SKILL.md">SKILL.md</a>:</strong> portable latest-version instructions for agents that support skill files.</li>
 </ul>
 
+<h2>Curated knowledge vs. source corpus</h2>
+<p>The curated <code>knowledge.jsonl</code> contains material that has a public CBT Cards page and an explicit safety scope. The larger related CBT Toolkit source corpus contains 115 English records: 77 cards, 23 metaphors, and 15 protocols. It is useful for discovery and retrieval, but its records do not include per-record clinical-review metadata.</p>
+<p>Prefer the curated CBT Cards page when one exists. If you use a raw source-corpus record, identify it as source content and do not infer clinical validation, diagnosis, treatment efficacy, or suitability for an individual.</p>
+<p>See the human-readable <a href="/toolkit/">toolkit landing page</a> and machine-readable <a href="/data/toolkit-source.json">source manifest</a>.</p>
+
 <h2>JSONL record shape</h2>
-<p>Each record in <code>knowledge.jsonl</code> has a stable resource ID, locale, canonical URL, summary, key points, relation to the CBT Cards implementation, safety scope, review date, and source URLs. The canonical HTML page remains the human-readable source to cite.</p>
+<p>Each curated record has a stable resource ID, locale, canonical URL, summary, key points, relation to the CBT Cards implementation, safety scope, review date, and source URLs. Curated toolkit cards also include their original source record ID.</p>
 
 <h2>Source priority</h2>
 <p>For a product-specific claim, read the most relevant official page before answering. Use the privacy policy as the primary source for data handling. When public information does not confirm a detail, say so rather than inferring it from the product name or a generic description of CBT.</p>
-<p>For conceptual CBT questions, use the <a href="/learn/">learning library</a> and keep general educational information separate from CBT Cards-specific implementation.</p>
+<p>For conceptual CBT questions, use the <a href="/learn/">learning library</a>. For product-owned card content, use a curated <a href="/toolkit/">toolkit page</a> when available.</p>
 
 <h2>Versioned skills</h2>
 <p>The unversioned <a href="/agents/cbt-cards/SKILL.md"><code>SKILL.md</code></a> is a moving alias for the latest published skill. For reproducible integrations, resolve <a href="/agents/cbt-cards/manifest.json"><code>manifest.json</code></a> and pin an immutable version such as <a href="/agents/cbt-cards/v1.1.0/SKILL.md"><code>v1.1.0/SKILL.md</code></a>.</p>
@@ -76,24 +83,23 @@
 <pre><code>mkdir -p skills/cbt-cards
 curl -fsSL https://cbt-cards.github.io/agents/cbt-cards/SKILL.md \
   -o skills/cbt-cards/SKILL.md</code></pre>
-<p>The skill is then available to that workspace's agent. To share it more broadly, place the same directory under <code>~/.openclaw/skills/</code>. If you use a skill allowlist, add <code>cbt-cards</code> to the intended agent's list.</p>
 
 <h2>Hermes</h2>
 <p>Install the public skill directly from its canonical latest-version URL:</p>
 <pre><code>hermes skills install \
   https://cbt-cards.github.io/agents/cbt-cards/SKILL.md \
   --name cbt-cards --now</code></pre>
-<p>Verify it with <code>hermes skills list</code>, then start a task with <code>/cbt-cards</code> or ask a CBT Cards question in natural language.</p>
 
 <h2>Use it safely</h2>
 <ul>
 <li>This is a public, read-only resource. It does not connect to a user's account or app data.</li>
-<li>Do not infer clinical meaning from journal entries, mood, stress, or energy check-ins.</li>
+<li>Do not infer clinical meaning from journal entries, mood, stress, energy, or toolkit-record wording.</li>
+<li>Do not treat presence in the raw source corpus as evidence that a technique has been clinically reviewed by CBT Cards.</li>
 <li>CBT Cards is for general wellness and self-reflection, not diagnosis, treatment, emergency support, or a substitute for professional care.</li>
-<li>Use canonical CBT Cards URLs when attributing a product fact or learning resource.</li>
+<li>Use canonical CBT Cards URLs when attributing a published product fact or curated resource.</li>
 </ul>
 </div></section>
 </main>
-<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/support/">Support</a><a href="/agents/">For agents</a></nav></div></footer>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/toolkit/">Toolkit</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/support/">Support</a><a href="/agents/">For agents</a></nav></div></footer>
 </body>
 </html>
