@@ -12,6 +12,7 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - https://cbt-cards.github.io/support/
 - https://cbt-cards.github.io/faq/
 - https://cbt-cards.github.io/about/
+- Editorial review policy: https://cbt-cards.github.io/about/editorial-review/
 - Changelog: https://cbt-cards.github.io/changelog/
 
 ## Learning library
@@ -23,6 +24,8 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - https://cbt-cards.github.io/learn/worry-time/
 - https://cbt-cards.github.io/learn/activity-planning/
 - https://cbt-cards.github.io/learn/cbt-journaling/
+
+Learning, worksheet, and curated toolkit-card pages are covered by the CBT Cards editorial review registry. The current project review target is 365 days; this is a maintenance policy, not a clinical standard.
 
 ## Printable worksheets
 
@@ -50,6 +53,7 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 
 - JSON resource catalog: https://cbt-cards.github.io/data/catalog.json
 - JSON Schema manifest: https://cbt-cards.github.io/schemas/index.json
+- Content review registry: https://cbt-cards.github.io/data/content-review.json
 - Machine-readable changelog: https://cbt-cards.github.io/data/changelog.json
 - RAG-friendly curated knowledge dataset (JSONL): https://cbt-cards.github.io/data/knowledge.jsonl
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
@@ -62,9 +66,11 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - Agent integration guide: https://cbt-cards.github.io/agents/
 - Latest agent skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 - Skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
-- Immutable skill v1.4.0: https://cbt-cards.github.io/agents/cbt-cards/v1.4.0/SKILL.md
+- Immutable skill v1.5.0: https://cbt-cards.github.io/agents/cbt-cards/v1.5.0/SKILL.md
 
 For CBT Cards-owned JSON/JSONL formats, use the versioned contracts listed in schemas/index.json. Catalog entries expose schema_url where applicable.
+
+For review freshness, join health-adjacent resources to data/content-review.json by catalog resource_id. Do not infer a later review date from sitemap lastmod, changelog updates, or skill versions.
 
 Website changelog entries are separate from mobile-app releases. Do not infer an Android/iOS app version from website, dataset, worksheet, or agent-skill changes.
 
