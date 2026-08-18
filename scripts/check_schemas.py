@@ -20,6 +20,7 @@ EXPECTED_IDS = {
     "locales-v1",
     "translation-record-v1",
     "agent-eval-case-v1",
+    "agent-eval-run-v1",
     "skill-manifest-v1",
 }
 
@@ -132,17 +133,8 @@ def main() -> None:
     translation = json.loads((ROOT / "schemas" / "translation-record-v1.schema.json").read_text(encoding="utf-8"))
     required_translation = set(translation.get("required", []))
     for key in (
-        "resource_id",
-        "locale",
-        "source_locale",
-        "source_reviewed",
-        "translation_status",
-        "review_status",
-        "publication_status",
-        "canonical_url",
-        "reviewed",
-        "title",
-        "safety_scope",
+        "resource_id", "locale", "source_locale", "source_reviewed", "translation_status",
+        "review_status", "publication_status", "canonical_url", "reviewed", "title", "safety_scope",
     ):
         if key not in required_translation:
             fail(f"translation record schema must require {key}")
@@ -156,18 +148,22 @@ def main() -> None:
     agent_eval = json.loads((ROOT / "schemas" / "agent-eval-case-v1.schema.json").read_text(encoding="utf-8"))
     required_eval = set(agent_eval.get("required", []))
     for key in (
-        "id",
-        "category",
-        "user_message",
-        "expected_route",
-        "expected_resource_ids",
-        "expected_source_record_ids",
-        "expected_checks",
-        "prohibited_claims",
-        "rationale",
+        "id", "category", "user_message", "expected_route", "expected_resource_ids",
+        "expected_source_record_ids", "expected_checks", "prohibited_claims", "rationale",
     ):
         if key not in required_eval:
             fail(f"agent eval schema must require {key}")
+
+    eval_run = json.loads((ROOT / "schemas" / "agent-eval-run-v1.schema.json").read_text(encoding="utf-8"))
+    required_run = set(eval_run.get("required", []))
+    for key in ("id", "eval_dataset", "eval_dataset_sha256", "executed", "runner", "metrics", "case_results", "notes"):
+        if key not in required_run:
+            fail(f"agent eval run schema must require {key}")
+
+    runner_required = set(eval_run["properties"]["runner"].get("required", []))
+    for key in ("id", "type", "version", "implementation_url", "input_fields"):
+        if key not in runner_required:
+            fail(f"agent eval run runner must require {key}")
 
     print(f"schema check passed: {len(entries)} versioned contracts discoverable from catalog")
 
