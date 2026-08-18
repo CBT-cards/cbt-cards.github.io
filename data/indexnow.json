@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "host": "cbt-cards.github.io",
+  "endpoint": "https://api.indexnow.org/indexnow",
+  "key": "2f7851cdd49747f0b24f653c61a90ce9",
+  "key_location": "https://cbt-cards.github.io/2f7851cdd49747f0b24f653c61a90ce9.txt"
+}
