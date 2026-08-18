@@ -3,75 +3,19 @@
   "title": "CBT Cards public resources",
   "home_page_url": "https://cbt-cards.github.io/",
   "feed_url": "https://cbt-cards.github.io/feed.json",
-  "description": "New and updated CBT Cards learning guides, worksheets, toolkit resources, changelog entries, and agent-facing public data.",
+  "description": "New and updated CBT Cards learning, review, localization, worksheet, toolkit, changelog, and agent resources.",
   "language": "en",
-  "authors": [
-    {"name": "CBT Cards", "url": "https://cbt-cards.github.io/about/"}
-  ],
+  "authors": [{"name": "CBT Cards", "url": "https://cbt-cards.github.io/about/"}],
   "items": [
-    {
-      "id": "https://cbt-cards.github.io/changelog/",
-      "url": "https://cbt-cards.github.io/changelog/",
-      "title": "CBT Cards public changelog",
-      "content_text": "Website and public-data release history, explicitly separated from CBT Cards mobile-app releases.",
-      "date_modified": "2026-08-18T00:00:00Z",
-      "tags": ["changelog", "provenance", "website"]
-    },
-    {
-      "id": "https://cbt-cards.github.io/worksheets/",
-      "url": "https://cbt-cards.github.io/worksheets/",
-      "title": "Free CBT reflection worksheets",
-      "content_text": "Browser-local printable worksheets for a CBT thought record, worry time, and activity planning, with no account or submit action.",
-      "date_modified": "2026-08-18T00:00:00Z",
-      "tags": ["worksheets", "CBT", "reflection"]
-    },
-    {
-      "id": "https://cbt-cards.github.io/worksheets/cbt-thought-record/",
-      "url": "https://cbt-cards.github.io/worksheets/cbt-thought-record/",
-      "title": "CBT thought record worksheet",
-      "content_text": "A seven-step printable browser worksheet for structured thought-record reflection.",
-      "date_modified": "2026-08-18T00:00:00Z",
-      "tags": ["worksheet", "thought record"]
-    },
-    {
-      "id": "https://cbt-cards.github.io/worksheets/worry-time/",
-      "url": "https://cbt-cards.github.io/worksheets/worry-time/",
-      "title": "Worry time worksheet",
-      "content_text": "A browser-local worksheet for recording a worry, parking it, and returning to it during a planned review period.",
-      "date_modified": "2026-08-18T00:00:00Z",
-      "tags": ["worksheet", "worry time"]
-    },
-    {
-      "id": "https://cbt-cards.github.io/worksheets/activity-planning/",
-      "url": "https://cbt-cards.github.io/worksheets/activity-planning/",
-      "title": "Activity planning worksheet",
-      "content_text": "A printable activity-planning worksheet for making one next step concrete and reviewing the result.",
-      "date_modified": "2026-08-18T00:00:00Z",
-      "tags": ["worksheet", "activity planning"]
-    },
-    {
-      "id": "https://cbt-cards.github.io/learn/",
-      "url": "https://cbt-cards.github.io/learn/",
-      "title": "CBT Cards learning library",
-      "content_text": "Plain-language, sourced guides to thought records, automatic thoughts, thought-vs-fact reflection, worry time, activity planning, and structured journaling.",
-      "date_modified": "2026-08-18T00:00:00Z",
-      "tags": ["learning", "CBT"]
-    },
-    {
-      "id": "https://cbt-cards.github.io/toolkit/",
-      "url": "https://cbt-cards.github.io/toolkit/",
-      "title": "CBT Cards public toolkit",
-      "content_text": "A public entry point to curated reflection cards and provenance for the related CBT Toolkit source corpus.",
-      "date_modified": "2026-08-18T00:00:00Z",
-      "tags": ["toolkit", "dataset"]
-    },
-    {
-      "id": "https://cbt-cards.github.io/agents/",
-      "url": "https://cbt-cards.github.io/agents/",
-      "title": "CBT Cards for AI agents",
-      "content_text": "Canonical web, JSON, JSONL, worksheet-schema, llms.txt, and versioned skill interfaces for public CBT Cards resources.",
-      "date_modified": "2026-08-18T00:00:00Z",
-      "tags": ["agents", "RAG", "llms.txt"]
-    }
+    {"id":"https://cbt-cards.github.io/about/localization/","url":"https://cbt-cards.github.io/about/localization/","title":"CBT Cards website localization policy","content_text":"Website locale source of truth, hreflang publication requirements, and a boundary separating website locales from mobile-app language claims.","date_modified":"2026-08-18T00:00:00Z","tags":["localization","locale","hreflang"]},
+    {"id":"https://cbt-cards.github.io/about/editorial-review/","url":"https://cbt-cards.github.io/about/editorial-review/","title":"CBT Cards editorial review policy","content_text":"Review scope, freshness targets, and machine-readable status for health-adjacent public resources.","date_modified":"2026-08-18T00:00:00Z","tags":["editorial review","freshness","trust"]},
+    {"id":"https://cbt-cards.github.io/changelog/","url":"https://cbt-cards.github.io/changelog/","title":"CBT Cards public changelog","content_text":"Website and public-data release history, explicitly separated from CBT Cards mobile-app releases.","date_modified":"2026-08-18T00:00:00Z","tags":["changelog","provenance","website"]},
+    {"id":"https://cbt-cards.github.io/worksheets/","url":"https://cbt-cards.github.io/worksheets/","title":"Free CBT reflection worksheets","content_text":"Browser-local printable worksheets with no account or submit action.","date_modified":"2026-08-18T00:00:00Z","tags":["worksheets","CBT","reflection"]},
+    {"id":"https://cbt-cards.github.io/worksheets/cbt-thought-record/","url":"https://cbt-cards.github.io/worksheets/cbt-thought-record/","title":"CBT thought record worksheet","content_text":"A seven-step printable browser worksheet for structured thought-record reflection.","date_modified":"2026-08-18T00:00:00Z","tags":["worksheet","thought record"]},
+    {"id":"https://cbt-cards.github.io/worksheets/worry-time/","url":"https://cbt-cards.github.io/worksheets/worry-time/","title":"Worry time worksheet","content_text":"A browser-local worksheet for recording a worry and returning to it during a planned review period.","date_modified":"2026-08-18T00:00:00Z","tags":["worksheet","worry time"]},
+    {"id":"https://cbt-cards.github.io/worksheets/activity-planning/","url":"https://cbt-cards.github.io/worksheets/activity-planning/","title":"Activity planning worksheet","content_text":"A printable activity-planning worksheet for making one next step concrete and reviewing the result.","date_modified":"2026-08-18T00:00:00Z","tags":["worksheet","activity planning"]},
+    {"id":"https://cbt-cards.github.io/learn/","url":"https://cbt-cards.github.io/learn/","title":"CBT Cards learning library","content_text":"Plain-language, sourced guides to CBT-inspired reflection concepts and tools.","date_modified":"2026-08-18T00:00:00Z","tags":["learning","CBT"]},
+    {"id":"https://cbt-cards.github.io/toolkit/","url":"https://cbt-cards.github.io/toolkit/","title":"CBT Cards public toolkit","content_text":"A public entry point to curated reflection cards and provenance for the related source corpus.","date_modified":"2026-08-18T00:00:00Z","tags":["toolkit","dataset"]},
+    {"id":"https://cbt-cards.github.io/agents/","url":"https://cbt-cards.github.io/agents/","title":"CBT Cards for AI agents","content_text":"Canonical web, JSON, JSONL, schema, locale, review, and versioned skill interfaces.","date_modified":"2026-08-18T00:00:00Z","tags":["agents","RAG","llms.txt"]}
   ]
 }
