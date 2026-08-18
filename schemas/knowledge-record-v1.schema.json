@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cbt-cards.github.io/schemas/knowledge-record-v1.schema.json",
+  "title": "CBT Cards curated knowledge record v1",
+  "description": "Schema for one line/record in data/knowledge.jsonl.",
+  "type": "object",
+  "required": ["schema_version", "id", "locale", "type", "title", "canonical_url", "summary", "key_points", "product_relation", "safety_scope", "reviewed", "sources"],
+  "properties": {
+    "$schema": {"type": "string", "format": "uri"},
+    "schema_version": {"const": "1.0"},
+    "id": {"type": "string", "minLength": 1},
+    "source_record_id": {"type": "string", "minLength": 1},
+    "locale": {"type": "string", "minLength": 2},
+    "type": {"enum": ["learning", "toolkit-card"]},
+    "title": {"type": "string", "minLength": 1},
+    "canonical_url": {"type": "string", "format": "uri"},
+    "summary": {"type": "string", "minLength": 1},
+    "key_points": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "product_relation": {"type": "string", "minLength": 1},
+    "safety_scope": {"type": "string", "minLength": 1},
+    "reviewed": {"type": "string", "format": "date"},
+    "sources": {"type": "array", "minItems": 1, "items": {"type": "string", "format": "uri"}}
+  },
+  "additionalProperties": false
+}
