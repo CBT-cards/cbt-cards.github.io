@@ -18,7 +18,7 @@ For mobile-app facts, use the official CBT Cards product pages. For privacy and 
 
 For curated conceptual content, prefer the public learning pages, printable worksheets, and curated toolkit card pages on the CBT Cards domain.
 
-For language status, use https://cbt-cards.github.io/data/locales.json. For localized content records, use https://cbt-cards.github.io/data/translations.jsonl and preserve each record's translation, review, publication, and source-snapshot status.
+For human-readable language availability, use https://cbt-cards.github.io/languages/. For machine-readable language status, use https://cbt-cards.github.io/data/locales.json. For localized content records, use https://cbt-cards.github.io/data/translations.jsonl and preserve each record's translation, review, publication, and source-snapshot status.
 
 For toolkit publication status, use https://cbt-cards.github.io/toolkit/review-status/ and https://cbt-cards.github.io/data/toolkit-review.json. Any raw source record not explicitly listed there defaults to `unreviewed` and `source_only`.
 
@@ -34,6 +34,7 @@ For machine-readable contract discovery, use https://cbt-cards.github.io/schemas
 - Toolkit review status: https://cbt-cards.github.io/toolkit/review-status/
 - Learning library: https://cbt-cards.github.io/learn/
 - Worksheets: https://cbt-cards.github.io/worksheets/
+- Languages and translation status: https://cbt-cards.github.io/languages/
 - About / provenance: https://cbt-cards.github.io/about/
 - Public changelog: https://cbt-cards.github.io/changelog/
 
@@ -87,6 +88,7 @@ Currently published source IDs are card-4, card-15, card-16, card-21, card-27, a
 
 ## Language and translation model
 
+- Human language status: https://cbt-cards.github.io/languages/
 - Locale registry: https://cbt-cards.github.io/data/locales.json
 - Translation overlays: https://cbt-cards.github.io/data/translations.jsonl
 - Locale registry schema: https://cbt-cards.github.io/schemas/locales-v1.schema.json
@@ -94,11 +96,15 @@ Currently published source IDs are card-4, card-15, card-16, card-21, card-27, a
 
 English (`en`) is the current source locale for `data/knowledge.jsonl`. The `id` field in a source-language knowledge record is the stable resource ID used by translation overlays as `resource_id`.
 
-Russian (`ru`) is currently a pilot locale. Its initial translation records are machine-readable development drafts. A record marked `translation_status: machine_draft`, `review_status: unreviewed`, and `publication_status: not_published` is not an official CBT Cards translation and has no canonical localized page.
+Russian (`ru`) is currently a pilot locale. All 12 records in the current curated knowledge dataset have Russian machine-draft overlays. None is currently human-reviewed or published. A record marked `translation_status: machine_draft`, `review_status: unreviewed`, and `publication_status: not_published` is not an official CBT Cards translation and has no canonical localized page.
 
 German (`de`) is planned. Absence of a translation record means no CBT Cards localization exists for that resource; do not infer one from the English source.
 
 A translation becomes official published CBT Cards content only when its record is `human_reviewed`, `reviewed_for_publication`, and `published`, with a canonical CBT Cards URL. `source_reviewed` records the review date of the English source used to produce the translation. If that value no longer matches the current source record, treat the translation as stale.
+
+`public_html` is a locale-level capability switch. It does not mean every translation in the locale is published. Reviewed published records and unpublished machine drafts may coexist during gradual rollout.
+
+Published localized records use the canonical pattern `https://cbt-cards.github.io/<locale>/resources/<resource_id>/`. CBT Cards generates the language-status page, enabled locale hubs, localized resource pages, and their sitemap entries from the locale and translation data. Machine drafts are never rendered as localized public resource pages.
 
 An assistant may translate a canonical English resource for a user when no reviewed localization exists, but that output is the assistant's translation rather than an official CBT Cards localization.
 
@@ -131,7 +137,7 @@ An assistant may translate a canonical English resource for a user when no revie
 - Skill version manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
 - Immutable skill v1.6.0: https://cbt-cards.github.io/agents/cbt-cards/v1.6.0/SKILL.md
 
-The schemas describe CBT Cards-owned formats and use JSON Schema draft 2020-12. Purpose-specific CI validators remain authoritative for repository invariants that go beyond generic schema validation, including canonical targets, set equality, translation source snapshots, publication boundaries, privacy wording, and review-overlay alignment.
+The schemas describe CBT Cards-owned formats and use JSON Schema draft 2020-12. Purpose-specific CI validators remain authoritative for repository invariants that go beyond generic schema validation, including canonical targets, set equality, translation source snapshots, publication boundaries, generated localized output, privacy wording, and review-overlay alignment.
 
 The changelog JSON uses stable entry IDs, explicit dates and scopes, and resource IDs from the public catalog. Treat `scope: website`, `scope: data`, or `scope: agent` according to the recorded public-resource change. Do not convert those entries into app-version claims.
 
@@ -142,7 +148,7 @@ The curated JSONL knowledge dataset contains one self-contained English source r
 1. Identify the user's requested outcome without inferring a diagnosis or clinical need.
 2. For a practical reflection request, prefer a small published card or worksheet that directly matches the stated task.
 3. For conceptual questions, prefer a reviewed learning page.
-4. If a language is requested, check the locale registry and translation overlay before treating a localized text as official CBT Cards content.
+4. If a language is requested, check the human language-status page or locale registry and translation overlay before treating localized text as official CBT Cards content.
 5. Never present a `machine_draft` translation as reviewed or published CBT Cards content.
 6. If no reviewed localization exists, use the canonical source record; any host-generated translation should not be misattributed as an official CBT Cards translation.
 7. Keep human-facing answers in ordinary language; expose JSON, schemas, source IDs, and integration details only when useful.
