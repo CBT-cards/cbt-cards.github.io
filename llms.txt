@@ -1,13 +1,15 @@
 # CBT Cards
 
-CBT Cards is a public library of practical reflection resources for people and AI assistants. It publishes reviewed CBT-inspired practices, learning guides, browser-local worksheets, a pinned source toolkit with a separate publication-review overlay, multilingual status metadata, agent evaluation data, a portable Agent Skills skill, and retrieval-ready public data. It is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
+CBT Cards is a public library of practical reflection resources for people and AI assistants. It publishes a small reviewed practice layer, learning guides, browser-local worksheets, a pinned source toolkit with explicit publication and audit metadata, language status, evaluation data, portable agent instructions, and retrieval-ready public data. It is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
 
 ## Start here
 - Overview: https://cbt-cards.github.io/
-- Learn: https://cbt-cards.github.io/learn/
 - Reviewed Practice Finder: https://cbt-cards.github.io/practice/
+- Learn: https://cbt-cards.github.io/learn/
 - Worksheets: https://cbt-cards.github.io/worksheets/
 - Toolkit: https://cbt-cards.github.io/toolkit/
+- Toolkit editorial audit: https://cbt-cards.github.io/toolkit/audit/
+- Editorial review/freshness: https://cbt-cards.github.io/about/editorial-review/
 - Languages: https://cbt-cards.github.io/languages/
 - Research/evals: https://cbt-cards.github.io/research/
 - For agents: https://cbt-cards.github.io/agents/
@@ -16,31 +18,36 @@ CBT Cards is a public library of practical reflection resources for people and A
 - Practices: https://cbt-cards.github.io/data/practice.json
 - Situation/mechanism ontology: https://cbt-cards.github.io/data/practice-ontology.json
 - Evidence + claim provenance: https://cbt-cards.github.io/data/practice-evidence.json
-- Reviewed relations: https://cbt-cards.github.io/data/practice-relations.json
-- Recommendation contract/examples: https://cbt-cards.github.io/data/practice-recommendations.json
+- Relations: https://cbt-cards.github.io/data/practice-relations.json
+- Recommendation contract: https://cbt-cards.github.io/data/practice-recommendations.json
 - RAG distribution: https://cbt-cards.github.io/data/practice-rag.ndjson
 - RAG manifest + SHA-256: https://cbt-cards.github.io/data/practice-rag-manifest.json
-- Semantic eval manifest: https://cbt-cards.github.io/data/practice-semantic-evals.json
-- Coverage/editorial planning: https://cbt-cards.github.io/data/practice-coverage.json
-- Interoperability fixtures: https://cbt-cards.github.io/data/interoperability-fixtures.json
-- Contract: https://cbt-cards.github.io/contracts/practice-system-v1.schema.json
-- Agent behavior guide: https://cbt-cards.github.io/agents/cbt-cards/PRACTICE_SYSTEM.md
+- Semantic evals: https://cbt-cards.github.io/data/practice-semantic-evals.json
+- Agent guide: https://cbt-cards.github.io/agents/cbt-cards/PRACTICE_SYSTEM.md
 
-Routing rule: start from the user's plain-language situation, not a diagnosis. Prefer one reviewed practice. Preserve `avoid_when`. Return `no_match` instead of inventing a practice when no reviewed fit exists. Genuine danger, required safety/professional/accessibility rules, and medical/legal/financial/safeguarding decisions are outside practice routing. Never promote source-only toolkit records or machine-draft translations as published guidance. Metaphors are memory aids, not evidence.
+Routing rule: start from the user's plain-language situation, not a diagnosis. Prefer one reviewed practice. Preserve `avoid_when`. Return `no_match` instead of inventing a practice when no reviewed fit exists. Genuine danger, required safety/professional/accessibility rules, and medical/legal/financial/safeguarding decisions are outside practice routing.
 
-## Existing agent/data layer
+## Review layers
+- Raw-source publication authority: https://cbt-cards.github.io/data/toolkit-review.json
+- 115-record source audit/triage: https://cbt-cards.github.io/data/toolkit-audit.json
+- Trusted-content freshness registry: https://cbt-cards.github.io/data/content-review.json
+
+The source audit is not publication approval. Any raw source record not explicitly published by the review overlay remains `unreviewed` and `source_only`. Audit candidates are editorial work items only. Every source protocol remains behind a separate protocol-level review gate. Metaphors are memory aids, not evidence.
+
+The freshness registry currently covers 26 trusted items: learning pages, worksheets, curated source-toolkit cards, and all 11 CBT Cards-owned practices. Freshness review is not clinical validation.
+
+## Agent/data layer
 - Resource catalog: https://cbt-cards.github.io/data/catalog.json
 - JSON Schema manifest: https://cbt-cards.github.io/schemas/index.json
 - Curated knowledge JSONL: https://cbt-cards.github.io/data/knowledge.jsonl
-- Toolkit review overlay: https://cbt-cards.github.io/data/toolkit-review.json
 - Locale registry: https://cbt-cards.github.io/data/locales.json
 - Translation overlays: https://cbt-cards.github.io/data/translations.jsonl
 - Starter evals: https://cbt-cards.github.io/data/agent-evals.jsonl
 - Held-out challenge: https://cbt-cards.github.io/data/agent-evals-challenge.jsonl
 - Model-run protocol: https://cbt-cards.github.io/research/MODEL_RUN_PROTOCOL.md
-- Latest portable skill v1.7.0: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
+- Latest portable skill v1.8.0: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 - Skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
 - Changelog: https://cbt-cards.github.io/data/changelog.json
 - Citation: https://cbt-cards.github.io/CITATION.cff
 
-English is the current canonical source locale. Russian machine drafts are not official published translations until explicitly human-reviewed and published. Website/data/skill releases do not imply a mobile-app release.
+English is the canonical source locale. Machine-draft translations are not official published guidance. Website/data/skill releases do not imply a mobile-app release.
