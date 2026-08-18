@@ -57,20 +57,34 @@ Agent, discovery, and machine-readable resources:
 - `/agents/` — integration guide
 - `/agents/cbt-cards/SKILL.md` — latest mutable skill alias, currently v1.4.0
 - `/agents/cbt-cards/manifest.json` — skill version manifest
-- `/agents/cbt-cards/v1.1.0/SKILL.md` — immutable historical skill version
-- `/agents/cbt-cards/v1.2.0/SKILL.md` — immutable version adding raw-corpus/curated-content rules
-- `/agents/cbt-cards/v1.3.0/SKILL.md` — immutable version adding worksheet rendering/privacy rules
-- `/agents/cbt-cards/v1.4.0/SKILL.md` — immutable version requiring toolkit review-overlay checks
+- `/agents/cbt-cards/v1.1.0/SKILL.md` through `/v1.4.0/SKILL.md` — immutable skill versions
 - `/llms.txt` — compact public index
-- `/llms-full.txt` — extended source-priority, release, worksheet, corpus, publication-status, and safety index
-- `/data/catalog.json` — canonical public resource catalog with stable IDs
+- `/llms-full.txt` — extended source-priority, release, schema, worksheet, corpus, publication-status, and safety index
+- `/data/catalog.json` — canonical public resource catalog with stable IDs and `schema_url` for CBT Cards-owned structured formats
 - `/data/changelog.json` — scoped website/public-data release provenance
-- `/data/knowledge.jsonl` — RAG-friendly curated prose knowledge records for public learning resources and reviewed toolkit cards
-- `/data/worksheets.json` — structured form definitions kept separate from prose knowledge records
+- `/data/knowledge.jsonl` — RAG-friendly curated prose knowledge records
+- `/data/worksheets.json` — structured form definitions
 - `/data/toolkit-review.json` — CBT Cards-owned source-record publication status
+- `/schemas/index.json` — public JSON Schema manifest
 - `/feed.xml` — Atom discovery feed
 - `/feed.json` — JSON Feed 1.1 discovery feed
 - `/.well-known/security.txt` — standard public security contact
+
+## Public data contracts
+
+CBT Cards-owned structured formats have versioned JSON Schema draft 2020-12 contracts under `/schemas/`. `schemas/index.json` maps each schema to the public instance it describes.
+
+Current contracts cover:
+
+- `data/catalog.json`
+- `data/changelog.json`
+- `data/worksheets.json`
+- `data/toolkit-review.json`
+- `data/toolkit-source.json`
+- one record/line in `data/knowledge.jsonl`
+- `agents/cbt-cards/manifest.json`
+
+The public catalog exposes `schema_url` for these resources. JSON Schema is the portable field-level contract; purpose-specific repository checks remain responsible for semantic invariants such as canonical target existence, sequential worksheet fields, privacy wording, and exact review-overlay/catalog/JSONL alignment.
 
 ## Local preview
 
@@ -90,9 +104,10 @@ python3 scripts/check_worksheets.py
 python3 scripts/check_discovery.py
 python3 scripts/check_changelog.py
 python3 scripts/check_toolkit_review.py
+python3 scripts/check_schemas.py
 ```
 
-The site checker verifies public HTML metadata, one H1 per indexed page, canonical uniqueness, JSON-LD parsing, internal links, crawler/IndexNow configuration, sitemap coverage/targets, resource catalog targets, curated JSONL alignment, toolkit source metadata, and agent skill/version targets.
+The site checker verifies public HTML metadata, canonical uniqueness, JSON-LD parsing, internal links, crawler/IndexNow configuration, sitemap coverage/targets, resource catalog targets, curated JSONL alignment, toolkit source metadata, and agent skill/version targets.
 
 The worksheet checker verifies worksheet IDs, catalog alignment, canonical and learning-resource targets, field IDs, sequential field order, source URLs, and explicit no-submit/no-send privacy behavior.
 
@@ -102,6 +117,8 @@ The changelog checker verifies schema version, stable release IDs, chronological
 
 The toolkit-review checker verifies safe defaults for unlisted source records, published source-ID uniqueness, exact alignment between the review overlay, catalog toolkit cards, curated JSONL toolkit records and canonical pages, plus latest-skill awareness of the overlay.
 
+The schema checker verifies schema-manifest completeness, JSON Schema 2020-12 declarations, stable `$id` values, local instance/schema targets, catalog `schema_url` discovery, and safety-critical constants in the toolkit-review contract.
+
 ## Deployment and discovery
 
 `.github/workflows/deploy-pages.yml` publishes `main` to GitHub Pages after the quality jobs pass. After successful push deployments, a non-blocking IndexNow job submits changed/deleted public HTML URLs rather than repeatedly submitting the whole sitemap.
@@ -110,7 +127,7 @@ In repository settings use **Pages → Build and deployment → Source → GitHu
 
 The repository must remain `CBT-cards/cbt-cards.github.io` to serve the user-site root at `https://cbt-cards.github.io/` without a base-path prefix.
 
-## Content rules
+## Content and data rules
 
 - Keep product feature, privacy, support, and data-handling claims consistent with the current application source and store metadata.
 - Use the privacy policy as the canonical public source for mobile-app data-handling behavior.
@@ -121,17 +138,17 @@ The repository must remain `CBT-cards/cbt-cards.github.io` to serve the user-sit
 - Do not claim that CBT Cards diagnoses, treats, cures, or prevents a condition. It is a general wellness and self-reflection product.
 - Keep internal links root-relative so GitHub Pages serves them correctly.
 - When adding or removing an indexed page, update `sitemap.xml`, `llms.txt`, `llms-full.txt`, `data/catalog.json`, and the relevant machine-readable dataset.
+- When adding or changing a CBT Cards-owned structured format, update its versioned schema, `schemas/index.json`, the catalog `schema_url`, and `scripts/check_schemas.py` as needed.
+- Treat schema changes that break existing consumers as a new schema-version URL rather than silently mutating the old contract.
 - Record meaningful public website/data changes in `/data/changelog.json` and `/changelog/` using a stable release ID and explicit `scope`.
 - Never infer a mobile-app release from a website, dataset, worksheet, feed, or agent-skill change. Mobile release entries require separately verified release metadata.
-- Keep each curated JSONL knowledge record self-contained and aligned with its canonical page. Reuse the same stable resource ID in the catalog and curated dataset.
-- Keep worksheet UI schemas in `data/worksheets.json`; do not duplicate form definitions into `knowledge.jsonl` unless the schema strategy changes intentionally.
+- Keep each curated JSONL knowledge record self-contained and aligned with its canonical page.
 - A raw toolkit record must not become a standalone published resource unless its stable source ID is explicitly added to `data/toolkit-review.json` as `reviewed_for_publication` and `published`.
 - Any raw toolkit source ID absent from the review overlay is `unreviewed` and `source_only` by default.
 - Never describe `reviewed_for_publication` as clinical validation or efficacy evidence.
-- Keep raw toolkit source IDs separate from curated resource IDs. A curated card record also carries its original `source_record_id`.
 - Do not generate standalone protocol/health-guidance pages from raw corpus records unless the record has gone through explicit editorial and safety review and is added to the review overlay.
-- Do not treat record titles as unique identifiers. The source corpus already contains repeated titles; stable IDs are authoritative.
-- When changing the agent skill, publish an immutable version and update `agents/cbt-cards/manifest.json`, `data/catalog.json`, and llms indexes before moving the latest alias.
+- Do not treat record titles as unique identifiers. Stable IDs are authoritative.
+- When changing the agent skill, publish an immutable version and update the manifest, catalog, and llms indexes before moving the latest alias.
 
 ## Crawlers
 
