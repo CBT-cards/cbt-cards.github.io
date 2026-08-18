@@ -27,8 +27,10 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 
 - JSON catalog: https://cbt-cards.github.io/data/catalog.json
 - Extended index: https://cbt-cards.github.io/llms-full.txt
-- Agent install guide: https://cbt-cards.github.io/agents/
-- Agent skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
+- Agent integration guide: https://cbt-cards.github.io/agents/
+- Latest agent skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
+- Skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
+- Immutable skill v1.1.0: https://cbt-cards.github.io/agents/cbt-cards/v1.1.0/SKILL.md
 
 ## Store listings
 
