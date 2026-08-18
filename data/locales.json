@@ -21,7 +21,7 @@
       "status": "pilot",
       "machine_readable": true,
       "public_html": false,
-      "policy": "Translation drafts may be published as machine-readable development data, but they remain non-authoritative until separate human language and editorial review."
+      "policy": "All current curated resources have machine-readable translation drafts. Drafts remain non-authoritative and produce no localized HTML until separate human language and editorial review; public HTML can be enabled later for incremental reviewed publication."
     },
     {
       "locale": "de",
