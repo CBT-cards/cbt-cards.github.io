@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import re
 from urllib.parse import urlparse
 import xml.etree.ElementTree as ET
 
@@ -25,6 +26,11 @@ def local_target(url: str) -> Path | None:
     return ROOT / parsed.path.lstrip("/")
 
 
+def declared_skill_version(text: str) -> str | None:
+    match = re.search(r"(?m)^version:\s*([^\s]+)\s*$", text)
+    return match.group(1) if match else None
+
+
 def main() -> None:
     review_path = ROOT / "data" / "toolkit-review.json"
     source_path = ROOT / "data" / "toolkit-source.json"
@@ -33,14 +39,17 @@ def main() -> None:
     page_path = ROOT / "toolkit" / "review-status" / "index.html"
     sitemap_path = ROOT / "sitemap.xml"
     latest_skill_path = ROOT / "agents" / "cbt-cards" / "SKILL.md"
+    manifest_path = ROOT / "agents" / "cbt-cards" / "manifest.json"
+    v14_path = ROOT / "agents" / "cbt-cards" / "v1.4.0" / "SKILL.md"
 
-    for path in (review_path, source_path, catalog_path, knowledge_path, page_path, sitemap_path, latest_skill_path):
+    for path in (review_path, source_path, catalog_path, knowledge_path, page_path, sitemap_path, latest_skill_path, manifest_path, v14_path):
         if not path.exists():
             fail(f"missing required file: {path.relative_to(ROOT)}")
 
     review = json.loads(review_path.read_text(encoding="utf-8"))
     source = json.loads(source_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
 
     if review.get("schema_version") != "1.0":
         fail("unexpected review schema_version")
@@ -73,6 +82,16 @@ def main() -> None:
             fail(f"catalog missing {resource_id}")
         if resource.get("url") != expected_url:
             fail(f"catalog URL mismatch for {resource_id}")
+
+    latest = manifest.get("latest")
+    if not isinstance(latest, str) or not latest:
+        fail("skill manifest missing latest version")
+    latest_catalog = resource_by_id.get("agent-skill-latest")
+    if not latest_catalog or latest_catalog.get("version") != latest:
+        fail("catalog latest skill does not match manifest latest")
+    immutable_latest = resource_by_id.get(f"agent-skill-v{latest}")
+    if not immutable_latest:
+        fail(f"catalog missing immutable latest skill v{latest}")
 
     records = review.get("records")
     if not isinstance(records, list) or not records:
@@ -147,14 +166,14 @@ def main() -> None:
         fail("sitemap missing toolkit review-status page")
 
     skill = latest_skill_path.read_text(encoding="utf-8")
-    if "version: 1.4.0" not in skill:
-        fail("latest skill is not v1.4.0")
+    if declared_skill_version(skill) != latest:
+        fail("latest skill declaration does not match manifest latest")
     if f"{ORIGIN}/data/toolkit-review.json" not in skill:
         fail("latest skill does not reference toolkit review overlay")
     if "unreviewed" not in skill or "source_only" not in skill:
         fail("latest skill does not preserve default raw-record status")
 
-    print(f"toolkit review check passed: {len(records)} published records; unlisted records default to source-only")
+    print(f"toolkit review check passed: {len(records)} published records; latest skill v{latest}; unlisted records default to source-only")
 
 
 if __name__ == "__main__":
