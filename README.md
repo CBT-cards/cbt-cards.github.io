@@ -4,7 +4,7 @@ Official static website and public reflection resource for CBT Cards.
 
 CBT Cards began as a mobile app and is evolving into an open public library that can be used directly by people and consumed by AI assistants through ordinary web pages, JSON/JSONL data, versioned schemas, review metadata, and portable agent instructions.
 
-The deployed site remains intentionally dependency-free: plain HTML, CSS, text, JSON, JSONL, and product-owned assets publish directly to GitHub Pages. There is no JavaScript application bundle or runtime service required to render public content.
+The deployed site remains intentionally dependency-free: plain HTML, CSS, text, JSON, JSONL, and product-owned assets publish directly to GitHub Pages. There is no JavaScript application bundle or runtime service required to render public content. Small Python scripts are used only for validation and deterministic generation before deployment.
 
 ## Public structure
 
@@ -14,6 +14,7 @@ Public reflection library:
 - `/learn/` — plain-language learning library
 - `/worksheets/` — printable browser-local worksheets
 - `/toolkit/` — public toolkit and dataset entry point
+- `/languages/` — human-readable language, translation-review, and publication status
 - `/about/` — project origin, direction, publisher, and editorial approach
 - `/changelog/` — website/public-data/agent release history, separate from mobile-app releases
 
@@ -62,20 +63,27 @@ Any source record not explicitly listed in `data/toolkit-review.json` defaults t
 
 Localization is an overlay rather than a second independent content tree:
 
+- `/languages/` — human-readable current status and publication rules
 - `/data/locales.json` — locale registry and source/pilot/planned status
 - `/data/translations.jsonl` — translation records keyed by `resource_id` + `locale`
 - `/schemas/locales-v1.schema.json` — locale registry contract
 - `/schemas/translation-record-v1.schema.json` — one translation-record contract
+- `LOCALIZATION.md` — review and publication workflow
+- `scripts/build_localized_pages.py` — deterministic generator for language hubs, published localized resource pages, and localized sitemap entries
 
 Current locale state:
 
 - `en` — source locale; machine-readable and public HTML
-- `ru` — pilot locale; initial machine-readable drafts exist, but public localized HTML is disabled
+- `ru` — pilot locale; all 12 records in the current curated knowledge set have machine-readable drafts, but none is human-reviewed or published
 - `de` — planned; no translation records exist yet
 
-The initial Russian records are deliberately marked `translation_status: machine_draft`, `review_status: unreviewed`, and `publication_status: not_published`. They are development data, not official published CBT Cards translations, and they do not have canonical localized pages.
+The Russian records are deliberately marked `translation_status: machine_draft`, `review_status: unreviewed`, and `publication_status: not_published`. They are development data, not official published CBT Cards translations, and they do not have canonical localized pages.
 
 A translation becomes official published CBT Cards content only after separate human language/editorial review and an explicit published status with a canonical CBT Cards URL. `source_reviewed` records the review date of the source-language knowledge record used to make the translation. CI rejects a translation when that value no longer matches the current source record, making stale localization visible rather than silently inconsistent.
+
+`public_html` is a locale-level capability switch, not a claim that every record in a locale is published. A locale may gradually publish reviewed records while other records remain machine drafts. Only records explicitly marked `human_reviewed`, `reviewed_for_publication`, and `published` are rendered as localized public resource pages.
+
+Generated localized pages use the canonical pattern `/<locale>/resources/<resource_id>/`. The generator also maintains locale hubs and the generated localization block in `sitemap.xml`. `/languages/` is always generated from the locale and translation data, so human-facing counts cannot silently drift from the machine-readable state.
 
 ## Agent, discovery, and machine-readable resources
 
@@ -123,20 +131,39 @@ python3 -m http.server 4173
 
 Open `http://localhost:4173/`.
 
+## Localization generation
+
+After changing locale status or a human-reviewed/published translation, regenerate the localized human surface:
+
+```bash
+python3 scripts/build_localized_pages.py --write
+```
+
+Do not hand-edit generated `/languages/`, `/<locale>/`, or `/<locale>/resources/.../` HTML. Edit `data/locales.json` or `data/translations.jsonl`, then regenerate.
+
+The generator does not publish machine drafts. It renders localized resource pages only for records that are simultaneously `human_reviewed`, `reviewed_for_publication`, and `published`, and only when the locale has `public_html: true`.
+
+See [LOCALIZATION.md](LOCALIZATION.md) for the human review checklist and state transitions.
+
 ## Quality checks
 
 Run the same static checks used by GitHub Actions:
 
 ```bash
+python3 scripts/check_localization.py
+python3 scripts/build_localized_pages.py --check
 python3 scripts/check_site.py
 python3 scripts/check_crawl_graph.py
 python3 scripts/check_worksheets.py
 python3 scripts/check_discovery.py
 python3 scripts/check_changelog.py
 python3 scripts/check_toolkit_review.py
-python3 scripts/check_localization.py
 python3 scripts/check_schemas.py
 ```
+
+The localization checker verifies the locale registry, stable knowledge IDs, translation `(resource_id, locale)` uniqueness, source-review snapshots, key-point structure, machine-draft publication boundaries, incremental locale rollout, and generated localized output.
+
+The localized-page generator check verifies that `/languages/`, any enabled locale hubs, published localized resource pages, and the generated localization block in `sitemap.xml` exactly match source data. Stale generated localized pages fail validation.
 
 The site checker verifies public HTML metadata, canonical uniqueness, JSON-LD parsing, internal links, crawler/IndexNow configuration, sitemap coverage/targets, resource catalog targets, curated JSONL alignment, toolkit source metadata, and agent skill/version targets.
 
@@ -149,8 +176,6 @@ The discovery checker verifies Atom/JSON Feed parity, canonical feed targets, se
 The changelog checker verifies schema version, stable release IDs, chronological order, allowed scopes/change types, catalog resource alignment, canonical local targets, sitemap inclusion, and discovery-feed presence.
 
 The toolkit-review checker verifies safe defaults for unlisted source records, published source-ID uniqueness, exact alignment between the review overlay, catalog toolkit cards, curated JSONL toolkit records and canonical pages, plus manifest-driven latest-skill alignment.
-
-The localization checker verifies the locale registry, stable knowledge IDs, translation `(resource_id, locale)` uniqueness, source-review snapshots, key-point structure, machine-draft publication boundaries, and locale lifecycle rules.
 
 The schema checker verifies schema-manifest completeness, JSON Schema 2020-12 declarations, stable `$id` values, local instance/schema targets, catalog `schema_url` discovery, localization contracts, and safety-critical constants.
 
@@ -173,7 +198,8 @@ The repository must remain `CBT-cards/cbt-cards.github.io` to serve the user-sit
 - Public worksheet pages must remain static/no-submit unless the privacy documentation and product architecture are deliberately changed first.
 - Do not claim that CBT Cards diagnoses, treats, cures, or prevents a condition. It is a general wellness and self-reflection resource.
 - Keep internal links root-relative so GitHub Pages serves them correctly.
-- When adding or removing an indexed page, update `sitemap.xml`, `llms.txt`, `llms-full.txt`, `data/catalog.json`, and the relevant machine-readable dataset.
+- When adding or removing an indexed non-generated page, update `sitemap.xml`, `llms.txt`, `llms-full.txt`, `data/catalog.json`, and the relevant machine-readable dataset.
+- Generated localized pages and their sitemap entries must be changed through locale/translation data and `scripts/build_localized_pages.py`, not by hand.
 - When adding or changing a CBT Cards-owned structured format, update its versioned schema, `schemas/index.json`, the catalog `schema_url`, and `scripts/check_schemas.py` as needed.
 - Treat schema changes that break existing consumers as a new schema-version URL rather than silently mutating the old contract.
 - Record meaningful public website/data/agent changes in `/data/changelog.json` and `/changelog/` using a stable release ID and explicit `scope`.
@@ -182,8 +208,10 @@ The repository must remain `CBT-cards/cbt-cards.github.io` to serve the user-sit
 - Treat the `id` in `data/knowledge.jsonl` as the stable logical resource ID for localization.
 - Store translations separately from source records and key them by stable `resource_id` plus locale.
 - A `machine_draft` translation must remain `unreviewed`, `not_published`, without a canonical localized URL or review date.
-- Do not publish localized HTML until the translation has separate human review and the locale is enabled for public HTML.
-- Keep `source_reviewed` aligned with the source record's current `reviewed` value; update/review translations when the source changes.
+- AI generation or AI self-review alone must never be recorded as `human_reviewed`.
+- `public_html: true` permits reviewed records in a locale to be published; it does not require every translation in that locale to be published.
+- A published localized record must use `https://cbt-cards.github.io/<locale>/resources/<resource_id>/` as its canonical URL.
+- Keep `source_reviewed` aligned with the source record's current `reviewed` value; update and re-review translations when the source changes.
 - Do not create records for a `planned` locale until it is deliberately promoted to `pilot`.
 - A raw toolkit record must not become a standalone published resource unless its stable source ID is explicitly added to `data/toolkit-review.json` as `reviewed_for_publication` and `published`.
 - Any raw toolkit source ID absent from the review overlay is `unreviewed` and `source_only` by default.
