@@ -37,6 +37,8 @@
     {"id": "worry-time", "type": "learning", "url": "https://cbt-cards.github.io/learn/worry-time/", "title": "Worry time", "reviewed": "2026-08-18"},
     {"id": "activity-planning", "type": "learning", "url": "https://cbt-cards.github.io/learn/activity-planning/", "title": "Activity planning", "reviewed": "2026-08-18"},
     {"id": "cbt-journaling", "type": "learning", "url": "https://cbt-cards.github.io/learn/cbt-journaling/", "title": "CBT journaling", "reviewed": "2026-08-18"},
+    {"id": "practice", "type": "collection", "url": "https://cbt-cards.github.io/practice/", "title": "Practice cards and metaphors", "reviewed": "2026-08-18"},
+    {"id": "practice-data", "type": "dataset", "url": "https://cbt-cards.github.io/data/practice.json", "title": "CBT Cards practice cards and metaphors", "format": "application/json", "locale": "en", "updated": "2026-08-18", "schema_url": "https://cbt-cards.github.io/schemas/practice-v1.schema.json"},
     {"id": "worksheets", "type": "collection", "url": "https://cbt-cards.github.io/worksheets/", "title": "Free CBT reflection worksheets"},
     {"id": "worksheet-definitions", "type": "dataset", "url": "https://cbt-cards.github.io/data/worksheets.json", "title": "CBT Cards worksheet definitions", "format": "application/json", "locale": "en", "updated": "2026-08-18", "schema_url": "https://cbt-cards.github.io/schemas/worksheets-v1.schema.json"},
     {"id": "cbt-thought-record-7-step", "type": "worksheet", "url": "https://cbt-cards.github.io/worksheets/cbt-thought-record/", "title": "CBT thought record — 7-step worksheet", "reviewed": "2026-08-18"},

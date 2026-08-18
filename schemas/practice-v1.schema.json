@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cbt-cards.github.io/schemas/practice-v1.schema.json",
+  "title": "CBT Cards practice cards and metaphors v1",
+  "type": "object",
+  "required": ["schema_version", "id", "name", "canonical", "updated", "language", "ownership", "review_status", "clinical_validation_status", "safety_scope", "pairs"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "id": {"const": "cbt-cards-practice-v1"},
+    "name": {"type": "string", "minLength": 1},
+    "canonical": {"const": "https://cbt-cards.github.io/data/practice.json"},
+    "updated": {"type": "string", "format": "date"},
+    "language": {"const": "en"},
+    "ownership": {"type": "string", "minLength": 1},
+    "review_status": {"const": "editorial_and_safety_reviewed_for_publication"},
+    "clinical_validation_status": {"const": "not_claimed"},
+    "safety_scope": {"type": "string", "minLength": 1},
+    "pairs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "mechanism", "target_patterns", "best_used_when", "avoid_when", "card", "metaphor", "follow_up", "evidence_basis"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^practice-[a-z0-9-]+$"},
+          "title": {"type": "string", "minLength": 1},
+          "mechanism": {"type": "string", "minLength": 1},
+          "target_patterns": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "best_used_when": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "avoid_when": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "card": {
+            "type": "object",
+            "required": ["prompt", "steps", "micro_action", "reflection_question"],
+            "properties": {
+              "prompt": {"type": "string", "minLength": 1},
+              "steps": {"type": "array", "minItems": 2, "items": {"type": "string", "minLength": 1}},
+              "micro_action": {"type": "string", "minLength": 1},
+              "reflection_question": {"type": "string", "minLength": 1}
+            },
+            "additionalProperties": false
+          },
+          "metaphor": {
+            "type": "object",
+            "required": ["id", "title", "text", "use"],
+            "properties": {
+              "id": {"type": "string", "pattern": "^metaphor-[a-z0-9-]+$"},
+              "title": {"type": "string", "minLength": 1},
+              "text": {"type": "string", "minLength": 1},
+              "use": {"type": "string", "minLength": 1}
+            },
+            "additionalProperties": false
+          },
+          "follow_up": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "evidence_basis": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["title", "url", "note"],
+              "properties": {
+                "title": {"type": "string", "minLength": 1},
+                "url": {"type": "string", "format": "uri"},
+                "note": {"type": "string", "minLength": 1}
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

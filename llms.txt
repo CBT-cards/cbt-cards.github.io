@@ -24,6 +24,15 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - https://cbt-cards.github.io/learn/activity-planning/
 - https://cbt-cards.github.io/learn/cbt-journaling/
 
+## CBT Cards-owned practice library
+
+- Practice cards and metaphors: https://cbt-cards.github.io/practice/
+- Machine-readable definitions: https://cbt-cards.github.io/data/practice.json
+- These records are CBT Cards originals, separate from the pinned MetalHatsCats CBT Toolkit source corpus.
+- The practice library currently contains three reviewed card/metaphor pairs: Test Your Prediction, Problem or Worry?, and Spot the Safety Behavior.
+- Preserve each pair's best_used_when, avoid_when, evidence basis, and safety scope. Metaphors are memory aids, not evidence.
+- editorial_and_safety_reviewed_for_publication does not mean clinical validation or proof of efficacy.
+
 ## Printable worksheets
 
 - Worksheet hub: https://cbt-cards.github.io/worksheets/
@@ -52,6 +61,7 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - JSON Schema manifest: https://cbt-cards.github.io/schemas/index.json
 - Machine-readable changelog: https://cbt-cards.github.io/data/changelog.json
 - RAG-friendly curated knowledge dataset (JSONL): https://cbt-cards.github.io/data/knowledge.jsonl
+- Practice cards and metaphors: https://cbt-cards.github.io/data/practice.json
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Toolkit review overlay: https://cbt-cards.github.io/data/toolkit-review.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
@@ -66,7 +76,7 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 
 For CBT Cards-owned JSON/JSONL formats, use the versioned contracts listed in schemas/index.json. Catalog entries expose schema_url where applicable.
 
-Website changelog entries are separate from mobile-app releases. Do not infer an Android/iOS app version from website, dataset, worksheet, or agent-skill changes.
+Website changelog entries are separate from mobile-app releases. Do not infer an Android/iOS app version from website, dataset, worksheet, practice-library, or agent-skill changes.
 
 ## Store listings
 

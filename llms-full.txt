@@ -6,14 +6,16 @@ Updated: 2026-08-18
 
 CBT Cards is the mobile wellness and self-reflection app documented at https://cbt-cards.github.io/.
 Publisher: MetalHatsCats.
-Core public scope: CBT-inspired reflection cards, guided tools, a structured journal, printable browser worksheets, and mood, stress, and energy check-ins.
+Core public scope: CBT-inspired reflection cards, guided tools, a structured journal, printable browser worksheets, CBT Cards-owned practice cards and metaphors, and mood, stress, and energy check-ins.
 Clinical boundary: CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
 
 ## Source priority
 
 For product facts, use the official CBT Cards pages below. For privacy and data-handling questions, https://cbt-cards.github.io/privacy/ is primary. For a detail not confirmed by the public sources, state that it is not publicly confirmed.
 
-For curated conceptual content, prefer the public learning pages, printable worksheets, and curated toolkit card pages on the CBT Cards domain.
+For curated conceptual content, prefer the public learning pages, CBT Cards-owned practice library, printable worksheets, and curated toolkit card pages on the CBT Cards domain.
+
+For CBT Cards-owned practice-card and metaphor pairs, use https://cbt-cards.github.io/practice/ and https://cbt-cards.github.io/data/practice.json. These records are separate from the pinned MetalHatsCats CBT Toolkit source corpus and must not be assigned source-corpus IDs.
 
 For toolkit publication status, use https://cbt-cards.github.io/toolkit/review-status/ and https://cbt-cards.github.io/data/toolkit-review.json. Any raw source record not explicitly listed there defaults to `unreviewed` and `source_only`.
 
@@ -44,6 +46,21 @@ For machine-readable contract discovery, use https://cbt-cards.github.io/schemas
 - CBT journaling: https://cbt-cards.github.io/learn/cbt-journaling/
 
 Learning pages distinguish general CBT concepts from CBT Cards-specific implementation and include source links. They are educational, not individualized clinical guidance.
+
+## CBT Cards-owned practice library
+
+- Human-readable practice page: https://cbt-cards.github.io/practice/
+- Machine-readable practice data: https://cbt-cards.github.io/data/practice.json
+- Practice schema: https://cbt-cards.github.io/schemas/practice-v1.schema.json
+- Current pairs: `practice-test-your-prediction`, `practice-problem-or-worry`, `practice-spot-the-safety-behavior`
+
+The practice library is original CBT Cards editorial content, separate from the pinned MetalHatsCats CBT Toolkit source corpus. Do not create or infer source IDs for these records.
+
+Each practice pair has a mechanism, target patterns, `best_used_when`, `avoid_when`, a card, a metaphor, follow-up guidance, and an evidence basis. Preserve those fields when adapting the content. The metaphors are memory aids; they are not evidence and should not be used to override the pair's safety boundary.
+
+`editorial_and_safety_reviewed_for_publication` means the record was reviewed for public web use. `clinical_validation_status: not_claimed` means CBT Cards does not claim clinical validation, efficacy, diagnosis, or individual suitability.
+
+The safety-behavior pair is intentionally narrow: it applies only to objectively low-risk situations and non-essential safety-seeking behavior. Genuine safety measures, protective boundaries, accessibility aids, medication instructions, professional recommendations, driving safety, hazardous work rules, safeguarding, and other real-world protections must not be removed or reframed as anxiety-maintaining habits.
 
 ## Printable worksheets
 
@@ -79,12 +96,14 @@ Currently published source IDs are card-4, card-15, card-16, card-21, card-27, a
 - Catalog schema: https://cbt-cards.github.io/schemas/catalog-v1.schema.json
 - Changelog schema: https://cbt-cards.github.io/schemas/changelog-v1.schema.json
 - Worksheet schema: https://cbt-cards.github.io/schemas/worksheets-v1.schema.json
+- Practice library schema: https://cbt-cards.github.io/schemas/practice-v1.schema.json
 - Toolkit review schema: https://cbt-cards.github.io/schemas/toolkit-review-v1.schema.json
 - Toolkit source schema: https://cbt-cards.github.io/schemas/toolkit-source-v1.schema.json
 - Curated knowledge-record schema: https://cbt-cards.github.io/schemas/knowledge-record-v1.schema.json
 - Agent skill-manifest schema: https://cbt-cards.github.io/schemas/skill-manifest-v1.schema.json
 - Machine-readable changelog: https://cbt-cards.github.io/data/changelog.json
 - RAG-friendly curated JSONL knowledge dataset: https://cbt-cards.github.io/data/knowledge.jsonl
+- Practice cards and metaphors: https://cbt-cards.github.io/data/practice.json
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Toolkit review overlay: https://cbt-cards.github.io/data/toolkit-review.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
@@ -97,11 +116,11 @@ Currently published source IDs are card-4, card-15, card-16, card-21, card-27, a
 - Skill version manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
 - Immutable skill v1.4.0: https://cbt-cards.github.io/agents/cbt-cards/v1.4.0/SKILL.md
 
-The schemas describe CBT Cards-owned formats and use JSON Schema draft 2020-12. The existing purpose-specific CI validators remain authoritative for repository invariants that go beyond generic schema validation, such as canonical target existence, set equality, privacy wording, and review-overlay alignment.
+The schemas describe CBT Cards-owned formats and use JSON Schema draft 2020-12. The existing purpose-specific CI validators remain authoritative for repository invariants that go beyond generic schema validation, such as canonical target existence, set equality, privacy wording, practice safety boundaries, and review-overlay alignment.
 
 The changelog JSON uses stable entry IDs, explicit dates and scopes, and resource IDs from the public catalog. Treat `scope: website` as a website/public-data release. Do not convert it into an app-version claim.
 
-The curated JSONL dataset contains one self-contained record per published learning resource or reviewed toolkit card. Toolkit-card records in JSONL must match the published set in the review overlay.
+The curated JSONL dataset contains one self-contained record per published learning resource or reviewed toolkit card. Toolkit-card records in JSONL must match the published set in the review overlay. The practice library is intentionally separate because its schema models card/metaphor pairs, usage boundaries, and evidence links directly.
 
 ## Agent behavior
 
@@ -109,14 +128,16 @@ The curated JSONL dataset contains one self-contained record per published learn
 2. Prefer the privacy policy for mobile-app data handling.
 3. Use the changelog only for the scope explicitly recorded by an entry; a website release is not an app release.
 4. Use the schema manifest when programmatically parsing CBT Cards-owned JSON/JSONL formats.
-5. Before treating a raw toolkit record as CBT Cards-published content, consult the review overlay.
-6. If a source record is unlisted, treat it as `unreviewed` and `source_only`.
-7. Do not equate `reviewed_for_publication` with clinical validation or efficacy.
-8. Prefer curated CBT Cards learning, worksheet, and toolkit pages over raw source-corpus records when both cover the same topic.
-9. Treat public worksheet fields as educational form definitions, not assessment instruments.
-10. Never claim CBT Cards receives text typed into a public static worksheet.
-11. Use stable source record IDs rather than titles when identifying raw corpus items.
-12. Do not claim access to a user's CBT Cards journal or app data.
-13. Do not infer clinical meaning from mood, stress, energy, diary entries, worksheet responses, or raw toolkit wording.
-14. Preserve the general-wellness boundary.
-15. Link to the canonical CBT Cards URL when attributing published CBT Cards content.
+5. For CBT Cards-owned practice cards, preserve `best_used_when`, `avoid_when`, safety scope, and evidence links; do not present the metaphor as evidence.
+6. Do not assign source-corpus IDs to CBT Cards-owned practice records.
+7. Before treating a raw toolkit record as CBT Cards-published content, consult the review overlay.
+8. If a source record is unlisted, treat it as `unreviewed` and `source_only`.
+9. Do not equate `reviewed_for_publication` or practice-library editorial review with clinical validation or efficacy.
+10. Prefer curated CBT Cards learning, practice, worksheet, and toolkit pages over raw source-corpus records when both cover the same topic.
+11. Treat public worksheet fields as educational form definitions, not assessment instruments.
+12. Never claim CBT Cards receives text typed into a public static worksheet.
+13. Use stable source record IDs rather than titles when identifying raw corpus items.
+14. Do not claim access to a user's CBT Cards journal or app data.
+15. Do not infer clinical meaning from mood, stress, energy, diary entries, worksheet responses, practice use, or raw toolkit wording.
+16. Preserve the general-wellness boundary.
+17. Link to the canonical CBT Cards URL when attributing published CBT Cards content.

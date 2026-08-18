@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.0",
+  "id": "cbt-cards-practice-v1",
+  "name": "CBT Cards practice cards and metaphors",
+  "canonical": "https://cbt-cards.github.io/data/practice.json",
+  "updated": "2026-08-18",
+  "language": "en",
+  "ownership": "CBT Cards original editorial content, separate from the pinned MetalHatsCats CBT Toolkit source corpus.",
+  "review_status": "editorial_and_safety_reviewed_for_publication",
+  "clinical_validation_status": "not_claimed",
+  "safety_scope": "General wellness and self-reflection only. These prompts are not diagnosis, treatment, emergency support, or individualized medical advice. Do not use them to override genuine safety measures, professional instructions, or urgent action.",
+  "pairs": [
+    {
+      "id": "practice-test-your-prediction",
+      "title": "Test Your Prediction",
+      "mechanism": "behavioral experiment and evidence update",
+      "target_patterns": [
+        "treating a prediction as if it is already known",
+        "mind reading",
+        "catastrophic expectation"
+      ],
+      "best_used_when": [
+        "the feared outcome is specific enough to observe",
+        "a small ordinary-risk test or observation is available",
+        "the goal is to learn what happens rather than force a positive result"
+      ],
+      "avoid_when": [
+        "the situation involves genuine physical danger or abuse",
+        "the action is irreversible or unusually high stakes",
+        "the decision is medical, legal, financial, or otherwise requires qualified guidance",
+        "the test would require breaking a safety rule, law, policy, or professional instruction"
+      ],
+      "card": {
+        "prompt": "Turn one anxious prediction into something observable, then compare the prediction with what actually happens.",
+        "steps": [
+          "Write the prediction in one specific sentence.",
+          "Rate how likely you think it is from 0 to 100.",
+          "Choose one small, safe way to test or observe the prediction.",
+          "Decide in advance what you will actually observe instead of guessing what other people think.",
+          "Afterward, write what happened and rate the prediction again.",
+          "Keep the result even if it does not reassure you; the point is better evidence, not a forced positive conclusion."
+        ],
+        "micro_action": "Write one prediction, one observable test, and one result.",
+        "reflection_question": "What did the result change, if anything, about how certain you are?"
+      },
+      "metaphor": {
+        "id": "metaphor-weather-forecast",
+        "title": "The Weather Forecast",
+        "text": "A forecast can be useful without being a fact about what the sky will do. You can prepare for rain and still look outside. An anxious prediction works similarly: notice the forecast, then update it with what actually happens.",
+        "use": "A memory aid for separating prediction from observation; it is not evidence that a feared outcome is safe or impossible."
+      },
+      "follow_up": [
+        "Repeat only with another small, ordinary-risk observation if that would add useful information.",
+        "If the same prediction persists despite repeated evidence, write down what evidence your mind is discounting rather than escalating the test."
+      ],
+      "evidence_basis": [
+        {
+          "title": "NICE social anxiety disorder guideline",
+          "url": "https://www.nice.org.uk/guidance/cg159/chapter/recommendations",
+          "note": "Describes behavioral experiments that test negative beliefs as part of individual CBT for social anxiety."
+        },
+        {
+          "title": "NHS thought record",
+          "url": "https://www.nhs.uk/every-mind-matters/mental-wellbeing-tips/self-help-cbt-techniques/thought-record/",
+          "note": "Uses evidence for and against a thought and a more realistic or neutral alternative."
+        }
+      ]
+    },
+    {
+      "id": "practice-problem-or-worry",
+      "title": "Problem or Worry?",
+      "mechanism": "distinguishing actionable problems from hypothetical worry",
+      "target_patterns": [
+        "repeated what-if thinking",
+        "trying to solve uncertainty as if it were a current problem",
+        "worry without a clear next action"
+      ],
+      "best_used_when": [
+        "you can state the worry clearly enough to ask whether a practical action exists",
+        "you want to decide between problem solving and setting the worry aside for later review"
+      ],
+      "avoid_when": [
+        "there is an urgent or time-sensitive safety issue that needs action now",
+        "the concern involves symptoms or circumstances that require medical, legal, financial, safeguarding, or other professional advice",
+        "you are using the label hypothetical to dismiss a concrete problem you could reasonably act on"
+      ],
+      "card": {
+        "prompt": "Ask whether this concern has a practical next action or is mainly a future-focused what-if.",
+        "steps": [
+          "Write the worry in one sentence.",
+          "Ask: Is there something practical I can do about this now or schedule to do later?",
+          "If yes, name the smallest useful next action and when you will do it.",
+          "If no, label it as a hypothetical or currently unsolvable worry rather than continuing to search for a perfect answer.",
+          "Capture it for a planned review or worry period if that helps, then return attention to the task or moment in front of you."
+        ],
+        "micro_action": "Classify one worry and either schedule one action or park it for review.",
+        "reflection_question": "Did more thinking create a usable action, or only another version of the same what-if?"
+      },
+      "metaphor": {
+        "id": "metaphor-toolbox-and-weather",
+        "title": "The Toolbox and the Weather",
+        "text": "A toolbox is useful for a loose hinge. It is not useful for tomorrow's weather. Some concerns have handles you can grab and work on; others are uncertainty you can notice without pretending there is a tool that will remove it.",
+        "use": "A memory aid for choosing between practical problem solving and tolerating uncertainty; it is not a rule for dismissing real problems."
+      },
+      "follow_up": [
+        "For a practical problem, review whether the chosen action helped and choose the next step if needed.",
+        "For a hypothetical worry, notice whether returning to it produces new actionable information before spending more time on it."
+      ],
+      "evidence_basis": [
+        {
+          "title": "NHS problem solving",
+          "url": "https://www.nhs.uk/every-mind-matters/mental-wellbeing-tips/self-help-cbt-techniques/problem-solving/",
+          "note": "Distinguishes problems with possible practical solutions from hypothetical worries."
+        },
+        {
+          "title": "NHS tackling your worries",
+          "url": "https://www.nhs.uk/every-mind-matters/mental-wellbeing-tips/self-help-cbt-techniques/tackling-your-worries/",
+          "note": "Uses a worry tree to separate actionable problems from hypothetical worries and choose a response."
+        }
+      ]
+    },
+    {
+      "id": "practice-spot-the-safety-behavior",
+      "title": "Spot the Safety Behavior",
+      "mechanism": "noticing anxiety-maintaining safety-seeking behavior in low-risk situations",
+      "target_patterns": [
+        "using an extra protective routine mainly to prevent an anxious prediction",
+        "entering a low-risk situation while relying on a behavior that makes it hard to learn what would happen without it",
+        "social-anxiety patterns such as excessive rehearsal, concealment, or checking"
+      ],
+      "best_used_when": [
+        "the situation is objectively low risk",
+        "the behavior is not a genuine safety requirement",
+        "you can reduce one mild, non-essential behavior without increasing real-world danger"
+      ],
+      "avoid_when": [
+        "the behavior is a genuine safety measure, protective boundary, accessibility aid, medication instruction, or professional recommendation",
+        "the situation involves driving, machinery, hazardous work, medical risk, abuse, intoxication, self-harm risk, or other real danger",
+        "reducing the behavior would break a law, policy, workplace rule, or safeguarding requirement",
+        "you are unsure whether the behavior is protective in a real-world sense"
+      ],
+      "card": {
+        "prompt": "Notice one extra behavior you use mainly to prevent an anxious prediction, then decide whether it is safe and useful to test reducing it slightly.",
+        "steps": [
+          "Name the low-risk situation and the feared outcome.",
+          "Name the extra behavior you use to prevent, hide, or control that outcome.",
+          "Ask whether the behavior protects against real danger or mainly protects against anxiety, embarrassment, or uncertainty.",
+          "If it is genuinely protective, keep it.",
+          "If it is non-essential and the situation is objectively safe, choose one small reduction rather than removing every coping strategy at once.",
+          "Observe what happens without mind reading or grading yourself on how calm you felt."
+        ],
+        "micro_action": "Identify one non-essential safety-seeking behavior; change nothing until you have checked that it is not a real safety measure.",
+        "reflection_question": "What did the behavior help you avoid learning about the situation?"
+      },
+      "metaphor": {
+        "id": "metaphor-training-wheels",
+        "title": "The Training Wheels",
+        "text": "Training wheels can help at first, but if they always touch the ground it is hard to learn what your own balance can do. The useful comparison is not 'remove every protection'; it is 'on a safe, flat path, is this extra support still teaching you something or preventing you from finding out?'",
+        "use": "A memory aid for non-essential safety-seeking behavior in low-risk anxiety situations. Genuine safety equipment and protective boundaries are not training wheels."
+      },
+      "follow_up": [
+        "If reducing the behavior was safe and informative, record what you learned before deciding whether another small experiment is useful.",
+        "If risk or uncertainty about real safety appears, stop the experiment and keep the protective behavior."
+      ],
+      "evidence_basis": [
+        {
+          "title": "NICE social anxiety disorder guideline",
+          "url": "https://www.nice.org.uk/guidance/cg159/chapter/recommendations",
+          "note": "Individual CBT for social anxiety includes work on safety-seeking behaviors and behavioral experiments."
+        }
+      ]
+    }
+  ]
+}

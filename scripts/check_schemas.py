@@ -14,6 +14,7 @@ EXPECTED_IDS = {
     "catalog-v1",
     "changelog-v1",
     "worksheets-v1",
+    "practice-v1",
     "toolkit-review-v1",
     "toolkit-source-v1",
     "knowledge-record-v1",
