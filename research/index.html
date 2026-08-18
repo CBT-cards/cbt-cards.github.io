@@ -4,28 +4,39 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CBT Cards agent evals: routing, safety &amp; localization cases</title>
-<meta name="description" content="A public starter evaluation set for testing whether AI assistants select CBT Cards resources correctly, preserve publication and privacy boundaries, and handle localization safely." />
+<meta name="description" content="Public evaluation cases and reproducible non-model baselines for testing CBT Cards resource routing, publication boundaries, privacy, localization, and safety abstention." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href="https://cbt-cards.github.io/research/" />
 <link rel="alternate" type="application/x-ndjson" href="https://cbt-cards.github.io/data/agent-evals.jsonl" title="CBT Cards agent evaluation cases" />
+<link rel="alternate" type="application/x-ndjson" href="https://cbt-cards.github.io/data/agent-eval-runs.jsonl" title="CBT Cards reproducible evaluation runs" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/schemas/agent-eval-case-v1.schema.json" title="CBT Cards agent evaluation case schema" />
+<link rel="alternate" type="application/json" href="https://cbt-cards.github.io/schemas/agent-eval-run-v1.schema.json" title="CBT Cards agent evaluation run schema" />
 <link rel="stylesheet" href="/styles.css?v=20260818" />
 <link rel="icon" href="/assets/app-icon.png" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="CBT Cards agent evals" />
-<meta property="og:description" content="Public routing, safety, privacy, publication-boundary, and localization cases for assistants using CBT Cards." />
+<meta property="og:description" content="Public routing, safety, privacy, publication-boundary, localization cases, and reproducible baselines for assistants using CBT Cards." />
 <meta property="og:url" content="https://cbt-cards.github.io/research/" />
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"Research","item":"https://cbt-cards.github.io/research/"}]},{"@type":"Dataset","name":"CBT Cards agent evaluation cases v1","description":"A starter set of scenarios for evaluating resource routing, localization status, source-publication boundaries, privacy boundaries, and safety abstention when assistants use CBT Cards public resources.","url":"https://cbt-cards.github.io/research/","distribution":{"@type":"DataDownload","encodingFormat":"application/x-ndjson","contentUrl":"https://cbt-cards.github.io/data/agent-evals.jsonl"},"license":"https://cbt-cards.github.io/LICENSE","creator":{"@id":"https://cbt-cards.github.io/#publisher"},"dateModified":"2026-08-18"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"Research","item":"https://cbt-cards.github.io/research/"}]},{"@type":"Dataset","name":"CBT Cards agent evaluation cases v1","description":"Scenarios and reproducible baseline runs for evaluating resource routing, localization status, source-publication boundaries, privacy boundaries, and safety abstention when assistants use CBT Cards public resources.","url":"https://cbt-cards.github.io/research/","distribution":[{"@type":"DataDownload","encodingFormat":"application/x-ndjson","contentUrl":"https://cbt-cards.github.io/data/agent-evals.jsonl"},{"@type":"DataDownload","encodingFormat":"application/x-ndjson","contentUrl":"https://cbt-cards.github.io/data/agent-eval-runs.jsonl"}],"license":"https://cbt-cards.github.io/LICENSE","creator":{"@id":"https://cbt-cards.github.io/#publisher"},"dateModified":"2026-08-18"}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/learn/">Learn</a><a href="/toolkit/">Toolkit</a><a href="/languages/">Languages</a><a href="/research/">Research</a><a href="/agents/">For AI</a><a href="/about/">About</a></nav><a class="download" href="/data/agent-evals.jsonl">Eval data</a></div></header>
 <main id="main">
-<section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / Research</div><h1>Test the assistant, not just the prompt.</h1><p class="lede">CBT Cards publishes a small evaluation set for checking whether an assistant chooses the right public resource, preserves review and localization status, respects private-data boundaries, and knows when not to route a person into a reflection exercise.</p></div></section>
+<section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / Research</div><h1>Test the assistant, not just the prompt.</h1><p class="lede">CBT Cards publishes inspectable evaluation cases and reproducible baselines for checking whether an assistant chooses the right public resource, preserves review and localization status, respects private-data boundaries, and knows when not to route a person into a reflection exercise.</p></div></section>
 <section class="section alt"><div class="wrap prose">
 <h2>Starter set: 24 cases, 7 categories</h2>
 <p>The first dataset contains 24 hand-authored scenarios across retrieval, learning, worksheets, localization, publication boundaries, privacy, and safety. Each case records an expected route, acceptable stable resource or source IDs, semantic checks, prohibited claims, and a rationale.</p>
-<p><a href="/data/agent-evals.jsonl"><strong>Read the JSONL cases</strong></a> · <a href="/schemas/agent-eval-case-v1.schema.json">View the versioned schema</a></p>
+<p><a href="/data/agent-evals.jsonl"><strong>Read the JSONL cases</strong></a> · <a href="/schemas/agent-eval-case-v1.schema.json">Case schema</a></p>
+
+<h2>Reproducible baselines</h2>
+<p>The repository now records two deterministic, non-model baselines in <a href="/data/agent-eval-runs.jsonl"><code>data/agent-eval-runs.jsonl</code></a>. Both are regenerated from the case dataset by <a href="/scripts/run_eval_baselines.py"><code>scripts/run_eval_baselines.py</code></a>; CI rejects the checked-in run records if they differ from the code or from the current eval dataset hash.</p>
+<ul>
+<li><strong><code>null-route-v1</code>:</strong> always declines to route to a resource. It gets 1/24 routes correct, 0/19 target selections, 0/4 locale behaviors, and 1/7 boundary routes. This is the intentionally weak floor.</li>
+<li><strong><code>deterministic-contract-router-v1</code>:</strong> a small keyword router using only <code>user_message</code>. On the current starter set it gets 24/24 routes, 19/19 target selections, 4/4 locale behaviors, and 7/7 boundary routes.</li>
+</ul>
+<p>The second baseline's perfect score is <strong>not</strong> evidence of general assistant quality. It is a contract/harness baseline built around the current small routing taxonomy. Its job is to prove that the cases, scoring fields, stable IDs, hashing, and result serialization can reproduce a known result before model runs are added.</p>
+<p><a href="/schemas/agent-eval-run-v1.schema.json">Run schema</a> · Dataset SHA-256 pinned inside every run record</p>
 
 <h2>What the cases test</h2>
 <ul>
@@ -38,16 +49,19 @@
 <li><strong>Safety abstention:</strong> preserve the general-wellness boundary and do not substitute a reflection card for the host platform's immediate-safety handling.</li>
 </ul>
 
-<h2>What this dataset does not claim</h2>
-<p>There are no public model scores in this release. The cases define evaluation targets; they do not pretend that a model was benchmarked merely because a JSONL file exists. The set is also not a clinical safety benchmark, diagnostic test, or proof that an assistant is appropriate for mental-health care.</p>
-<p>The expected checks are intentionally semantic rather than exact-string answers. A useful evaluator should test whether the response preserves the relevant source and boundary, not whether it reproduces one preferred sentence.</p>
+<h2>What the numbers do not measure</h2>
+<p>The deterministic baselines do not grade free-form explanation quality, empathy, factual completeness, clinical suitability, or real-world model behavior. Boundary accuracy here means that the structured router chose the expected boundary route. A future model run must record its own model/provider/version and evaluator metadata rather than inheriting a deterministic baseline score.</p>
+<p>The expected case checks are intentionally semantic rather than exact-string answers. A useful evaluator should test whether the response preserves the relevant source and boundary, not whether it reproduces one preferred sentence.</p>
 
 <h2>Versioning and reproducibility</h2>
-<p>Cases use stable IDs such as <code>eval-retrieval-worry-box</code>. Resource expectations use the same stable catalog IDs and raw source IDs used elsewhere in CBT Cards. The repository validator rejects unknown IDs, missing category coverage, invalid source-only routes, localization expectations that conflict with published translation state, and evaluation metadata that drifts from the public catalog.</p>
-<p>Meaningful changes to the case format require a new versioned schema URL rather than silently changing the contract. Dataset additions can extend the same v1 record shape while keeping existing case IDs stable.</p>
+<p>Cases use stable IDs such as <code>eval-retrieval-worry-box</code>. Resource expectations use the same stable catalog IDs and raw source IDs used elsewhere in CBT Cards. Every run records the SHA-256 of the exact eval dataset bytes it used, so results cannot silently float onto a changed test set.</p>
+<p>Meaningful changes to the case or run format require a new versioned schema URL rather than silently changing the contract. Dataset additions can extend the same v1 case shape while keeping existing IDs stable.</p>
+
+<h2>Citation and archival provenance</h2>
+<p>The repository includes a root <a href="/CITATION.cff"><code>CITATION.cff</code></a> using Citation File Format 1.2.0, with CBT Cards described as a dataset and MetalHatsCats as the authoring entity. No DOI is claimed yet. A DOI should be added only after an archive actually assigns one to a release.</p>
 
 <h2>Research direction</h2>
-<p>This starter set is deliberately small enough to inspect. Future releases can add multilingual fidelity cases, adversarial publication-status cases, retrieval ambiguity, source-update regressions, and recorded model runs with explicit model/version/date metadata. Those results should be published separately from the test cases so the benchmark does not grade itself, a surprisingly popular human tradition.</p>
+<p>Next useful additions are held-out paraphrase cases, multilingual fidelity grading, adversarial publication-status cases, source-update regressions, and actual model runs with explicit provider/model/version/date and evaluator metadata. Model results should stay separate from the test cases so the benchmark does not grade itself, a surprisingly durable human tradition.</p>
 </div></section>
 </main>
 <footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/research/">Research</a><a href="/languages/">Languages</a><a href="/toolkit/">Toolkit</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/agents/">For AI</a></nav></div></footer>
