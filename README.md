@@ -2,7 +2,7 @@
 
 Official static website and public knowledge resource for CBT Cards.
 
-The site is intentionally dependency-free: plain HTML, CSS, text, JSON, and product-owned assets deploy directly to GitHub Pages. There is no JavaScript application bundle or build step required to render public content.
+The site is intentionally dependency-free: plain HTML, CSS, text, JSON, JSONL, and product-owned assets deploy directly to GitHub Pages. There is no JavaScript application bundle or build step required to render public content.
 
 ## Public structure
 
@@ -34,6 +34,7 @@ Agent and machine-readable resources:
 - `/llms.txt` — compact public index
 - `/llms-full.txt` — extended source-priority and safety index
 - `/data/catalog.json` — canonical public resource catalog with stable IDs
+- `/data/knowledge.jsonl` — RAG-friendly knowledge records for public learning resources
 
 ## Local preview
 
@@ -51,7 +52,7 @@ Run the same static checks used by GitHub Actions:
 python3 scripts/check_site.py
 ```
 
-The checker verifies public HTML metadata, one H1 per indexed page, canonical uniqueness, JSON-LD parsing, internal links, sitemap coverage, sitemap targets, and machine-readable catalog targets.
+The checker verifies public HTML metadata, one H1 per indexed page, canonical uniqueness, JSON-LD parsing, internal links, sitemap coverage, sitemap targets, the resource catalog, the skill manifest, and JSONL knowledge records.
 
 ## Deployment
 
@@ -69,7 +70,8 @@ The repository must remain `CBT-cards/cbt-cards.github.io` to serve the user-sit
 - Health-adjacent learning content should link to authoritative sources and record a review date.
 - Do not claim that CBT Cards diagnoses, treats, cures, or prevents a condition. It is a general wellness and self-reflection product.
 - Keep internal links root-relative so GitHub Pages serves them correctly.
-- When adding or removing an indexed page, update `sitemap.xml`, `llms.txt`, `llms-full.txt`, and `data/catalog.json` where relevant.
+- When adding or removing an indexed page, update `sitemap.xml`, `llms.txt`, `llms-full.txt`, `data/catalog.json`, and `data/knowledge.jsonl` where relevant.
+- Keep each JSONL knowledge record self-contained and aligned with its canonical learning page. Reuse the same stable resource ID in the catalog and dataset.
 - When changing the agent skill, publish an immutable version and update `agents/cbt-cards/manifest.json` before moving the latest alias.
 
 ## Assets
