@@ -13,6 +13,7 @@
     {"id": "translation-record-v1", "url": "https://cbt-cards.github.io/schemas/translation-record-v1.schema.json", "instance": "https://cbt-cards.github.io/data/translations.jsonl"},
     {"id": "agent-eval-case-v1", "url": "https://cbt-cards.github.io/schemas/agent-eval-case-v1.schema.json", "instance": "https://cbt-cards.github.io/data/agent-evals.jsonl"},
     {"id": "agent-eval-run-v1", "url": "https://cbt-cards.github.io/schemas/agent-eval-run-v1.schema.json", "instance": "https://cbt-cards.github.io/data/agent-eval-runs.jsonl"},
+    {"id": "agent-eval-challenge-run-v1", "url": "https://cbt-cards.github.io/schemas/agent-eval-challenge-run-v1.schema.json", "instance": "https://cbt-cards.github.io/data/agent-eval-challenge-runs.jsonl"},
     {"id": "skill-manifest-v1", "url": "https://cbt-cards.github.io/schemas/skill-manifest-v1.schema.json", "instance": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"}
   ]
 }
