@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "name": "CBT Cards content review registry",
+  "canonical": "https://cbt-cards.github.io/data/content-review.json",
+  "updated": "2026-08-18",
+  "policy": {
+    "covered_resource_types": ["learning", "worksheet", "toolkit-card"],
+    "review_kind": "editorial_source_and_safety",
+    "target_interval_days": 365,
+    "overdue_behavior": "CI blocks deployment until the affected resource is reviewed and its review metadata is updated.",
+    "clinical_validation_status": "not_claimed",
+    "scope_note": "Review confirms source, wording, product-boundary, privacy where relevant, and general-wellness safety for public web publication. It is not clinical validation, efficacy evidence, diagnosis, or individualized treatment review."
+  },
+  "resources": [
+    {"resource_id":"cbt-thought-record","content_type":"learning","status":"reviewed","last_reviewed":"2026-08-18","next_review_due":"2027-08-18","review_scope":"editorial_source_and_safety","reviewed_by":"CBT Cards project","clinical_validation_status":"not_claimed"},
+    {"resource_id":"automatic-thoughts","content_type":"learning","status":"reviewed","last_reviewed":"2026-08-18","next_review_due":"2027-08-18","review_scope":"editorial_source_and_safety","reviewed_by":"CBT Cards project","clinical_validation_status":"not_claimed"},
+    {"resource_id":"thought-vs-fact","content_type":"learning","status":"reviewed","last_reviewed":"2026-08-18","next_review_due":"2027-08-18","review_scope":"editorial_source_and_safety","reviewed_by":"CBT Cards project","clinical_validation_status":"not_claimed"},
+    {"resource_id":"worry-time","content_type":"learning","status":"reviewed","last_reviewed":"2026-08-18","next_review_due":"2027-08-18","review_scope":"editorial_source_and_safety","reviewed_by":"CBT Cards project","clinical_validation_status":"not_claimed"},
+    {"resource_id":"activity-planning","content_type":"learning","status":"reviewed","last_reviewed":"2026-08-18","next_review_due":"2027-08-18","review_scope":"editorial_source_and_safety","reviewed_by":"CBT Cards project","clinical_validation_status":"not_claimed"},
+    {"resource_id":"cbt-journaling","content_type":"learning","status":"reviewed","last_reviewed":"2026-08-18","next_review_due":"2027-08-18","review_scope":"editorial_source_and_safety","reviewed_by":"CBT Cards project","clinical_validation_status":"not_claimed"},
+    {"resource_id":"cbt-thought-record-7-step","content_type":"worksheet","status":"reviewed","last_reviewed":"2026-08-18","next_review_due":"2027-08-18","review_scope":"editorial_source_and_safety","reviewed_by":"CBT Cards project","clinical_validation_status":"not_claimed"},
+    {"resource_id":"worry-time-6-step","content_type":"worksheet","status":"reviewed","last_reviewed":"2026-08-18","next_review_due":"2027-08-18","review_scope":"editorial_source_and_safety","reviewed_by":"CBT Cards project","clinical_validation_status":"not_claimed"},
+    {"resource_id":"activity-planning-7-step","content_type":"worksheet","status":"reviewed","last_reviewed":"2026-08-18","next_review_due":"2027-08-18","review_scope":"editorial_source_and_safety","reviewed_by":"CBT Cards project","clinical_validation_status":"not_claimed"},
+    {"resource_id":"source-card-4","content_type":"toolkit-card","status":"reviewed","last_reviewed":"2026-08-18","next_review_due":"2027-08-18","review_scope":"editorial_source_and_safety","reviewed_by":"CBT Cards project","clinical_validation_status":"not_claimed"},
+    {"resource_id":"source-card-15","content_type":"toolkit-card","status":"reviewed","last_reviewed":"2026-08-18","next_review_due":"2027-08-18","review_scope":"editorial_source_and_safety","reviewed_by":"CBT Cards project","clinical_validation_status":"not_claimed"},
+    {"resource_id":"source-card-16","content_type":"toolkit-card","status":"reviewed","last_reviewed":"2026-08-18","next_review_due":"2027-08-18","review_scope":"editorial_source_and_safety","reviewed_by":"CBT Cards project","clinical_validation_status":"not_claimed"},
+    {"resource_id":"source-card-21","content_type":"toolkit-card","status":"reviewed","last_reviewed":"2026-08-18","next_review_due":"2027-08-18","review_scope":"editorial_source_and_safety","reviewed_by":"CBT Cards project","clinical_validation_status":"not_claimed"},
+    {"resource_id":"source-card-27","content_type":"toolkit-card","status":"reviewed","last_reviewed":"2026-08-18","next_review_due":"2027-08-18","review_scope":"editorial_source_and_safety","reviewed_by":"CBT Cards project","clinical_validation_status":"not_claimed"},
+    {"resource_id":"source-card-32","content_type":"toolkit-card","status":"reviewed","last_reviewed":"2026-08-18","next_review_due":"2027-08-18","review_scope":"editorial_source_and_safety","reviewed_by":"CBT Cards project","clinical_validation_status":"not_claimed"}
+  ]
+}
