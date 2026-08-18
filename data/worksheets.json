@@ -20,6 +20,43 @@
         {"id": "alternative_view", "position": 6, "label": "Alternative view", "prompt": "Considering both sides, is there a more realistic, neutral, or balanced way to describe the situation?"},
         {"id": "feelings_after", "position": 7, "label": "Feelings now", "prompt": "After reviewing the situation, what do you notice now? It is also okay if nothing changed."}
       ]
+    },
+    {
+      "id": "worry-time-6-step",
+      "locale": "en",
+      "title": "Worry time — 6-step worksheet",
+      "canonical_url": "https://cbt-cards.github.io/worksheets/worry-time/",
+      "learning_resource": "https://cbt-cards.github.io/learn/worry-time/",
+      "source": "https://www.nhs.uk/every-mind-matters/mental-wellbeing-tips/self-help-cbt-techniques/tackling-your-worries/",
+      "safety_scope": "General self-reflection only; persistent or overwhelming worry may warrant support from an appropriate qualified professional.",
+      "privacy_behavior": "The static web worksheet has no submit action. Text entered into the browser fields is not sent to CBT Cards and is lost when the page is refreshed or closed unless the user prints or saves it independently.",
+      "fields": [
+        {"id": "review_time", "position": 1, "label": "Choose a review time", "prompt": "Choose a short deliberate period for reviewing worries rather than repeatedly engaging with them throughout the day."},
+        {"id": "worries", "position": 2, "label": "Capture the worry", "prompt": "Write each worry in a clear sentence so it can be reviewed later."},
+        {"id": "worry_type", "position": 3, "label": "What can be acted on?", "prompt": "Is this a practical problem with an action available, a hypothetical concern, or are you unsure?"},
+        {"id": "next_action", "position": 4, "label": "Choose one next step", "prompt": "For a practical problem, specify what you will do, when, where, and what support or information you need."},
+        {"id": "set_aside", "position": 5, "label": "Set down what cannot be solved now", "prompt": "Record worries that do not have a useful action right now without trying to prove them impossible or unimportant."},
+        {"id": "review", "position": 6, "label": "Review what happened", "prompt": "What did you notice after postponing and reviewing the worries deliberately?"}
+      ]
+    },
+    {
+      "id": "activity-planning-7-step",
+      "locale": "en",
+      "title": "Activity planning — 7-step worksheet",
+      "canonical_url": "https://cbt-cards.github.io/worksheets/activity-planning/",
+      "learning_resource": "https://cbt-cards.github.io/learn/activity-planning/",
+      "source": "https://www.nhs.uk/every-mind-matters/mental-wellbeing-tips/self-help-cbt-techniques/tackling-your-to-do-list/",
+      "safety_scope": "General planning and self-reflection only; not individualized treatment guidance.",
+      "privacy_behavior": "The static web worksheet has no submit action. Text entered into the browser fields is not sent to CBT Cards and is lost when the page is refreshed or closed unless the user prints or saves it independently.",
+      "fields": [
+        {"id": "activity", "position": 1, "label": "Choose one activity", "prompt": "Name one task or activity rather than an entire project or life area."},
+        {"id": "meaning", "position": 2, "label": "Why does it matter?", "prompt": "What responsibility, connection, enjoyment, learning, care, or unfinished business would this activity support?"},
+        {"id": "first_step", "position": 3, "label": "Make the first step smaller", "prompt": "Choose the smallest visible action that would count as starting."},
+        {"id": "time_place", "position": 4, "label": "Choose when and where", "prompt": "Specify when you will try the first step and where you expect to be."},
+        {"id": "obstacle", "position": 5, "label": "Plan for one obstacle", "prompt": "What is most likely to get in the way and what modest response could help?"},
+        {"id": "review", "position": 6, "label": "Review after trying it", "prompt": "What happened and what did you notice about effort, mood, energy, stress, enjoyment, or willingness to continue?"},
+        {"id": "next_step", "position": 7, "label": "Choose the next step", "prompt": "Based on what happened, decide whether to repeat, reduce, adjust, or choose the next small action."}
+      ]
     }
   ]
 }
