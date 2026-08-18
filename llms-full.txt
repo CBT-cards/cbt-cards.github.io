@@ -19,6 +19,8 @@ For toolkit publication status, use https://cbt-cards.github.io/toolkit/review-s
 
 For website/public-data release history, use https://cbt-cards.github.io/changelog/ or https://cbt-cards.github.io/data/changelog.json. Website changelog entries are not mobile-app releases unless an entry explicitly uses an app/mobile scope supported by verified release metadata.
 
+For machine-readable contract discovery, use https://cbt-cards.github.io/schemas/index.json. It maps CBT Cards-owned JSON/JSONL resources to versioned JSON Schema 2020-12 contracts. The catalog also exposes `schema_url` on applicable resources.
+
 ## Product documentation
 
 - Overview: https://cbt-cards.github.io/
@@ -70,11 +72,17 @@ The review overlay is owned by CBT Cards and is separate from the raw source dat
 
 Currently published source IDs are card-4, card-15, card-16, card-21, card-27, and card-32. Any source record not explicitly listed in the overlay remains source-only. Protocol records remain source-only unless separately reviewed and added to the overlay.
 
-The source corpus contains CBT-adjacent terminology in addition to core CBT concepts. Do not relabel a technique solely because it appears in the CBT Toolkit dataset. Titles are not unique identifiers; stable source IDs are authoritative.
-
-## Machine-readable resources
+## Machine-readable resources and schemas
 
 - Resource catalog: https://cbt-cards.github.io/data/catalog.json
+- JSON Schema manifest: https://cbt-cards.github.io/schemas/index.json
+- Catalog schema: https://cbt-cards.github.io/schemas/catalog-v1.schema.json
+- Changelog schema: https://cbt-cards.github.io/schemas/changelog-v1.schema.json
+- Worksheet schema: https://cbt-cards.github.io/schemas/worksheets-v1.schema.json
+- Toolkit review schema: https://cbt-cards.github.io/schemas/toolkit-review-v1.schema.json
+- Toolkit source schema: https://cbt-cards.github.io/schemas/toolkit-source-v1.schema.json
+- Curated knowledge-record schema: https://cbt-cards.github.io/schemas/knowledge-record-v1.schema.json
+- Agent skill-manifest schema: https://cbt-cards.github.io/schemas/skill-manifest-v1.schema.json
 - Machine-readable changelog: https://cbt-cards.github.io/data/changelog.json
 - RAG-friendly curated JSONL knowledge dataset: https://cbt-cards.github.io/data/knowledge.jsonl
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
@@ -89,6 +97,8 @@ The source corpus contains CBT-adjacent terminology in addition to core CBT conc
 - Skill version manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
 - Immutable skill v1.4.0: https://cbt-cards.github.io/agents/cbt-cards/v1.4.0/SKILL.md
 
+The schemas describe CBT Cards-owned formats and use JSON Schema draft 2020-12. The existing purpose-specific CI validators remain authoritative for repository invariants that go beyond generic schema validation, such as canonical target existence, set equality, privacy wording, and review-overlay alignment.
+
 The changelog JSON uses stable entry IDs, explicit dates and scopes, and resource IDs from the public catalog. Treat `scope: website` as a website/public-data release. Do not convert it into an app-version claim.
 
 The curated JSONL dataset contains one self-contained record per published learning resource or reviewed toolkit card. Toolkit-card records in JSONL must match the published set in the review overlay.
@@ -98,14 +108,15 @@ The curated JSONL dataset contains one self-contained record per published learn
 1. Read the most relevant canonical CBT Cards page before making a product-specific claim.
 2. Prefer the privacy policy for mobile-app data handling.
 3. Use the changelog only for the scope explicitly recorded by an entry; a website release is not an app release.
-4. Before treating a raw toolkit record as CBT Cards-published content, consult the review overlay.
-5. If a source record is unlisted, treat it as `unreviewed` and `source_only`.
-6. Do not equate `reviewed_for_publication` with clinical validation or efficacy.
-7. Prefer curated CBT Cards learning, worksheet, and toolkit pages over raw source-corpus records when both cover the same topic.
-8. Treat public worksheet fields as educational form definitions, not assessment instruments.
-9. Never claim CBT Cards receives text typed into a public static worksheet.
-10. Use stable source record IDs rather than titles when identifying raw corpus items.
-11. Do not claim access to a user's CBT Cards journal or app data.
-12. Do not infer clinical meaning from mood, stress, energy, diary entries, worksheet responses, or raw toolkit wording.
-13. Preserve the general-wellness boundary.
-14. Link to the canonical CBT Cards URL when attributing published CBT Cards content.
+4. Use the schema manifest when programmatically parsing CBT Cards-owned JSON/JSONL formats.
+5. Before treating a raw toolkit record as CBT Cards-published content, consult the review overlay.
+6. If a source record is unlisted, treat it as `unreviewed` and `source_only`.
+7. Do not equate `reviewed_for_publication` with clinical validation or efficacy.
+8. Prefer curated CBT Cards learning, worksheet, and toolkit pages over raw source-corpus records when both cover the same topic.
+9. Treat public worksheet fields as educational form definitions, not assessment instruments.
+10. Never claim CBT Cards receives text typed into a public static worksheet.
+11. Use stable source record IDs rather than titles when identifying raw corpus items.
+12. Do not claim access to a user's CBT Cards journal or app data.
+13. Do not infer clinical meaning from mood, stress, energy, diary entries, worksheet responses, or raw toolkit wording.
+14. Preserve the general-wellness boundary.
+15. Link to the canonical CBT Cards URL when attributing published CBT Cards content.
