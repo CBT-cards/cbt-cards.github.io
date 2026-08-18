@@ -21,6 +21,7 @@ EXPECTED_IDS = {
     "translation-record-v1",
     "agent-eval-case-v1",
     "agent-eval-run-v1",
+    "agent-eval-challenge-run-v1",
     "skill-manifest-v1",
 }
 
@@ -34,6 +35,19 @@ def local_path(url: str) -> Path | None:
     if f"{parsed.scheme}://{parsed.netloc}" != ORIGIN:
         return None
     return ROOT / parsed.path.lstrip("/")
+
+
+def validate_run_shape(schema: dict, label: str, expected_dataset: str) -> None:
+    required_run = set(schema.get("required", []))
+    for key in ("id", "eval_dataset", "eval_dataset_sha256", "executed", "runner", "metrics", "case_results", "notes"):
+        if key not in required_run:
+            fail(f"{label} must require {key}")
+    if schema.get("properties", {}).get("eval_dataset", {}).get("const") != expected_dataset:
+        fail(f"{label} must pin eval_dataset to {expected_dataset}")
+    runner_required = set(schema["properties"]["runner"].get("required", []))
+    for key in ("id", "type", "version", "implementation_url", "input_fields"):
+        if key not in runner_required:
+            fail(f"{label} runner must require {key}")
 
 
 def main() -> None:
@@ -155,15 +169,14 @@ def main() -> None:
             fail(f"agent eval schema must require {key}")
 
     eval_run = json.loads((ROOT / "schemas" / "agent-eval-run-v1.schema.json").read_text(encoding="utf-8"))
-    required_run = set(eval_run.get("required", []))
-    for key in ("id", "eval_dataset", "eval_dataset_sha256", "executed", "runner", "metrics", "case_results", "notes"):
-        if key not in required_run:
-            fail(f"agent eval run schema must require {key}")
+    validate_run_shape(eval_run, "agent eval run schema", f"{ORIGIN}/data/agent-evals.jsonl")
 
-    runner_required = set(eval_run["properties"]["runner"].get("required", []))
-    for key in ("id", "type", "version", "implementation_url", "input_fields"):
-        if key not in runner_required:
-            fail(f"agent eval run runner must require {key}")
+    challenge_run = json.loads((ROOT / "schemas" / "agent-eval-challenge-run-v1.schema.json").read_text(encoding="utf-8"))
+    validate_run_shape(
+        challenge_run,
+        "agent eval challenge run schema",
+        f"{ORIGIN}/data/agent-evals-challenge.jsonl",
+    )
 
     print(f"schema check passed: {len(entries)} versioned contracts discoverable from catalog")
 
