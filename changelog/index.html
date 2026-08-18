@@ -28,6 +28,18 @@
 <p>This changelog tracks changes to the public CBT Cards website, learning library, printable browser worksheets, schemas, toolkit pages, structured data, feeds, and agent interfaces. A website or data entry does <strong>not</strong> imply that an Android or iOS app version shipped on the same date.</p>
 <p>Agents and tooling can read the same history from <a href="/data/changelog.json"><code>data/changelog.json</code></a>. Versioned data contracts are listed in <a href="/schemas/index.json"><code>schemas/index.json</code></a>.</p>
 
+<article id="web-2026-08-18-crawl-graph-quality">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Website</p>
+<h2>Indexed-page crawl graph quality gate</h2>
+<p>Added direct homepage links to the major public-resource hubs and a CI rule that checks the sitemap as an actual internal-link graph rather than merely a list of files.</p>
+<ul>
+<li>Requires every indexed page except the homepage to receive at least one link from another indexed page.</li>
+<li>Requires every sitemap page to be reachable from the homepage in at most three internal-link hops.</li>
+<li>Requires Learn, Worksheets, Toolkit, About, Changelog, and Agents to be linked directly from the homepage.</li>
+<li>Adds a dedicated homepage public-resources section for worksheets, release history, and agent/data interfaces.</li>
+</ul>
+</article>
+
 <article id="web-2026-08-18-public-json-schemas">
 <p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Public data</p>
 <h2>Versioned public JSON Schema contracts</h2>
@@ -36,9 +48,7 @@
 <li>Added <a href="/schemas/index.json">a schema manifest</a> mapping versioned contracts to their instance URLs.</li>
 <li>Added contracts for the resource catalog, changelog, worksheets, toolkit review overlay, toolkit source manifest, curated knowledge-record lines, and agent skill manifest.</li>
 <li>Added <code>schema_url</code> links to applicable public catalog resources.</li>
-<li>Added a CI checker for schema IDs, JSON Schema version, local targets, catalog discovery, and safety-critical toolkit-review constants.</li>
 </ul>
-<p>Purpose-specific validators remain in place for invariants that generic JSON Schema does not express well, including canonical target existence, worksheet ordering, privacy behavior, and toolkit publication-set equality.</p>
 </article>
 
 <article id="web-2026-08-18-toolkit-review-overlay">
@@ -48,10 +58,9 @@
 <ul>
 <li>Added <a href="/toolkit/review-status/">human-readable toolkit review status</a> and <a href="/data/toolkit-review.json">machine-readable review data</a>.</li>
 <li>Defined the safe default for unlisted source records as <code>unreviewed</code> and <code>source_only</code>.</li>
-<li>Recorded six currently published source IDs: <code>card-4</code>, <code>card-15</code>, <code>card-16</code>, <code>card-21</code>, <code>card-27</code>, and <code>card-32</code>.</li>
-<li>Published agent skill v1.4.0, which requires checking the review overlay before treating a raw toolkit record as CBT Cards-published content.</li>
+<li>Recorded six currently published source IDs and published agent skill v1.4.0.</li>
 </ul>
-<p><code>reviewed_for_publication</code> means editorial and safety review for public web use. It is not clinical validation, proof of efficacy, diagnosis, or an individualized recommendation.</p>
+<p><code>reviewed_for_publication</code> means editorial and safety review for public web use. It is not clinical validation or proof of efficacy.</p>
 </article>
 
 <article id="web-2026-08-18-knowledge-foundation">
