@@ -1,0 +1,4 @@
+Contact: https://cbt-cards.github.io/support/
+Expires: 2027-08-18T00:00:00Z
+Preferred-Languages: en
+Canonical: https://cbt-cards.github.io/.well-known/security.txt
