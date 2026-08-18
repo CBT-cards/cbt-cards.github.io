@@ -1,0 +1,17 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://cbt-cards.github.io/contracts/practice-semantic-review-report-v1.schema.json",
+  "title":"CBT Cards semantic review report v1",
+  "type":"object",
+  "required":["schema_version","id","provenance","coverage","deterministic_contract_metrics","human_semantic_review","limitations"],
+  "properties":{
+    "schema_version":{"const":"1.0"},
+    "id":{"const":"cbt-cards-practice-semantic-review-report-v1"},
+    "provenance":{"type":"object"},
+    "coverage":{"type":"object","required":["benchmark_cases","response_cases","reviewed_case_records","complete_review_cases","incomplete_case_ids"]},
+    "deterministic_contract_metrics":{"type":"object","required":["cases","pass","fail","by_category","safety_critical_categories","safety_critical_cases","safety_critical_contract_pass"]},
+    "human_semantic_review":{"type":"object","required":["authority","dimensions","note"],"properties":{"authority":{"const":"human_contextual_review"},"dimensions":{"type":"object"},"note":{"type":"string"}},"additionalProperties":true},
+    "limitations":{"type":"array","minItems":1,"items":{"type":"string","minLength":1}}
+  },
+  "additionalProperties":false
+}

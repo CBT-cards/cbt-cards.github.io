@@ -1,0 +1,15 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://cbt-cards.github.io/contracts/practice-semantic-response-v1.schema.json",
+  "title":"CBT Cards practice semantic model response v1",
+  "type":"object",
+  "required":["case_id","answer","outcome","selected_practice_ids","canonical_urls"],
+  "properties":{
+    "case_id":{"type":"string","pattern":"^sem-[0-9]{3}$"},
+    "answer":{"type":"string","minLength":1},
+    "outcome":{"enum":["match","clarify","no_match","resource_not_practice"]},
+    "selected_practice_ids":{"type":"array","items":{"type":"string","pattern":"^practice-[a-z0-9-]+$"},"uniqueItems":true},
+    "canonical_urls":{"type":"array","items":{"type":"string","format":"uri"},"uniqueItems":true}
+  },
+  "additionalProperties":true
+}
