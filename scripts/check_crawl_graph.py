@@ -16,6 +16,7 @@ KEY_HOME_HUBS = {
     "/learn/",
     "/worksheets/",
     "/toolkit/",
+    "/languages/",
     "/about/",
     "/changelog/",
     "/agents/",
