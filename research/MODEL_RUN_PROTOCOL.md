@@ -55,13 +55,15 @@ For each eval case it constructs a fresh OpenAI Responses API request with:
 
 The adapter stores provider response IDs, the provider-returned model identifier, usage metadata, web-search call count, prompt/dataset/skill hashes, and the raw response envelopes in an execution artifact. It does not read expected benchmark fields for prediction and it does not calculate benchmark scores.
 
-`scripts/check_model_runner.py` reconstructs a request with sentinel benchmark-only values and fails CI if any sentinel value leaks into the model request. This test makes the input-isolation promise executable rather than ceremonial.
+`scripts/check_model_runner.py` reconstructs a request with sentinel benchmark-only values and fails CI if any sentinel value leaks into the model request. It also exercises the complete post-generation scorer/candidate path with a synthetic artifact. This makes the input-isolation and artifact-processing promises executable rather than ceremonial.
 
 ## Artifact-only GitHub Actions execution
 
-`.github/workflows/run-model-eval.yml` is a manual `workflow_dispatch` job for a fresh isolated process after the workflow exists on the repository default branch. It requires repository secret `OPENAI_API_KEY` and accepts a dataset (`starter` or `challenge`) plus model identifier.
+`.github/workflows/run-model-eval.yml` is a manual `workflow_dispatch` job for a fresh isolated process. GitHub only exposes a newly added manual workflow normally after that workflow exists on the repository default branch, so this job is intended for use after the containing change is merged or otherwise present on the default branch.
 
-The workflow performs four separate stages:
+The workflow requires repository secret `OPENAI_API_KEY` and accepts a dataset (`starter` or `challenge`) plus model identifier.
+
+It performs four separate stages:
 
 1. validate protocol and runner isolation;
 2. generate raw model responses with `run_model_openai.py`;
