@@ -5,6 +5,26 @@
   "updated": "2026-08-18",
   "entries": [
     {
+      "id": "web-2026-08-18-localization-publication-pipeline",
+      "date": "2026-08-18",
+      "scope": "website",
+      "title": "Localization review and generated publication pipeline",
+      "summary": "Completed Russian machine-draft coverage for the current curated knowledge set, added a human-readable language-status hub, and introduced deterministic generation that publishes only human-reviewed localized records.",
+      "changes": [
+        {"type": "added", "resource_id": "languages", "url": "https://cbt-cards.github.io/languages/"},
+        {"type": "changed", "resource_id": "product-overview", "url": "https://cbt-cards.github.io/"},
+        {"type": "changed", "resource_id": "translation-dataset", "url": "https://cbt-cards.github.io/data/translations.jsonl"},
+        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+      ],
+      "notes": [
+        "All 12 records in the current curated English knowledge set now have Russian machine-draft overlays; zero Russian records are currently human-reviewed or published.",
+        "Machine drafts never generate localized public resource pages.",
+        "Localized public pages use /<locale>/resources/<resource_id>/ and are generated only from human_reviewed + reviewed_for_publication + published records.",
+        "The public_html locale flag enables gradual publication; reviewed published records may coexist with unpublished machine drafts.",
+        "The generator maintains the language-status page, enabled locale hubs, localized resource pages, and their sitemap entries."
+      ]
+    },
+    {
       "id": "agent-2026-08-18-localization-aware-skill",
       "date": "2026-08-18",
       "scope": "agent",
@@ -37,8 +57,8 @@
       ],
       "notes": [
         "English is the current canonical source locale for curated knowledge records.",
-        "Russian is a pilot locale with three initial machine-draft records: CBT thought record, Thought vs Fact, and Worry Time.",
-        "The Russian drafts are explicitly unreviewed and not published; they have no canonical localized pages.",
+        "Russian is a pilot locale with machine-readable translation drafts that remain independently reviewable from the source content.",
+        "Russian machine drafts are explicitly unreviewed and not published; they have no canonical localized pages.",
         "German is registered as planned and has no translation records yet.",
         "Each translation records the source review date it was based on; CI rejects translations when that source snapshot no longer matches the current English record."
       ]
@@ -73,7 +93,7 @@
       "notes": [
         "Every sitemap HTML URL except the homepage must have an inbound link from another indexed page.",
         "Every indexed page must be reachable from the homepage in at most three internal-link hops.",
-        "Learn, Worksheets, Toolkit, About, Changelog, and Agents are required as direct homepage-linked hubs."
+        "Learn, Worksheets, Toolkit, Languages, About, Changelog, and Agents are required as direct homepage-linked hubs."
       ]
     },
     {
