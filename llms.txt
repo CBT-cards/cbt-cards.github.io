@@ -1,6 +1,6 @@
 # CBT Cards
 
-CBT Cards is a public library of practical reflection resources for people and the AI assistants they choose to use. It publishes short CBT-inspired cards, plain-language learning guides, printable browser worksheets, structured public data, review metadata, language-status metadata, and versioned agent instructions. The original CBT Cards mobile app remains documented as a separate product surface. CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
+CBT Cards is a public library of practical reflection resources for people and the AI assistants they choose to use. It publishes short CBT-inspired cards, plain-language learning guides, printable browser worksheets, structured public data, review metadata, language-status metadata, public agent evals, and versioned agent instructions. The original CBT Cards mobile app remains documented as a separate product surface. CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
 
 ## Public reflection resources
 
@@ -11,6 +11,7 @@ CBT Cards is a public library of practical reflection resources for people and t
 - Learning library: https://cbt-cards.github.io/learn/
 - Worksheets: https://cbt-cards.github.io/worksheets/
 - Languages and translation status: https://cbt-cards.github.io/languages/
+- Agent eval research: https://cbt-cards.github.io/research/
 - About / provenance: https://cbt-cards.github.io/about/
 - Changelog: https://cbt-cards.github.io/changelog/
 
@@ -57,6 +58,15 @@ CBT Cards is a public library of practical reflection resources for people and t
 - A localized record is official published CBT Cards content only when its translation, review, publication status, and canonical URL explicitly say so.
 - Published localized resources use `https://cbt-cards.github.io/<locale>/resources/<resource_id>/` and are generated only from reviewed published translation records.
 
+## Agent evaluation research
+
+- Human-readable research page: https://cbt-cards.github.io/research/
+- Evaluation cases (JSONL): https://cbt-cards.github.io/data/agent-evals.jsonl
+- Evaluation case schema: https://cbt-cards.github.io/schemas/agent-eval-case-v1.schema.json
+- The starter set contains 24 hand-authored cases across retrieval, learning, worksheets, localization, publication boundaries, privacy, and safety.
+- Cases define expected routes, stable resource/source IDs, semantic checks, prohibited claims, and rationales. They do not prescribe exact response wording.
+- No public model scores are claimed in this release. The dataset defines evaluation targets; recorded model runs should be published separately with explicit model/version/date metadata.
+
 ## Machine-readable resources
 
 - JSON resource catalog: https://cbt-cards.github.io/data/catalog.json
@@ -65,6 +75,7 @@ CBT Cards is a public library of practical reflection resources for people and t
 - Curated source-language knowledge dataset (JSONL): https://cbt-cards.github.io/data/knowledge.jsonl
 - Locale registry: https://cbt-cards.github.io/data/locales.json
 - Translation overlays (JSONL): https://cbt-cards.github.io/data/translations.jsonl
+- Agent evaluation cases (JSONL): https://cbt-cards.github.io/data/agent-evals.jsonl
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Toolkit review overlay: https://cbt-cards.github.io/data/toolkit-review.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
@@ -79,7 +90,7 @@ CBT Cards is a public library of practical reflection resources for people and t
 
 For CBT Cards-owned JSON/JSONL formats, use the versioned contracts listed in schemas/index.json. Catalog entries expose schema_url where applicable.
 
-Website, dataset, translation, schema, worksheet, and agent-skill changes are separate from mobile-app releases. Do not infer an Android/iOS app version from public-site release metadata.
+Website, dataset, translation, schema, worksheet, research, and agent-skill changes are separate from mobile-app releases. Do not infer an Android/iOS app version from public-site release metadata.
 
 ## Original mobile app documentation
 
