@@ -9,6 +9,8 @@
     {"id": "toolkit-review-v1", "url": "https://cbt-cards.github.io/schemas/toolkit-review-v1.schema.json", "instance": "https://cbt-cards.github.io/data/toolkit-review.json"},
     {"id": "toolkit-source-v1", "url": "https://cbt-cards.github.io/schemas/toolkit-source-v1.schema.json", "instance": "https://cbt-cards.github.io/data/toolkit-source.json"},
     {"id": "knowledge-record-v1", "url": "https://cbt-cards.github.io/schemas/knowledge-record-v1.schema.json", "instance": "https://cbt-cards.github.io/data/knowledge.jsonl"},
+    {"id": "locales-v1", "url": "https://cbt-cards.github.io/schemas/locales-v1.schema.json", "instance": "https://cbt-cards.github.io/data/locales.json"},
+    {"id": "translation-record-v1", "url": "https://cbt-cards.github.io/schemas/translation-record-v1.schema.json", "instance": "https://cbt-cards.github.io/data/translations.jsonl"},
     {"id": "skill-manifest-v1", "url": "https://cbt-cards.github.io/schemas/skill-manifest-v1.schema.json", "instance": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"}
   ]
 }
