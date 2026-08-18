@@ -64,6 +64,14 @@ The mutable alias is convenient for interactive use. Reproducible integrations s
 
 `https://cbt-cards.github.io/agents/cbt-cards/manifest.json`
 
-and pin the URL corresponding to `latest` or to a deliberately selected older version.
+The current manifest-pinned immutable v1.7.0 URL is:
 
-Historical skill releases before v1.7.0 are preserved at their original URLs. v1.7.0 is the first release whose immutable distribution places `SKILL.md` inside an immediate `cbt-cards/` parent directory and whose frontmatter is intentionally restricted to the portable Agent Skills field set.
+`https://cbt-cards.github.io/agents/cbt-cards/v1.7.0/SKILL.md`
+
+For strict Agent Skills directory/name validation, the same immutable v1.7.0 content is also distributed at:
+
+`https://cbt-cards.github.io/agents/cbt-cards/v1.7.0/cbt-cards/SKILL.md`
+
+The first URL preserves the versioned URL convention used by existing CBT Cards consumers. The second places `SKILL.md` under an immediate `cbt-cards/` directory so extracted or mirrored skill packages satisfy the portable directory/name contract. Both files and the mutable alias are required to contain identical v1.7.0 skill content.
+
+Historical skill releases before v1.7.0 are preserved at their original URLs. v1.7.0 is the first release whose strict portable distribution places `SKILL.md` inside an immediate `cbt-cards/` parent directory and whose frontmatter is intentionally restricted to the portable Agent Skills field set.
