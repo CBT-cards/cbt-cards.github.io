@@ -5,6 +5,28 @@
   "updated": "2026-08-18",
   "entries": [
     {
+      "id": "web-2026-08-18-public-json-schemas",
+      "date": "2026-08-18",
+      "scope": "data",
+      "title": "Versioned public JSON Schema contracts",
+      "summary": "Published JSON Schema 2020-12 contracts for CBT Cards-owned machine-readable resources and made them discoverable from the public catalog.",
+      "changes": [
+        {"type": "added", "resource_id": "schema-manifest", "url": "https://cbt-cards.github.io/schemas/index.json"},
+        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"},
+        {"type": "changed", "resource_id": "changelog-data", "url": "https://cbt-cards.github.io/data/changelog.json"},
+        {"type": "changed", "resource_id": "worksheet-definitions", "url": "https://cbt-cards.github.io/data/worksheets.json"},
+        {"type": "changed", "resource_id": "toolkit-review-data", "url": "https://cbt-cards.github.io/data/toolkit-review.json"},
+        {"type": "changed", "resource_id": "toolkit-source", "url": "https://cbt-cards.github.io/data/toolkit-source.json"},
+        {"type": "changed", "resource_id": "knowledge-dataset", "url": "https://cbt-cards.github.io/data/knowledge.jsonl"},
+        {"type": "changed", "resource_id": "agent-skill-manifest", "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"}
+      ],
+      "notes": [
+        "The schema manifest maps each CBT Cards-owned JSON/JSONL instance to a versioned JSON Schema 2020-12 contract.",
+        "Purpose-specific repository validators remain responsible for invariants beyond generic JSON Schema, including canonical targets, privacy wording, ordered worksheet fields, and toolkit publication-set equality.",
+        "The JSONL contract describes one record/line rather than the entire newline-delimited file as one JSON document."
+      ]
+    },
+    {
       "id": "web-2026-08-18-toolkit-review-overlay",
       "date": "2026-08-18",
       "scope": "website",

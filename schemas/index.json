@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "name": "CBT Cards public JSON Schema manifest",
+  "updated": "2026-08-18",
+  "schemas": [
+    {"id": "catalog-v1", "url": "https://cbt-cards.github.io/schemas/catalog-v1.schema.json", "instance": "https://cbt-cards.github.io/data/catalog.json"},
+    {"id": "changelog-v1", "url": "https://cbt-cards.github.io/schemas/changelog-v1.schema.json", "instance": "https://cbt-cards.github.io/data/changelog.json"},
+    {"id": "worksheets-v1", "url": "https://cbt-cards.github.io/schemas/worksheets-v1.schema.json", "instance": "https://cbt-cards.github.io/data/worksheets.json"},
+    {"id": "toolkit-review-v1", "url": "https://cbt-cards.github.io/schemas/toolkit-review-v1.schema.json", "instance": "https://cbt-cards.github.io/data/toolkit-review.json"},
+    {"id": "toolkit-source-v1", "url": "https://cbt-cards.github.io/schemas/toolkit-source-v1.schema.json", "instance": "https://cbt-cards.github.io/data/toolkit-source.json"},
+    {"id": "knowledge-record-v1", "url": "https://cbt-cards.github.io/schemas/knowledge-record-v1.schema.json", "instance": "https://cbt-cards.github.io/data/knowledge.jsonl"},
+    {"id": "skill-manifest-v1", "url": "https://cbt-cards.github.io/schemas/skill-manifest-v1.schema.json", "instance": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"}
+  ]
+}

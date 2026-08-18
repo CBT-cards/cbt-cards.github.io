@@ -49,6 +49,7 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 ## Machine-readable resources
 
 - JSON resource catalog: https://cbt-cards.github.io/data/catalog.json
+- JSON Schema manifest: https://cbt-cards.github.io/schemas/index.json
 - Machine-readable changelog: https://cbt-cards.github.io/data/changelog.json
 - RAG-friendly curated knowledge dataset (JSONL): https://cbt-cards.github.io/data/knowledge.jsonl
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
@@ -62,6 +63,8 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - Latest agent skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 - Skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
 - Immutable skill v1.4.0: https://cbt-cards.github.io/agents/cbt-cards/v1.4.0/SKILL.md
+
+For CBT Cards-owned JSON/JSONL formats, use the versioned contracts listed in schemas/index.json. Catalog entries expose schema_url where applicable.
 
 Website changelog entries are separate from mobile-app releases. Do not infer an Android/iOS app version from website, dataset, worksheet, or agent-skill changes.
 
