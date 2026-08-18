@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "name": "cbt-cards",
   "homepage": "https://cbt-cards.github.io/agents/",
-  "latest": "1.5.0",
+  "latest": "1.6.0",
   "latest_url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
   "updated": "2026-08-18",
   "versions": [
@@ -10,6 +10,7 @@
     {"version": "1.2.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.2.0/SKILL.md"},
     {"version": "1.3.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.3.0/SKILL.md"},
     {"version": "1.4.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.4.0/SKILL.md"},
-    {"version": "1.5.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.5.0/SKILL.md"}
+    {"version": "1.5.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.5.0/SKILL.md"},
+    {"version": "1.6.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.6.0/SKILL.md"}
   ]
 }
