@@ -58,10 +58,10 @@
     <summary>A public entry point to curated reflection cards and provenance for the related CBT Toolkit source corpus.</summary>
   </entry>
   <entry>
-    <title>CBT Cards for AI agents</title>
+    <title>Use CBT Cards with AI assistants</title>
     <id>https://cbt-cards.github.io/agents/</id>
     <link href="https://cbt-cards.github.io/agents/" />
     <updated>2026-08-18T00:00:00Z</updated>
-    <summary>Canonical web, JSON, JSONL, worksheet-schema, llms.txt, and versioned skill interfaces for public CBT Cards resources.</summary>
+    <summary>A public, read-only interface for reflection resources, canonical pages, JSON/JSONL data, review metadata, schemas, and versioned skill instructions.</summary>
   </entry>
 </feed>

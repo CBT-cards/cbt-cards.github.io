@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CBT Cards changelog: website &amp; public data updates</title>
-<meta name="description" content="Track CBT Cards website, public-data, schema, worksheet, toolkit, and agent-interface updates without confusing them with mobile-app releases." />
+<meta name="description" content="Track CBT Cards website, public-data, translation, research, schema, worksheet, toolkit, and agent-interface updates without confusing them with mobile-app releases." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href="https://cbt-cards.github.io/changelog/" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/changelog.json" title="CBT Cards machine-readable changelog" />
@@ -15,18 +15,139 @@
 <link rel="icon" href="/assets/app-icon.png" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="CBT Cards changelog" />
-<meta property="og:description" content="Website and public-data updates, separated from mobile-app release history." />
+<meta property="og:description" content="Website, data, translation, research, and agent-interface updates, separated from mobile-app release history." />
 <meta property="og:url" content="https://cbt-cards.github.io/changelog/" />
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://cbt-cards.github.io/changelog/"}]},{"@type":"CollectionPage","name":"CBT Cards public changelog","url":"https://cbt-cards.github.io/changelog/","description":"Website, public knowledge, schema, worksheet, dataset, toolkit-review, and agent-interface release history for CBT Cards.","dateModified":"2026-08-18","publisher":{"@id":"https://cbt-cards.github.io/#publisher"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://cbt-cards.github.io/changelog/"}]},{"@type":"CollectionPage","name":"CBT Cards public changelog","url":"https://cbt-cards.github.io/changelog/","description":"Website, public knowledge, translation, research, schema, worksheet, dataset, toolkit-review, and agent-interface release history for CBT Cards.","dateModified":"2026-08-18","publisher":{"@id":"https://cbt-cards.github.io/#publisher"}}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/how-it-works/">How it works</a><a href="/features/">Features</a><a href="/learn/">Learn</a><a href="/toolkit/">Toolkit</a><a href="/about/">About</a></nav><a class="download" href="/#download">Download</a></div></header>
+<header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/languages/">Languages</a><a href="/research/">Research</a><a href="/agents/">For AI</a><a href="/about/">About</a></nav><a class="download" href="/toolkit/">Explore tools</a></div></header>
 <main id="main">
-<section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / Changelog</div><h1>CBT Cards public changelog</h1><p class="lede">Website and public-data changes, recorded separately from mobile-app releases.</p></div></section>
+<section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / Changelog</div><h1>CBT Cards public changelog</h1><p class="lede">Website, public-data, translation, research, and agent-interface changes, recorded separately from mobile-app releases.</p></div></section>
 <section class="section alt"><div class="wrap prose">
-<p>This changelog tracks changes to the public CBT Cards website, learning library, printable browser worksheets, schemas, toolkit pages, structured data, feeds, and agent interfaces. A website or data entry does <strong>not</strong> imply that an Android or iOS app version shipped on the same date.</p>
+<p>This changelog tracks changes to the public CBT Cards website, learning library, printable browser worksheets, schemas, language data, research datasets, toolkit pages, structured data, feeds, and agent interfaces. A website, data, translation, research, or agent entry does <strong>not</strong> imply that an Android or iOS app version shipped on the same date.</p>
 <p>Agents and tooling can read the same history from <a href="/data/changelog.json"><code>data/changelog.json</code></a>. Versioned data contracts are listed in <a href="/schemas/index.json"><code>schemas/index.json</code></a>.</p>
+
+<article id="data-2026-08-18-model-run-protocol">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Public data/research</p>
+<h2>Provenance-first model-run protocol v1</h2>
+<p>Added a two-stage path for real model evaluations: generate responses before benchmark answers are visible, then score the captured routing envelope with a deterministic evaluator.</p>
+<ul>
+<li>Published <a href="/research/MODEL_RUN_PROTOCOL.md">the model-run protocol</a> and fixed <a href="/research/model-run-prompt-v1.txt">model-run prompt v1</a>.</li>
+<li>Added model-response and model-run schemas for provider/model/runtime provenance, prompt and dataset hashes, raw answers, and per-case routing results.</li>
+<li>Added <a href="/scripts/evaluate_model_run.py"><code>evaluate_model_run.py</code></a>, which scores route, target IDs, locale behavior, and boundary routing after generation is complete.</li>
+<li>CI runs a synthetic contract fixture through the scorer to test the protocol plumbing.</li>
+</ul>
+<p>The fixture is not a model result. The v1 evaluator also does not claim automatic scoring of prose quality, <code>expected_checks</code>, or prohibited claims. No LLM or hosted-assistant score is published by this release.</p>
+</article>
+
+<article id="data-2026-08-18-held-out-eval-challenge">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Public data/research</p>
+<h2>Held-out paraphrase and adversarial eval challenge</h2>
+<p>Added 12 separately authored challenge cases to see whether the friendly starter score survives different wording. It mostly does not.</p>
+<ul>
+<li>The unchanged <code>deterministic-contract-router-v1</code> drops from 24/24 starter routes to 1/12 challenge routes.</li>
+<li>On the challenge it also gets 0/10 target selections, 0/1 locale behaviors, and 1/3 boundary routes.</li>
+<li>The challenge dataset is pinned by SHA-256 <code>f20bbc8562315de235fe6b935b17be8eeaa41d604b222c91904618658b2c0407</code>.</li>
+<li>If a system is tuned on these 12 cases, this generation is no longer held out for that system.</li>
+</ul>
+<p>The drop is published as evidence that the keyword baseline is brittle, not as a failure of any LLM. No model was evaluated in this entry.</p>
+</article>
+
+<article id="agent-2026-08-18-portable-skill-v1-7">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Agent interface</p>
+<h2>Portable Agent Skills release v1.7.0</h2>
+<p>Published a stricter portable skill distribution without rewriting historical skill releases or breaking the existing immutable URL convention.</p>
+<ul>
+<li>Advanced the mutable <a href="/agents/cbt-cards/SKILL.md">latest skill</a> to v1.7.0 and published the normal immutable <a href="/agents/cbt-cards/v1.7.0/SKILL.md">v1.7.0 compatibility URL</a>.</li>
+<li>Added a strict portable copy at <a href="/agents/cbt-cards/v1.7.0/cbt-cards/SKILL.md"><code>v1.7.0/cbt-cards/SKILL.md</code></a>, where the immediate directory matches <code>name: cbt-cards</code>.</li>
+<li>Restricted v1.7.0 frontmatter to the portable Agent Skills field set and moved release version into string-valued <code>metadata.version</code>.</li>
+<li>Added <a href="/agents/cbt-cards/INSTALL.md">installation and pinning notes</a> for OpenClaw, Hermes Agent, and generic Agent Skills clients.</li>
+<li>Added a CI portability check that requires the mutable alias, compatibility mirror, and strict portable distribution to contain identical skill content.</li>
+</ul>
+<p>Runtime-specific install details remain outside the portable skill core. This is an agent-interface release and does not imply a new Android or iOS app version.</p>
+</article>
+
+<article id="data-2026-08-18-reproducible-eval-baselines">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Public data/research</p>
+<h2>Reproducible agent eval baselines and citation metadata</h2>
+<p>Added a versioned run format and reproducible deterministic baselines so evaluation numbers have an inspectable source instead of materializing from the traditional scientific instrument known as a slide deck.</p>
+<ul>
+<li>Added <a href="/data/agent-eval-runs.jsonl"><code>data/agent-eval-runs.jsonl</code></a> and a versioned <a href="/schemas/agent-eval-run-v1.schema.json">evaluation-run schema</a>.</li>
+<li>Every run pins the SHA-256 of the exact <a href="/data/agent-evals.jsonl">evaluation-case dataset</a> bytes used and records both aggregate and per-case results.</li>
+<li><code>null-route-v1</code> is an intentionally weak floor: 1/24 correct routes, 0/19 targets, 0/4 locale behaviors, and 1/7 boundary routes.</li>
+<li><code>deterministic-contract-router-v1</code> uses only the user message and reaches 24/24 routes, 19/19 targets, 4/4 locale behaviors, and 7/7 boundary routes on the current starter set.</li>
+<li>CI regenerates both deterministic runs and rejects any checked-in result that differs from the runner output.</li>
+<li>Added root <a href="/CITATION.cff"><code>CITATION.cff</code></a> using Citation File Format 1.2.0.</li>
+</ul>
+<p>The perfect deterministic-router score is a contract/harness baseline, not an LLM benchmark or evidence of general assistant quality. No DOI or project-wide semantic version is claimed before one is actually assigned or deliberately released.</p>
+</article>
+
+<article id="data-2026-08-18-agent-eval-foundation">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Public data/research</p>
+<h2>Public agent routing and boundary evals</h2>
+<p>Published a starter evaluation set for checking whether assistants use CBT Cards resources and metadata without collapsing every request into the same cheerful card-shaped answer.</p>
+<ul>
+<li>Added the <a href="/research/">agent eval research page</a> and <a href="/data/agent-evals.jsonl">24 JSONL evaluation cases</a>.</li>
+<li>Covered seven categories: retrieval, learning, worksheets, localization, publication boundaries, privacy, and safety.</li>
+<li>Each case records an expected route, stable resource or raw source IDs, semantic checks, prohibited claims, and a rationale rather than one exact reference answer.</li>
+<li>Added a versioned <a href="/schemas/agent-eval-case-v1.schema.json">agent-eval case schema</a> and CI checks against the live catalog, review overlay, locale registry, translation state, and raw source indexes.</li>
+</ul>
+<p>No model scores are claimed in this release. The dataset defines evaluation targets; future recorded runs should identify the evaluated model, version, and date separately.</p>
+</article>
+
+<article id="web-2026-08-18-localization-publication-pipeline">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Website/localization</p>
+<h2>Localization review and generated publication pipeline</h2>
+<p>Completed Russian machine-draft coverage for the current curated knowledge set and added a deterministic publication path that keeps drafts separate from reviewed public localizations.</p>
+<ul>
+<li>Added the human-readable <a href="/languages/">language and translation status page</a>.</li>
+<li>Expanded Russian pilot data to all 12 records in the current curated English knowledge set. All 12 remain machine drafts; none is currently human-reviewed or published.</li>
+<li>Added deterministic generation for language hubs and localized resource pages at <code>/&lt;locale&gt;/resources/&lt;resource_id&gt;/</code>.</li>
+<li>Machine drafts never produce localized public HTML. Generated resource pages require <code>human_reviewed</code>, <code>reviewed_for_publication</code>, and <code>published</code>.</li>
+<li>The generator also keeps localization sitemap entries synchronized with the data.</li>
+</ul>
+<p>The locale-level <code>public_html</code> flag supports gradual rollout: a locale may contain reviewed published records and unpublished machine drafts at the same time.</p>
+</article>
+
+<article id="agent-2026-08-18-localization-aware-skill">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Agent interface</p>
+<h2>Localization-aware agent skill v1.6.0</h2>
+<p>Published a new agent-skill version that understands CBT Cards language and translation status instead of assuming that any available translation is official published content.</p>
+<ul>
+<li>Published immutable <a href="/agents/cbt-cards/v1.6.0/SKILL.md">skill v1.6.0</a> and advanced the version manifest and latest alias.</li>
+<li>Added the locale registry and translation overlay to the normal source-selection flow.</li>
+<li>Defined machine drafts as development data rather than official CBT Cards localizations.</li>
+<li>When no reviewed localization exists, assistants may translate the canonical source for a user but should identify that output as their own translation.</li>
+</ul>
+<p>This is an agent-interface release. It does not imply a new Android or iOS app version.</p>
+</article>
+
+<article id="data-2026-08-18-localization-foundation">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Public data</p>
+<h2>Locale registry and translation overlay foundation</h2>
+<p>Added a language model that keeps source content, translation drafts, review state, and localized publication state separate rather than cloning English pages and hoping they stay aligned.</p>
+<ul>
+<li>Added <a href="/data/locales.json"><code>data/locales.json</code></a> with English as the source locale, Russian as a pilot locale, and German as planned.</li>
+<li>Added <a href="/data/translations.jsonl"><code>data/translations.jsonl</code></a> for machine-readable localized overlays keyed by stable resource ID.</li>
+<li>Added versioned schemas for the locale registry and one translation record.</li>
+<li>Added CI checks for stable resource IDs, locale state, source-review snapshots, key-point alignment, and publication boundaries.</li>
+</ul>
+<p>Russian machine-draft records are explicitly <code>machine_draft</code>, <code>unreviewed</code>, and <code>not_published</code>. They have no canonical localized pages. A source update also makes an older translation fail validation until its source snapshot is updated.</p>
+</article>
+
+<article id="agent-2026-08-18-public-resource-skill">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Agent interface</p>
+<h2>Public reflection resource skill v1.5.0</h2>
+<p>Reframed the CBT Cards agent skill around using the public reflection library rather than treating the mobile app as the primary resource surface.</p>
+<ul>
+<li>Published immutable <a href="/agents/cbt-cards/v1.5.0/SKILL.md">skill v1.5.0</a> and updated the version manifest.</li>
+<li>Made published cards, worksheets, and reviewed learning pages first-class choices for human-facing reflection tasks.</li>
+<li>Added guidance to keep human answers in ordinary language and expose machine details only when they are useful.</li>
+<li>Kept the mobile app as the canonical source for app-specific behavior, privacy, support, and download questions.</li>
+</ul>
+<p>This is an agent-interface release. It does not imply a new Android or iOS app version.</p>
+</article>
 
 <article id="web-2026-08-18-crawl-graph-quality">
 <p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Website</p>
@@ -34,9 +155,9 @@
 <p>Added direct homepage links to the major public-resource hubs and a CI rule that checks the sitemap as an actual internal-link graph rather than merely a list of files.</p>
 <ul>
 <li>Requires every indexed page except the homepage to receive at least one link from another indexed page.</li>
-<li>Requires every sitemap page to be reachable from the homepage in at most three internal-link hops.</li>
-<li>Requires Learn, Worksheets, Toolkit, About, Changelog, and Agents to be linked directly from the homepage.</li>
-<li>Adds a dedicated homepage public-resources section for worksheets, release history, and agent/data interfaces.</li>
+<li>Requires every indexed page to be reachable from the homepage in at most three internal-link hops.</li>
+<li>Requires Learn, Worksheets, Toolkit, Languages, About, Changelog, and Agents to be linked directly from the homepage.</li>
+<li>Adds a dedicated homepage public-resources section for worksheets, release history, agent/data interfaces, and language status.</li>
 </ul>
 </article>
 
@@ -45,8 +166,8 @@
 <h2>Versioned public JSON Schema contracts</h2>
 <p>Published JSON Schema draft 2020-12 contracts for CBT Cards-owned machine-readable formats and made them discoverable from the public resource catalog.</p>
 <ul>
-<li>Added <a href="/schemas/index.json">a schema manifest</a> mapping versioned contracts to their instance URLs.</li>
-<li>Added contracts for the resource catalog, changelog, worksheets, toolkit review overlay, toolkit source manifest, curated knowledge-record lines, and agent skill manifest.</li>
+<li>Added <a href="/schemas/index.json">a schema manifest</a> mapping committed instances to versioned contracts and allowing interface-only contracts before a real public instance exists.</li>
+<li>Added contracts for the resource catalog, changelog, worksheets, toolkit review overlay, toolkit source manifest, curated knowledge-record lines, locale registry, translation records, evaluation cases/runs, model-run interfaces, and agent skill manifest.</li>
 <li>Added <code>schema_url</code> links to applicable public catalog resources.</li>
 </ul>
 </article>
@@ -84,6 +205,6 @@
 </article>
 </div></section>
 </main>
-<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/toolkit/">Toolkit</a><a href="/toolkit/review-status/">Review status</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/support/">Support</a><a href="/agents/">For agents</a></nav></div></footer>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/languages/">Languages</a><a href="/research/">Research</a><a href="/toolkit/review-status/">Review status</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/support/">Support</a><a href="/agents/">For AI</a></nav></div></footer>
 </body>
 </html>

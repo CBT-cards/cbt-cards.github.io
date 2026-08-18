@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use CBT Cards public data, agent evals, or research materials, please cite the project using these metadata."
+title: "CBT Cards"
+type: dataset
+authors:
+  - name: "MetalHatsCats"
+abstract: "CBT Cards is a public reflection library with human-readable resources, machine-readable datasets, localization metadata, review provenance, portable agent instructions, and public evaluation cases for assistant routing and safety boundaries."
+date-released: "2026-08-18"
+license: CC-BY-NC-SA-4.0
+repository-code: "https://github.com/CBT-cards/cbt-cards.github.io"
+url: "https://cbt-cards.github.io/"
+keywords:
+  - CBT
+  - self-reflection
+  - agent evaluation
+  - AI assistants
+  - localization
+  - public dataset

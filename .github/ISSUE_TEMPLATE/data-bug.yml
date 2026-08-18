@@ -1,0 +1,11 @@
+name: Data or schema bug
+description: Report a broken ID, URL, hash, schema or generated artifact
+body:
+  - type: input
+    id: resource
+    attributes: {label: Resource or path}
+    validations: {required: true}
+  - type: textarea
+    id: issue
+    attributes: {label: What is inconsistent}
+    validations: {required: true}

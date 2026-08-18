@@ -1,0 +1,84 @@
+name: Run isolated CBT Cards model eval
+
+on:
+  workflow_dispatch:
+    inputs:
+      dataset:
+        description: Evaluation dataset
+        required: true
+        default: starter
+        type: choice
+        options:
+          - starter
+          - challenge
+      model:
+        description: OpenAI model identifier
+        required: true
+        default: gpt-5.6
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: model-eval-${{ github.ref }}-${{ inputs.dataset }}-${{ inputs.model }}
+  cancel-in-progress: false
+
+jobs:
+  model-eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate model-run contracts before generation
+        run: |
+          python3 -m py_compile scripts/run_model_openai.py scripts/score_model_execution.py scripts/check_model_runner.py scripts/check_model_run_candidate.py scripts/evaluate_model_run.py
+          python3 scripts/check_model_run_protocol.py
+          python3 scripts/check_model_runner.py
+
+      - name: Require OpenAI API key
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "Repository secret OPENAI_API_KEY is required for a real isolated model run." >&2
+            exit 1
+          fi
+
+      - name: Generate isolated model responses
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          mkdir -p artifacts
+          python3 scripts/run_model_openai.py \
+            --dataset "${{ inputs.dataset }}" \
+            --model "${{ inputs.model }}" \
+            --responses artifacts/model-responses.jsonl \
+            --execution artifacts/model-execution.json
+
+      - name: Score generated responses in a separate process
+        run: |
+          python3 scripts/score_model_execution.py \
+            --execution artifacts/model-execution.json \
+            --responses artifacts/model-responses.jsonl \
+            --run-id "model-run-openai-${{ inputs.dataset }}-${{ github.run_id }}" \
+            --output artifacts/model-run.json
+
+      - name: Validate publication candidate
+        run: |
+          python3 scripts/check_model_run_candidate.py \
+            --execution artifacts/model-execution.json \
+            --responses artifacts/model-responses.jsonl \
+            --run artifacts/model-run.json
+
+      - name: Upload isolated model-run artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cbt-cards-model-eval-${{ inputs.dataset }}-${{ github.run_id }}
+          path: |
+            artifacts/model-execution.json
+            artifacts/model-responses.jsonl
+            artifacts/model-run.json
+          if-no-files-found: error
+          retention-days: 30

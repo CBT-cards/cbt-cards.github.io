@@ -3,73 +3,108 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CBT Cards for AI agents: skill, llms.txt, JSON &amp; schemas</title>
-<meta name="description" content="Use official CBT Cards facts, curated resources, JSON/JSONL data, versioned JSON Schema contracts, toolkit publication status, and agent skills." />
+<title>Use CBT Cards with AI assistants: public data, skills &amp; languages</title>
+<meta name="description" content="Connect AI assistants to CBT Cards through canonical public pages, JSON/JSONL data, language and review metadata, versioned schemas, and a portable Agent Skills distribution." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href="https://cbt-cards.github.io/agents/" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/catalog.json" title="CBT Cards public resource catalog" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/schemas/index.json" title="CBT Cards public JSON Schema manifest" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/changelog.json" title="CBT Cards machine-readable changelog" />
-<link rel="alternate" type="application/x-ndjson" href="https://cbt-cards.github.io/data/knowledge.jsonl" title="CBT Cards curated knowledge dataset" />
+<link rel="alternate" type="application/x-ndjson" href="https://cbt-cards.github.io/data/knowledge.jsonl" title="CBT Cards curated source-language knowledge dataset" />
+<link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/locales.json" title="CBT Cards locale registry" />
+<link rel="alternate" type="application/x-ndjson" href="https://cbt-cards.github.io/data/translations.jsonl" title="CBT Cards translation overlays" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/worksheets.json" title="CBT Cards worksheet definitions" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/toolkit-review.json" title="CBT Cards toolkit review overlay" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/toolkit-source.json" title="CBT toolkit source metadata" />
 <link rel="stylesheet" href="/styles.css?v=20260818" />
 <link rel="icon" href="/assets/app-icon.png" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="CBT Cards for AI agents" />
-<meta property="og:description" content="Canonical public sources, versioned JSON Schema contracts, release provenance, toolkit publication status, worksheet definitions, and agent skills." />
+<meta property="og:title" content="Use CBT Cards with AI assistants" />
+<meta property="og:description" content="A public, read-only interface for practical reflection resources, stable IDs, language and review metadata, schemas, research evals, and portable agent instructions." />
 <meta property="og:url" content="https://cbt-cards.github.io/agents/" />
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"For AI agents","item":"https://cbt-cards.github.io/agents/"}]},{"@type":"TechArticle","headline":"CBT Cards for AI agents","description":"How to consume CBT Cards public facts, schemas, release provenance, toolkit publication status, learning resources, worksheet definitions, source metadata, and versioned agent instructions.","mainEntityOfPage":"https://cbt-cards.github.io/agents/","dateModified":"2026-08-18"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"For AI assistants","item":"https://cbt-cards.github.io/agents/"}]},{"@type":"TechArticle","headline":"Use CBT Cards with AI assistants","description":"How AI assistants and research tooling can consume CBT Cards public reflection resources, language and review metadata, source provenance, worksheet definitions, schemas, evaluation data, and portable Agent Skills instructions.","mainEntityOfPage":"https://cbt-cards.github.io/agents/","dateModified":"2026-08-18"}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/how-it-works/">How it works</a><a href="/features/">Features</a><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/about/">About</a></nav><a class="download" href="/#download">Download</a></div></header>
+<header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/languages/">Languages</a><a href="/research/">Research</a><a href="/agents/">For AI</a><a href="/about/">About</a></nav><a class="download" href="/toolkit/">Explore tools</a></div></header>
 <main id="main">
-<section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / For AI agents</div><h1>Use CBT Cards as a public agent resource.</h1><p class="lede">Official product facts, versioned data contracts, release provenance, curated learning resources, worksheet definitions, toolkit review status, source metadata, and agent skills are available as canonical public resources. None provides access to a user's journal, check-ins, or app data.</p></div></section>
+<section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / For AI assistants</div><h1>Give an assistant a source it can inspect.</h1><p class="lede">CBT Cards publishes practical reflection resources in human-readable and machine-readable forms. An assistant can discover a relevant card, guide, or worksheet, check its language and publication status, preserve its source and safety context, and present it without needing access to a user's CBT Cards account or private journal.</p></div></section>
 <section class="section alt"><div class="wrap prose agent-guide">
+<h2>What this interface is for</h2>
+<p>Use the public agent resources when an assistant needs to find, explain, cite, translate, evaluate, or render CBT Cards material. The public interface is read-only. It does not connect to a user's app data, journal, check-ins, backups, or account.</p>
+<p>The project deliberately keeps ordinary web pages as the human source of truth and publishes structured representations alongside them. Integrations should prefer the smallest interface that solves the task rather than loading the entire corpus for every request.</p>
+
+<h2>Recommended consumption flow</h2>
+<ol>
+<li>Discover available resources through <a href="/llms.txt"><code>llms.txt</code></a> or <a href="/data/catalog.json"><code>data/catalog.json</code></a>.</li>
+<li>Choose a reviewed learning page, published toolkit record, or worksheet definition that fits the user's request.</li>
+<li>If a language is requested, check <a href="/languages/">human language status</a>, <a href="/data/locales.json"><code>data/locales.json</code></a>, and any matching record in <a href="/data/translations.jsonl"><code>data/translations.jsonl</code></a>.</li>
+<li>Preserve the canonical URL and stable source ID when one is available.</li>
+<li>Check publication status before presenting raw toolkit material or a localized record as CBT Cards-published content.</li>
+<li>Keep the resource's safety scope and privacy behavior intact when summarizing, translating, or rendering it.</li>
+</ol>
+
 <h2>Choose the smallest useful interface</h2>
 <ul>
-<li><strong><a href="/llms.txt">llms.txt</a>:</strong> compact discovery index.</li>
-<li><strong><a href="/llms-full.txt">llms-full.txt</a>:</strong> extended source-priority and safety guidance.</li>
-<li><strong><a href="/data/catalog.json">JSON catalog</a>:</strong> stable resource IDs, canonical URLs, and <code>schema_url</code> where applicable.</li>
-<li><strong><a href="/schemas/index.json">JSON Schema manifest</a>:</strong> versioned JSON Schema 2020-12 contracts mapped to CBT Cards-owned JSON/JSONL instances.</li>
-<li><strong><a href="/data/changelog.json">Changelog JSON</a>:</strong> scoped website/public-data release provenance.</li>
-<li><strong><a href="/data/knowledge.jsonl">Curated JSONL</a>:</strong> reviewed learning resources and published toolkit cards.</li>
-<li><strong><a href="/data/worksheets.json">Worksheet definitions</a>:</strong> ordered form definitions and privacy behavior.</li>
+<li><strong><a href="/llms.txt">llms.txt</a>:</strong> compact discovery index for the public resource surface.</li>
+<li><strong><a href="/llms-full.txt">llms-full.txt</a>:</strong> extended source-priority, language, research, release, and safety guidance.</li>
+<li><strong><a href="/data/catalog.json">JSON catalog</a>:</strong> stable resource IDs, canonical URLs, formats, locale metadata, and <code>schema_url</code> where applicable.</li>
+<li><strong><a href="/data/knowledge.jsonl">Curated JSONL</a>:</strong> self-contained reviewed English source records for learning resources and published toolkit records.</li>
+<li><strong><a href="/languages/">Language status page</a>:</strong> human-readable source, pilot, planned, reviewed, and published counts.</li>
+<li><strong><a href="/data/translations.jsonl">Translation overlays</a>:</strong> localized records keyed by stable resource ID, with explicit translation, review, publication, and source-snapshot status.</li>
+<li><strong><a href="/research/">Research and evals</a>:</strong> inspectable assistant-routing cases and reproducible non-model baselines.</li>
+<li><strong><a href="/data/worksheets.json">Worksheet definitions</a>:</strong> ordered form definitions, canonical links, safety scope, and privacy behavior.</li>
 <li><strong><a href="/data/toolkit-review.json">Toolkit review overlay</a>:</strong> explicit CBT Cards publication status keyed by stable source record ID.</li>
-<li><strong><a href="/data/toolkit-source.json">Toolkit source metadata</a>:</strong> pinned source version, counts, license, and quality notes.</li>
-<li><strong><a href="/agents/cbt-cards/SKILL.md">SKILL.md</a>:</strong> latest portable agent instructions.</li>
+<li><strong><a href="/schemas/index.json">JSON Schema manifest</a>:</strong> versioned contracts for CBT Cards-owned JSON/JSONL formats.</li>
+<li><strong><a href="/data/changelog.json">Changelog JSON</a>:</strong> scoped public release provenance.</li>
+<li><strong><a href="/agents/cbt-cards/SKILL.md">SKILL.md</a>:</strong> latest portable instructions for assistants that support file-based skills.</li>
 </ul>
 
-<h2>Versioned data contracts</h2>
-<p>Use <a href="/schemas/index.json"><code>schemas/index.json</code></a> to discover the contract for a CBT Cards-owned JSON or JSONL resource. The manifest currently covers the resource catalog, changelog, worksheet definitions, toolkit review overlay, toolkit source manifest, one curated knowledge-record line, and the agent skill manifest.</p>
-<p>The schema files use JSON Schema draft 2020-12. They describe portable field-level contracts. CBT Cards also keeps purpose-specific CI checks for invariants that generic JSON Schema does not capture well, such as canonical target existence, sequential worksheet fields, publication-set equality, and privacy wording.</p>
+<h2>Portable Agent Skills release</h2>
+<p>Skill v1.7.0 is the first CBT Cards release intentionally shaped as a strict portable Agent Skills core. Its frontmatter uses the standard field set, keeps version information in string-valued <code>metadata.version</code>, and avoids runtime-specific top-level extensions.</p>
+<p>The mutable <a href="/agents/cbt-cards/SKILL.md"><code>SKILL.md</code></a>, the backward-compatible immutable <a href="/agents/cbt-cards/v1.7.0/SKILL.md">v1.7.0 URL</a>, and the strict directory/name-compatible <a href="/agents/cbt-cards/v1.7.0/cbt-cards/SKILL.md">portable distribution</a> contain identical skill content. The extra immutable path exists because strict Agent Skills validation expects the immediate skill directory to match <code>name: cbt-cards</code>, while existing CBT Cards consumers already use the older versioned URL convention.</p>
+<p><a href="/agents/cbt-cards/INSTALL.md"><strong>Installation notes</strong></a> include OpenClaw, Hermes Agent, generic Agent Skills setup, and version pinning. Runtime-specific installation details stay outside the portable core so the same skill file does not accumulate mutually incompatible frontmatter dialects.</p>
+
+<h2>Languages and translation status</h2>
+<p>English is currently the source language for the curated knowledge dataset. Russian is a pilot locale with machine-readable drafts for all 12 records in the current curated knowledge set; none is currently human-reviewed or published. German is planned and currently has no translation records.</p>
+<p>A machine translation draft is deliberately not treated as a published CBT Cards localization. A localized record becomes official public CBT Cards content only after separate human language and editorial review, an explicit published status, and a canonical CBT Cards URL. Until then, an assistant can translate the canonical English resource for a user, but that translation belongs to the assistant rather than to CBT Cards.</p>
+<p>Each translation records the review date of the source-language record it was based on. Repository checks reject a translation when that source snapshot no longer matches the current English record.</p>
+<p>Published localized records are generated from reviewed translation data at <code>/&lt;locale&gt;/resources/&lt;resource_id&gt;/</code>. Locale-level <code>public_html</code> allows gradual publication: reviewed published records can coexist with machine drafts, which remain unpublished.</p>
+
+<h2>Research and evaluation</h2>
+<p>The <a href="/research/">research page</a> publishes 24 routing and boundary cases plus two reproducible deterministic baselines. Their results are stored separately from the cases and pin the exact evaluation dataset hash. A perfect deterministic-router result is a harness check, not an LLM-quality claim.</p>
+
+<h2>Human pages remain canonical</h2>
+<p>Structured data exists to make the same material easier for software to consume, not to create a second editorial universe. When a record has a canonical public page, keep that URL attached to the answer. For conceptual explanations, prefer reviewed pages in the <a href="/learn/">learning library</a>. For practical exercises, prefer published <a href="/toolkit/">toolkit resources</a> or <a href="/worksheets/">worksheet definitions</a>.</p>
 
 <h2>Toolkit publication status</h2>
-<p>Before presenting a raw source record as CBT Cards-published content, consult <a href="/data/toolkit-review.json"><code>data/toolkit-review.json</code></a>. Any unlisted source record defaults to <code>unreviewed</code> and <code>source_only</code>. <code>reviewed_for_publication</code> is editorial and safety review for web publication, not clinical validation or efficacy evidence.</p>
+<p>Before presenting a raw source record as CBT Cards-published content, consult <a href="/data/toolkit-review.json"><code>data/toolkit-review.json</code></a>. Any unlisted source record defaults to <code>unreviewed</code> and <code>source_only</code>. <code>reviewed_for_publication</code> is editorial and safety review for public web use, not clinical validation or evidence of efficacy.</p>
 
-<h2>Release provenance</h2>
-<p>Use the <a href="/changelog/">public changelog</a> or <a href="/data/changelog.json"><code>data/changelog.json</code></a> for website/public-data changes. A <code>scope: website</code> entry is not a mobile-app release.</p>
+<h2>Versioned data contracts</h2>
+<p>Use <a href="/schemas/index.json"><code>schemas/index.json</code></a> to discover contracts for CBT Cards-owned machine-readable resources. The schemas describe portable field-level structure. Purpose-specific repository checks still enforce semantic invariants such as canonical targets, translation source snapshots, ordered worksheet fields, publication-set alignment, eval provenance, and privacy wording.</p>
 
 <h2>Printable worksheet interface</h2>
-<p>The public worksheets have no submit action. Text entered there remains in the current browser page unless the user independently prints or saves it. Structured definitions are in <a href="/data/worksheets.json"><code>data/worksheets.json</code></a>; preserve field order, labels, canonical URL, safety scope, and privacy behavior.</p>
+<p>The public worksheets have no submit action. Text entered there remains in the current browser page unless the user independently prints or saves it. If an assistant renders a form from <a href="/data/worksheets.json"><code>data/worksheets.json</code></a>, preserve field order, labels, canonical URL, safety scope, and privacy behavior.</p>
 
 <h2>Versioned skills</h2>
-<p>The unversioned <a href="/agents/cbt-cards/SKILL.md"><code>SKILL.md</code></a> is a moving alias. For reproducibility, resolve <a href="/agents/cbt-cards/manifest.json"><code>manifest.json</code></a> and pin <a href="/agents/cbt-cards/v1.4.0/SKILL.md"><code>v1.4.0/SKILL.md</code></a>.</p>
+<p>The unversioned <a href="/agents/cbt-cards/SKILL.md"><code>SKILL.md</code></a> is a moving alias, currently v1.7.0. For reproducibility, resolve <a href="/agents/cbt-cards/manifest.json"><code>manifest.json</code></a> and pin the immutable version it identifies. Consumers that do not support file-based skills can use the same public pages and datasets directly.</p>
+
+<h2>Release provenance</h2>
+<p>Use the <a href="/changelog/">public changelog</a> or <a href="/data/changelog.json"><code>data/changelog.json</code></a> for website, dataset, translation, research, schema, worksheet, and agent-interface changes. A public-site release is not evidence that a new Android or iOS version shipped.</p>
 
 <h2>Use it safely</h2>
 <ul>
-<li>This is a public, read-only resource. It does not connect to a user's account or app data.</li>
-<li>Do not turn a website changelog entry into a mobile-app version claim.</li>
-<li>Do not claim that text typed into a public worksheet is sent to CBT Cards.</li>
+<li>Do not claim access to a user's private CBT Cards data. Public agent resources contain public content only.</li>
+<li>Do not infer diagnosis or clinical meaning from journal text, worksheet answers, mood, stress, energy, or toolkit wording.</li>
+<li>Do not present a machine translation draft as reviewed or published CBT Cards content.</li>
 <li>Do not infer publication approval from raw-corpus presence.</li>
 <li>Do not equate editorial publication review with clinical validation.</li>
-<li>Do not infer clinical meaning from journal entries, worksheet responses, mood, stress, energy, or toolkit-record wording.</li>
-<li>CBT Cards is for general wellness and self-reflection, not diagnosis, treatment, emergency support, or a substitute for professional care.</li>
+<li>Do not turn a short public exercise into individualized treatment instructions.</li>
+<li>Do not turn deterministic eval baselines into model-quality claims.</li>
+<li>CBT Cards is for general wellness and self-reflection, not diagnosis, treatment, emergency support, or a substitute for qualified professional care.</li>
 </ul>
 </div></section>
 </main>
-<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/toolkit/review-status/">Review status</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a></nav></div></footer>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/languages/">Languages</a><a href="/research/">Research</a><a href="/toolkit/review-status/">Review status</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a></nav></div></footer>
 </body>
 </html>

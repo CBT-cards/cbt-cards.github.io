@@ -1,0 +1,1 @@
+{"schema_version":"1.0","id":"cbt-cards-practice-rag-v1","record_count":11,"distribution":"https://cbt-cards.github.io/data/practice-rag.ndjson","sha256":"0009607aafd435fd38b69466b1f1623d1a2559310f2899421ae2845dd86c2bac","rule":"one reviewed practice per chunk; safety exclusions stay in the same chunk; embeddings are not canonical"}

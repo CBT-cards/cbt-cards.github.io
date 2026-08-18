@@ -1,0 +1,15 @@
+name: Evidence update
+description: Propose a source or claim-scope update
+body:
+  - type: input
+    id: target
+    attributes: {label: Practice or evidence ID}
+    validations: {required: true}
+  - type: textarea
+    id: source
+    attributes: {label: Source URL and claim scope}
+    validations: {required: true}
+  - type: textarea
+    id: limits
+    attributes: {label: What the source does not establish}
+    validations: {required: true}

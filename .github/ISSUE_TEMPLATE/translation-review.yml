@@ -1,0 +1,11 @@
+name: Translation review
+description: Review a machine draft or human translation
+body:
+  - type: input
+    id: resource
+    attributes: {label: Resource ID and locale}
+    validations: {required: true}
+  - type: textarea
+    id: review
+    attributes: {label: Terminology and safety review notes}
+    validations: {required: true}

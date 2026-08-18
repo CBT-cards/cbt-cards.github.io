@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cbt-cards.github.io/schemas/agent-eval-run-v1.schema.json",
+  "title": "CBT Cards agent evaluation run v1",
+  "description": "Schema for one reproducible run record in data/agent-eval-runs.jsonl.",
+  "type": "object",
+  "required": ["schema_version", "id", "eval_dataset", "eval_dataset_sha256", "executed", "runner", "metrics", "case_results", "notes"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "id": {"type": "string", "minLength": 1},
+    "eval_dataset": {"const": "https://cbt-cards.github.io/data/agent-evals.jsonl"},
+    "eval_dataset_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "executed": {"type": "string", "format": "date"},
+    "runner": {
+      "type": "object",
+      "required": ["id", "type", "version", "implementation_url", "input_fields"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "type": {"enum": ["deterministic_baseline", "model"]},
+        "version": {"type": "string", "minLength": 1},
+        "implementation_url": {"type": "string", "format": "uri"},
+        "input_fields": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+      },
+      "additionalProperties": false
+    },
+    "metrics": {
+      "type": "object",
+      "required": ["case_count", "route_correct", "route_accuracy", "target_case_count", "target_correct", "target_accuracy", "locale_case_count", "locale_correct", "locale_accuracy", "boundary_case_count", "boundary_correct", "boundary_accuracy"],
+      "properties": {
+        "case_count": {"type": "integer", "minimum": 1},
+        "route_correct": {"type": "integer", "minimum": 0},
+        "route_accuracy": {"type": "number", "minimum": 0, "maximum": 1},
+        "target_case_count": {"type": "integer", "minimum": 0},
+        "target_correct": {"type": "integer", "minimum": 0},
+        "target_accuracy": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "locale_case_count": {"type": "integer", "minimum": 0},
+        "locale_correct": {"type": "integer", "minimum": 0},
+        "locale_accuracy": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "boundary_case_count": {"type": "integer", "minimum": 0},
+        "boundary_correct": {"type": "integer", "minimum": 0},
+        "boundary_accuracy": {"type": ["number", "null"], "minimum": 0, "maximum": 1}
+      },
+      "additionalProperties": false
+    },
+    "case_results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["case_id", "predicted_route", "predicted_resource_ids", "predicted_source_record_ids", "predicted_locale_behavior", "route_correct", "target_scored", "target_correct", "locale_scored", "locale_correct", "boundary_scored", "boundary_correct"],
+        "properties": {
+          "case_id": {"type": "string", "minLength": 1},
+          "predicted_route": {"type": "string", "minLength": 1},
+          "predicted_resource_ids": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "predicted_source_record_ids": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "predicted_locale_behavior": {"type": "string", "minLength": 1},
+          "route_correct": {"type": "boolean"},
+          "target_scored": {"type": "boolean"},
+          "target_correct": {"type": ["boolean", "null"]},
+          "locale_scored": {"type": "boolean"},
+          "locale_correct": {"type": ["boolean", "null"]},
+          "boundary_scored": {"type": "boolean"},
+          "boundary_correct": {"type": ["boolean", "null"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "notes": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+  },
+  "additionalProperties": false
+}
