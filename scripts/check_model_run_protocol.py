@@ -48,7 +48,7 @@ def main() -> None:
         "resource_ids",
         "source_record_ids",
         "locale_behavior",
-        "does not automatically score",
+        "not automatically scored",
     ):
         if fragment not in prompt:
             fail(f"model prompt missing isolation/output fragment: {fragment}")
