@@ -144,6 +144,30 @@ else:
     if "Sitemap: https://cbt-cards.github.io/sitemap.xml" not in robots:
         errors.append("robots.txt: missing canonical sitemap declaration")
 
+indexnow_path = ROOT / "data/indexnow.json"
+if not indexnow_path.exists():
+    errors.append("missing data/indexnow.json")
+else:
+    try:
+        indexnow = json.loads(indexnow_path.read_text(encoding="utf-8"))
+        if indexnow.get("host") != SITE_HOST:
+            errors.append("data/indexnow.json: unexpected host")
+        if indexnow.get("endpoint") != "https://api.indexnow.org/indexnow":
+            errors.append("data/indexnow.json: unexpected endpoint")
+        key = indexnow.get("key", "")
+        if not re.fullmatch(r"[A-Za-z0-9-]{8,128}", key):
+            errors.append("data/indexnow.json: invalid key format")
+        key_file = ROOT / f"{key}.txt"
+        if not key_file.exists():
+            errors.append(f"data/indexnow.json: missing root key file {key}.txt")
+        elif key_file.read_text(encoding="utf-8").strip() != key:
+            errors.append("data/indexnow.json: key file contents differ from configured key")
+        expected_location = f"{SITE_ORIGIN}/{key}.txt"
+        if indexnow.get("key_location") != expected_location:
+            errors.append("data/indexnow.json: key_location does not match root key file")
+    except json.JSONDecodeError as exc:
+        errors.append(f"data/indexnow.json: invalid JSON: {exc}")
+
 sitemap = ROOT / "sitemap.xml"
 if not sitemap.exists():
     errors.append("missing sitemap.xml")
@@ -358,5 +382,5 @@ if errors:
 print(
     f"OK: {len(html_files)} HTML pages checked; {len(canonicals)} canonical URLs; "
     f"{len(knowledge_ids)} curated knowledge records; internal links, sitemap, catalog, toolkit source, "
-    "crawler policy, skill versions, JSON and JSON-LD parsed."
+    "crawler and IndexNow policies, skill versions, JSON and JSON-LD parsed."
 )
