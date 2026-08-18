@@ -68,10 +68,10 @@
     {
       "id": "https://cbt-cards.github.io/agents/",
       "url": "https://cbt-cards.github.io/agents/",
-      "title": "CBT Cards for AI agents",
-      "content_text": "Canonical web, JSON, JSONL, worksheet-schema, llms.txt, and versioned skill interfaces for public CBT Cards resources.",
+      "title": "Use CBT Cards with AI assistants",
+      "content_text": "A public, read-only interface for reflection resources, canonical pages, JSON/JSONL data, review metadata, schemas, and versioned skill instructions.",
       "date_modified": "2026-08-18T00:00:00Z",
-      "tags": ["agents", "RAG", "llms.txt"]
+      "tags": ["agents", "reflection", "llms.txt"]
     }
   ]
 }
