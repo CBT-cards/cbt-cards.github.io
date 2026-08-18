@@ -28,6 +28,21 @@
 <p>This changelog tracks changes to the public CBT Cards website, learning library, printable browser worksheets, schemas, language data, research datasets, toolkit pages, structured data, feeds, and agent interfaces. A website, data, translation, research, or agent entry does <strong>not</strong> imply that an Android or iOS app version shipped on the same date.</p>
 <p>Agents and tooling can read the same history from <a href="/data/changelog.json"><code>data/changelog.json</code></a>. Versioned data contracts are listed in <a href="/schemas/index.json"><code>schemas/index.json</code></a>.</p>
 
+<article id="data-2026-08-18-reproducible-eval-baselines">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Public data/research</p>
+<h2>Reproducible agent eval baselines and citation metadata</h2>
+<p>Added a versioned run format and reproducible deterministic baselines so evaluation numbers have an inspectable source instead of materializing from the traditional scientific instrument known as a slide deck.</p>
+<ul>
+<li>Added <a href="/data/agent-eval-runs.jsonl"><code>data/agent-eval-runs.jsonl</code></a> and a versioned <a href="/schemas/agent-eval-run-v1.schema.json">evaluation-run schema</a>.</li>
+<li>Every run pins the SHA-256 of the exact <a href="/data/agent-evals.jsonl">evaluation-case dataset</a> bytes used and records both aggregate and per-case results.</li>
+<li><code>null-route-v1</code> is an intentionally weak floor: 1/24 correct routes, 0/19 targets, 0/4 locale behaviors, and 1/7 boundary routes.</li>
+<li><code>deterministic-contract-router-v1</code> uses only the user message and reaches 24/24 routes, 19/19 targets, 4/4 locale behaviors, and 7/7 boundary routes on the current starter set.</li>
+<li>CI regenerates both deterministic runs and rejects any checked-in result that differs from the runner output.</li>
+<li>Added root <a href="/CITATION.cff"><code>CITATION.cff</code></a> using Citation File Format 1.2.0.</li>
+</ul>
+<p>The perfect deterministic-router score is a contract/harness baseline, not an LLM benchmark or evidence of general assistant quality. No DOI or project-wide semantic version is claimed before one is actually assigned or deliberately released.</p>
+</article>
+
 <article id="data-2026-08-18-agent-eval-foundation">
 <p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Public data/research</p>
 <h2>Public agent routing and boundary evals</h2>
@@ -112,7 +127,7 @@
 <p>Published JSON Schema draft 2020-12 contracts for CBT Cards-owned machine-readable formats and made them discoverable from the public resource catalog.</p>
 <ul>
 <li>Added <a href="/schemas/index.json">a schema manifest</a> mapping versioned contracts to their instance URLs.</li>
-<li>Added contracts for the resource catalog, changelog, worksheets, toolkit review overlay, toolkit source manifest, curated knowledge-record lines, locale registry, translation records, agent evaluation cases, and agent skill manifest.</li>
+<li>Added contracts for the resource catalog, changelog, worksheets, toolkit review overlay, toolkit source manifest, curated knowledge-record lines, locale registry, translation records, agent evaluation cases and runs, and agent skill manifest.</li>
 <li>Added <code>schema_url</code> links to applicable public catalog resources.</li>
 </ul>
 </article>
