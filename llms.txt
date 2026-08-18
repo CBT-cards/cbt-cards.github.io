@@ -1,6 +1,6 @@
 # CBT Cards
 
-CBT Cards is a public library of practical reflection resources for people and the AI assistants they choose to use. It publishes short CBT-inspired cards, plain-language learning guides, printable browser worksheets, structured public data, review metadata, language-status metadata, public agent evals, reproducible non-model baselines, held-out challenge cases, a provenance-first model-run protocol, citation metadata, and versioned portable agent instructions. The original CBT Cards mobile app remains documented as a separate product surface. CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
+CBT Cards is a public library of practical reflection resources for people and the AI assistants they choose to use. It publishes short CBT-inspired cards, plain-language learning guides, printable browser worksheets, structured public data, review metadata, language-status metadata, public agent evals, reproducible non-model baselines, held-out challenge cases, a provenance-first model-run protocol, an isolated provider execution path, citation metadata, and versioned portable agent instructions. The original CBT Cards mobile app remains documented as a separate product surface. CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
 
 ## Public reflection resources
 
@@ -79,11 +79,16 @@ CBT Cards is a public library of practical reflection resources for people and t
 - Fixed model-run prompt v1: https://cbt-cards.github.io/research/model-run-prompt-v1.txt
 - Model-response contract: https://cbt-cards.github.io/schemas/agent-model-response-v1.schema.json
 - Model-run contract: https://cbt-cards.github.io/schemas/agent-model-run-v1.schema.json
+- Isolated OpenAI Responses API generator: https://cbt-cards.github.io/scripts/run_model_openai.py
+- Separate execution scorer wrapper: https://cbt-cards.github.io/scripts/score_model_execution.py
 - Deterministic post-generation evaluator: https://cbt-cards.github.io/scripts/evaluate_model_run.py
-- Generation and scoring are separate stages. During generation the model may receive `user_message`, normal runtime/system instructions, and normal public CBT Cards sources, but benchmark-only expected fields must remain hidden.
-- A model run records provider, model, exposed version/snapshot when available, runtime, execution timestamp, prompt SHA-256, dataset SHA-256, raw answers, evaluator version, and per-case routing results.
+- Publication-candidate provenance gate: https://cbt-cards.github.io/scripts/check_model_run_candidate.py
+- Generation and scoring are separate stages. During generation the model receives `user_message`, the fixed evaluation prompt, normal CBT Cards skill/runtime instructions, and public CBT Cards sources, but benchmark-only expected fields remain hidden.
+- The OpenAI adapter uses strict structured output, records `store: false`, and restricts web search to `cbt-cards.github.io`.
+- A model execution records prompt, dataset, current skill, response, model/runtime, and evaluator provenance before it can be considered for publication.
+- A manual GitHub Actions workflow can generate starter or challenge artifacts in a fresh process using repository secret `OPENAI_API_KEY`; it uploads execution, raw-response, and scored-run artifacts and does not self-publish them.
 - The v1 deterministic evaluator scores route, exact target IDs, locale behavior, and boundary routing. It does not automatically score prose quality, `expected_checks`, or prohibited claims.
-- CI uses a synthetic fixture only to validate the protocol/scorer contract. That fixture is not a model benchmark result.
+- CI uses synthetic fixtures only to validate isolation and the post-generation scoring/candidate pipeline. Fixtures are not model benchmark results.
 - No LLM or hosted-assistant score is currently claimed.
 
 ## Portable agent skill
