@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cbt-cards.github.io/schemas/agent-model-run-v1.schema.json",
+  "title": "CBT Cards agent model run v1",
+  "description": "Contract for one scored model/assistant run over a CBT Cards evaluation dataset.",
+  "type": "object",
+  "required": ["schema_version", "id", "eval_dataset", "eval_dataset_sha256", "executed", "model", "prompt", "evaluator", "metrics", "case_results", "semantic_evaluation", "notes"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "id": {"type": "string", "pattern": "^model-run-[a-z0-9][a-z0-9._-]*$"},
+    "eval_dataset": {
+      "enum": [
+        "https://cbt-cards.github.io/data/agent-evals.jsonl",
+        "https://cbt-cards.github.io/data/agent-evals-challenge.jsonl"
+      ]
+    },
+    "eval_dataset_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "executed": {"type": "string", "format": "date-time"},
+    "model": {
+      "type": "object",
+      "required": ["provider", "model", "version_or_snapshot", "runtime", "runtime_metadata"],
+      "properties": {
+        "provider": {"type": "string", "minLength": 1},
+        "model": {"type": "string", "minLength": 1},
+        "version_or_snapshot": {"type": ["string", "null"], "minLength": 1},
+        "runtime": {"type": "string", "minLength": 1},
+        "runtime_metadata": {"type": "object", "additionalProperties": true}
+      },
+      "additionalProperties": false
+    },
+    "prompt": {
+      "type": "object",
+      "required": ["url", "sha256", "input_fields", "expected_fields_hidden"],
+      "properties": {
+        "url": {"const": "https://cbt-cards.github.io/research/model-run-prompt-v1.txt"},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "input_fields": {
+          "type": "array",
+          "prefixItems": [{"const": "user_message"}],
+          "minItems": 1,
+          "maxItems": 1
+        },
+        "expected_fields_hidden": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "evaluator": {
+      "type": "object",
+      "required": ["id", "version", "implementation_url"],
+      "properties": {
+        "id": {"const": "route-contract-evaluator-v1"},
+        "version": {"const": "1.0.0"},
+        "implementation_url": {"const": "https://cbt-cards.github.io/scripts/evaluate_model_run.py"}
+      },
+      "additionalProperties": false
+    },
+    "metrics": {
+      "type": "object",
+      "required": ["case_count", "route_correct", "route_accuracy", "target_case_count", "target_correct", "target_accuracy", "locale_case_count", "locale_correct", "locale_accuracy", "boundary_case_count", "boundary_correct", "boundary_accuracy"],
+      "properties": {
+        "case_count": {"type": "integer", "minimum": 1},
+        "route_correct": {"type": "integer", "minimum": 0},
+        "route_accuracy": {"type": "number", "minimum": 0, "maximum": 1},
+        "target_case_count": {"type": "integer", "minimum": 0},
+        "target_correct": {"type": "integer", "minimum": 0},
+        "target_accuracy": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "locale_case_count": {"type": "integer", "minimum": 0},
+        "locale_correct": {"type": "integer", "minimum": 0},
+        "locale_accuracy": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "boundary_case_count": {"type": "integer", "minimum": 0},
+        "boundary_correct": {"type": "integer", "minimum": 0},
+        "boundary_accuracy": {"type": ["number", "null"], "minimum": 0, "maximum": 1}
+      },
+      "additionalProperties": false
+    },
+    "case_results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["case_id", "answer", "answer_sha256", "predicted_route", "predicted_resource_ids", "predicted_source_record_ids", "predicted_locale_behavior", "route_correct", "target_scored", "target_correct", "locale_scored", "locale_correct", "boundary_scored", "boundary_correct", "runtime_metadata"],
+        "properties": {
+          "case_id": {"type": "string", "pattern": "^eval-[a-z0-9][a-z0-9-]*$"},
+          "answer": {"type": "string", "minLength": 1},
+          "answer_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "predicted_route": {"type": "string", "minLength": 1},
+          "predicted_resource_ids": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "predicted_source_record_ids": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "predicted_locale_behavior": {"type": "string", "minLength": 1},
+          "route_correct": {"type": "boolean"},
+          "target_scored": {"type": "boolean"},
+          "target_correct": {"type": ["boolean", "null"]},
+          "locale_scored": {"type": "boolean"},
+          "locale_correct": {"type": ["boolean", "null"]},
+          "boundary_scored": {"type": "boolean"},
+          "boundary_correct": {"type": ["boolean", "null"]},
+          "runtime_metadata": {"type": "object", "additionalProperties": true}
+        },
+        "additionalProperties": false
+      }
+    },
+    "semantic_evaluation": {
+      "type": "object",
+      "required": ["status", "automatic_expected_checks_scored", "automatic_prohibited_claims_scored", "notes"],
+      "properties": {
+        "status": {"enum": ["not_scored", "partially_scored", "scored"]},
+        "automatic_expected_checks_scored": {"type": "boolean"},
+        "automatic_prohibited_claims_scored": {"type": "boolean"},
+        "notes": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+      },
+      "additionalProperties": false
+    },
+    "notes": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+  },
+  "additionalProperties": false
+}
