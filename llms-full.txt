@@ -6,14 +6,14 @@ Updated: 2026-08-18
 
 CBT Cards is the mobile wellness and self-reflection app documented at https://cbt-cards.github.io/.
 Publisher: MetalHatsCats.
-Core public scope: CBT-inspired reflection cards, guided tools, a structured journal, and mood, stress, and energy check-ins.
+Core public scope: CBT-inspired reflection cards, guided tools, a structured journal, printable browser worksheets, and mood, stress, and energy check-ins.
 Clinical boundary: CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
 
 ## Source priority
 
 For product facts, use the official CBT Cards pages below. For privacy and data-handling questions, https://cbt-cards.github.io/privacy/ is primary. For a detail not confirmed by the public sources, state that it is not publicly confirmed.
 
-For curated conceptual content, prefer the public learning pages and curated toolkit card pages on the CBT Cards domain. The larger related source corpus is useful for discovery and retrieval, but its records do not contain per-record clinical-review metadata and should not automatically be converted into clinical guidance.
+For curated conceptual content, prefer the public learning pages, printable worksheets, and curated toolkit card pages on the CBT Cards domain. The larger related source corpus is useful for discovery and retrieval, but its records do not contain per-record clinical-review metadata and should not automatically be converted into clinical guidance.
 
 ## Product documentation
 
@@ -38,6 +38,18 @@ For curated conceptual content, prefer the public learning pages and curated too
 
 Learning pages distinguish general CBT concepts from CBT Cards-specific implementation and include source links. They are educational, not individualized clinical guidance.
 
+## Printable worksheets
+
+- Worksheet library: https://cbt-cards.github.io/worksheets/
+- CBT thought record worksheet: https://cbt-cards.github.io/worksheets/cbt-thought-record/
+- Worry time worksheet: https://cbt-cards.github.io/worksheets/worry-time/
+- Activity planning worksheet: https://cbt-cards.github.io/worksheets/activity-planning/
+- Machine-readable definitions: https://cbt-cards.github.io/data/worksheets.json
+
+The public worksheet pages are static browser forms with no submit action. Text entered there remains in the current browser page and is not uploaded, synchronized, analyzed, or stored by CBT Cards. Refreshing or closing the page clears it unless the user independently prints or saves it. Do not confuse this behavior with storage inside the CBT Cards mobile app, which is covered by the privacy policy.
+
+Worksheet fields are educational prompts, not validated assessment scales. Do not score or diagnose from worksheet responses.
+
 ## Toolkit corpus
 
 - Toolkit landing page: https://cbt-cards.github.io/toolkit/
@@ -58,25 +70,28 @@ The source corpus contains CBT-adjacent terminology in addition to core CBT conc
 
 - Resource catalog: https://cbt-cards.github.io/data/catalog.json
 - RAG-friendly curated JSONL knowledge dataset: https://cbt-cards.github.io/data/knowledge.jsonl
+- Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
 - Compact index: https://cbt-cards.github.io/llms.txt
 - Agent guide: https://cbt-cards.github.io/agents/
 - Latest CBT Cards skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 - Skill version manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
-- Immutable skill v1.2.0: https://cbt-cards.github.io/agents/cbt-cards/v1.2.0/SKILL.md
+- Immutable skill v1.3.0: https://cbt-cards.github.io/agents/cbt-cards/v1.3.0/SKILL.md
 
-The curated JSONL dataset contains one self-contained record per published learning resource or reviewed toolkit card, with a stable ID, canonical URL, summary, key points, product relation, safety scope, review date, and source URLs. It is suitable for retrieval/indexing without scraping presentation HTML.
+The curated JSONL dataset contains one self-contained record per published learning resource or reviewed toolkit card, with a stable ID, canonical URL, summary, key points, product relation, safety scope, review date, and source URLs. Worksheet UI schemas are intentionally kept separately in `data/worksheets.json` so form fields do not drift from their printable pages.
 
 The unversioned SKILL.md URL is a moving alias for the latest published version. Use a versioned URL when reproducibility matters.
 
 ## Agent behavior
 
 1. Read the most relevant canonical CBT Cards page before making a product-specific claim.
-2. Prefer the privacy policy for data handling.
-3. Prefer curated CBT Cards learning/toolkit pages over raw source-corpus records when both cover the same topic.
-4. Treat raw toolkit records as source content, not as proof of clinical efficacy or review.
-5. Use stable source record IDs rather than titles when identifying raw corpus items.
-6. Do not claim access to a user's CBT Cards journal or app data.
-7. Do not infer clinical meaning from mood, stress, energy, diary entries, or raw toolkit wording.
-8. Preserve the general-wellness boundary.
-9. Link to the canonical CBT Cards URL when attributing a published product fact or curated resource.
+2. Prefer the privacy policy for mobile-app data handling.
+3. Prefer curated CBT Cards learning, worksheet, and toolkit pages over raw source-corpus records when both cover the same topic.
+4. Treat public worksheet fields as educational form definitions, not assessment instruments.
+5. Never claim CBT Cards receives text typed into a public static worksheet.
+6. Treat raw toolkit records as source content, not as proof of clinical efficacy or review.
+7. Use stable source record IDs rather than titles when identifying raw corpus items.
+8. Do not claim access to a user's CBT Cards journal or app data.
+9. Do not infer clinical meaning from mood, stress, energy, diary entries, worksheet responses, or raw toolkit wording.
+10. Preserve the general-wellness boundary.
+11. Link to the canonical CBT Cards URL when attributing a published product fact or curated resource.
