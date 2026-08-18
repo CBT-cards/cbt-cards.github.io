@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "id": "metalhatscats-cbt-toolkit-v0.1.0",
+  "name": "MetalHatsCats CBT Toolkit",
+  "relationship": "public source corpus related to CBT Cards",
+  "version": "0.1.0",
+  "language": "en",
+  "record_count": 115,
+  "record_counts": {
+    "card": 77,
+    "metaphor": 23,
+    "protocol": 15
+  },
+  "source_repository": "https://github.com/metalhatscats/metalhatscats-datasets",
+  "source_commit": "af0a9bac9ab8ff10173e266903d592a3507c1890",
+  "dataset_blob_sha": "236b7216e1fe0028006c9585cdedb0e21293db1a",
+  "dataset_path": "datasets/cbt-toolkit/dataset.jsonl",
+  "schema_path": "datasets/cbt-toolkit/schema.json",
+  "canonical_dataset_landing_page": "https://metalhatscats.com/datasets/cbt-toolkit",
+  "distribution": "https://raw.githubusercontent.com/metalhatscats/metalhatscats-datasets/af0a9bac9ab8ff10173e266903d592a3507c1890/datasets/cbt-toolkit/dataset.jsonl",
+  "media_type": "application/x-ndjson",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "clinical_review_metadata_present": false,
+  "publication_policy": "The CBT Cards website publishes curated HTML pages from this corpus only after editorial and safety review. The full source corpus remains available as machine-readable data.",
+  "quality_notes": [
+    "The source taxonomy distinguishes card, metaphor, and protocol records but does not encode clinical-review status.",
+    "The corpus contains CBT-adjacent techniques and labels in addition to core CBT concepts; a record should not be treated as clinical guidance solely because it appears in this dataset.",
+    "Protocol records require separate review before being republished as standalone health-adjacent web guidance.",
+    "Source records protocol-1 and protocol-8 share the title Burnout Recovery Protocol and should be reconciled before large-scale page generation."
+  ],
+  "verified": "2026-08-18"
+}
