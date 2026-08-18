@@ -2,9 +2,9 @@
 
 Official static website and public reflection resource for CBT Cards.
 
-CBT Cards began as a mobile app and is evolving into an open public library that can be used directly by people and consumed by AI assistants through ordinary web pages, JSON/JSONL data, versioned schemas, review metadata, and portable agent instructions.
+CBT Cards began as a mobile app and is evolving into an open public library that can be used directly by people and consumed by AI assistants through ordinary web pages, JSON/JSONL data, versioned schemas, review metadata, portable agent instructions, and inspectable evaluation data.
 
-The deployed site remains intentionally dependency-free: plain HTML, CSS, text, JSON, JSONL, and product-owned assets publish directly to GitHub Pages. There is no JavaScript application bundle or runtime service required to render public content. Small Python scripts are used only for validation and deterministic generation before deployment.
+The deployed site remains intentionally dependency-free: plain HTML, CSS, text, JSON, JSONL, and product-owned assets publish directly to GitHub Pages. There is no JavaScript application bundle or runtime service required to render public content. Small Python scripts are used only for validation, deterministic generation, and reproducible baseline evaluation before deployment.
 
 ## Public structure
 
@@ -15,6 +15,7 @@ Public reflection library:
 - `/worksheets/` — printable browser-local worksheets
 - `/toolkit/` — public toolkit and dataset entry point
 - `/languages/` — human-readable language, translation-review, and publication status
+- `/research/` — public agent evaluation cases, reproducible baselines, and methodology notes
 - `/about/` — project origin, direction, publisher, and editorial approach
 - `/changelog/` — website/public-data/agent release history, separate from mobile-app releases
 
@@ -85,6 +86,33 @@ A translation becomes official published CBT Cards content only after separate h
 
 Generated localized pages use the canonical pattern `/<locale>/resources/<resource_id>/`. The generator also maintains locale hubs and the generated localization block in `sitemap.xml`. `/languages/` is always generated from the locale and translation data, so human-facing counts cannot silently drift from the machine-readable state.
 
+## Public agent evaluation research
+
+CBT Cards publishes a small, inspectable evaluation surface for assistants and integrations:
+
+- `/research/` — methodology, scope, current deterministic baselines, and limitations
+- `/data/agent-evals.jsonl` — 24 hand-authored v1 evaluation cases across retrieval, learning, worksheets, localization, publication boundaries, privacy, and safety
+- `/schemas/agent-eval-case-v1.schema.json` — one evaluation-case contract
+- `/data/agent-eval-runs.jsonl` — reproducible run records kept separate from the test cases
+- `/schemas/agent-eval-run-v1.schema.json` — one evaluation-run contract
+- `scripts/check_evals.py` — semantic consistency check against live catalog/review/localization state
+- `scripts/run_eval_baselines.py` — deterministic non-model baseline runner and exact-output verifier
+
+Every run record pins the SHA-256 of the exact `data/agent-evals.jsonl` bytes used. `scripts/run_eval_baselines.py --check` regenerates the deterministic baselines and requires the committed run dataset to match exactly.
+
+The initial baselines are intentionally different kinds of reference points:
+
+- `null-route-v1` is an intentionally weak floor: 1/24 correct routes, 0/19 expected target selections, 0/4 locale behaviors, and 1/7 boundary routes.
+- `deterministic-contract-router-v1` is a small rule-based contract/harness baseline that reads only `user_message`. On the current starter set it reaches 24/24 routes, 19/19 targets, 4/4 locale behaviors, and 7/7 boundary routes.
+
+The deterministic router's perfect score is not a model benchmark or claim about general assistant quality. It verifies that the current routing taxonomy, stable IDs, result format, hashing, and scoring pipeline can reproduce a known result. Future model runs must identify their own model/provider/version or snapshot, execution date, evaluator version, and per-case results rather than inheriting these baseline numbers.
+
+## Citation and archival provenance
+
+- `/CITATION.cff` — repository-level Citation File Format 1.2.0 metadata
+
+CBT Cards is currently described there as a dataset with MetalHatsCats as the authoring entity. No DOI or project-wide semantic version is claimed. Add a DOI only after an archival service actually assigns one to a release, and record any future project-wide version deliberately rather than inferring one from website, data, app, or skill versions.
+
 ## Agent, discovery, and machine-readable resources
 
 - `/agents/` — integration guide for AI assistants and research tooling
@@ -92,15 +120,18 @@ Generated localized pages use the canonical pattern `/<locale>/resources/<resour
 - `/agents/cbt-cards/manifest.json` — skill version manifest
 - `/agents/cbt-cards/v1.1.0/SKILL.md` through `/v1.6.0/SKILL.md` — immutable skill versions
 - `/llms.txt` — compact public index
-- `/llms-full.txt` — extended source-priority, localization, release, schema, worksheet, corpus, publication-status, and safety index
+- `/llms-full.txt` — extended source-priority, localization, research, release, schema, worksheet, corpus, publication-status, and safety index
 - `/data/catalog.json` — canonical public resource catalog with stable IDs and `schema_url` for CBT Cards-owned structured formats
 - `/data/changelog.json` — scoped website/public-data/agent release provenance
 - `/data/knowledge.jsonl` — curated English source-language knowledge records
 - `/data/locales.json` — language registry
 - `/data/translations.jsonl` — localized content overlays with independent review/publication status
+- `/data/agent-evals.jsonl` — public agent evaluation cases
+- `/data/agent-eval-runs.jsonl` — reproducible deterministic baselines and future recorded evaluation runs
 - `/data/worksheets.json` — structured form definitions
 - `/data/toolkit-review.json` — CBT Cards-owned source-record publication status
 - `/schemas/index.json` — public JSON Schema manifest
+- `/CITATION.cff` — citation metadata
 - `/feed.xml` — Atom discovery feed
 - `/feed.json` — JSON Feed 1.1 discovery feed
 - `/.well-known/security.txt` — standard public security contact
@@ -119,9 +150,11 @@ Current contracts cover:
 - one record/line in `data/knowledge.jsonl`
 - `data/locales.json`
 - one record/line in `data/translations.jsonl`
+- one record/line in `data/agent-evals.jsonl`
+- one record/line in `data/agent-eval-runs.jsonl`
 - `agents/cbt-cards/manifest.json`
 
-The public catalog exposes `schema_url` for these resources. JSON Schema is the portable field-level contract; purpose-specific repository checks remain responsible for semantic invariants such as canonical target existence, sequential worksheet fields, privacy wording, translation source snapshots, and exact review-overlay/catalog/JSONL alignment.
+The public catalog exposes `schema_url` for these resources. JSON Schema is the portable field-level contract; purpose-specific repository checks remain responsible for semantic invariants such as canonical target existence, sequential worksheet fields, privacy wording, translation source snapshots, eval source expectations, run reproducibility, and exact review-overlay/catalog/JSONL alignment.
 
 ## Local preview
 
@@ -145,6 +178,22 @@ The generator does not publish machine drafts. It renders localized resource pag
 
 See [LOCALIZATION.md](LOCALIZATION.md) for the human review checklist and state transitions.
 
+## Reproducing evaluation baselines
+
+To regenerate the deterministic non-model baselines:
+
+```bash
+python3 scripts/run_eval_baselines.py
+```
+
+To verify that the committed `data/agent-eval-runs.jsonl` matches the current eval cases and baseline code exactly:
+
+```bash
+python3 scripts/run_eval_baselines.py --check
+```
+
+Do not edit deterministic baseline records by hand. Change the eval cases or runner intentionally, regenerate, inspect the metric changes, and record the public change in the changelog.
+
 ## Quality checks
 
 Run the same static checks used by GitHub Actions:
@@ -152,6 +201,9 @@ Run the same static checks used by GitHub Actions:
 ```bash
 python3 scripts/check_localization.py
 python3 scripts/build_localized_pages.py --check
+python3 scripts/check_evals.py
+python3 scripts/run_eval_baselines.py --check
+python3 scripts/check_citation.py
 python3 scripts/check_site.py
 python3 scripts/check_crawl_graph.py
 python3 scripts/check_worksheets.py
@@ -165,6 +217,12 @@ The localization checker verifies the locale registry, stable knowledge IDs, tra
 
 The localized-page generator check verifies that `/languages/`, any enabled locale hubs, published localized resource pages, and the generated localization block in `sitemap.xml` exactly match source data. Stale generated localized pages fail validation.
 
+The agent-eval checker verifies stable case IDs, category coverage, expected catalog/raw-source IDs, publication-boundary expectations, privacy/safety routes, and localization expectations against current public state.
+
+The eval-baseline check regenerates deterministic non-model runs from the current case dataset, pins its SHA-256, recalculates route/target/locale/boundary metrics, and rejects any checked-in result that differs from the reproducible output.
+
+The citation checker verifies the repository's CFF 1.2.0 dataset metadata and rejects an invented DOI or project-wide semantic version.
+
 The site checker verifies public HTML metadata, canonical uniqueness, JSON-LD parsing, internal links, crawler/IndexNow configuration, sitemap coverage/targets, resource catalog targets, curated JSONL alignment, toolkit source metadata, and agent skill/version targets.
 
 The crawl-graph checker rejects indexed orphan pages and verifies that public pages remain reachable within the intended depth from the homepage.
@@ -177,7 +235,7 @@ The changelog checker verifies schema version, stable release IDs, chronological
 
 The toolkit-review checker verifies safe defaults for unlisted source records, published source-ID uniqueness, exact alignment between the review overlay, catalog toolkit cards, curated JSONL toolkit records and canonical pages, plus manifest-driven latest-skill alignment.
 
-The schema checker verifies schema-manifest completeness, JSON Schema 2020-12 declarations, stable `$id` values, local instance/schema targets, catalog `schema_url` discovery, localization contracts, and safety-critical constants.
+The schema checker verifies schema-manifest completeness, JSON Schema 2020-12 declarations, stable `$id` values, local instance/schema targets, catalog `schema_url` discovery, localization contracts, evaluation contracts, and safety-critical constants.
 
 ## Deployment and discovery
 
@@ -203,7 +261,7 @@ The repository must remain `CBT-cards/cbt-cards.github.io` to serve the user-sit
 - When adding or changing a CBT Cards-owned structured format, update its versioned schema, `schemas/index.json`, the catalog `schema_url`, and `scripts/check_schemas.py` as needed.
 - Treat schema changes that break existing consumers as a new schema-version URL rather than silently mutating the old contract.
 - Record meaningful public website/data/agent changes in `/data/changelog.json` and `/changelog/` using a stable release ID and explicit `scope`.
-- Never infer a mobile-app release from a website, dataset, translation, worksheet, feed, or agent-skill change. Mobile release entries require separately verified release metadata.
+- Never infer a mobile-app release from a website, dataset, translation, worksheet, feed, research, or agent-skill change. Mobile release entries require separately verified release metadata.
 - Keep each curated JSONL knowledge record self-contained and aligned with its canonical page.
 - Treat the `id` in `data/knowledge.jsonl` as the stable logical resource ID for localization.
 - Store translations separately from source records and key them by stable `resource_id` plus locale.
@@ -213,6 +271,11 @@ The repository must remain `CBT-cards/cbt-cards.github.io` to serve the user-sit
 - A published localized record must use `https://cbt-cards.github.io/<locale>/resources/<resource_id>/` as its canonical URL.
 - Keep `source_reviewed` aligned with the source record's current `reviewed` value; update and re-review translations when the source changes.
 - Do not create records for a `planned` locale until it is deliberately promoted to `pilot`.
+- Keep eval cases separate from recorded runs; do not change expected cases to make a particular runner look better.
+- Deterministic baseline runners must use only their declared `input_fields` and must not inspect expected routes, resource IDs, rationales, tags, or checks as prediction inputs.
+- Every recorded eval run must identify the exact eval dataset bytes through `eval_dataset_sha256` and preserve per-case results.
+- Do not describe a deterministic routing baseline as an LLM benchmark or general model-quality score.
+- Do not publish a DOI in `CITATION.cff` until an archival service has actually assigned it.
 - A raw toolkit record must not become a standalone published resource unless its stable source ID is explicitly added to `data/toolkit-review.json` as `reviewed_for_publication` and `published`.
 - Any raw toolkit source ID absent from the review overlay is `unreviewed` and `source_only` by default.
 - Never describe `reviewed_for_publication` as clinical validation or efficacy evidence.
@@ -238,4 +301,4 @@ See [MIGRATION.md](MIGRATION.md) for legacy URL mappings. Changes to legacy host
 
 The original CBT Cards website content is licensed under [CC BY-NC-SA 4.0](LICENSE): attribution and the same license are required for sharing or adaptations, and commercial use is not permitted without prior written permission from MetalHatsCats. CBT Cards names and logos are not licensed for reuse.
 
-The source CBT Toolkit v0.1.0 is also documented as CC BY-NC-SA 4.0. Any future change to the reuse license for machine-readable agent/RAG or translation data must be explicit and publisher-approved rather than inferred from technical accessibility.
+The source CBT Toolkit v0.1.0 is also documented as CC BY-NC-SA 4.0. Any future change to the reuse license for machine-readable agent/RAG, eval, or translation data must be explicit and publisher-approved rather than inferred from technical accessibility.
