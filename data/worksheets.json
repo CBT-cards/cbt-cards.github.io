@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "updated": "2026-08-18",
+  "worksheets": [
+    {
+      "id": "cbt-thought-record-7-step",
+      "locale": "en",
+      "title": "CBT thought record — 7-step worksheet",
+      "canonical_url": "https://cbt-cards.github.io/worksheets/cbt-thought-record/",
+      "learning_resource": "https://cbt-cards.github.io/learn/cbt-thought-record/",
+      "source": "https://www.nhs.uk/every-mind-matters/mental-wellbeing-tips/self-help-cbt-techniques/thought-record/",
+      "safety_scope": "Educational self-reflection only; not diagnosis, treatment, or individualized clinical guidance.",
+      "privacy_behavior": "The static web worksheet has no submit action. Text entered into the browser fields is not sent to CBT Cards and is lost when the page is refreshed or closed unless the user prints or saves it independently.",
+      "fields": [
+        {"id": "situation", "position": 1, "label": "Situation", "prompt": "What happened? Describe one specific situation using concrete details."},
+        {"id": "feelings_before", "position": 2, "label": "Feelings at first", "prompt": "What emotions did you notice at the time?"},
+        {"id": "initial_thoughts", "position": 3, "label": "Thoughts", "prompt": "What thoughts or images went through your mind?"},
+        {"id": "evidence_for", "position": 4, "label": "Evidence that supports the thought", "prompt": "What directly known information supports the interpretation?"},
+        {"id": "evidence_against", "position": 5, "label": "Evidence that does not support the thought", "prompt": "What facts, context, or experience complicate or contradict the interpretation?"},
+        {"id": "alternative_view", "position": 6, "label": "Alternative view", "prompt": "Considering both sides, is there a more realistic, neutral, or balanced way to describe the situation?"},
+        {"id": "feelings_after", "position": 7, "label": "Feelings now", "prompt": "After reviewing the situation, what do you notice now? It is also okay if nothing changed."}
+      ]
+    }
+  ]
+}
