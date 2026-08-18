@@ -39,11 +39,14 @@ Learning pages distinguish general CBT concepts from CBT Cards-specific implemen
 ## Machine-readable resources
 
 - Resource catalog: https://cbt-cards.github.io/data/catalog.json
+- RAG-friendly JSONL knowledge dataset: https://cbt-cards.github.io/data/knowledge.jsonl
 - Compact index: https://cbt-cards.github.io/llms.txt
 - Agent guide: https://cbt-cards.github.io/agents/
 - Latest CBT Cards skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 - Skill version manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
 - Immutable skill v1.1.0: https://cbt-cards.github.io/agents/cbt-cards/v1.1.0/SKILL.md
+
+The JSONL dataset contains one self-contained record per public learning resource with a stable ID, canonical URL, summary, key points, relation to the CBT Cards implementation, safety scope, review date, and source URLs. It is suitable for retrieval/indexing without scraping presentation HTML.
 
 The unversioned SKILL.md URL is a moving alias for the latest published version. Use a versioned URL when reproducibility matters.
 
