@@ -10,6 +10,7 @@ CBT Cards is a public library of practical reflection resources for people and t
 - Toolkit review status: https://cbt-cards.github.io/toolkit/review-status/
 - Learning library: https://cbt-cards.github.io/learn/
 - Worksheets: https://cbt-cards.github.io/worksheets/
+- Languages and translation status: https://cbt-cards.github.io/languages/
 - About / provenance: https://cbt-cards.github.io/about/
 - Changelog: https://cbt-cards.github.io/changelog/
 
@@ -46,12 +47,15 @@ CBT Cards is a public library of practical reflection resources for people and t
 
 ## Languages
 
+- Human-readable language status: https://cbt-cards.github.io/languages/
 - Locale registry: https://cbt-cards.github.io/data/locales.json
 - Translation overlays: https://cbt-cards.github.io/data/translations.jsonl
 - English (`en`) is the canonical source locale for the current curated knowledge dataset.
-- Russian (`ru`) is a pilot locale with machine-readable draft translations. Records marked `machine_draft`, `unreviewed`, and `not_published` are development data, not official published CBT Cards translations.
+- Russian (`ru`) is a pilot locale. All 12 records in the current curated knowledge set have machine-readable drafts; none is human-reviewed or published as localized CBT Cards content yet.
+- Records marked `machine_draft`, `unreviewed`, and `not_published` are development data, not official published CBT Cards translations.
 - German (`de`) is planned and currently has no translation records.
 - A localized record is official published CBT Cards content only when its translation, review, publication status, and canonical URL explicitly say so.
+- Published localized resources use `https://cbt-cards.github.io/<locale>/resources/<resource_id>/` and are generated only from reviewed published translation records.
 
 ## Machine-readable resources
 
