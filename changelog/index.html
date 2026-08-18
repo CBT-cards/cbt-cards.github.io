@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CBT Cards changelog: website &amp; public data updates</title>
-<meta name="description" content="Track CBT Cards website, public-data, schema, worksheet, toolkit, and agent-interface updates without confusing them with mobile-app releases." />
+<meta name="description" content="Track CBT Cards website, localization, review, data, schema, worksheet, toolkit, and agent-interface updates separately from mobile-app releases." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href="https://cbt-cards.github.io/changelog/" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/changelog.json" title="CBT Cards machine-readable changelog" />
@@ -17,7 +17,7 @@
 <meta property="og:title" content="CBT Cards changelog" />
 <meta property="og:description" content="Website and public-data updates, separated from mobile-app release history." />
 <meta property="og:url" content="https://cbt-cards.github.io/changelog/" />
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://cbt-cards.github.io/changelog/"}]},{"@type":"CollectionPage","name":"CBT Cards public changelog","url":"https://cbt-cards.github.io/changelog/","description":"Website, public knowledge, schema, worksheet, dataset, toolkit-review, and agent-interface release history for CBT Cards.","dateModified":"2026-08-18","publisher":{"@id":"https://cbt-cards.github.io/#publisher"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://cbt-cards.github.io/changelog/"}]},{"@type":"CollectionPage","name":"CBT Cards public changelog","url":"https://cbt-cards.github.io/changelog/","dateModified":"2026-08-18","publisher":{"@id":"https://cbt-cards.github.io/#publisher"}}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -25,65 +25,23 @@
 <main id="main">
 <section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / Changelog</div><h1>CBT Cards public changelog</h1><p class="lede">Website and public-data changes, recorded separately from mobile-app releases.</p></div></section>
 <section class="section alt"><div class="wrap prose">
-<p>This changelog tracks changes to the public CBT Cards website, learning library, printable browser worksheets, schemas, toolkit pages, structured data, feeds, and agent interfaces. A website or data entry does <strong>not</strong> imply that an Android or iOS app version shipped on the same date.</p>
-<p>Agents and tooling can read the same history from <a href="/data/changelog.json"><code>data/changelog.json</code></a>. Versioned data contracts are listed in <a href="/schemas/index.json"><code>schemas/index.json</code></a>.</p>
+<p>Machine-readable history is available in <a href="/data/changelog.json"><code>data/changelog.json</code></a>. A website, data, or agent entry does not imply that an Android or iOS app version shipped on the same date.</p>
 
-<article id="web-2026-08-18-crawl-graph-quality">
-<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Website</p>
-<h2>Indexed-page crawl graph quality gate</h2>
-<p>Added direct homepage links to the major public-resource hubs and a CI rule that checks the sitemap as an actual internal-link graph rather than merely a list of files.</p>
-<ul>
-<li>Requires every indexed page except the homepage to receive at least one link from another indexed page.</li>
-<li>Requires every sitemap page to be reachable from the homepage in at most three internal-link hops.</li>
-<li>Requires Learn, Worksheets, Toolkit, About, Changelog, and Agents to be linked directly from the homepage.</li>
-<li>Adds a dedicated homepage public-resources section for worksheets, release history, and agent/data interfaces.</li>
-</ul>
-</article>
+<article id="web-2026-08-18-localization-readiness"><p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Website</p><h2>Website locale source of truth and localization guardrails</h2><p>Added a <a href="/about/localization/">website localization policy</a>, <a href="/data/locales.json">machine-readable locale registry</a>, versioned locale schema, CI checks, and agent skill v1.6.0. The site currently publishes English at the root URL. Website locale metadata is explicitly not a source for Android or iOS language support.</p></article>
 
-<article id="web-2026-08-18-public-json-schemas">
-<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Public data</p>
-<h2>Versioned public JSON Schema contracts</h2>
-<p>Published JSON Schema draft 2020-12 contracts for CBT Cards-owned machine-readable formats and made them discoverable from the public resource catalog.</p>
-<ul>
-<li>Added <a href="/schemas/index.json">a schema manifest</a> mapping versioned contracts to their instance URLs.</li>
-<li>Added contracts for the resource catalog, changelog, worksheets, toolkit review overlay, toolkit source manifest, curated knowledge-record lines, and agent skill manifest.</li>
-<li>Added <code>schema_url</code> links to applicable public catalog resources.</li>
-</ul>
-</article>
+<article id="web-2026-08-18-editorial-review-freshness"><p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Website</p><h2>Editorial review freshness registry</h2><p>Added the <a href="/about/editorial-review/">editorial review policy</a> and <a href="/data/content-review.json">review registry</a> for learning, worksheet, and curated toolkit-card resources. The 365-day review target is a maintenance rule, not clinical validation.</p></article>
 
-<article id="web-2026-08-18-toolkit-review-overlay">
-<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Website/public data</p>
-<h2>Toolkit review and publication overlay</h2>
-<p>Added a CBT Cards-owned review layer that separates raw toolkit source records from records explicitly reviewed for standalone website publication.</p>
-<ul>
-<li>Added <a href="/toolkit/review-status/">human-readable toolkit review status</a> and <a href="/data/toolkit-review.json">machine-readable review data</a>.</li>
-<li>Defined the safe default for unlisted source records as <code>unreviewed</code> and <code>source_only</code>.</li>
-<li>Recorded six currently published source IDs and published agent skill v1.4.0.</li>
-</ul>
-<p><code>reviewed_for_publication</code> means editorial and safety review for public web use. It is not clinical validation or proof of efficacy.</p>
-</article>
+<article id="web-2026-08-18-crawl-graph-quality"><p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Website</p><h2>Indexed-page crawl graph quality gate</h2><p>Added direct homepage links to major public-resource hubs and a CI rule rejecting orphaned or excessively deep sitemap pages.</p></article>
 
-<article id="web-2026-08-18-knowledge-foundation">
-<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Website/public data</p>
-<h2>Knowledge, worksheets, agent data, and discovery foundation</h2>
-<p>The standalone site was expanded from product documentation into a broader public knowledge surface that can be read directly, indexed by search engines, or consumed by read-only AI/RAG clients.</p>
-<ul>
-<li>Added six sourced learning guides and a learning hub.</li>
-<li>Added printable browser-local worksheets for thought records, worry time, and activity planning.</li>
-<li>Added a public toolkit landing page, curated card pages, and source-corpus provenance.</li>
-<li>Added a stable resource catalog, curated JSONL knowledge records, worksheet schemas, and versioned agent skills.</li>
-<li>Added Atom/JSON feeds and a standard security contact endpoint.</li>
-</ul>
-</article>
+<article id="web-2026-08-18-public-json-schemas"><p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Public data</p><h2>Versioned public JSON Schema contracts</h2><p>Published JSON Schema 2020-12 contracts and <a href="/schemas/index.json">a schema manifest</a> for CBT Cards-owned structured resources.</p></article>
 
-<article id="web-2026-07-14-standalone-site">
-<p class="source-note"><time datetime="2026-07-14">14 July 2026</time> · Website</p>
-<h2>Standalone CBT Cards website</h2>
-<p>Established the standalone CBT Cards public site at <code>cbt-cards.github.io</code>, with canonical product documentation, features, how-it-works, privacy, terms, support, and FAQ pages.</p>
-<p>This records the website launch only. It is not a mobile-app release record.</p>
-</article>
+<article id="web-2026-08-18-toolkit-review-overlay"><p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Website/public data</p><h2>Toolkit review and publication overlay</h2><p>Added <a href="/toolkit/review-status/">review status</a> and <a href="/data/toolkit-review.json">machine-readable publication status</a>. Unlisted source records default to unreviewed and source-only; publication review is not clinical validation.</p></article>
+
+<article id="web-2026-08-18-knowledge-foundation"><p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Website/public data</p><h2>Knowledge, worksheets, agent data, and discovery foundation</h2><p>Expanded the standalone site with sourced learning guides, printable browser-local worksheets, curated toolkit pages, structured agent data, feeds, and quality checks.</p></article>
+
+<article id="web-2026-07-14-standalone-site"><p class="source-note"><time datetime="2026-07-14">14 July 2026</time> · Website</p><h2>Standalone CBT Cards website</h2><p>Established the standalone public site at <code>cbt-cards.github.io</code> with canonical product, privacy, terms, support, FAQ, and feature documentation.</p></article>
 </div></section>
 </main>
-<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/toolkit/">Toolkit</a><a href="/toolkit/review-status/">Review status</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/support/">Support</a><a href="/agents/">For agents</a></nav></div></footer>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/toolkit/">Toolkit</a><a href="/about/editorial-review/">Editorial review</a><a href="/about/localization/">Localization</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/agents/">For agents</a></nav></div></footer>
 </body>
 </html>
