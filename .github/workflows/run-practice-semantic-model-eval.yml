@@ -1,0 +1,73 @@
+name: Run CBT Cards practice semantic model eval
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: OpenAI model identifier
+        required: true
+        default: gpt-5.6
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: practice-semantic-model-eval-${{ github.ref }}-${{ inputs.model }}
+  cancel-in-progress: false
+
+jobs:
+  semantic-model-eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate frozen-context semantic runner before generation
+        run: |
+          python3 -m py_compile scripts/run_practice_semantic_openai.py scripts/check_practice_semantic_model_runner.py scripts/check_practice_semantic_execution.py scripts/build_semantic_review_packet.py
+          python3 scripts/check_practice_semantic_model_runner.py
+
+      - name: Require OpenAI API key
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "Repository secret OPENAI_API_KEY is required for a real practice-semantic model run." >&2
+            exit 1
+          fi
+
+      - name: Generate 41 isolated practice-semantic responses
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          mkdir -p artifacts
+          python3 scripts/run_practice_semantic_openai.py \
+            --model "${{ inputs.model }}" \
+            --responses artifacts/practice-semantic-responses.jsonl \
+            --execution artifacts/practice-semantic-execution.json
+
+      - name: Validate full execution provenance before review
+        run: |
+          python3 scripts/check_practice_semantic_execution.py \
+            --execution artifacts/practice-semantic-execution.json \
+            --responses artifacts/practice-semantic-responses.jsonl
+
+      - name: Build blinded human-review packet
+        run: |
+          python3 scripts/build_semantic_review_packet.py \
+            --responses artifacts/practice-semantic-responses.jsonl \
+            --packet-out artifacts/practice-semantic-review-packet.json \
+            --review-template-out artifacts/practice-semantic-review-template.json
+
+      - name: Upload frozen execution and blinded review artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cbt-cards-practice-semantic-${{ inputs.model }}-${{ github.run_id }}
+          path: |
+            artifacts/practice-semantic-execution.json
+            artifacts/practice-semantic-responses.jsonl
+            artifacts/practice-semantic-review-packet.json
+            artifacts/practice-semantic-review-template.json
+          if-no-files-found: error
+          retention-days: 30
