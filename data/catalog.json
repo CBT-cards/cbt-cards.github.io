@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "name": "CBT Cards public resource catalog",
+  "canonical": "https://cbt-cards.github.io/data/catalog.json",
+  "updated": "2026-08-18",
+  "license": "https://cbt-cards.github.io/LICENSE",
+  "product": {
+    "id": "cbt-cards",
+    "name": "CBT Cards",
+    "homepage": "https://cbt-cards.github.io/",
+    "publisher": "MetalHatsCats",
+    "category": "general wellness and self-reflection",
+    "platforms": ["Android", "iOS"],
+    "medical_scope": "Not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.",
+    "privacy": "https://cbt-cards.github.io/privacy/",
+    "support": "https://cbt-cards.github.io/support/",
+    "stores": {
+      "android": "https://play.google.com/store/apps/details?id=cbt.cbtcards.stressrelief",
+      "ios": "https://apps.apple.com/us/app/cbt-cards-%D1%81bt-for-daily-use/id6737169041"
+    }
+  },
+  "resources": [
+    {"id": "product-overview", "type": "product", "url": "https://cbt-cards.github.io/", "title": "CBT Cards"},
+    {"id": "features", "type": "product", "url": "https://cbt-cards.github.io/features/", "title": "Features"},
+    {"id": "how-it-works", "type": "product", "url": "https://cbt-cards.github.io/how-it-works/", "title": "How it works"},
+    {"id": "privacy", "type": "policy", "url": "https://cbt-cards.github.io/privacy/", "title": "Privacy policy"},
+    {"id": "faq", "type": "support", "url": "https://cbt-cards.github.io/faq/", "title": "FAQ"},
+    {"id": "about", "type": "provenance", "url": "https://cbt-cards.github.io/about/", "title": "About CBT Cards"},
+    {"id": "learn", "type": "collection", "url": "https://cbt-cards.github.io/learn/", "title": "Learning library"},
+    {"id": "cbt-thought-record", "type": "learning", "url": "https://cbt-cards.github.io/learn/cbt-thought-record/", "title": "CBT thought record", "reviewed": "2026-08-18"},
+    {"id": "automatic-thoughts", "type": "learning", "url": "https://cbt-cards.github.io/learn/automatic-thoughts/", "title": "Automatic thoughts in CBT", "reviewed": "2026-08-18"},
+    {"id": "thought-vs-fact", "type": "learning", "url": "https://cbt-cards.github.io/learn/thought-vs-fact/", "title": "Thought vs fact", "reviewed": "2026-08-18"},
+    {"id": "agent-skill", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md", "title": "CBT Cards agent skill", "version": "1.1.0"}
+  ]
+}
