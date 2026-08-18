@@ -5,6 +5,28 @@
   "updated": "2026-08-18",
   "entries": [
     {
+      "id": "agent-2026-08-18-portable-skill-v1-7",
+      "date": "2026-08-18",
+      "scope": "agent",
+      "title": "Portable Agent Skills release v1.7.0",
+      "summary": "Published a strict portable Agent Skills profile for the latest CBT Cards skill while preserving the existing immutable URL convention and adding installation guidance for OpenClaw, Hermes Agent, and generic Agent Skills clients.",
+      "changes": [
+        {"type": "added", "resource_id": "agent-skill-v1.7.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.7.0/SKILL.md"},
+        {"type": "added", "resource_id": "agent-skill-v1.7.0-portable", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.7.0/cbt-cards/SKILL.md"},
+        {"type": "added", "resource_id": "agent-skill-install", "url": "https://cbt-cards.github.io/agents/cbt-cards/INSTALL.md"},
+        {"type": "changed", "resource_id": "agent-skill-latest", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md"},
+        {"type": "changed", "resource_id": "agent-skill-manifest", "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"},
+        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+      ],
+      "notes": [
+        "v1.7.0 restricts SKILL.md frontmatter to the portable Agent Skills field set and stores release version in string-valued metadata.version rather than a custom top-level frontmatter field.",
+        "The mutable alias, backward-compatible immutable URL, and strict portable distribution contain identical v1.7.0 skill content.",
+        "The strict portable distribution places SKILL.md under an immediate cbt-cards directory so directory/name validation can succeed without breaking the existing versioned URL convention.",
+        "Runtime-specific OpenClaw and Hermes installation instructions live in INSTALL.md outside the portable skill core.",
+        "This is an agent-interface release and does not imply an Android or iOS app release."
+      ]
+    },
+    {
       "id": "data-2026-08-18-reproducible-eval-baselines",
       "date": "2026-08-18",
       "scope": "data",
@@ -21,7 +43,7 @@
         "The intentionally weak null-route-v1 baseline gets 1/24 routes, 0/19 target selections, 0/4 locale behaviors, and 1/7 boundary routes correct.",
         "The deterministic-contract-router-v1 baseline gets 24/24 routes, 19/19 target selections, 4/4 locale behaviors, and 7/7 boundary routes correct on the current starter set.",
         "The deterministic router is a non-model contract/harness baseline using only user_message; its perfect score is not evidence of general model or assistant quality.",
-        "The repository now includes CITATION.cff using Citation File Format 1.2.0. No DOI or project-wide semantic version is claimed before one is actually assigned or deliberately released."
+        "The repository includes CITATION.cff using Citation File Format 1.2.0. No DOI or project-wide semantic version is claimed before one is actually assigned or deliberately released."
       ]
     },
     {
