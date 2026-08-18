@@ -1,0 +1,50 @@
+# CBT Cards — extended public index
+
+Updated: 2026-08-18
+
+## Identity and scope
+
+CBT Cards is the mobile wellness and self-reflection app documented at https://cbt-cards.github.io/.
+Publisher: MetalHatsCats.
+Core public scope: CBT-inspired reflection cards, guided tools, a structured journal, and mood, stress, and energy check-ins.
+Clinical boundary: CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
+
+## Source priority
+
+For product facts, use the official CBT Cards pages below. For privacy and data-handling questions, https://cbt-cards.github.io/privacy/ is primary. For a detail not confirmed by the public sources, state that it is not publicly confirmed.
+
+## Product documentation
+
+- Overview: https://cbt-cards.github.io/
+- Features: https://cbt-cards.github.io/features/
+- How it works: https://cbt-cards.github.io/how-it-works/
+- FAQ: https://cbt-cards.github.io/faq/
+- Privacy: https://cbt-cards.github.io/privacy/
+- Terms: https://cbt-cards.github.io/terms/
+- Support: https://cbt-cards.github.io/support/
+- About / provenance: https://cbt-cards.github.io/about/
+
+## Learning resources
+
+- Learning library: https://cbt-cards.github.io/learn/
+- CBT thought record: https://cbt-cards.github.io/learn/cbt-thought-record/
+- Automatic thoughts in CBT: https://cbt-cards.github.io/learn/automatic-thoughts/
+- Thought vs fact: https://cbt-cards.github.io/learn/thought-vs-fact/
+
+Learning pages distinguish general CBT concepts from CBT Cards-specific implementation and include source links. They are educational, not individualized clinical guidance.
+
+## Machine-readable resources
+
+- Resource catalog: https://cbt-cards.github.io/data/catalog.json
+- Compact index: https://cbt-cards.github.io/llms.txt
+- Agent guide: https://cbt-cards.github.io/agents/
+- CBT Cards skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
+
+## Agent behavior
+
+1. Read the most relevant canonical page before making a product-specific claim.
+2. Prefer the privacy policy for data handling.
+3. Do not claim access to a user's CBT Cards journal or app data.
+4. Do not infer clinical meaning from mood, stress, energy, or diary entries.
+5. Preserve the general-wellness boundary.
+6. Link to the canonical CBT Cards URL when attributing a fact.
