@@ -41,6 +41,9 @@ Learning pages distinguish general CBT concepts from CBT Cards-specific implemen
 ## Toolkit corpus
 
 - Toolkit landing page: https://cbt-cards.github.io/toolkit/
+- Card records: https://cbt-cards.github.io/toolkit/cards/
+- Metaphor records: https://cbt-cards.github.io/toolkit/metaphors/
+- Protocol records: https://cbt-cards.github.io/toolkit/protocols/
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
 - Related canonical dataset landing page: https://metalhatscats.com/datasets/cbt-toolkit
 - Source corpus version: 0.1.0
@@ -60,7 +63,7 @@ The source corpus contains CBT-adjacent terminology in addition to core CBT conc
 - Agent guide: https://cbt-cards.github.io/agents/
 - Latest CBT Cards skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 - Skill version manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
-- Immutable skill v1.1.0: https://cbt-cards.github.io/agents/cbt-cards/v1.1.0/SKILL.md
+- Immutable skill v1.2.0: https://cbt-cards.github.io/agents/cbt-cards/v1.2.0/SKILL.md
 
 The curated JSONL dataset contains one self-contained record per published learning resource or reviewed toolkit card, with a stable ID, canonical URL, summary, key points, product relation, safety scope, review date, and source URLs. It is suitable for retrieval/indexing without scraping presentation HTML.
 
@@ -72,7 +75,8 @@ The unversioned SKILL.md URL is a moving alias for the latest published version.
 2. Prefer the privacy policy for data handling.
 3. Prefer curated CBT Cards learning/toolkit pages over raw source-corpus records when both cover the same topic.
 4. Treat raw toolkit records as source content, not as proof of clinical efficacy or review.
-5. Do not claim access to a user's CBT Cards journal or app data.
-6. Do not infer clinical meaning from mood, stress, energy, or diary entries.
-7. Preserve the general-wellness boundary.
-8. Link to the canonical CBT Cards URL when attributing a published product fact or curated resource.
+5. Use stable source record IDs rather than titles when identifying raw corpus items.
+6. Do not claim access to a user's CBT Cards journal or app data.
+7. Do not infer clinical meaning from mood, stress, energy, diary entries, or raw toolkit wording.
+8. Preserve the general-wellness boundary.
+9. Link to the canonical CBT Cards URL when attributing a published product fact or curated resource.
