@@ -29,6 +29,10 @@ def load_jsonl(path: Path, label: str) -> list[dict]:
     return records
 
 
+def expected_public_url(locale: str, resource_id: str) -> str:
+    return f"{ORIGIN}/{locale}/resources/{resource_id}/"
+
+
 def main() -> None:
     locales_path = ROOT / "data" / "locales.json"
     knowledge_path = ROOT / "data" / "knowledge.jsonl"
@@ -91,6 +95,10 @@ def main() -> None:
 
     seen_pairs: set[tuple[str, str]] = set()
     translation_count_by_locale: dict[str, int] = {locale: 0 for locale in locale_by_id}
+    status_count_by_locale: dict[str, dict[str, int]] = {
+        locale: {"machine_draft": 0, "human_reviewed": 0, "published": 0}
+        for locale in locale_by_id
+    }
 
     for record in translation_records:
         resource_id = record.get("resource_id")
@@ -130,12 +138,11 @@ def main() -> None:
         publication_status = record.get("publication_status")
 
         if translation_status == "machine_draft":
+            status_count_by_locale[locale]["machine_draft"] += 1
             if locale_entry.get("status") != "pilot":
                 fail(f"machine draft exists outside a pilot locale: {resource_id}/{locale}")
             if locale_entry.get("machine_readable") is not True:
                 fail(f"pilot machine draft locale must be machine-readable: {locale}")
-            if locale_entry.get("public_html") is not False:
-                fail(f"machine draft locale must not publish HTML: {locale}")
             if review_status != "unreviewed":
                 fail(f"machine draft must remain unreviewed: {resource_id}/{locale}")
             if publication_status != "not_published":
@@ -145,16 +152,24 @@ def main() -> None:
             if record.get("reviewed") is not None:
                 fail(f"machine draft must not have a review date: {resource_id}/{locale}")
         elif translation_status == "human_reviewed":
+            status_count_by_locale[locale]["human_reviewed"] += 1
             if review_status != "reviewed_for_publication":
                 fail(f"human-reviewed translation lacks publication review: {resource_id}/{locale}")
-            if record.get("reviewed") is None:
+            reviewed = record.get("reviewed")
+            drafted = record.get("drafted")
+            if not isinstance(reviewed, str):
                 fail(f"human-reviewed translation lacks review date: {resource_id}/{locale}")
+            if isinstance(drafted, str) and reviewed < drafted:
+                fail(f"translation review date precedes draft date: {resource_id}/{locale}")
+            if reviewed < record.get("source_reviewed", ""):
+                fail(f"translation review predates source review snapshot: {resource_id}/{locale}")
             if publication_status == "published":
+                status_count_by_locale[locale]["published"] += 1
                 if locale_entry.get("public_html") is not True:
                     fail(f"published translation locale is not enabled for public HTML: {locale}")
-                canonical_url = record.get("canonical_url")
-                if not isinstance(canonical_url, str) or not canonical_url.startswith(f"{ORIGIN}/"):
-                    fail(f"published translation lacks canonical CBT Cards URL: {resource_id}/{locale}")
+                expected_url = expected_public_url(locale, resource_id)
+                if record.get("canonical_url") != expected_url:
+                    fail(f"published translation canonical must be {expected_url}: {resource_id}/{locale}")
             elif publication_status == "not_published":
                 if record.get("canonical_url") is not None:
                     fail(f"unpublished reviewed translation must not have canonical URL: {resource_id}/{locale}")
@@ -192,11 +207,20 @@ def main() -> None:
         if resource.get("schema_url") != schema_url:
             fail(f"catalog schema_url mismatch for {resource_id}")
 
+    coverage = []
+    for locale, entry in locale_by_id.items():
+        if locale == source_locale:
+            continue
+        counts = status_count_by_locale[locale]
+        coverage.append(
+            f"{locale}:{translation_count_by_locale[locale]}/{len(knowledge_by_id)} overlays "
+            f"({counts['machine_draft']} draft, {counts['human_reviewed']} reviewed, {counts['published']} published)"
+        )
+
     print(
         "localization check passed: "
         f"{len(knowledge_by_id)} source resources; "
-        f"{len(translation_records)} translation overlays across "
-        f"{sum(1 for count in translation_count_by_locale.values() if count)} non-source locales"
+        + "; ".join(coverage)
     )
 
 
