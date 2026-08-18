@@ -12,6 +12,7 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - https://cbt-cards.github.io/support/
 - https://cbt-cards.github.io/faq/
 - https://cbt-cards.github.io/about/
+- Changelog: https://cbt-cards.github.io/changelog/
 
 ## Learning library
 
@@ -45,6 +46,7 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 ## Machine-readable resources
 
 - JSON resource catalog: https://cbt-cards.github.io/data/catalog.json
+- Machine-readable changelog: https://cbt-cards.github.io/data/changelog.json
 - RAG-friendly curated knowledge dataset (JSONL): https://cbt-cards.github.io/data/knowledge.jsonl
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
@@ -56,6 +58,8 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - Latest agent skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 - Skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
 - Immutable skill v1.3.0: https://cbt-cards.github.io/agents/cbt-cards/v1.3.0/SKILL.md
+
+Website changelog entries are separate from mobile-app releases. Do not infer an Android/iOS app version from website, dataset, worksheet, or agent-skill changes.
 
 ## Store listings
 
