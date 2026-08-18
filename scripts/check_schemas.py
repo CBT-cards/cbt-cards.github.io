@@ -17,6 +17,8 @@ EXPECTED_IDS = {
     "toolkit-review-v1",
     "toolkit-source-v1",
     "knowledge-record-v1",
+    "locales-v1",
+    "translation-record-v1",
     "skill-manifest-v1",
 }
 
@@ -119,6 +121,36 @@ def main() -> None:
     for key in ("canonical_url", "summary", "safety_scope", "reviewed", "sources"):
         if key not in required_knowledge:
             fail(f"knowledge record schema must require {key}")
+
+    locales = json.loads((ROOT / "schemas" / "locales-v1.schema.json").read_text(encoding="utf-8"))
+    required_locales = set(locales.get("required", []))
+    for key in ("canonical", "source_locale", "updated", "locales"):
+        if key not in required_locales:
+            fail(f"locale registry schema must require {key}")
+
+    translation = json.loads((ROOT / "schemas" / "translation-record-v1.schema.json").read_text(encoding="utf-8"))
+    required_translation = set(translation.get("required", []))
+    for key in (
+        "resource_id",
+        "locale",
+        "source_locale",
+        "source_reviewed",
+        "translation_status",
+        "review_status",
+        "publication_status",
+        "canonical_url",
+        "reviewed",
+        "title",
+        "safety_scope",
+    ):
+        if key not in required_translation:
+            fail(f"translation record schema must require {key}")
+
+    translation_props = translation.get("properties", {})
+    if set(translation_props.get("translation_status", {}).get("enum", [])) != {"machine_draft", "human_reviewed"}:
+        fail("translation schema must distinguish machine_draft and human_reviewed")
+    if set(translation_props.get("publication_status", {}).get("enum", [])) != {"not_published", "published"}:
+        fail("translation schema must distinguish not_published and published")
 
     print(f"schema check passed: {len(entries)} versioned contracts discoverable from catalog")
 
