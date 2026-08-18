@@ -55,7 +55,7 @@
 <h2>Executable isolated OpenAI path</h2>
 <p>The first provider adapter is <a href="/scripts/run_model_openai.py"><code>run_model_openai.py</code></a>. It gives each API request the fixed evaluation prompt, the current public CBT Cards skill, and exactly one case field: <code>user_message</code>. Web search is restricted to the CBT Cards public domain and the routing envelope is requested as strict structured JSON.</p>
 <p>Generation and scoring remain separate processes. <a href="/scripts/score_model_execution.py"><code>score_model_execution.py</code></a> converts an execution artifact into the neutral scored run, and <a href="/scripts/check_model_run_candidate.py"><code>check_model_run_candidate.py</code></a> verifies prompt/dataset/skill/response provenance and refuses to treat v1 as semantically scored.</p>
-<p>A manual GitHub Actions workflow, <code>Run isolated CBT Cards model eval</code>, can run either starter or challenge data in a fresh process using repository secret <code>OPENAI_API_KEY</code>. It uploads the execution manifest, raw response JSONL, and scored run JSON as an Actions artifact. It does not commit a public benchmark result automatically.</p>
+<p>A manual GitHub Actions workflow, <code>Run isolated CBT Cards model eval</code>, can run either starter or challenge data in a fresh process using repository secret <code>OPENAI_API_KEY</code> once that workflow exists on the repository default branch. It uploads the execution manifest, raw response JSONL, and scored run JSON as an Actions artifact. It does not commit a public benchmark result automatically.</p>
 <p>The full rules are in <a href="/research/MODEL_RUN_PROTOCOL.md"><strong>MODEL_RUN_PROTOCOL.md</strong></a>. Normal PR CI exercises input-isolation plus the complete post-generation scoring/candidate pipeline with a synthetic fixture; that fixture is not a model result.</p>
 
 <h2>What v1 scores, and what it does not</h2>
@@ -63,7 +63,7 @@
 <p>This separation matters: a route can be correct while the prose is poor, and polished prose can still use the wrong source or cross a publication/privacy boundary.</p>
 
 <h2>No model score yet</h2>
-<p>No LLM or hosted-assistant score is currently published. The isolated execution workflow is now defined and CI-validated, but a real result should be generated in a fresh process with its own provider credential and then inspected before publication. Deterministic baselines and CI fixtures must not be relabeled as model results.</p>
+<p>No LLM or hosted-assistant score is currently published. The isolated execution workflow is defined and CI-validated, but its manual Actions entry point is intended for use after the workflow is present on the default branch. A real result should then be generated in a fresh process with its own provider credential and inspected before publication. Deterministic baselines and CI fixtures must not be relabeled as model results.</p>
 
 <h2>Research direction</h2>
 <p>The next useful result is a first clean artifact-only model execution on starter and untouched challenge data, followed by a separately versioned semantic-review protocol for prohibited claims, source fidelity, and answer quality. Multilingual fidelity can then be evaluated without quietly converting translation drafts into official content.</p>
