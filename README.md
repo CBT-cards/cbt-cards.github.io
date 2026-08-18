@@ -14,6 +14,8 @@ Core product documentation:
 - `/faq/` — product questions with matching FAQ structured data
 - `/privacy/`, `/terms/`, `/support/` — policy and support pages
 - `/about/` — publisher, provenance, and editorial approach
+- `/changelog/` — website/public-data release history, explicitly separate from mobile-app releases
+- `/data/changelog.json` — machine-readable changelog with stable release IDs, dates, scopes, and changed resource IDs
 
 Learning library:
 
@@ -44,9 +46,9 @@ Public toolkit:
 - `/toolkit/cards/.../` — curated standalone pages for selected reviewed card records
 - `/data/toolkit-source.json` — pinned source-corpus version, commit, blob SHA, record counts, license, distribution URL, and quality notes
 
-The related source corpus is MetalHatsCats CBT Toolkit v0.1.0 from `metalhatscats/metalhatscats-datasets`. The current pinned source contains 115 English records: 77 cards, 23 metaphors, and 15 protocols. The source corpus has no per-record clinical-review metadata, so source presence alone is not publication approval.
+The related source corpus is MetalHatsCats CBT Toolkit v0.1.0. The current pinned source contains 115 English records: 77 cards, 23 metaphors, and 15 protocols. The source corpus has no per-record clinical-review metadata, so source presence alone is not publication approval.
 
-Agent and machine-readable resources:
+Agent, discovery, and machine-readable resources:
 
 - `/agents/` — integration guide
 - `/agents/cbt-cards/SKILL.md` — latest mutable skill alias
@@ -55,10 +57,14 @@ Agent and machine-readable resources:
 - `/agents/cbt-cards/v1.2.0/SKILL.md` — immutable version adding raw-corpus/curated-content rules
 - `/agents/cbt-cards/v1.3.0/SKILL.md` — current immutable version adding worksheet rendering/privacy rules
 - `/llms.txt` — compact public index
-- `/llms-full.txt` — extended source-priority, worksheet, corpus, and safety index
+- `/llms-full.txt` — extended source-priority, release, worksheet, corpus, and safety index
 - `/data/catalog.json` — canonical public resource catalog with stable IDs
+- `/data/changelog.json` — scoped website/public-data release provenance
 - `/data/knowledge.jsonl` — RAG-friendly curated prose knowledge records for public learning resources and reviewed toolkit cards
 - `/data/worksheets.json` — structured form definitions kept separate from prose knowledge records
+- `/feed.xml` — Atom discovery feed
+- `/feed.json` — JSON Feed 1.1 discovery feed
+- `/.well-known/security.txt` — standard public security contact
 
 ## Local preview
 
@@ -75,11 +81,17 @@ Run the same static checks used by GitHub Actions:
 ```bash
 python3 scripts/check_site.py
 python3 scripts/check_worksheets.py
+python3 scripts/check_discovery.py
+python3 scripts/check_changelog.py
 ```
 
 The site checker verifies public HTML metadata, one H1 per indexed page, canonical uniqueness, JSON-LD parsing, internal links, crawler/IndexNow configuration, sitemap coverage/targets, resource catalog targets, curated JSONL alignment, toolkit source metadata, and agent skill/version targets.
 
 The worksheet checker verifies worksheet IDs, catalog alignment, canonical and learning-resource targets, field IDs, sequential field order, source URLs, and explicit no-submit/no-send privacy behavior.
+
+The discovery checker verifies Atom/JSON Feed parity, canonical feed targets, security metadata, and matching catalog entries.
+
+The changelog checker verifies schema version, stable release IDs, chronological order, allowed scopes/change types, catalog resource alignment, canonical local targets, sitemap inclusion, and discovery-feed presence.
 
 ## Deployment and discovery
 
@@ -100,6 +112,8 @@ The repository must remain `CBT-cards/cbt-cards.github.io` to serve the user-sit
 - Do not claim that CBT Cards diagnoses, treats, cures, or prevents a condition. It is a general wellness and self-reflection product.
 - Keep internal links root-relative so GitHub Pages serves them correctly.
 - When adding or removing an indexed page, update `sitemap.xml`, `llms.txt`, `llms-full.txt`, `data/catalog.json`, and the relevant machine-readable dataset.
+- Record meaningful public website/data changes in `/data/changelog.json` and `/changelog/` using a stable release ID and explicit `scope`.
+- Never infer a mobile-app release from a website, dataset, worksheet, feed, or agent-skill change. Mobile release entries require separately verified release metadata.
 - Keep each curated JSONL knowledge record self-contained and aligned with its canonical page. Reuse the same stable resource ID in the catalog and curated dataset.
 - Keep worksheet UI schemas in `data/worksheets.json`; do not duplicate form definitions into `knowledge.jsonl` unless the schema strategy changes intentionally.
 - Keep raw toolkit source IDs separate from curated resource IDs. A curated card record also carries its original `source_record_id`.
@@ -119,7 +133,7 @@ Large legacy PNG/TTF payload optimization is tracked separately because binary a
 
 ## Migration
 
-See [MIGRATION.md](MIGRATION.md) for legacy MetalHatsCats URL mappings. Redirect behavior must be verified externally because the redirects are implemented outside this repository.
+See [MIGRATION.md](MIGRATION.md) for legacy URL mappings. Changes to legacy hosts are external dependencies and are outside this repository's modification scope.
 
 ## License
 
