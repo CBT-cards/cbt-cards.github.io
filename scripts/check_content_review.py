@@ -34,13 +34,16 @@ def main() -> None:
     policy_page = ROOT / "about" / "editorial-review" / "index.html"
     sitemap_path = ROOT / "sitemap.xml"
     about_path = ROOT / "about" / "index.html"
+    latest_skill_path = ROOT / "agents" / "cbt-cards" / "SKILL.md"
+    manifest_path = ROOT / "agents" / "cbt-cards" / "manifest.json"
 
-    for path in (registry_path, catalog_path, knowledge_path, policy_page, sitemap_path, about_path):
+    for path in (registry_path, catalog_path, knowledge_path, policy_page, sitemap_path, about_path, latest_skill_path, manifest_path):
         if not path.exists():
             fail(f"missing required file: {path.relative_to(ROOT)}")
 
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
 
     if registry.get("schema_version") != "1.0":
         fail("unexpected schema_version")
@@ -69,12 +72,19 @@ def main() -> None:
     for required_id, expected_url in {
         "content-review-page": f"{ORIGIN}/about/editorial-review/",
         "content-review-data": f"{ORIGIN}/data/content-review.json",
+        "agent-skill-v1.5.0": f"{ORIGIN}/agents/cbt-cards/v1.5.0/SKILL.md",
     }.items():
         item = catalog_by_id.get(required_id)
         if not item:
             fail(f"catalog missing {required_id}")
         if item.get("url") != expected_url:
             fail(f"catalog URL mismatch for {required_id}")
+
+    latest_catalog = catalog_by_id.get("agent-skill-latest")
+    if not latest_catalog or latest_catalog.get("version") != "1.5.0":
+        fail("catalog latest skill is not v1.5.0")
+    if manifest.get("latest") != "1.5.0":
+        fail("skill manifest latest is not v1.5.0")
 
     covered_catalog = {
         item["id"]: item
@@ -163,6 +173,14 @@ def main() -> None:
     about_text = about_path.read_text(encoding="utf-8")
     if 'href="/about/editorial-review/"' not in about_text:
         fail("about page does not link editorial review policy")
+
+    skill_text = latest_skill_path.read_text(encoding="utf-8")
+    if "version: 1.5.0" not in skill_text:
+        fail("latest skill file is not v1.5.0")
+    if f"{ORIGIN}/data/content-review.json" not in skill_text:
+        fail("latest skill does not reference content review registry")
+    if "next_review_due" not in skill_text:
+        fail("latest skill does not describe review freshness behavior")
 
     print(f"content review check passed: {len(records)} covered resources, next due {min(date.fromisoformat(r['next_review_due']) for r in records)}")
 
