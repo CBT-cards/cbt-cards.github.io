@@ -22,15 +22,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check Python helper syntax
-        run: python3 -m py_compile scripts/check_site.py scripts/check_worksheets.py scripts/check_discovery.py scripts/check_changelog.py scripts/check_toolkit_review.py scripts/check_localization.py scripts/build_localized_pages.py scripts/check_evals.py scripts/run_eval_baselines.py scripts/check_citation.py scripts/check_skill_portability.py scripts/check_schemas.py scripts/check_crawl_graph.py scripts/notify_indexnow.py
+        run: python3 -m py_compile scripts/check_site.py scripts/check_worksheets.py scripts/check_discovery.py scripts/check_changelog.py scripts/check_toolkit_review.py scripts/check_localization.py scripts/build_localized_pages.py scripts/check_evals.py scripts/check_evals_challenge.py scripts/run_eval_baselines.py scripts/run_eval_challenge.py scripts/check_citation.py scripts/check_skill_portability.py scripts/check_schemas.py scripts/check_crawl_graph.py scripts/notify_indexnow.py
       - name: Validate locale registry and translation overlays
         run: python3 scripts/check_localization.py
       - name: Validate generated localized pages and sitemap entries
         run: python3 scripts/build_localized_pages.py --check
       - name: Validate public agent evaluation cases
         run: python3 scripts/check_evals.py
+      - name: Validate held-out agent evaluation challenge cases
+        run: python3 scripts/check_evals_challenge.py
       - name: Validate reproducible agent eval baselines
         run: python3 scripts/run_eval_baselines.py --check
+      - name: Validate held-out eval challenge baselines
+        run: python3 scripts/run_eval_challenge.py --check
       - name: Validate citation metadata
         run: python3 scripts/check_citation.py
       - name: Validate portable Agent Skills distribution
