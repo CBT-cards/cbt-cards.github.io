@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>About CBT Cards — product, publisher &amp; editorial approach</title>
-<meta name="description" content="Learn who publishes CBT Cards, what the app is for, how public product information is maintained, and how agents and researchers can use official resources." />
+<title>About CBT Cards — from mobile app to public reflection library</title>
+<meta name="description" content="CBT Cards began as a mobile app and is growing into a public library of practical reflection tools for people, researchers, developers, and AI assistants." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href="https://cbt-cards.github.io/about/" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="About CBT Cards — product, publisher &amp; editorial approach" />
-<meta property="og:description" content="Learn who publishes CBT Cards, what the app is for, how public product information is maintained, and how agents and researchers can use official resources." />
+<meta property="og:title" content="About CBT Cards — from mobile app to public reflection library" />
+<meta property="og:description" content="Why CBT Cards is opening its practical reflection tools as a public resource for people and AI assistants." />
 <meta property="og:url" content="https://cbt-cards.github.io/about/" />
 <meta property="og:image" content="https://cbt-cards.github.io/assets/egg-reflection-cards.png" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -30,6 +30,7 @@
       "@type": "AboutPage",
       "name": "About CBT Cards",
       "url": "https://cbt-cards.github.io/about/",
+      "description": "The origin, direction, editorial principles, and public source-of-truth approach for CBT Cards.",
       "isPartOf": {"@id": "https://cbt-cards.github.io/#website"}
     }
   ]
@@ -41,40 +42,55 @@
 <header class="site-header"><div class="wrap nav">
 <a class="brand" href="/"><img src="/assets/app-icon.png" width="42" height="42" alt="" />CBT Cards</a>
 <nav class="nav-links" aria-label="Primary">
-<a href="/how-it-works/">How it works</a><a href="/features/">Features</a><a href="/learn/">Learn</a><a href="/faq/">FAQ</a><a href="/about/">About</a>
+<a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/agents/">For AI</a><a href="/about/">About</a>
 </nav>
-<a class="download" href="/#download">Download</a>
+<a class="download" href="/toolkit/">Explore tools</a>
 </div></header>
 <main id="main">
 <section class="page-hero"><div class="wrap">
 <div class="crumb"><a href="/">CBT Cards</a> / About CBT Cards</div>
-<h1>About CBT Cards</h1>
-<p class="lede">Product identity, editorial principles, and the public source of truth for CBT Cards.</p>
+<h1>Useful ideas should outlive the app that carried them.</h1>
+<p class="lede">CBT Cards began as a mobile reflection app. The project is now opening its practical material as a public library that people can use directly and AI assistants can use without guessing what the source meant.</p>
 </div></section>
 <section class="section alt"><div class="wrap prose">
-<h2>What CBT Cards is</h2>
-<p>CBT Cards is a mobile app published by MetalHatsCats. It provides short CBT-inspired reflection cards, guided tools, a structured journal, and personal check-ins for mood, stress, and energy.</p>
-<p>The app is designed for general wellness and self-reflection. It is not a medical device, a diagnostic service, emergency support, or a replacement for psychotherapy or other professional care.</p>
+<h2>Where it started</h2>
+<p>CBT Cards was originally built as a mobile app with short CBT-inspired reflection cards, guided tools, a structured journal, and personal check-ins for mood, stress, and energy. The visual cards and plain, practical language were the part people responded to most.</p>
+<p>The app still exists, but an app install is no longer the boundary of the project. Useful prompts, worksheets, explanations, and source material can be more valuable when they are linkable, inspectable, reusable, and available outside one product interface.</p>
 
-<h2>How product information is maintained</h2>
-<p>This website is the canonical public documentation for CBT Cards. Feature, privacy, data-handling, and support claims should match the current application source and store listings. When the app changes, the relevant public documentation should be reviewed with the release.</p>
+<h2>Where it is going</h2>
+<p>CBT Cards is becoming a public reflection library for two kinds of readers: people and the assistants they choose to use. A person should be able to open a card or worksheet and understand it without technical background. An assistant should be able to find the same resource through a stable ID, canonical URL, structured data, and explicit safety and review metadata.</p>
+<p>The goal is not to wrap ordinary text in AI terminology. The goal is to make practical material easy to discover, cite, translate, test, and use responsibly across different interfaces.</p>
+
+<h2>What the project publishes</h2>
+<ul>
+<li><a href="/toolkit/">Reflection cards and toolkit resources</a> that can be opened directly on the web.</li>
+<li><a href="/worksheets/">Browser-local worksheets</a> that do not submit what a person types to CBT Cards.</li>
+<li><a href="/learn/">Plain-language learning guides</a> with source links and visible review dates.</li>
+<li><a href="/data/catalog.json">Machine-readable catalogs and datasets</a> with stable resource IDs and canonical URLs.</li>
+<li><a href="/agents/">Agent-facing instructions and data contracts</a> for assistants, developers, and research tooling.</li>
+<li><a href="/changelog/">A public changelog</a> that records website, data, schema, and agent-interface changes separately from mobile releases.</li>
+</ul>
 
 <h2>Editorial approach</h2>
 <ul>
-<li>Use plain language and avoid claims that CBT Cards can diagnose, treat, cure, or prevent a condition.</li>
-<li>Distinguish established CBT concepts from the way CBT Cards implements a reflection tool.</li>
-<li>Link to primary or authoritative sources when a learning page explains a CBT concept.</li>
-<li>Say when a product detail is not publicly confirmed rather than filling the gap with an assumption.</li>
-<li>Keep safety and privacy limitations visible where they matter.</li>
+<li>Write for a person first. Plain language is not a temporary layer that gets removed when software arrives.</li>
+<li>Keep a stable source record underneath different pages, translations, formats, and integrations.</li>
+<li>Distinguish source material from records explicitly reviewed for standalone publication.</li>
+<li>Use authoritative sources when a learning page explains a health-adjacent concept.</li>
+<li>Keep provenance, review dates, safety limits, and uncertainty visible instead of filling gaps with confident prose.</li>
+<li>Do not describe editorial review as clinical validation or evidence that a technique will work for an individual.</li>
 </ul>
 
-<h2>For researchers, developers, and agents</h2>
-<p>Public product facts and learning resources are available as ordinary web pages and through a small machine-readable catalog. Start with <a href="/agents/">For agents</a>, <a href="/llms.txt">llms.txt</a>, or <a href="/data/catalog.json">the JSON catalog</a>.</p>
+<h2>Health and safety scope</h2>
+<p>CBT Cards is for general wellness and self-reflection. It is not medical advice, diagnosis, treatment, emergency support, or a substitute for qualified professional care. Public worksheets are educational prompts rather than clinical assessments, and the project does not infer a condition from a person's answers, mood, stress, or energy check-ins.</p>
 
-<h2>Contact and support</h2>
-<p>For practical help, privacy questions, or current support options, use the <a href="/support/">support page</a>. Do not send private journal contents or other sensitive personal information when reporting an issue.</p>
+<h2>The original mobile app</h2>
+<p>The mobile app remains available for people who prefer private on-device journaling, guided tools, cards, and check-ins in one place. Its product behavior, privacy details, and support information remain documented separately through <a href="/features/">app features</a>, <a href="/how-it-works/">how it works</a>, and the <a href="/privacy/">privacy policy</a>.</p>
+
+<h2>Publisher and contact</h2>
+<p>CBT Cards is published by MetalHatsCats. For practical help, privacy questions, or current support options, use the <a href="/support/">support page</a>. Do not send private journal contents or other sensitive personal information when reporting an issue.</p>
 </div></section>
 </main>
-<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/support/">Support</a><a href="/agents/">For agents</a></nav></div></footer>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/support/">Support</a><a href="/agents/">For AI</a></nav></div></footer>
 </body>
 </html>
