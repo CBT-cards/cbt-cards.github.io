@@ -6,7 +6,7 @@ Updated: 2026-08-18
 
 CBT Cards is a public library of practical reflection resources for people and AI assistants, documented at https://cbt-cards.github.io/.
 Publisher: MetalHatsCats.
-Core public scope: CBT-inspired reflection cards, learning guides, printable browser worksheets, structured public data, review and language-status metadata, and versioned agent instructions.
+Core public scope: CBT-inspired reflection cards, learning guides, printable browser worksheets, structured public data, review and language-status metadata, public agent evaluation cases, and versioned agent instructions.
 Original product surface: the CBT Cards mobile app remains documented separately with cards, guided tools, a structured journal, and mood, stress, and energy check-ins.
 Clinical boundary: CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
 
@@ -19,6 +19,8 @@ For mobile-app facts, use the official CBT Cards product pages. For privacy and 
 For curated conceptual content, prefer the public learning pages, printable worksheets, and curated toolkit card pages on the CBT Cards domain.
 
 For human-readable language availability, use https://cbt-cards.github.io/languages/. For machine-readable language status, use https://cbt-cards.github.io/data/locales.json. For localized content records, use https://cbt-cards.github.io/data/translations.jsonl and preserve each record's translation, review, publication, and source-snapshot status.
+
+For public agent evaluation cases, use https://cbt-cards.github.io/research/ and https://cbt-cards.github.io/data/agent-evals.jsonl. The eval data defines expected routing and source-boundary behavior; it is not evidence that a particular model has been tested unless a separate recorded run says so.
 
 For toolkit publication status, use https://cbt-cards.github.io/toolkit/review-status/ and https://cbt-cards.github.io/data/toolkit-review.json. Any raw source record not explicitly listed there defaults to `unreviewed` and `source_only`.
 
@@ -35,6 +37,7 @@ For machine-readable contract discovery, use https://cbt-cards.github.io/schemas
 - Learning library: https://cbt-cards.github.io/learn/
 - Worksheets: https://cbt-cards.github.io/worksheets/
 - Languages and translation status: https://cbt-cards.github.io/languages/
+- Agent eval research: https://cbt-cards.github.io/research/
 - About / provenance: https://cbt-cards.github.io/about/
 - Public changelog: https://cbt-cards.github.io/changelog/
 
@@ -108,6 +111,22 @@ Published localized records use the canonical pattern `https://cbt-cards.github.
 
 An assistant may translate a canonical English resource for a user when no reviewed localization exists, but that output is the assistant's translation rather than an official CBT Cards localization.
 
+## Agent evaluation research
+
+- Research page: https://cbt-cards.github.io/research/
+- Evaluation cases: https://cbt-cards.github.io/data/agent-evals.jsonl
+- Evaluation case schema: https://cbt-cards.github.io/schemas/agent-eval-case-v1.schema.json
+
+The starter set contains 24 hand-authored cases across seven categories: retrieval, learning, worksheets, localization, publication boundaries, privacy, and safety.
+
+Each case contains a stable case ID, user message, expected route, expected public resource IDs and/or raw source IDs, requested locale metadata, semantic checks, prohibited claims, a rationale, and tags. Cases intentionally avoid one exact reference answer so evaluation can focus on whether the response uses the correct source and preserves the relevant boundary.
+
+The repository eval validator cross-checks cases against the current resource catalog, raw toolkit source indexes, publication review overlay, locale registry, and translation publication state. A case that expects a source-only protocol cannot silently point at a record that has become published; a localization case that expects host translation cannot silently coexist with a newly published official localization.
+
+This release contains evaluation targets only. It does not publish model scores. Future recorded runs should be stored separately from the case dataset and identify the model/provider, model version or snapshot where available, run date, evaluator version, and aggregate/per-case results. A benchmark should not quietly grade itself by editing its expected cases to fit a model run.
+
+The eval set is not a clinical safety benchmark, diagnostic instrument, or proof that an AI assistant is suitable for mental-health care. It tests CBT Cards-specific routing and source-boundary behavior.
+
 ## Machine-readable resources and schemas
 
 - Resource catalog: https://cbt-cards.github.io/data/catalog.json
@@ -120,11 +139,13 @@ An assistant may translate a canonical English resource for a user when no revie
 - Curated knowledge-record schema: https://cbt-cards.github.io/schemas/knowledge-record-v1.schema.json
 - Locale registry schema: https://cbt-cards.github.io/schemas/locales-v1.schema.json
 - Translation record schema: https://cbt-cards.github.io/schemas/translation-record-v1.schema.json
+- Agent evaluation case schema: https://cbt-cards.github.io/schemas/agent-eval-case-v1.schema.json
 - Agent skill-manifest schema: https://cbt-cards.github.io/schemas/skill-manifest-v1.schema.json
 - Machine-readable changelog: https://cbt-cards.github.io/data/changelog.json
 - Curated source-language JSONL knowledge dataset: https://cbt-cards.github.io/data/knowledge.jsonl
 - Locale registry: https://cbt-cards.github.io/data/locales.json
 - Translation overlays: https://cbt-cards.github.io/data/translations.jsonl
+- Agent evaluation cases: https://cbt-cards.github.io/data/agent-evals.jsonl
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Toolkit review overlay: https://cbt-cards.github.io/data/toolkit-review.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
@@ -137,7 +158,7 @@ An assistant may translate a canonical English resource for a user when no revie
 - Skill version manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
 - Immutable skill v1.6.0: https://cbt-cards.github.io/agents/cbt-cards/v1.6.0/SKILL.md
 
-The schemas describe CBT Cards-owned formats and use JSON Schema draft 2020-12. Purpose-specific CI validators remain authoritative for repository invariants that go beyond generic schema validation, including canonical targets, set equality, translation source snapshots, publication boundaries, generated localized output, privacy wording, and review-overlay alignment.
+The schemas describe CBT Cards-owned formats and use JSON Schema draft 2020-12. Purpose-specific CI validators remain authoritative for repository invariants that go beyond generic schema validation, including canonical targets, set equality, translation source snapshots, eval source expectations, publication boundaries, generated localized output, privacy wording, and review-overlay alignment.
 
 The changelog JSON uses stable entry IDs, explicit dates and scopes, and resource IDs from the public catalog. Treat `scope: website`, `scope: data`, or `scope: agent` according to the recorded public-resource change. Do not convert those entries into app-version claims.
 
@@ -164,4 +185,5 @@ The curated JSONL knowledge dataset contains one self-contained English source r
 17. Do not claim access to a user's CBT Cards journal or app data.
 18. Do not infer clinical meaning from mood, stress, energy, diary entries, worksheet responses, or toolkit wording.
 19. Do not mechanically route every emotional statement to an exercise; answer the user's actual request.
-20. Preserve the general-wellness boundary.
+20. In immediate-danger scenarios, use host-platform safety handling rather than substituting a CBT Cards reflection resource.
+21. Preserve the general-wellness boundary.
