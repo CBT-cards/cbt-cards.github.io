@@ -1,6 +1,6 @@
 # CBT Cards
 
-CBT Cards is a public library of practical reflection resources for people and the AI assistants they choose to use. It publishes short CBT-inspired cards, plain-language learning guides, printable browser worksheets, structured public data, review metadata, language-status metadata, public agent evals, and versioned agent instructions. The original CBT Cards mobile app remains documented as a separate product surface. CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
+CBT Cards is a public library of practical reflection resources for people and the AI assistants they choose to use. It publishes short CBT-inspired cards, plain-language learning guides, printable browser worksheets, structured public data, review metadata, language-status metadata, public agent evals, reproducible non-model baselines, citation metadata, and versioned agent instructions. The original CBT Cards mobile app remains documented as a separate product surface. CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
 
 ## Public reflection resources
 
@@ -63,9 +63,21 @@ CBT Cards is a public library of practical reflection resources for people and t
 - Human-readable research page: https://cbt-cards.github.io/research/
 - Evaluation cases (JSONL): https://cbt-cards.github.io/data/agent-evals.jsonl
 - Evaluation case schema: https://cbt-cards.github.io/schemas/agent-eval-case-v1.schema.json
+- Evaluation runs (JSONL): https://cbt-cards.github.io/data/agent-eval-runs.jsonl
+- Evaluation run schema: https://cbt-cards.github.io/schemas/agent-eval-run-v1.schema.json
+- Reproducible baseline runner: https://cbt-cards.github.io/scripts/run_eval_baselines.py
 - The starter set contains 24 hand-authored cases across retrieval, learning, worksheets, localization, publication boundaries, privacy, and safety.
-- Cases define expected routes, stable resource/source IDs, semantic checks, prohibited claims, and rationales. They do not prescribe exact response wording.
-- No public model scores are claimed in this release. The dataset defines evaluation targets; recorded model runs should be published separately with explicit model/version/date metadata.
+- Every run pins the SHA-256 of the exact evaluation-case dataset bytes it used.
+- `null-route-v1` is an intentionally weak non-model floor: route 1/24, targets 0/19, locale 0/4, boundary 1/7.
+- `deterministic-contract-router-v1` is a rule-based contract/harness baseline using only `user_message`: route 24/24, targets 19/19, locale 4/4, boundary 7/7 on the current starter set.
+- The deterministic router's perfect score is not evidence of general assistant or model quality. It verifies the routing/evaluation harness on this small fixed taxonomy.
+- No LLM/model results are currently claimed. Future model runs must carry their own model/provider/version/date and evaluator provenance.
+
+## Citation
+
+- Citation metadata: https://cbt-cards.github.io/CITATION.cff
+- The file uses Citation File Format 1.2.0 and describes CBT Cards as a dataset authored by MetalHatsCats.
+- No DOI or project-wide semantic version is currently claimed; add them only when actually assigned/released.
 
 ## Machine-readable resources
 
@@ -76,6 +88,7 @@ CBT Cards is a public library of practical reflection resources for people and t
 - Locale registry: https://cbt-cards.github.io/data/locales.json
 - Translation overlays (JSONL): https://cbt-cards.github.io/data/translations.jsonl
 - Agent evaluation cases (JSONL): https://cbt-cards.github.io/data/agent-evals.jsonl
+- Agent evaluation runs (JSONL): https://cbt-cards.github.io/data/agent-eval-runs.jsonl
 - Worksheet definitions: https://cbt-cards.github.io/data/worksheets.json
 - Toolkit review overlay: https://cbt-cards.github.io/data/toolkit-review.json
 - Toolkit source metadata: https://cbt-cards.github.io/data/toolkit-source.json
