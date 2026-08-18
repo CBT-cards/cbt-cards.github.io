@@ -5,6 +5,26 @@
   "updated": "2026-08-18",
   "entries": [
     {
+      "id": "data-2026-08-18-reproducible-eval-baselines",
+      "date": "2026-08-18",
+      "scope": "data",
+      "title": "Reproducible agent eval baselines and citation metadata",
+      "summary": "Added a versioned evaluation-run format, two deterministic non-model baselines tied to the exact evaluation dataset hash, CI regeneration checks, and repository-level citation metadata.",
+      "changes": [
+        {"type": "added", "resource_id": "agent-eval-runs", "url": "https://cbt-cards.github.io/data/agent-eval-runs.jsonl"},
+        {"type": "changed", "resource_id": "agent-evals", "url": "https://cbt-cards.github.io/data/agent-evals.jsonl"},
+        {"type": "changed", "resource_id": "research", "url": "https://cbt-cards.github.io/research/"},
+        {"type": "changed", "resource_id": "schema-manifest", "url": "https://cbt-cards.github.io/schemas/index.json"}
+      ],
+      "notes": [
+        "Each run record pins the SHA-256 of the exact agent-evals JSONL bytes used and keeps aggregate metrics separate from per-case results.",
+        "The intentionally weak null-route-v1 baseline gets 1/24 routes, 0/19 target selections, 0/4 locale behaviors, and 1/7 boundary routes correct.",
+        "The deterministic-contract-router-v1 baseline gets 24/24 routes, 19/19 target selections, 4/4 locale behaviors, and 7/7 boundary routes correct on the current starter set.",
+        "The deterministic router is a non-model contract/harness baseline using only user_message; its perfect score is not evidence of general model or assistant quality.",
+        "The repository now includes CITATION.cff using Citation File Format 1.2.0. No DOI or project-wide semantic version is claimed before one is actually assigned or deliberately released."
+      ]
+    },
+    {
       "id": "data-2026-08-18-agent-eval-foundation",
       "date": "2026-08-18",
       "scope": "data",
