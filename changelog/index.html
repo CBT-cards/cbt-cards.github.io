@@ -28,6 +28,32 @@
 <p>This changelog tracks changes to the public CBT Cards website, learning library, printable browser worksheets, schemas, language data, research datasets, toolkit pages, structured data, feeds, and agent interfaces. A website, data, translation, research, or agent entry does <strong>not</strong> imply that an Android or iOS app version shipped on the same date.</p>
 <p>Agents and tooling can read the same history from <a href="/data/changelog.json"><code>data/changelog.json</code></a>. Versioned data contracts are listed in <a href="/schemas/index.json"><code>schemas/index.json</code></a>.</p>
 
+<article id="data-2026-08-18-model-run-protocol">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Public data/research</p>
+<h2>Provenance-first model-run protocol v1</h2>
+<p>Added a two-stage path for real model evaluations: generate responses before benchmark answers are visible, then score the captured routing envelope with a deterministic evaluator.</p>
+<ul>
+<li>Published <a href="/research/MODEL_RUN_PROTOCOL.md">the model-run protocol</a> and fixed <a href="/research/model-run-prompt-v1.txt">model-run prompt v1</a>.</li>
+<li>Added model-response and model-run schemas for provider/model/runtime provenance, prompt and dataset hashes, raw answers, and per-case routing results.</li>
+<li>Added <a href="/scripts/evaluate_model_run.py"><code>evaluate_model_run.py</code></a>, which scores route, target IDs, locale behavior, and boundary routing after generation is complete.</li>
+<li>CI runs a synthetic contract fixture through the scorer to test the protocol plumbing.</li>
+</ul>
+<p>The fixture is not a model result. The v1 evaluator also does not claim automatic scoring of prose quality, <code>expected_checks</code>, or prohibited claims. No LLM or hosted-assistant score is published by this release.</p>
+</article>
+
+<article id="data-2026-08-18-held-out-eval-challenge">
+<p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Public data/research</p>
+<h2>Held-out paraphrase and adversarial eval challenge</h2>
+<p>Added 12 separately authored challenge cases to see whether the friendly starter score survives different wording. It mostly does not.</p>
+<ul>
+<li>The unchanged <code>deterministic-contract-router-v1</code> drops from 24/24 starter routes to 1/12 challenge routes.</li>
+<li>On the challenge it also gets 0/10 target selections, 0/1 locale behaviors, and 1/3 boundary routes.</li>
+<li>The challenge dataset is pinned by SHA-256 <code>f20bbc8562315de235fe6b935b17be8eeaa41d604b222c91904618658b2c0407</code>.</li>
+<li>If a system is tuned on these 12 cases, this generation is no longer held out for that system.</li>
+</ul>
+<p>The drop is published as evidence that the keyword baseline is brittle, not as a failure of any LLM. No model was evaluated in this entry.</p>
+</article>
+
 <article id="agent-2026-08-18-portable-skill-v1-7">
 <p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Agent interface</p>
 <h2>Portable Agent Skills release v1.7.0</h2>
@@ -140,8 +166,8 @@
 <h2>Versioned public JSON Schema contracts</h2>
 <p>Published JSON Schema draft 2020-12 contracts for CBT Cards-owned machine-readable formats and made them discoverable from the public resource catalog.</p>
 <ul>
-<li>Added <a href="/schemas/index.json">a schema manifest</a> mapping versioned contracts to their instance URLs.</li>
-<li>Added contracts for the resource catalog, changelog, worksheets, toolkit review overlay, toolkit source manifest, curated knowledge-record lines, locale registry, translation records, agent evaluation cases and runs, and agent skill manifest.</li>
+<li>Added <a href="/schemas/index.json">a schema manifest</a> mapping committed instances to versioned contracts and allowing interface-only contracts before a real public instance exists.</li>
+<li>Added contracts for the resource catalog, changelog, worksheets, toolkit review overlay, toolkit source manifest, curated knowledge-record lines, locale registry, translation records, evaluation cases/runs, model-run interfaces, and agent skill manifest.</li>
 <li>Added <code>schema_url</code> links to applicable public catalog resources.</li>
 </ul>
 </article>
