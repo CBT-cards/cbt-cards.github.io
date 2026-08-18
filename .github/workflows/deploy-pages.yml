@@ -22,9 +22,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check Python helper syntax
-        run: python3 -m py_compile scripts/check_site.py scripts/notify_indexnow.py
+        run: python3 -m py_compile scripts/check_site.py scripts/check_worksheets.py scripts/notify_indexnow.py
       - name: Validate HTML, canonical URLs, structured data, sitemap and internal links
         run: python3 scripts/check_site.py
+      - name: Validate worksheet schemas and canonical form pages
+        run: python3 scripts/check_worksheets.py
 
   deploy:
     if: github.event_name != 'pull_request'
