@@ -201,10 +201,17 @@ else:
         catalog_resource = catalog_by_id.get(record_id)
         if catalog_resource is None:
             errors.append(f"data/knowledge.jsonl:{line_number}: id {record_id} missing from catalog")
-        elif catalog_resource.get("type") != "learning":
-            errors.append(f"data/knowledge.jsonl:{line_number}: catalog resource {record_id} is not type learning")
-        elif catalog_resource.get("url") != record.get("canonical_url"):
-            errors.append(f"data/knowledge.jsonl:{line_number}: canonical URL differs from catalog for {record_id}")
+        else:
+            if catalog_resource.get("type") != record.get("type"):
+                errors.append(
+                    f"data/knowledge.jsonl:{line_number}: type differs from catalog for {record_id} "
+                    f"({record.get('type')} != {catalog_resource.get('type')})"
+                )
+            if catalog_resource.get("url") != record.get("canonical_url"):
+                errors.append(f"data/knowledge.jsonl:{line_number}: canonical URL differs from catalog for {record_id}")
+            source_record_id = record.get("source_record_id")
+            if source_record_id and catalog_resource.get("source_record_id") != source_record_id:
+                errors.append(f"data/knowledge.jsonl:{line_number}: source_record_id differs from catalog for {record_id}")
 
         canonical_url = record.get("canonical_url")
         if canonical_url:
@@ -218,8 +225,46 @@ else:
             errors.append(f"data/knowledge.jsonl:{line_number}: sources must be a non-empty list")
 
 for resource_id, resource in catalog_by_id.items():
-    if resource.get("type") == "learning" and resource_id not in knowledge_ids:
-        errors.append(f"data/catalog.json: learning resource {resource_id} missing from knowledge.jsonl")
+    if resource.get("type") in {"learning", "toolkit-card"} and resource_id not in knowledge_ids:
+        errors.append(f"data/catalog.json: curated resource {resource_id} missing from knowledge.jsonl")
+
+toolkit_source_path = ROOT / "data/toolkit-source.json"
+toolkit_source = None
+if not toolkit_source_path.exists():
+    errors.append("missing data/toolkit-source.json")
+else:
+    try:
+        toolkit_source = json.loads(toolkit_source_path.read_text(encoding="utf-8"))
+        required = {
+            "id", "version", "record_count", "record_counts", "source_repository",
+            "source_commit", "dataset_blob_sha", "dataset_path", "distribution", "license",
+            "clinical_review_metadata_present", "publication_policy", "verified"
+        }
+        missing = sorted(required - set(toolkit_source))
+        if missing:
+            errors.append(f"data/toolkit-source.json: missing fields: {', '.join(missing)}")
+        counts = toolkit_source.get("record_counts")
+        if not isinstance(counts, dict):
+            errors.append("data/toolkit-source.json: record_counts must be an object")
+        else:
+            expected_types = {"card", "metaphor", "protocol"}
+            if set(counts) != expected_types:
+                errors.append("data/toolkit-source.json: record_counts must contain card, metaphor, protocol")
+            elif sum(counts.values()) != toolkit_source.get("record_count"):
+                errors.append("data/toolkit-source.json: record_count does not equal record_counts total")
+        source_commit = toolkit_source.get("source_commit", "")
+        if len(source_commit) != 40:
+            errors.append("data/toolkit-source.json: source_commit must be a full 40-character commit SHA")
+        blob_sha = toolkit_source.get("dataset_blob_sha", "")
+        if len(blob_sha) != 40:
+            errors.append("data/toolkit-source.json: dataset_blob_sha must be a full 40-character blob SHA")
+        distribution = toolkit_source.get("distribution", "")
+        if source_commit and source_commit not in distribution:
+            errors.append("data/toolkit-source.json: distribution must be pinned to source_commit")
+        if toolkit_source.get("clinical_review_metadata_present") is not False:
+            errors.append("data/toolkit-source.json: clinical_review_metadata_present must remain explicit false until source schema changes")
+    except json.JSONDecodeError as exc:
+        errors.append(f"data/toolkit-source.json: invalid JSON: {exc}")
 
 manifest_path = ROOT / "agents/cbt-cards/manifest.json"
 if not manifest_path.exists():
@@ -264,5 +309,5 @@ if errors:
 
 print(
     f"OK: {len(html_files)} HTML pages checked; {len(canonicals)} canonical URLs; "
-    f"{len(knowledge_ids)} knowledge records; internal links, sitemap, catalog, manifest, JSON and JSON-LD parsed."
+    f"{len(knowledge_ids)} curated knowledge records; internal links, sitemap, catalog, toolkit source, manifest, JSON and JSON-LD parsed."
 )
