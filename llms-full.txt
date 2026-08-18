@@ -139,7 +139,8 @@ The protocol uses two stages.
 
 Stage 1 — generation:
 - The evaluated runtime may receive the case `user_message`, its normal system/runtime instructions, and the normal public CBT Cards resources/tools available to that integration.
-- Benchmark-only fields such as category, `expected_route`, expected resource/source IDs, requested locale expectations, semantic checks, prohibited claims, rationale, and tags must remain hidden from the model.
+- Benchmark-only fields such as category, `expected_route`, expected resource/source IDs, requested-locale evaluation metadata, semantic checks, prohibited claims, rationale, and tags must remain hidden from the model.
+- The runtime may of course infer a user's requested language from `user_message`; the hidden field restriction applies to benchmark annotations, not to information contained in the user's text.
 - The model returns a user-facing answer plus a small routing envelope: route, resource IDs, raw source IDs, and locale behavior.
 - Capture the raw answer before deterministic scoring. Do not silently repair routing metadata after reading expected benchmark fields.
 
