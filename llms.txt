@@ -1,8 +1,8 @@
 # CBT Cards
 
-CBT Cards is a mobile app for general wellness and self-reflection. It includes short CBT-inspired cards, guided tools, a structured diary, and mood, stress, and energy check-ins. It is not medical advice or a substitute for professional care.
+CBT Cards is a mobile app for general wellness and self-reflection. It includes short CBT-inspired cards, guided tools, a structured journal, and mood, stress, and energy check-ins. It is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
 
-## Important pages
+## Canonical product pages
 
 - https://cbt-cards.github.io/
 - https://cbt-cards.github.io/features/
@@ -11,7 +11,21 @@ CBT Cards is a mobile app for general wellness and self-reflection. It includes 
 - https://cbt-cards.github.io/terms/
 - https://cbt-cards.github.io/support/
 - https://cbt-cards.github.io/faq/
-- https://cbt-cards.github.io/agents/ (install the public CBT Cards skill for OpenClaw or Hermes)
+- https://cbt-cards.github.io/about/
+
+## Learning library
+
+- https://cbt-cards.github.io/learn/
+- https://cbt-cards.github.io/learn/cbt-thought-record/
+- https://cbt-cards.github.io/learn/automatic-thoughts/
+- https://cbt-cards.github.io/learn/thought-vs-fact/
+
+## Machine-readable resources
+
+- JSON catalog: https://cbt-cards.github.io/data/catalog.json
+- Extended index: https://cbt-cards.github.io/llms-full.txt
+- Agent install guide: https://cbt-cards.github.io/agents/
+- Agent skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 
 ## Store listings
 
