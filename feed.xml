@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>CBT Cards public resources</title>
-  <subtitle>New and updated CBT Cards learning guides, worksheets, toolkit resources, and agent-facing public data.</subtitle>
+  <subtitle>New and updated CBT Cards learning guides, worksheets, toolkit resources, changelog entries, and agent-facing public data.</subtitle>
   <id>https://cbt-cards.github.io/</id>
   <link href="https://cbt-cards.github.io/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://cbt-cards.github.io/" rel="alternate" type="text/html" />
+  <link href="https://cbt-cards.github.io/changelog/" rel="related" type="text/html" />
   <updated>2026-08-18T00:00:00Z</updated>
   <author><name>CBT Cards</name><uri>https://cbt-cards.github.io/about/</uri></author>
+  <entry>
+    <title>CBT Cards public changelog</title>
+    <id>https://cbt-cards.github.io/changelog/</id>
+    <link href="https://cbt-cards.github.io/changelog/" />
+    <updated>2026-08-18T00:00:00Z</updated>
+    <summary>Website and public-data release history, explicitly separated from CBT Cards mobile-app releases.</summary>
+  </entry>
   <entry>
     <title>Free CBT reflection worksheets</title>
     <id>https://cbt-cards.github.io/worksheets/</id>
