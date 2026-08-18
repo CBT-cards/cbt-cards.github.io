@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "name": "CBT Cards public changelog",
+  "canonical": "https://cbt-cards.github.io/data/changelog.json",
+  "updated": "2026-08-18",
+  "entries": [
+    {
+      "id": "web-2026-08-18-knowledge-foundation",
+      "date": "2026-08-18",
+      "scope": "website",
+      "title": "Knowledge, worksheets, agent data, and discovery foundation",
+      "summary": "Expanded the standalone CBT Cards website from a product landing page into a public knowledge and discovery surface for people, search engines, and read-only AI/RAG clients.",
+      "changes": [
+        {"type": "added", "resource_id": "learn", "url": "https://cbt-cards.github.io/learn/"},
+        {"type": "added", "resource_id": "worksheets", "url": "https://cbt-cards.github.io/worksheets/"},
+        {"type": "added", "resource_id": "toolkit", "url": "https://cbt-cards.github.io/toolkit/"},
+        {"type": "added", "resource_id": "knowledge-dataset", "url": "https://cbt-cards.github.io/data/knowledge.jsonl"},
+        {"type": "added", "resource_id": "worksheet-definitions", "url": "https://cbt-cards.github.io/data/worksheets.json"},
+        {"type": "added", "resource_id": "agent-skill-v1.3.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.3.0/SKILL.md"},
+        {"type": "added", "resource_id": "atom-feed", "url": "https://cbt-cards.github.io/feed.xml"},
+        {"type": "added", "resource_id": "json-feed", "url": "https://cbt-cards.github.io/feed.json"},
+        {"type": "added", "resource_id": "security-contact", "url": "https://cbt-cards.github.io/.well-known/security.txt"}
+      ],
+      "notes": [
+        "This is a website/public-data release, not a CBT Cards mobile-app version.",
+        "Health-adjacent learning resources remain educational and do not provide diagnosis or treatment guidance.",
+        "Raw toolkit records are not automatically considered clinically reviewed or suitable for standalone publication."
+      ]
+    },
+    {
+      "id": "web-2026-07-14-standalone-site",
+      "date": "2026-07-14",
+      "scope": "website",
+      "title": "Standalone CBT Cards website",
+      "summary": "Established the standalone CBT Cards public website on the cbt-cards.github.io domain with canonical product, privacy, terms, support, FAQ, and feature documentation.",
+      "changes": [
+        {"type": "added", "resource_id": "product-overview", "url": "https://cbt-cards.github.io/"},
+        {"type": "added", "resource_id": "features", "url": "https://cbt-cards.github.io/features/"},
+        {"type": "added", "resource_id": "how-it-works", "url": "https://cbt-cards.github.io/how-it-works/"},
+        {"type": "added", "resource_id": "privacy", "url": "https://cbt-cards.github.io/privacy/"},
+        {"type": "added", "resource_id": "faq", "url": "https://cbt-cards.github.io/faq/"}
+      ],
+      "notes": [
+        "This entry records the website launch only and does not imply a mobile-app release on the same date."
+      ]
+    }
+  ]
+}
