@@ -1,6 +1,6 @@
 # CBT Cards
 
-CBT Cards is a public library of practical reflection resources for people and the AI assistants they choose to use. It publishes short CBT-inspired cards, plain-language learning guides, printable browser worksheets, structured public data, review metadata, language-status metadata, public agent evals, reproducible non-model baselines, citation metadata, and versioned agent instructions. The original CBT Cards mobile app remains documented as a separate product surface. CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
+CBT Cards is a public library of practical reflection resources for people and the AI assistants they choose to use. It publishes short CBT-inspired cards, plain-language learning guides, printable browser worksheets, structured public data, review metadata, language-status metadata, public agent evals, reproducible non-model baselines, citation metadata, and versioned portable agent instructions. The original CBT Cards mobile app remains documented as a separate product surface. CBT Cards is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
 
 ## Public reflection resources
 
@@ -73,6 +73,17 @@ CBT Cards is a public library of practical reflection resources for people and t
 - The deterministic router's perfect score is not evidence of general assistant or model quality. It verifies the routing/evaluation harness on this small fixed taxonomy.
 - No LLM/model results are currently claimed. Future model runs must carry their own model/provider/version/date and evaluator provenance.
 
+## Portable agent skill
+
+- Latest mutable skill v1.7.0: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
+- Skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
+- Backward-compatible immutable v1.7.0: https://cbt-cards.github.io/agents/cbt-cards/v1.7.0/SKILL.md
+- Strict Agent Skills distribution v1.7.0: https://cbt-cards.github.io/agents/cbt-cards/v1.7.0/cbt-cards/SKILL.md
+- Installation notes for OpenClaw, Hermes Agent, and generic Agent Skills clients: https://cbt-cards.github.io/agents/cbt-cards/INSTALL.md
+- v1.7.0 uses the portable Agent Skills frontmatter field set, stores version in string-valued `metadata.version`, and keeps runtime-specific installation instructions outside the portable core.
+- The mutable alias, compatibility immutable URL, and strict portable distribution contain identical v1.7.0 skill content.
+- Historical skill releases remain unchanged at their original URLs.
+
 ## Citation
 
 - Citation metadata: https://cbt-cards.github.io/CITATION.cff
@@ -97,9 +108,6 @@ CBT Cards is a public library of practical reflection resources for people and t
 - Security contact: https://cbt-cards.github.io/.well-known/security.txt
 - Extended index: https://cbt-cards.github.io/llms-full.txt
 - Agent integration guide: https://cbt-cards.github.io/agents/
-- Latest agent skill: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
-- Skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
-- Immutable skill v1.6.0: https://cbt-cards.github.io/agents/cbt-cards/v1.6.0/SKILL.md
 
 For CBT Cards-owned JSON/JSONL formats, use the versioned contracts listed in schemas/index.json. Catalog entries expose schema_url where applicable.
 
