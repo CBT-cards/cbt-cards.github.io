@@ -14,6 +14,7 @@ EXPECTED_IDS = {
     "catalog-v1",
     "changelog-v1",
     "content-review-v1",
+    "locales-v1",
     "worksheets-v1",
     "toolkit-review-v1",
     "toolkit-source-v1",
@@ -121,6 +122,15 @@ def main() -> None:
         fail("content-review schema must preserve editorial_source_and_safety review kind")
     if policy_props["clinical_validation_status"].get("const") != "not_claimed":
         fail("content-review schema must preserve not_claimed clinical status")
+
+    locales = json.loads((ROOT / "schemas" / "locales-v1.schema.json").read_text(encoding="utf-8"))
+    if locales["properties"]["scope"].get("const") != "website_only":
+        fail("locales schema must preserve website_only scope")
+    if locales["properties"]["mobile_app_language_support"].get("const") != "not_asserted_by_this_registry":
+        fail("locales schema must preserve website/app language boundary")
+    requirements = locales["properties"]["publication_requirements"]["properties"]
+    if requirements["machine_translation_alone_is_sufficient"].get("const") is not False:
+        fail("locales schema must require human review beyond machine translation")
 
     knowledge = json.loads((ROOT / "schemas" / "knowledge-record-v1.schema.json").read_text(encoding="utf-8"))
     required_knowledge = set(knowledge.get("required", []))
