@@ -30,6 +30,8 @@
     {"id": "about", "type": "provenance", "url": "https://cbt-cards.github.io/about/", "title": "About CBT Cards"},
     {"id": "content-review-page", "type": "provenance", "url": "https://cbt-cards.github.io/about/editorial-review/", "title": "Editorial review policy", "updated": "2026-08-18"},
     {"id": "content-review-data", "type": "dataset", "url": "https://cbt-cards.github.io/data/content-review.json", "title": "CBT Cards content review registry", "format": "application/json", "updated": "2026-08-18", "schema_url": "https://cbt-cards.github.io/schemas/content-review-v1.schema.json"},
+    {"id": "localization-page", "type": "provenance", "url": "https://cbt-cards.github.io/about/localization/", "title": "Website localization policy", "updated": "2026-08-18"},
+    {"id": "locale-registry", "type": "dataset", "url": "https://cbt-cards.github.io/data/locales.json", "title": "CBT Cards website locale registry", "format": "application/json", "updated": "2026-08-18", "schema_url": "https://cbt-cards.github.io/schemas/locales-v1.schema.json"},
     {"id": "changelog", "type": "provenance", "url": "https://cbt-cards.github.io/changelog/", "title": "CBT Cards public changelog", "updated": "2026-08-18"},
     {"id": "changelog-data", "type": "dataset", "url": "https://cbt-cards.github.io/data/changelog.json", "title": "CBT Cards machine-readable changelog", "format": "application/json", "updated": "2026-08-18", "schema_url": "https://cbt-cards.github.io/schemas/changelog-v1.schema.json"},
     {"id": "learn", "type": "collection", "url": "https://cbt-cards.github.io/learn/", "title": "Learning library"},
@@ -61,12 +63,13 @@
     {"id": "atom-feed", "type": "feed", "url": "https://cbt-cards.github.io/feed.xml", "title": "CBT Cards Atom feed", "format": "application/atom+xml", "updated": "2026-08-18"},
     {"id": "json-feed", "type": "feed", "url": "https://cbt-cards.github.io/feed.json", "title": "CBT Cards JSON Feed", "format": "application/feed+json", "updated": "2026-08-18"},
     {"id": "security-contact", "type": "security", "url": "https://cbt-cards.github.io/.well-known/security.txt", "title": "CBT Cards security contact"},
-    {"id": "agent-skill-latest", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md", "title": "CBT Cards agent skill (latest)", "version": "1.5.0", "mutable": true},
+    {"id": "agent-skill-latest", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md", "title": "CBT Cards agent skill (latest)", "version": "1.6.0", "mutable": true},
     {"id": "agent-skill-v1.1.0", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.1.0/SKILL.md", "title": "CBT Cards agent skill v1.1.0", "version": "1.1.0", "mutable": false},
     {"id": "agent-skill-v1.2.0", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.2.0/SKILL.md", "title": "CBT Cards agent skill v1.2.0", "version": "1.2.0", "mutable": false},
     {"id": "agent-skill-v1.3.0", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.3.0/SKILL.md", "title": "CBT Cards agent skill v1.3.0", "version": "1.3.0", "mutable": false},
     {"id": "agent-skill-v1.4.0", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.4.0/SKILL.md", "title": "CBT Cards agent skill v1.4.0", "version": "1.4.0", "mutable": false},
     {"id": "agent-skill-v1.5.0", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.5.0/SKILL.md", "title": "CBT Cards agent skill v1.5.0", "version": "1.5.0", "mutable": false},
+    {"id": "agent-skill-v1.6.0", "type": "agent", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.6.0/SKILL.md", "title": "CBT Cards agent skill v1.6.0", "version": "1.6.0", "mutable": false},
     {"id": "agent-skill-manifest", "type": "agent-manifest", "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json", "title": "CBT Cards skill manifest", "schema_url": "https://cbt-cards.github.io/schemas/skill-manifest-v1.schema.json"}
   ]
 }
