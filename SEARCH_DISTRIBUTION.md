@@ -56,7 +56,15 @@ The list is a queue, not a mail merge. Outreach should be selective:
 
 ## Current high-fit targets
 
-Highest-priority candidates include `dreamingechoes/awesome-mental-health` for the reviewed public practice library, Agent Skill Exchange, `dmgrok/agent_skills_directory`, Block/Goose Agent Skills, and `JPeetz/agent-skills` for the portable skill. Other targets need format, eligibility, licensing, or submission-path checks first. The machine-readable queue explains those tradeoffs so “10 targets” does not become 10 irrelevant pitches.
+The 19 August process recheck changed several targets from vague `not_contacted` entries into explicit execution states:
+
+- `dreamingechoes/awesome-mental-health` is topically suitable for the reviewed practice library. Its current guide requires one pull request per resource and permits small tools/apps without treating them as therapy-efficacy submissions. The content fit is ready, but the connected GitHub environment cannot fork the target repository, so the target is `ready_requires_fork` rather than falsely `submitted`.
+- `theimpossibleastronaut/awesome-mentalhealth` is a strong fit for the free browser-local worksheets and accepts English HTTPS resources. No documented issue-based suggestion path was found; repository contribution remains the defensible route, so it is also `ready_requires_fork` here.
+- Agent Skill Exchange requires a fork + pull request into its catalog. The technical fit is strong, but the same fork limitation applies and any copied/adapted skill must retain CBT Cards' active license rather than inherit a catalog license by implication.
+- `dmgrok/agent_skills_directory` now resolves to `dmgrok/agent-plugins`. Its New Provider issue flow is technically executable and automated, but the current template explicitly expects a permissive-style repository license such as MIT or Apache 2.0. CBT Cards remains CC BY-NC-SA 4.0, so this target is `blocked_by_catalog_license_policy` until issue #7 is deliberately resolved.
+- `JPeetz/agent-skills` is similarly held behind its current skill-license expectations rather than being submitted with a mislabeled license.
+
+This requalification matters: a distribution target can be a strong topical/technical fit and still be ineligible today. Outreach counts should reflect actual submissions and acceptances, not merely researched names.
 
 ## Completion boundary for issue #9
 
