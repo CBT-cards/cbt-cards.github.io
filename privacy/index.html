@@ -1,1 +1,70 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Privacy policy — CBT Cards</title><meta name="description" content="Confirmed data practices for the CBT Cards mobile application."><link rel="canonical" href="https://cbt-cards.github.io/privacy/"><link rel="stylesheet" href="/styles.css"><link rel="icon" href="/assets/app-icon.png"></head><body><header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.webp" width="42" height="42" alt="CBT Cards" decoding="async">CBT Cards</a><a class="download" href="/#download">Download</a></div></header><main><section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / Privacy</div><h1>Privacy policy</h1><p>Effective 14 July 2026</p></div></section><article class="section alt"><div class="wrap prose"><p>This policy describes the CBT Cards mobile app. It is based on the current application source. If future releases change data practices, this policy will be updated before or with that release.</p><h2>What the app stores on your device</h2><p>The app stores settings, card state, notes, diary entries, check-ins, reminders, activity history, and supported tool entries locally using Hive. The application attempts to use a key from device secure storage to encrypt supported Hive boxes. A PIN lock can also be enabled in the app.</p><h2>Accounts and direct identifiers</h2><p>The app does not require an account for its core features. It does not ask for your name or email to use cards, diary entries, or check-ins. The app may open your email client if you choose to contact support.</p><h2>Diagnostics and analytics</h2><p>The app includes Firebase Analytics, Firebase Crashlytics, Firebase Performance, Firebase Cloud Messaging, and Firestore. Analytics and Crashlytics collection can be controlled with the in-app analytics-consent setting. Firebase may process technical device and usage data according to its own terms when those services are enabled. The app uses Firestore for a shared card popularity counter; it sends a card identifier and increments a counter, not diary content.</p><h2>Backups and sharing</h2><p>You can export supported app data to a file and use platform sharing. The app also provides an optional Google Drive backup feature that requires you to sign in and explicitly initiate the backup. Google processes data in that feature under its own privacy terms. The developer does not operate a separate CBT Cards account database.</p><h2>Permissions</h2><p>The app may request camera or photo access if you choose to attach photos to entries, notification permission for reminders, and network access for optional online services. Photos attached through the app are stored locally unless you choose to include them in a backup or share them using your device.</p><h2>Retention and deletion</h2><p>Local information remains on your device until you delete it in the app, clear app data, or uninstall the app. Backups and exported files are controlled by you in their destination. You may turn analytics consent off in Settings; previously processed service data is governed by the relevant provider’s retention policy.</p><h2>Children</h2><p>CBT Cards is not directed to children under the age required by local law to consent to data processing. Do not use the app on behalf of a child without appropriate supervision.</p><h2>Your questions</h2><p>For privacy questions, contact us through <a href="https://www.linkedin.com/in/metalhatcats/">LinkedIn</a>. You may also use the app’s local deletion and backup controls to manage the data under your control.</p></div></article></main><footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav><a href="/terms/">Terms</a><a href="/support/">Support</a><a href="/faq/">FAQ</a></nav></div></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Privacy policy and store disclosure status — CBT Cards</title>
+<meta name="description" content="CBT Cards mobile-app privacy policy, including the boundary between private journal content, technical telemetry, optional backups, and current app-store disclosure reconciliation." />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href="https://cbt-cards.github.io/privacy/" />
+<link rel="stylesheet" href="/styles.css?v=20260818" />
+<link rel="icon" href="/assets/app-icon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="CBT Cards privacy policy and store disclosure status" />
+<meta property="og:description" content="What stays local, what technical services may process, and which Apple/Google store disclosures still require implementation verification." />
+<meta property="og:url" content="https://cbt-cards.github.io/privacy/" />
+<meta property="og:image" content="https://cbt-cards.github.io/assets/social-preview.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"CBT Cards privacy policy and store disclosure status","url":"https://cbt-cards.github.io/privacy/","dateModified":"2026-08-19","isPartOf":{"@id":"https://cbt-cards.github.io/#website"}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.webp" width="42" height="42" alt="" decoding="async" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/features/">Features</a><a href="/how-it-works/">How it works</a><a href="/faq/">FAQ</a><a href="/about/">About</a></nav><a class="download" href="/#download">Download</a></div></header>
+<main id="main">
+<section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / Privacy</div><h1>Privacy policy</h1><p class="lede">This page separates private reflection content from technical service data, and separates both from app-store disclosure labels. Those are different things and should not be collapsed into one slogan.</p><p class="source-note">Implementation-policy audit: <time datetime="2026-07-14">14 July 2026</time> · Public store metadata rechecked: <time datetime="2026-08-19">19 August 2026</time> · Store reconciliation: <strong>open</strong></p></div></section>
+
+<section class="section alt"><div class="wrap prose">
+<h2>Scope and verification status</h2>
+<p>This policy describes the CBT Cards mobile app using the implementation audit that informed the policy on 14 July 2026. Public Apple App Store and Google Play metadata was separately rechecked on 19 August 2026. Store privacy labels are publisher disclosures, not a substitute for inspecting the shipped application, SDK configuration, consent flow, and store-console answers.</p>
+<p>The public store metadata currently contains statements that do not line up cleanly with one another. CBT Cards therefore records the discrepancy instead of silently choosing whichever statement is more convenient. The external reconciliation remains open until the current iOS and Android builds and store-console answers are verified together.</p>
+
+<h2>Reflection content kept on the device</h2>
+<p>The app stores settings, card state, notes, diary entries, check-ins, reminders, activity history, and supported tool entries locally using Hive. The application attempts to use a key from device secure storage to encrypt supported Hive boxes. A PIN lock can also be enabled in the app.</p>
+<p>Diary entries, check-in text, notes, and attached photos are reflection content. They are not the same category as technical identifiers, crash diagnostics, performance telemetry, or aggregate usage events. Reflection content remains local unless you deliberately use a feature that exports, shares, or backs up supported data.</p>
+
+<h2>Accounts and direct identifiers</h2>
+<p>The app does not require a CBT Cards account for its core features. It does not ask for your name or email to use cards, diary entries, or check-ins. The app may open your email client if you choose to contact support.</p>
+
+<h2>Technical services, diagnostics, and analytics</h2>
+<p>The audited app implementation includes Firebase Analytics, Firebase Crashlytics, Firebase Performance, Firebase Cloud Messaging, and Firestore. Analytics and Crashlytics collection can be controlled with the in-app analytics-consent setting. When enabled or otherwise used by the application, Firebase services may process technical device, diagnostic, performance, identifier, or usage data according to their configuration and provider terms.</p>
+<p>Firestore is used for a shared card-popularity counter. The app sends a card identifier and increments a counter; the audited behavior does not send diary text with that counter. This distinction matters: a store category about identifiers or app activity does not, by itself, mean that private journal or check-in contents are uploaded.</p>
+
+<h2>Current store disclosure reconciliation</h2>
+<p><strong>Apple App Store.</strong> The public listing rechecked on 19 August 2026 identifies the current release as <strong>Version 3.0 CBT</strong>. Apple's App Privacy section lists <strong>Identifiers</strong> under data used for tracking and <strong>Usage Data</strong> as data not linked to identity. Marketing text on the same public listing uses broader tracking-free privacy wording. Those public statements require reconciliation against the current iOS source/build, Firebase configuration, any advertising or attribution SDK behavior, ATT/IDFA usage, and the answers stored in App Store Connect.</p>
+<p><strong>Google Play.</strong> The public listing was last shown as updated on <strong>9 March 2026</strong> when rechecked. Its Data Safety section says the app may share <strong>App activity</strong> and <strong>App info and performance</strong> with third parties, while a separate field indicates that collection is absent. Marketing text on the listing also uses broader tracking-free privacy wording. The exact Android build/version and Play Console answers still need to be checked against the shipped implementation.</p>
+<p>These store observations describe disclosure categories around technical and usage data. They should not be reinterpreted as evidence that diary entries, check-ins, or note contents are shared. Conversely, the local-content design should not be stretched into an absolute claim about all technical telemetry.</p>
+<p>Official store pages: <a href="https://apps.apple.com/us/app/cbt-cards-%D1%81bt-for-daily-use/id6737169041">Apple App Store</a> · <a href="https://play.google.com/store/apps/details?id=cbt.cbtcards.stressrelief">Google Play</a>. The repository verification checklist is documented in <a href="/MOBILE_PRIVACY_AUDIT.md"><code>MOBILE_PRIVACY_AUDIT.md</code></a>.</p>
+
+<h2>Backups, exports, and sharing</h2>
+<p>You can export supported app data to a file and use platform sharing. The app also provides an optional Google Drive backup feature that requires you to sign in and explicitly initiate the backup. Google processes data used for that feature under its own terms. The developer does not operate a separate CBT Cards account database for the app's core reflection features.</p>
+
+<h2>Permissions</h2>
+<p>The app may request camera or photo access if you choose to attach photos to entries, notification permission for reminders, and network access for optional online services. Photos attached through the app are stored locally unless you choose to include them in a backup or share them using your device.</p>
+
+<h2>Retention and deletion</h2>
+<p>Local information remains on your device until you delete it in the app, clear app data, or uninstall the app. Backups and exported files are controlled by you in their destination. You may turn analytics consent off in Settings; service data already processed by a provider is governed by that provider's retention rules and the app's configured integration.</p>
+
+<h2>What still has to be verified</h2>
+<p>Before the store-reconciliation task can be closed, CBT Cards needs a build-level review of the current iOS and Android application source, Firebase/SDK configuration, consent initialization, any identifier or attribution access, and the exact privacy/Data Safety answers in App Store Connect and Play Console. The verified app commit/build and store-answer update date should then be recorded together.</p>
+
+<h2>Children</h2>
+<p>CBT Cards is not directed to children under the age required by local law to consent to data processing. Do not use the app on behalf of a child without appropriate supervision.</p>
+
+<h2>Your questions</h2>
+<p>For privacy questions, use the current options on the <a href="/support/">support page</a>. Do not send private journal contents or other sensitive reflection text when reporting a support or privacy issue.</p>
+</div></section>
+</main>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/terms/">Terms</a><a href="/support/">Support</a><a href="/faq/">FAQ</a><a href="/about/">About</a></nav></div></footer>
+</body>
+</html>
