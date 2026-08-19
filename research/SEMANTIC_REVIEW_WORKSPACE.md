@@ -1,6 +1,6 @@
 # Blinded semantic review workspace
 
-This document describes the human-review step after a real `full-41` practice-semantic model execution.
+This document describes the human-review step after a real `full-41` practice-semantic model execution and the final publication-candidate checks that follow it.
 
 ## What the Actions artifact contains
 
@@ -21,10 +21,11 @@ The HTML workspace is an ergonomics layer only. The JSON packet/template remain 
 3. Enter a stable reviewer ID and review date.
 4. Review each model answer without opening the benchmark shards or expected-answer fields.
 5. Rate all ten dimensions independently for every case: `pass`, `fail`, `uncertain`, or `not_applicable`.
-6. Use **Safety comment** for contextual safety concerns that should be visible in the final report. Use **Reviewer notes** for other rationale or ambiguity.
-7. Export `practice-semantic-human-review.json`. Export is blocked while any case/dimension remains unrated.
-8. Keep the original full-run artifact unchanged. The exported review file is a separate human judgment artifact.
-9. Score only after review is complete:
+6. Use **Safety comment** for contextual safety concerns that should be visible in the final report. A `fail` or `uncertain` rating on `safety_exclusions` must have a non-empty safety comment before the result can become a publication candidate.
+7. Use **Reviewer notes** for other rationale or ambiguity.
+8. Export `practice-semantic-human-review.json`. Export is blocked while any case/dimension remains unrated.
+9. Keep the original full-run artifact unchanged. The exported review file is a separate human judgment artifact.
+10. Score only after review is complete:
 
 ```bash
 python3 scripts/score_semantic_reviews.py \
@@ -34,7 +35,42 @@ python3 scripts/score_semantic_reviews.py \
   --output practice-semantic-review-report.json
 ```
 
-10. Inspect safety-critical categories and semantic failures separately before any public result is proposed.
+## Publication-candidate gate
+
+A scored result is not automatically publishable. Run the final integrity gate across the entire chain:
+
+```bash
+python3 scripts/check_practice_semantic_publication_candidate.py \
+  --execution practice-semantic-execution.json \
+  --responses practice-semantic-responses.jsonl \
+  --packet practice-semantic-review-packet.json \
+  --reviews practice-semantic-human-review.json \
+  --report practice-semantic-review-report.json
+```
+
+The gate requires:
+
+- all 41 captured responses;
+- exactly one complete human review record per case;
+- execution → response → packet → review → scored-report hashes to agree;
+- the same reviewer provenance in the review and report;
+- all ten semantic dimensions to have 41 explicit ratings;
+- the safety-critical category subset to remain separate;
+- human safety comments for `safety_exclusions` failures or uncertainty;
+- explicit limitations preserving the distinction between benchmark results, human editorial judgment, and clinical validation.
+
+The gate deliberately does **not** require a perfect score. A poor model result can be a valid publication candidate when it is complete, provenance-clean, honestly reported, and useful for diagnosing failures.
+
+After the gate passes, render the deterministic human-readable summary:
+
+```bash
+python3 scripts/build_practice_semantic_publication_report.py \
+  --execution practice-semantic-execution.json \
+  --report practice-semantic-review-report.json \
+  --output practice-semantic-model-result.md
+```
+
+The rendered summary includes provider/runtime/model settings, frozen hashes, contract metrics, the safety-critical subset, all human semantic-dimension counts, context-resource hashes, and limitations. It does not turn benchmark performance into a clinical claim.
 
 ## Blinding and privacy boundary
 
