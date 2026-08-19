@@ -1,0 +1,19 @@
+name: Temporary strict practice artifacts debug v3
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate deterministic practice artifacts in workspace
+        run: python3 scripts/build_practice_artifacts.py --write
+      - name: Validate strict practice graph
+        run: python3 scripts/check_practice_system_strict.py
+      - name: Validate generated human page in site graph
+        run: |
+          python3 scripts/check_site.py
+          python3 scripts/check_crawl_graph.py
