@@ -1,13 +1,13 @@
 @font-face {
   font-family: Nunito;
-  src: url("/assets/Nunito-Regular.ttf");
+  src: url("/assets/Nunito-Regular.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 400;
 }
 @font-face {
   font-family: Nunito;
-  src: url("/assets/Nunito-ExtraBold.ttf");
+  src: url("/assets/Nunito-ExtraBold.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 800;
@@ -164,6 +164,11 @@ img {
 .hero-art {
   width: min(100%, 410px);
   justify-self: end;
+}
+.hero-art picture,
+.split > picture {
+  display: block;
+  width: 100%;
 }
 .hero-art img {
   width: 100%;
