@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from datetime import datetime, timezone
 from pathlib import Path
 import argparse
 import json
@@ -73,9 +74,35 @@ def load_config():
     return config
 
 
-def submit(urls, config):
+def now_utc():
+    return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+
+
+def write_receipt(path, *, status, urls, config, http_status=None, error=None):
+    if not path:
+        return
+    receipt_path = Path(path)
+    receipt_path.parent.mkdir(parents=True, exist_ok=True)
+    receipt = {
+        "schema_version": "1.0",
+        "service": "IndexNow",
+        "executed_at": now_utc(),
+        "status": status,
+        "host": config.get("host"),
+        "endpoint": config.get("endpoint"),
+        "key_location": config.get("key_location"),
+        "url_count": len(urls),
+        "urls": urls,
+        "http_status": http_status,
+        "error": error,
+    }
+    receipt_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def submit(urls, config, receipt_path=None):
     if not urls:
         print("IndexNow: no changed public HTML URLs to submit.")
+        write_receipt(receipt_path, status="skipped_no_changed_html", urls=urls, config=config)
         return 0
     if len(urls) > 10000:
         raise RuntimeError(f"IndexNow URL batch is too large: {len(urls)}")
@@ -87,12 +114,12 @@ def submit(urls, config):
         "urlList": urls,
     }
     body = json.dumps(payload).encode("utf-8")
-    request = urllib.request.Request(
+    req = urllib.request.Request(
         config["endpoint"],
         data=body,
         headers={
             "Content-Type": "application/json; charset=utf-8",
-            "User-Agent": "CBT-Cards-IndexNow/1.0",
+            "User-Agent": "CBT-Cards-IndexNow/1.1",
         },
         method="POST",
     )
@@ -102,17 +129,50 @@ def submit(urls, config):
         print(f"- {url}")
 
     try:
-        with urllib.request.urlopen(request, timeout=20) as response:
+        with urllib.request.urlopen(req, timeout=20) as response:
             status = response.status
             if status not in {200, 202}:
-                raise RuntimeError(f"IndexNow returned unexpected HTTP {status}")
+                message = f"unexpected HTTP {status}"
+                write_receipt(
+                    receipt_path,
+                    status="unexpected_http_status",
+                    urls=urls,
+                    config=config,
+                    http_status=status,
+                    error=message,
+                )
+                print(f"IndexNow: {message}", file=sys.stderr)
+                return 1
+            write_receipt(
+                receipt_path,
+                status="success",
+                urls=urls,
+                config=config,
+                http_status=status,
+            )
             print(f"IndexNow: HTTP {status}")
             return 0
     except urllib.error.HTTPError as exc:
         detail = exc.read().decode("utf-8", errors="replace")
+        write_receipt(
+            receipt_path,
+            status="http_error",
+            urls=urls,
+            config=config,
+            http_status=exc.code,
+            error=detail[:1000],
+        )
         print(f"IndexNow HTTP error {exc.code}: {detail}", file=sys.stderr)
         return 1
     except urllib.error.URLError as exc:
+        message = str(exc)
+        write_receipt(
+            receipt_path,
+            status="network_error",
+            urls=urls,
+            config=config,
+            error=message,
+        )
         print(f"IndexNow network error: {exc}", file=sys.stderr)
         return 1
 
@@ -121,6 +181,7 @@ def main():
     parser = argparse.ArgumentParser(description="Notify IndexNow about changed CBT Cards HTML URLs.")
     parser.add_argument("--base", required=True, help="Git commit before the deployed push")
     parser.add_argument("--head", required=True, help="Git commit being deployed")
+    parser.add_argument("--receipt", help="Optional JSON receipt path recording the submission outcome")
     args = parser.parse_args()
 
     config = load_config()
@@ -130,7 +191,7 @@ def main():
         raise RuntimeError("Unexpected IndexNow endpoint")
 
     urls = changed_urls(args.base, args.head)
-    return submit(urls, config)
+    return submit(urls, config, args.receipt)
 
 
 if __name__ == "__main__":
