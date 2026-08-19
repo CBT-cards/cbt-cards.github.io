@@ -1,1 +1,22 @@
-{"schema_version":"1.0","id":"cbt-cards-practice-rag-v1","record_count":11,"distribution":"https://cbt-cards.github.io/data/practice-rag.ndjson","sha256":"0009607aafd435fd38b69466b1f1623d1a2559310f2899421ae2845dd86c2bac","rule":"one reviewed practice per chunk; safety exclusions stay in the same chunk; embeddings are not canonical"}
+{
+  "schema_version": "1.0",
+  "id": "cbt-cards-practice-rag-v1",
+  "generated": "2026-08-18",
+  "record_count": 11,
+  "distribution": "https://cbt-cards.github.io/data/practice-rag.ndjson",
+  "sha256": "9532230c921405769d63d47f8617e250d9f38f16e4f4a6395471b569a01c995e",
+  "chunk_id_format": "{resource_id}:en:v1",
+  "review_status": "editorial_and_safety_reviewed_for_publication",
+  "clinical_validation_status": "not_claimed",
+  "generated_from": [
+    {
+      "url": "https://cbt-cards.github.io/data/practice.json",
+      "sha256": "bd87cea7fd5b934759f80a08be53160943c9ba03655123544516f1ab1ae13e73"
+    },
+    {
+      "url": "https://cbt-cards.github.io/data/practice-ontology.json",
+      "sha256": "d8cee9ccb7fe3dba326789cb82c116e5babb9e05db6df79a05776f5255f3353b"
+    }
+  ],
+  "rule": "one reviewed practice per chunk; safety exclusions and safety scope stay in the same chunk; embeddings are not canonical"
+}
