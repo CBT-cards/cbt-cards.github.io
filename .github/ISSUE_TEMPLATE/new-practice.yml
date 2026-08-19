@@ -1,23 +1,98 @@
-name: New practice proposal
-description: Propose a reviewed CBT Cards-owned practice
+name: New reviewed practice proposal
+description: Propose a CBT Cards-owned practice for the reviewed situation-first layer
+title: "Practice: "
 body:
+  - type: markdown
+    attributes:
+      value: |
+        A proposal is not publication, clinical validation, or evidence of efficacy. Write project copy in your own words and link to sources instead of pasting copyrighted manuals or paywalled text.
+  - type: input
+    id: title
+    attributes:
+      label: Proposed title
+      description: Short human-facing title. Titles are not stable IDs.
+    validations: {required: true}
   - type: input
     id: mechanism
-    attributes: {label: Mechanism}
+    attributes:
+      label: Mechanism
+      description: Existing mechanism ID if possible, or explain why a genuinely new mechanism is needed.
     validations: {required: true}
   - type: textarea
     id: situations
-    attributes: {label: Plain-language situations}
+    attributes:
+      label: Plain-language situations
+      description: Describe user situations without diagnosis labels. Include how this differs from existing situation IDs.
     validations: {required: true}
   - type: textarea
-    id: fit
-    attributes: {label: Best used when}
+    id: best_used_when
+    attributes:
+      label: Best used when
+      description: Concrete fit conditions. Avoid generic statements such as “when anxious.”
     validations: {required: true}
   - type: textarea
-    id: avoid
-    attributes: {label: Avoid when / genuine-risk exclusions}
+    id: avoid_when
+    attributes:
+      label: Avoid when / genuine-risk exclusions
+      description: Include real danger, mandatory safety/professional/accessibility rules, and other practice-specific exclusions.
     validations: {required: true}
   - type: textarea
-    id: provenance
-    attributes: {label: Evidence and provenance}
+    id: prompt
+    attributes:
+      label: Proposed prompt
+      description: Short original wording for the practice itself.
     validations: {required: true}
+  - type: input
+    id: micro_action
+    attributes:
+      label: One bounded micro-action
+      description: One observable next action, small enough to do without turning the practice into a treatment plan.
+    validations: {required: true}
+  - type: input
+    id: reflection_question
+    attributes:
+      label: Follow-up / reflection question
+      description: What should the person review after the action?
+    validations: {required: true}
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence URLs and mechanism-level claim scope
+      description: Explain what each source supports. Evidence for a mechanism is not automatically evidence for this exact short-card format.
+    validations: {required: true}
+  - type: textarea
+    id: claim_limits
+    attributes:
+      label: What the evidence does not establish
+      description: State important limitations, including any treatment/efficacy or individual-suitability claims that must not be inferred.
+    validations: {required: true}
+  - type: dropdown
+    id: wording_origin
+    attributes:
+      label: Wording origin
+      description: How was the proposed CBT Cards wording produced?
+      options:
+        - Original project wording
+        - Adapted from a cited source in new wording
+        - Quoted wording with explicit reuse permission
+    validations: {required: true}
+  - type: textarea
+    id: rights_provenance
+    attributes:
+      label: Rights / source provenance
+      description: If adapted or quoted, identify the source and permission/license. Do not submit copyrighted manual text without rights.
+    validations: {required: true}
+  - type: textarea
+    id: relations
+    attributes:
+      label: Possible related / next practices
+      description: Optional. Suggest pairs_with, often_precedes, follow_up_with, alternative_when, or not_same_as relations and explain why.
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Submission boundaries
+      options:
+        - label: I have the right to submit this wording and did not paste paywalled/copyrighted therapy-manual text without permission.
+          required: true
+        - label: I understand this proposal is not published, clinically validated, or approved for individual treatment use merely because it is submitted.
+          required: true
