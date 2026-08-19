@@ -2,8 +2,72 @@
   "schema_version": "1.0",
   "name": "CBT Cards public changelog",
   "canonical": "https://cbt-cards.github.io/data/changelog.json",
-  "updated": "2026-08-18",
+  "updated": "2026-08-19",
   "entries": [
+    {
+      "id": "data-2026-08-19-practice-agent-trust-hardening",
+      "date": "2026-08-19",
+      "scope": "data",
+      "title": "Reviewed practice, agent evaluation, and trust hardening",
+      "summary": "Consolidated the situation-first reviewed practice system, source/audit/freshness boundaries, semantic model-evaluation pipeline, performance/privacy/localization/search hardening, explicit rights provenance, and current Agent Skill v1.8.0 into one verified public project state.",
+      "changes": [
+        {
+          "type": "changed",
+          "resource_id": "product-overview",
+          "url": "https://cbt-cards.github.io/"
+        },
+        {
+          "type": "changed",
+          "resource_id": "privacy",
+          "url": "https://cbt-cards.github.io/privacy/"
+        },
+        {
+          "type": "changed",
+          "resource_id": "languages",
+          "url": "https://cbt-cards.github.io/languages/"
+        },
+        {
+          "type": "changed",
+          "resource_id": "research",
+          "url": "https://cbt-cards.github.io/research/"
+        },
+        {
+          "type": "changed",
+          "resource_id": "agent-skill-latest",
+          "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md"
+        },
+        {
+          "type": "changed",
+          "resource_id": "knowledge-dataset",
+          "url": "https://cbt-cards.github.io/data/knowledge.jsonl"
+        },
+        {
+          "type": "added",
+          "resource_id": "mobile-releases",
+          "url": "https://cbt-cards.github.io/mobile-releases/"
+        },
+        {
+          "type": "changed",
+          "resource_id": "resource-catalog",
+          "url": "https://cbt-cards.github.io/data/catalog.json"
+        },
+        {
+          "type": "changed",
+          "resource_id": "changelog-data",
+          "url": "https://cbt-cards.github.io/data/changelog.json"
+        }
+      ],
+      "notes": [
+        "The trusted CBT Cards-owned layer now contains 11 reviewed practices, 11 mechanisms, 41 practice-semantic cases, and 11 stable RAG chunks with safety exclusions preserved in-chunk.",
+        "The pinned 115-record source toolkit now has separate publication, record-complete audit, and editorial-freshness layers; audit candidacy is not publication approval and editorial review is not clinical validation.",
+        "Agent Skill v1.8.0 prioritizes the reviewed practice layer and preserves source-only, freshness, localization, licensing, and no-match boundaries.",
+        "The semantic evaluation path separates frozen-context generation, deterministic contract metrics, blinded human semantic review, and safety review. No hosted-model result is published by this release; synthetic fixtures remain CI plumbing only.",
+        "Controlled mobile Lighthouse lab medians improved from performance 0.72 to 0.91, LCP 18.98 s to 3.38 s, and transferred bytes 4.47 MB to 478 KB after responsive WebP/WOFF2 optimization. These are lab measurements, not field Core Web Vitals.",
+        "Privacy/store disclosures, website/mobile locale state, legacy-host redirects, search-provider metrics, and the future machine-data reuse license remain explicitly separated from facts this repository can verify autonomously.",
+        "The active public license remains CC BY-NC-SA 4.0. Record-level knowledge rights provenance is explicit; LICENSING_DECISION.md is a pending publisher/legal decision memo, not a permissive grant.",
+        "The separately sourced /mobile-releases/ history is not a website/data release number and repository activity is not used to invent Android or iOS versions."
+      ]
+    },
     {
       "id": "data-2026-08-18-model-run-protocol",
       "date": "2026-08-18",
@@ -11,12 +75,36 @@
       "title": "Provenance-first model-run protocol v1",
       "summary": "Added a two-stage protocol for generating real assistant responses without benchmark answers and scoring routing metadata afterward with a deterministic evaluator.",
       "changes": [
-        {"type": "added", "resource_id": "model-run-protocol", "url": "https://cbt-cards.github.io/research/MODEL_RUN_PROTOCOL.md"},
-        {"type": "added", "resource_id": "model-run-prompt-v1", "url": "https://cbt-cards.github.io/research/model-run-prompt-v1.txt"},
-        {"type": "added", "resource_id": "model-run-evaluator-v1", "url": "https://cbt-cards.github.io/scripts/evaluate_model_run.py"},
-        {"type": "changed", "resource_id": "research", "url": "https://cbt-cards.github.io/research/"},
-        {"type": "changed", "resource_id": "schema-manifest", "url": "https://cbt-cards.github.io/schemas/index.json"},
-        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+        {
+          "type": "added",
+          "resource_id": "model-run-protocol",
+          "url": "https://cbt-cards.github.io/research/MODEL_RUN_PROTOCOL.md"
+        },
+        {
+          "type": "added",
+          "resource_id": "model-run-prompt-v1",
+          "url": "https://cbt-cards.github.io/research/model-run-prompt-v1.txt"
+        },
+        {
+          "type": "added",
+          "resource_id": "model-run-evaluator-v1",
+          "url": "https://cbt-cards.github.io/scripts/evaluate_model_run.py"
+        },
+        {
+          "type": "changed",
+          "resource_id": "research",
+          "url": "https://cbt-cards.github.io/research/"
+        },
+        {
+          "type": "changed",
+          "resource_id": "schema-manifest",
+          "url": "https://cbt-cards.github.io/schemas/index.json"
+        },
+        {
+          "type": "changed",
+          "resource_id": "resource-catalog",
+          "url": "https://cbt-cards.github.io/data/catalog.json"
+        }
       ],
       "notes": [
         "Generation and scoring are separate stages: the model sees user_message plus the normal runtime/public CBT Cards sources, while benchmark expected fields remain hidden until deterministic scoring.",
@@ -33,11 +121,31 @@
       "title": "Held-out paraphrase and adversarial eval challenge",
       "summary": "Added 12 separately authored challenge cases and recorded the unchanged deterministic router's large drop from its friendly starter-set score.",
       "changes": [
-        {"type": "added", "resource_id": "agent-evals-challenge", "url": "https://cbt-cards.github.io/data/agent-evals-challenge.jsonl"},
-        {"type": "added", "resource_id": "agent-eval-challenge-runs", "url": "https://cbt-cards.github.io/data/agent-eval-challenge-runs.jsonl"},
-        {"type": "changed", "resource_id": "research", "url": "https://cbt-cards.github.io/research/"},
-        {"type": "changed", "resource_id": "schema-manifest", "url": "https://cbt-cards.github.io/schemas/index.json"},
-        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+        {
+          "type": "added",
+          "resource_id": "agent-evals-challenge",
+          "url": "https://cbt-cards.github.io/data/agent-evals-challenge.jsonl"
+        },
+        {
+          "type": "added",
+          "resource_id": "agent-eval-challenge-runs",
+          "url": "https://cbt-cards.github.io/data/agent-eval-challenge-runs.jsonl"
+        },
+        {
+          "type": "changed",
+          "resource_id": "research",
+          "url": "https://cbt-cards.github.io/research/"
+        },
+        {
+          "type": "changed",
+          "resource_id": "schema-manifest",
+          "url": "https://cbt-cards.github.io/schemas/index.json"
+        },
+        {
+          "type": "changed",
+          "resource_id": "resource-catalog",
+          "url": "https://cbt-cards.github.io/data/catalog.json"
+        }
       ],
       "notes": [
         "The challenge set contains 12 paraphrase/adversarial cases across the same seven categories as the starter set and was authored separately from the deterministic router rules.",
@@ -54,12 +162,36 @@
       "title": "Portable Agent Skills release v1.7.0",
       "summary": "Published a strict portable Agent Skills profile for the latest CBT Cards skill while preserving the existing immutable URL convention and adding installation guidance for OpenClaw, Hermes Agent, and generic Agent Skills clients.",
       "changes": [
-        {"type": "added", "resource_id": "agent-skill-v1.7.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.7.0/SKILL.md"},
-        {"type": "added", "resource_id": "agent-skill-v1.7.0-portable", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.7.0/cbt-cards/SKILL.md"},
-        {"type": "added", "resource_id": "agent-skill-install", "url": "https://cbt-cards.github.io/agents/cbt-cards/INSTALL.md"},
-        {"type": "changed", "resource_id": "agent-skill-latest", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md"},
-        {"type": "changed", "resource_id": "agent-skill-manifest", "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"},
-        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+        {
+          "type": "added",
+          "resource_id": "agent-skill-v1.7.0",
+          "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.7.0/SKILL.md"
+        },
+        {
+          "type": "added",
+          "resource_id": "agent-skill-v1.7.0-portable",
+          "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.7.0/cbt-cards/SKILL.md"
+        },
+        {
+          "type": "added",
+          "resource_id": "agent-skill-install",
+          "url": "https://cbt-cards.github.io/agents/cbt-cards/INSTALL.md"
+        },
+        {
+          "type": "changed",
+          "resource_id": "agent-skill-latest",
+          "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md"
+        },
+        {
+          "type": "changed",
+          "resource_id": "agent-skill-manifest",
+          "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"
+        },
+        {
+          "type": "changed",
+          "resource_id": "resource-catalog",
+          "url": "https://cbt-cards.github.io/data/catalog.json"
+        }
       ],
       "notes": [
         "v1.7.0 restricts SKILL.md frontmatter to the portable Agent Skills field set and stores release version in string-valued metadata.version rather than a custom top-level frontmatter field.",
@@ -76,10 +208,26 @@
       "title": "Reproducible agent eval baselines and citation metadata",
       "summary": "Added a versioned evaluation-run format, two deterministic non-model baselines tied to the exact evaluation dataset hash, CI regeneration checks, and repository-level citation metadata.",
       "changes": [
-        {"type": "added", "resource_id": "agent-eval-runs", "url": "https://cbt-cards.github.io/data/agent-eval-runs.jsonl"},
-        {"type": "changed", "resource_id": "agent-evals", "url": "https://cbt-cards.github.io/data/agent-evals.jsonl"},
-        {"type": "changed", "resource_id": "research", "url": "https://cbt-cards.github.io/research/"},
-        {"type": "changed", "resource_id": "schema-manifest", "url": "https://cbt-cards.github.io/schemas/index.json"}
+        {
+          "type": "added",
+          "resource_id": "agent-eval-runs",
+          "url": "https://cbt-cards.github.io/data/agent-eval-runs.jsonl"
+        },
+        {
+          "type": "changed",
+          "resource_id": "agent-evals",
+          "url": "https://cbt-cards.github.io/data/agent-evals.jsonl"
+        },
+        {
+          "type": "changed",
+          "resource_id": "research",
+          "url": "https://cbt-cards.github.io/research/"
+        },
+        {
+          "type": "changed",
+          "resource_id": "schema-manifest",
+          "url": "https://cbt-cards.github.io/schemas/index.json"
+        }
       ],
       "notes": [
         "Each run record pins the SHA-256 of the exact agent-evals JSONL bytes used and keeps aggregate metrics separate from per-case results.",
@@ -96,10 +244,26 @@
       "title": "Public agent routing and boundary evals",
       "summary": "Published a starter set of 24 evaluation cases for testing CBT Cards resource routing, localization status, publication boundaries, privacy boundaries, and safety abstention without prescribing exact model wording.",
       "changes": [
-        {"type": "added", "resource_id": "research", "url": "https://cbt-cards.github.io/research/"},
-        {"type": "added", "resource_id": "agent-evals", "url": "https://cbt-cards.github.io/data/agent-evals.jsonl"},
-        {"type": "changed", "resource_id": "schema-manifest", "url": "https://cbt-cards.github.io/schemas/index.json"},
-        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+        {
+          "type": "added",
+          "resource_id": "research",
+          "url": "https://cbt-cards.github.io/research/"
+        },
+        {
+          "type": "added",
+          "resource_id": "agent-evals",
+          "url": "https://cbt-cards.github.io/data/agent-evals.jsonl"
+        },
+        {
+          "type": "changed",
+          "resource_id": "schema-manifest",
+          "url": "https://cbt-cards.github.io/schemas/index.json"
+        },
+        {
+          "type": "changed",
+          "resource_id": "resource-catalog",
+          "url": "https://cbt-cards.github.io/data/catalog.json"
+        }
       ],
       "notes": [
         "The starter set contains 24 hand-authored cases across retrieval, learning, worksheets, localization, publication boundaries, privacy, and safety.",
@@ -115,10 +279,26 @@
       "title": "Localization review and generated publication pipeline",
       "summary": "Completed Russian machine-draft coverage for the current curated knowledge set, added a human-readable language-status hub, and introduced deterministic generation that publishes only human-reviewed localized records.",
       "changes": [
-        {"type": "added", "resource_id": "languages", "url": "https://cbt-cards.github.io/languages/"},
-        {"type": "changed", "resource_id": "product-overview", "url": "https://cbt-cards.github.io/"},
-        {"type": "changed", "resource_id": "translation-dataset", "url": "https://cbt-cards.github.io/data/translations.jsonl"},
-        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+        {
+          "type": "added",
+          "resource_id": "languages",
+          "url": "https://cbt-cards.github.io/languages/"
+        },
+        {
+          "type": "changed",
+          "resource_id": "product-overview",
+          "url": "https://cbt-cards.github.io/"
+        },
+        {
+          "type": "changed",
+          "resource_id": "translation-dataset",
+          "url": "https://cbt-cards.github.io/data/translations.jsonl"
+        },
+        {
+          "type": "changed",
+          "resource_id": "resource-catalog",
+          "url": "https://cbt-cards.github.io/data/catalog.json"
+        }
       ],
       "notes": [
         "All 12 records in the current curated English knowledge set now have Russian machine-draft overlays; zero Russian records are currently human-reviewed or published.",
@@ -135,10 +315,26 @@
       "title": "Localization-aware agent skill v1.6.0",
       "summary": "Added explicit language and translation-status handling to the CBT Cards agent skill so assistants can distinguish source content, machine drafts, reviewed translations, and published localized resources.",
       "changes": [
-        {"type": "added", "resource_id": "agent-skill-v1.6.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.6.0/SKILL.md"},
-        {"type": "changed", "resource_id": "agent-skill-latest", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md"},
-        {"type": "changed", "resource_id": "agent-skill-manifest", "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"},
-        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+        {
+          "type": "added",
+          "resource_id": "agent-skill-v1.6.0",
+          "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.6.0/SKILL.md"
+        },
+        {
+          "type": "changed",
+          "resource_id": "agent-skill-latest",
+          "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md"
+        },
+        {
+          "type": "changed",
+          "resource_id": "agent-skill-manifest",
+          "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"
+        },
+        {
+          "type": "changed",
+          "resource_id": "resource-catalog",
+          "url": "https://cbt-cards.github.io/data/catalog.json"
+        }
       ],
       "notes": [
         "The skill checks the locale registry and translation overlay before treating localized text as official CBT Cards content.",
@@ -154,10 +350,26 @@
       "title": "Locale registry and translation overlay foundation",
       "summary": "Added a source-locale registry, versioned translation-record contract, Russian pilot translation overlays, and CI rules that keep localized review and publication status separate from source content.",
       "changes": [
-        {"type": "added", "resource_id": "locale-registry", "url": "https://cbt-cards.github.io/data/locales.json"},
-        {"type": "added", "resource_id": "translation-dataset", "url": "https://cbt-cards.github.io/data/translations.jsonl"},
-        {"type": "changed", "resource_id": "schema-manifest", "url": "https://cbt-cards.github.io/schemas/index.json"},
-        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+        {
+          "type": "added",
+          "resource_id": "locale-registry",
+          "url": "https://cbt-cards.github.io/data/locales.json"
+        },
+        {
+          "type": "added",
+          "resource_id": "translation-dataset",
+          "url": "https://cbt-cards.github.io/data/translations.jsonl"
+        },
+        {
+          "type": "changed",
+          "resource_id": "schema-manifest",
+          "url": "https://cbt-cards.github.io/schemas/index.json"
+        },
+        {
+          "type": "changed",
+          "resource_id": "resource-catalog",
+          "url": "https://cbt-cards.github.io/data/catalog.json"
+        }
       ],
       "notes": [
         "English is the current canonical source locale for curated knowledge records.",
@@ -174,10 +386,26 @@
       "title": "Public reflection resource skill v1.5.0",
       "summary": "Reframed the CBT Cards agent skill around finding and using public reflection cards, worksheets, learning resources, and verified project information rather than treating the mobile app as the primary resource surface.",
       "changes": [
-        {"type": "added", "resource_id": "agent-skill-v1.5.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.5.0/SKILL.md"},
-        {"type": "changed", "resource_id": "agent-skill-latest", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md"},
-        {"type": "changed", "resource_id": "agent-skill-manifest", "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"},
-        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"}
+        {
+          "type": "added",
+          "resource_id": "agent-skill-v1.5.0",
+          "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.5.0/SKILL.md"
+        },
+        {
+          "type": "changed",
+          "resource_id": "agent-skill-latest",
+          "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md"
+        },
+        {
+          "type": "changed",
+          "resource_id": "agent-skill-manifest",
+          "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"
+        },
+        {
+          "type": "changed",
+          "resource_id": "resource-catalog",
+          "url": "https://cbt-cards.github.io/data/catalog.json"
+        }
       ],
       "notes": [
         "The skill now treats published cards, worksheets, and reviewed learning pages as first-class resources for human-facing reflection tasks.",
@@ -192,7 +420,11 @@
       "title": "Indexed-page crawl graph quality gate",
       "summary": "Added homepage links to key public resource hubs and a CI check that rejects orphaned or excessively deep indexable pages.",
       "changes": [
-        {"type": "changed", "resource_id": "product-overview", "url": "https://cbt-cards.github.io/"}
+        {
+          "type": "changed",
+          "resource_id": "product-overview",
+          "url": "https://cbt-cards.github.io/"
+        }
       ],
       "notes": [
         "Every sitemap HTML URL except the homepage must have an inbound link from another indexed page.",
@@ -207,14 +439,46 @@
       "title": "Versioned public JSON Schema contracts",
       "summary": "Published JSON Schema 2020-12 contracts for CBT Cards-owned machine-readable resources and made them discoverable from the public catalog.",
       "changes": [
-        {"type": "added", "resource_id": "schema-manifest", "url": "https://cbt-cards.github.io/schemas/index.json"},
-        {"type": "changed", "resource_id": "resource-catalog", "url": "https://cbt-cards.github.io/data/catalog.json"},
-        {"type": "changed", "resource_id": "changelog-data", "url": "https://cbt-cards.github.io/data/changelog.json"},
-        {"type": "changed", "resource_id": "worksheet-definitions", "url": "https://cbt-cards.github.io/data/worksheets.json"},
-        {"type": "changed", "resource_id": "toolkit-review-data", "url": "https://cbt-cards.github.io/data/toolkit-review.json"},
-        {"type": "changed", "resource_id": "toolkit-source", "url": "https://cbt-cards.github.io/data/toolkit-source.json"},
-        {"type": "changed", "resource_id": "knowledge-dataset", "url": "https://cbt-cards.github.io/data/knowledge.jsonl"},
-        {"type": "changed", "resource_id": "agent-skill-manifest", "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"}
+        {
+          "type": "added",
+          "resource_id": "schema-manifest",
+          "url": "https://cbt-cards.github.io/schemas/index.json"
+        },
+        {
+          "type": "changed",
+          "resource_id": "resource-catalog",
+          "url": "https://cbt-cards.github.io/data/catalog.json"
+        },
+        {
+          "type": "changed",
+          "resource_id": "changelog-data",
+          "url": "https://cbt-cards.github.io/data/changelog.json"
+        },
+        {
+          "type": "changed",
+          "resource_id": "worksheet-definitions",
+          "url": "https://cbt-cards.github.io/data/worksheets.json"
+        },
+        {
+          "type": "changed",
+          "resource_id": "toolkit-review-data",
+          "url": "https://cbt-cards.github.io/data/toolkit-review.json"
+        },
+        {
+          "type": "changed",
+          "resource_id": "toolkit-source",
+          "url": "https://cbt-cards.github.io/data/toolkit-source.json"
+        },
+        {
+          "type": "changed",
+          "resource_id": "knowledge-dataset",
+          "url": "https://cbt-cards.github.io/data/knowledge.jsonl"
+        },
+        {
+          "type": "changed",
+          "resource_id": "agent-skill-manifest",
+          "url": "https://cbt-cards.github.io/agents/cbt-cards/manifest.json"
+        }
       ],
       "notes": [
         "The schema manifest maps committed instances to versioned JSON Schema 2020-12 contracts and may also list interface-only contracts before a real public instance exists.",
@@ -229,11 +493,31 @@
       "title": "Toolkit review and publication overlay",
       "summary": "Added an explicit CBT Cards-owned review layer that separates raw toolkit source records from records reviewed for standalone website publication.",
       "changes": [
-        {"type": "added", "resource_id": "toolkit-review-page", "url": "https://cbt-cards.github.io/toolkit/review-status/"},
-        {"type": "added", "resource_id": "toolkit-review-data", "url": "https://cbt-cards.github.io/data/toolkit-review.json"},
-        {"type": "added", "resource_id": "agent-skill-v1.4.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.4.0/SKILL.md"},
-        {"type": "changed", "resource_id": "agent-skill-latest", "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md"},
-        {"type": "changed", "resource_id": "toolkit", "url": "https://cbt-cards.github.io/toolkit/"}
+        {
+          "type": "added",
+          "resource_id": "toolkit-review-page",
+          "url": "https://cbt-cards.github.io/toolkit/review-status/"
+        },
+        {
+          "type": "added",
+          "resource_id": "toolkit-review-data",
+          "url": "https://cbt-cards.github.io/data/toolkit-review.json"
+        },
+        {
+          "type": "added",
+          "resource_id": "agent-skill-v1.4.0",
+          "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.4.0/SKILL.md"
+        },
+        {
+          "type": "changed",
+          "resource_id": "agent-skill-latest",
+          "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md"
+        },
+        {
+          "type": "changed",
+          "resource_id": "toolkit",
+          "url": "https://cbt-cards.github.io/toolkit/"
+        }
       ],
       "notes": [
         "Any source record not explicitly listed in the review overlay defaults to unreviewed and source-only.",
@@ -248,15 +532,51 @@
       "title": "Knowledge, worksheets, agent data, and discovery foundation",
       "summary": "Expanded the standalone CBT Cards website from a product landing page into a public knowledge and discovery surface for people, search engines, and read-only AI/RAG clients.",
       "changes": [
-        {"type": "added", "resource_id": "learn", "url": "https://cbt-cards.github.io/learn/"},
-        {"type": "added", "resource_id": "worksheets", "url": "https://cbt-cards.github.io/worksheets/"},
-        {"type": "added", "resource_id": "toolkit", "url": "https://cbt-cards.github.io/toolkit/"},
-        {"type": "added", "resource_id": "knowledge-dataset", "url": "https://cbt-cards.github.io/data/knowledge.jsonl"},
-        {"type": "added", "resource_id": "worksheet-definitions", "url": "https://cbt-cards.github.io/data/worksheets.json"},
-        {"type": "added", "resource_id": "agent-skill-v1.3.0", "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.3.0/SKILL.md"},
-        {"type": "added", "resource_id": "atom-feed", "url": "https://cbt-cards.github.io/feed.xml"},
-        {"type": "added", "resource_id": "json-feed", "url": "https://cbt-cards.github.io/feed.json"},
-        {"type": "added", "resource_id": "security-contact", "url": "https://cbt-cards.github.io/.well-known/security.txt"}
+        {
+          "type": "added",
+          "resource_id": "learn",
+          "url": "https://cbt-cards.github.io/learn/"
+        },
+        {
+          "type": "added",
+          "resource_id": "worksheets",
+          "url": "https://cbt-cards.github.io/worksheets/"
+        },
+        {
+          "type": "added",
+          "resource_id": "toolkit",
+          "url": "https://cbt-cards.github.io/toolkit/"
+        },
+        {
+          "type": "added",
+          "resource_id": "knowledge-dataset",
+          "url": "https://cbt-cards.github.io/data/knowledge.jsonl"
+        },
+        {
+          "type": "added",
+          "resource_id": "worksheet-definitions",
+          "url": "https://cbt-cards.github.io/data/worksheets.json"
+        },
+        {
+          "type": "added",
+          "resource_id": "agent-skill-v1.3.0",
+          "url": "https://cbt-cards.github.io/agents/cbt-cards/v1.3.0/SKILL.md"
+        },
+        {
+          "type": "added",
+          "resource_id": "atom-feed",
+          "url": "https://cbt-cards.github.io/feed.xml"
+        },
+        {
+          "type": "added",
+          "resource_id": "json-feed",
+          "url": "https://cbt-cards.github.io/feed.json"
+        },
+        {
+          "type": "added",
+          "resource_id": "security-contact",
+          "url": "https://cbt-cards.github.io/.well-known/security.txt"
+        }
       ],
       "notes": [
         "This is a website/public-data release, not a CBT Cards mobile-app version.",
@@ -271,11 +591,31 @@
       "title": "Standalone CBT Cards website",
       "summary": "Established the standalone CBT Cards public website on the cbt-cards.github.io domain with canonical product, privacy, terms, support, FAQ, and feature documentation.",
       "changes": [
-        {"type": "added", "resource_id": "product-overview", "url": "https://cbt-cards.github.io/"},
-        {"type": "added", "resource_id": "features", "url": "https://cbt-cards.github.io/features/"},
-        {"type": "added", "resource_id": "how-it-works", "url": "https://cbt-cards.github.io/how-it-works/"},
-        {"type": "added", "resource_id": "privacy", "url": "https://cbt-cards.github.io/privacy/"},
-        {"type": "added", "resource_id": "faq", "url": "https://cbt-cards.github.io/faq/"}
+        {
+          "type": "added",
+          "resource_id": "product-overview",
+          "url": "https://cbt-cards.github.io/"
+        },
+        {
+          "type": "added",
+          "resource_id": "features",
+          "url": "https://cbt-cards.github.io/features/"
+        },
+        {
+          "type": "added",
+          "resource_id": "how-it-works",
+          "url": "https://cbt-cards.github.io/how-it-works/"
+        },
+        {
+          "type": "added",
+          "resource_id": "privacy",
+          "url": "https://cbt-cards.github.io/privacy/"
+        },
+        {
+          "type": "added",
+          "resource_id": "faq",
+          "url": "https://cbt-cards.github.io/faq/"
+        }
       ],
       "notes": [
         "This entry records the website launch only and does not imply a mobile-app release on the same date."

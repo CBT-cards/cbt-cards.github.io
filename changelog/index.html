@@ -17,7 +17,7 @@
 <meta property="og:title" content="CBT Cards changelog" />
 <meta property="og:description" content="Website, data, translation, research, and agent-interface updates, separated from mobile-app release history." />
 <meta property="og:url" content="https://cbt-cards.github.io/changelog/" />
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://cbt-cards.github.io/changelog/"}]},{"@type":"CollectionPage","name":"CBT Cards public changelog","url":"https://cbt-cards.github.io/changelog/","description":"Website, public knowledge, translation, research, schema, worksheet, dataset, toolkit-review, and agent-interface release history for CBT Cards.","dateModified":"2026-08-18","publisher":{"@id":"https://cbt-cards.github.io/#publisher"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://cbt-cards.github.io/changelog/"}]},{"@type":"CollectionPage","name":"CBT Cards public changelog","url":"https://cbt-cards.github.io/changelog/","description":"Website, public knowledge, translation, research, schema, worksheet, dataset, toolkit-review, and agent-interface release history for CBT Cards.","dateModified":"2026-08-19","publisher":{"@id":"https://cbt-cards.github.io/#publisher"}}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -27,6 +27,21 @@
 <section class="section alt"><div class="wrap prose">
 <p>This changelog tracks changes to the public CBT Cards website, learning library, printable browser worksheets, schemas, language data, research datasets, toolkit pages, structured data, feeds, and agent interfaces. A website, data, translation, research, or agent entry does <strong>not</strong> imply that an Android or iOS app version shipped on the same date.</p>
 <p>Agents and tooling can read the same history from <a href="/data/changelog.json"><code>data/changelog.json</code></a>. Versioned data contracts are listed in <a href="/schemas/index.json"><code>schemas/index.json</code></a>.</p>
+
+
+<article id="data-2026-08-19-practice-agent-trust-hardening">
+<p class="source-note"><time datetime="2026-08-19">19 August 2026</time> · Public data/project state</p>
+<h2>Reviewed practice, agent evaluation, and trust hardening</h2>
+<p>Consolidated the situation-first practice system and the trust boundaries needed for people and AI assistants to use it without treating every raw prompt, benchmark fixture, store claim, or Git commit as equally authoritative.</p>
+<ul>
+<li>Published 11 CBT Cards-owned reviewed practices with ontology, evidence provenance, relations, recommendation/no-match contract, and stable RAG chunks.</li>
+<li>Added a record-complete audit and freshness registry around the pinned 115-record source toolkit instead of automatically promoting raw records.</li>
+<li>Advanced the portable Agent Skill to v1.8.0 and added 41 practice-semantic cases, blinded human-review tooling, and a frozen-context real-provider execution path.</li>
+<li>Optimized runtime imagery/fonts and added byte budgets; reconciled privacy, mobile/store locale, legacy-host, search-distribution, and licensing boundaries without claiming external actions that have not occurred.</li>
+<li>Added a separately sourced <a href="/mobile-releases/">mobile release history</a>; website/data releases remain distinct from Android/iOS releases.</li>
+</ul>
+<p>No hosted-model benchmark result or clinical validation claim is introduced by this release. Current machine-readable reuse remains under CC BY-NC-SA 4.0 unless a later explicit publisher-approved license release says otherwise.</p>
+</article>
 
 <article id="data-2026-08-18-model-run-protocol">
 <p class="source-note"><time datetime="2026-08-18">18 August 2026</time> · Public data/research</p>

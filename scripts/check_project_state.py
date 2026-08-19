@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = "https://cbt-cards.github.io"
+RELEASE_ID = "data-2026-08-19-practice-agent-trust-hardening"
 
 
 def fail(message: str) -> None:
@@ -33,7 +34,10 @@ def main() -> None:
         "llms-full.txt",
         "mobile-releases/index.html",
         "about/index.html",
+        "changelog/index.html",
         "sitemap.xml",
+        "data/catalog.json",
+        "data/changelog.json",
         "data/practice.json",
         "data/practice-semantic-evals.json",
         "data/content-review.json",
@@ -77,6 +81,27 @@ def main() -> None:
     measurement = load_json("data/search-measurement.json")
     if measurement.get("baseline", {}).get("sitemap_url_count") != len(sitemap_urls):
         fail("search measurement sitemap count drifted from sitemap.xml")
+
+    catalog = load_json("data/catalog.json")
+    if catalog.get("updated") != "2026-08-19":
+        fail("resource catalog update date does not reflect the 19 Aug reconciliation release")
+    resources = {item.get("id"): item for item in catalog.get("resources", [])}
+    mobile = resources.get("mobile-releases")
+    if not mobile or mobile.get("url") != f"{ORIGIN}/mobile-releases/":
+        fail("catalog does not expose canonical mobile release history")
+    for resource_id in ("changelog", "changelog-data"):
+        if resources.get(resource_id, {}).get("updated") != "2026-08-19":
+            fail(f"catalog {resource_id} update date is stale")
+
+    changelog = load_json("data/changelog.json")
+    entries = changelog.get("entries", [])
+    if changelog.get("updated") != "2026-08-19":
+        fail("machine-readable changelog update date is stale")
+    if not entries or entries[0].get("id") != RELEASE_ID or entries[0].get("date") != "2026-08-19":
+        fail("19 Aug project-state release is not the newest machine-readable changelog entry")
+    changelog_page = (ROOT / "changelog/index.html").read_text(encoding="utf-8")
+    if f'id="{RELEASE_ID}"' not in changelog_page or '"dateModified":"2026-08-19"' not in changelog_page:
+        fail("public changelog page does not expose the 19 Aug reconciliation release")
 
     about = (ROOT / "about/index.html").read_text(encoding="utf-8")
     if 'href="/mobile-releases/"' not in about:
@@ -144,7 +169,8 @@ def main() -> None:
 
     print(
         "project state check passed: skill 1.8.0, 11 reviewed practices, "
-        "41 semantic cases, 26 freshness items, 38 sitemap URLs, mobile/repo release boundary reconciled"
+        "41 semantic cases, 26 freshness items, 38 sitemap URLs, current changelog/catalog, "
+        "mobile/repo release boundary reconciled"
     )
 
 
