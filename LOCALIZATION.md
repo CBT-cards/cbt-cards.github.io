@@ -5,12 +5,19 @@ CBT Cards keeps source content, translation drafts, editorial review, and public
 ## Sources of truth
 
 - `data/knowledge.jsonl` contains the current curated source-language records. English (`en`) is the current source locale.
-- `data/locales.json` defines locale lifecycle and whether a locale may expose machine-readable data or public HTML.
-- `data/translations.jsonl` contains localized overlays keyed by stable `resource_id` + `locale`.
+- `data/locales.json` defines **website publication lifecycle** and whether a website locale may expose machine-readable data or public HTML.
+- `data/translations.jsonl` contains localized website overlays keyed by stable `resource_id` + `locale`.
+- `MOBILE_LOCALE_AUDIT.md` separately records observed mobile/store language metadata and the build verification still required before those observations can be treated as app implementation facts.
 - `scripts/check_localization.py` validates translation state, source snapshots, and publication boundaries.
 - `scripts/build_localized_pages.py` deterministically renders `/languages/`, public locale hubs, localized resource pages, and the generated localization block in `sitemap.xml`.
 
 Do not edit generated localized HTML directly. Change the locale/translation source data and regenerate it.
+
+## Website vs mobile/store language scope
+
+The website locale registry is intentionally not a mobile-app support matrix. A website `pilot` or `planned` locale does not prove the iOS/Android app ships that language. Likewise, a language shown in an app-store listing does not become an official CBT Cards website localization without translation records, human language/editorial review, and the normal publication gate.
+
+As of the 19 August 2026 public-store recheck, Apple lists English, French, German, Italian, Portuguese, and Spanish for Version 3.0 CBT. That is an observed App Store statement, not yet a verified mobile-source matrix. The current Android/source matrix is also pending verification. Keep those observations in `MOBILE_LOCALE_AUDIT.md`; do not copy them into `data/locales.json` merely to make the two lists look symmetrical.
 
 ## Translation states
 
