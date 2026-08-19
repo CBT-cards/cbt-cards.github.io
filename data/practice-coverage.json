@@ -1,1 +1,238 @@
-{"schema_version":"1.0","generated":"2026-08-18","purpose":"Editorial planning only; not a claim that CBT is complete.","mechanisms":[{"mechanism_id":"prediction-testing","status":"covered","practice_ids":["practice-test-your-prediction"],"eval_case_count":2,"evidence_complete":true},{"mechanism_id":"actionable-vs-hypothetical-worry","status":"covered","practice_ids":["practice-problem-or-worry"],"eval_case_count":2,"evidence_complete":true},{"mechanism_id":"safety-behavior-learning","status":"covered","practice_ids":["practice-spot-the-safety-behavior"],"eval_case_count":2,"evidence_complete":true},{"mechanism_id":"worry-postponement","status":"covered","practice_ids":["practice-park-and-return"],"eval_case_count":2,"evidence_complete":true},{"mechanism_id":"rumination-disengagement","status":"covered","practice_ids":["practice-reflection-or-replay"],"eval_case_count":2,"evidence_complete":true},{"mechanism_id":"uncertainty-reassurance-reduction","status":"covered","practice_ids":["practice-one-less-check"],"eval_case_count":2,"evidence_complete":true},{"mechanism_id":"graded-approach","status":"covered","practice_ids":["practice-smallest-approach-step"],"eval_case_count":2,"evidence_complete":true},{"mechanism_id":"flexible-standards","status":"covered","practice_ids":["practice-good-enough-contract"],"eval_case_count":3,"evidence_complete":true},{"mechanism_id":"continuum-evaluation","status":"covered","practice_ids":["practice-continuum-not-verdict"],"eval_case_count":2,"evidence_complete":true},{"mechanism_id":"specific-self-evaluation","status":"covered","practice_ids":["practice-behavior-not-identity"],"eval_case_count":1,"evidence_complete":true},{"mechanism_id":"balanced-standards","status":"covered","practice_ids":["practice-same-standard-check"],"eval_case_count":1,"evidence_complete":true}],"summary":{"mechanisms":11,"published_practices":11,"semantic_eval_cases":41,"relation_edges":10,"published_locales":["en"],"machine_draft_locales":["ru"],"planned_locales":["de"]}}
+{
+  "schema_version": "1.0",
+  "generated": "2026-08-19",
+  "purpose": "Editorial planning only; not a claim that CBT is complete.",
+  "mechanisms": [
+    {
+      "mechanism_id": "prediction-testing",
+      "status": "covered",
+      "practice_ids": [
+        "practice-test-your-prediction"
+      ],
+      "eval_case_count": 2,
+      "evidence_complete": true
+    },
+    {
+      "mechanism_id": "actionable-vs-hypothetical-worry",
+      "status": "covered",
+      "practice_ids": [
+        "practice-problem-or-worry"
+      ],
+      "eval_case_count": 2,
+      "evidence_complete": true
+    },
+    {
+      "mechanism_id": "safety-behavior-learning",
+      "status": "covered",
+      "practice_ids": [
+        "practice-spot-the-safety-behavior"
+      ],
+      "eval_case_count": 2,
+      "evidence_complete": true
+    },
+    {
+      "mechanism_id": "worry-postponement",
+      "status": "covered",
+      "practice_ids": [
+        "practice-park-and-return"
+      ],
+      "eval_case_count": 2,
+      "evidence_complete": true
+    },
+    {
+      "mechanism_id": "rumination-disengagement",
+      "status": "covered",
+      "practice_ids": [
+        "practice-reflection-or-replay"
+      ],
+      "eval_case_count": 2,
+      "evidence_complete": true
+    },
+    {
+      "mechanism_id": "uncertainty-reassurance-reduction",
+      "status": "covered",
+      "practice_ids": [
+        "practice-one-less-check"
+      ],
+      "eval_case_count": 2,
+      "evidence_complete": true
+    },
+    {
+      "mechanism_id": "graded-approach",
+      "status": "covered",
+      "practice_ids": [
+        "practice-smallest-approach-step"
+      ],
+      "eval_case_count": 2,
+      "evidence_complete": true
+    },
+    {
+      "mechanism_id": "flexible-standards",
+      "status": "covered",
+      "practice_ids": [
+        "practice-good-enough-contract"
+      ],
+      "eval_case_count": 3,
+      "evidence_complete": true
+    },
+    {
+      "mechanism_id": "continuum-evaluation",
+      "status": "covered",
+      "practice_ids": [
+        "practice-continuum-not-verdict"
+      ],
+      "eval_case_count": 2,
+      "evidence_complete": true
+    },
+    {
+      "mechanism_id": "specific-self-evaluation",
+      "status": "covered",
+      "practice_ids": [
+        "practice-behavior-not-identity"
+      ],
+      "eval_case_count": 1,
+      "evidence_complete": true
+    },
+    {
+      "mechanism_id": "balanced-standards",
+      "status": "covered",
+      "practice_ids": [
+        "practice-same-standard-check"
+      ],
+      "eval_case_count": 1,
+      "evidence_complete": true
+    }
+  ],
+  "editorial_queue": {
+    "status_definitions": {
+      "covered_single_practice": "Mechanism has one reviewed practice, supporting evidence provenance, and at least one semantic case; expand only for a distinct user need, not page count.",
+      "covered_multiple_practices": "Mechanism has multiple reviewed practices; check overlap before adding another.",
+      "needs_practice": "Ontology mechanism has no reviewed practice.",
+      "needs_evidence": "A reviewed practice lacks evidence provenance that supports its declared mechanism.",
+      "needs_eval_coverage": "Mechanism has a reviewed/evidenced practice but no semantic case that accepts it."
+    },
+    "items": [
+      {
+        "mechanism_id": "prediction-testing",
+        "status": "covered_single_practice",
+        "practice_ids": [
+          "practice-test-your-prediction"
+        ],
+        "eval_case_count": 2,
+        "evidence_complete": true
+      },
+      {
+        "mechanism_id": "actionable-vs-hypothetical-worry",
+        "status": "covered_single_practice",
+        "practice_ids": [
+          "practice-problem-or-worry"
+        ],
+        "eval_case_count": 2,
+        "evidence_complete": true
+      },
+      {
+        "mechanism_id": "safety-behavior-learning",
+        "status": "covered_single_practice",
+        "practice_ids": [
+          "practice-spot-the-safety-behavior"
+        ],
+        "eval_case_count": 2,
+        "evidence_complete": true
+      },
+      {
+        "mechanism_id": "worry-postponement",
+        "status": "covered_single_practice",
+        "practice_ids": [
+          "practice-park-and-return"
+        ],
+        "eval_case_count": 2,
+        "evidence_complete": true
+      },
+      {
+        "mechanism_id": "rumination-disengagement",
+        "status": "covered_single_practice",
+        "practice_ids": [
+          "practice-reflection-or-replay"
+        ],
+        "eval_case_count": 2,
+        "evidence_complete": true
+      },
+      {
+        "mechanism_id": "uncertainty-reassurance-reduction",
+        "status": "covered_single_practice",
+        "practice_ids": [
+          "practice-one-less-check"
+        ],
+        "eval_case_count": 2,
+        "evidence_complete": true
+      },
+      {
+        "mechanism_id": "graded-approach",
+        "status": "covered_single_practice",
+        "practice_ids": [
+          "practice-smallest-approach-step"
+        ],
+        "eval_case_count": 2,
+        "evidence_complete": true
+      },
+      {
+        "mechanism_id": "flexible-standards",
+        "status": "covered_single_practice",
+        "practice_ids": [
+          "practice-good-enough-contract"
+        ],
+        "eval_case_count": 3,
+        "evidence_complete": true
+      },
+      {
+        "mechanism_id": "continuum-evaluation",
+        "status": "covered_single_practice",
+        "practice_ids": [
+          "practice-continuum-not-verdict"
+        ],
+        "eval_case_count": 2,
+        "evidence_complete": true
+      },
+      {
+        "mechanism_id": "specific-self-evaluation",
+        "status": "covered_single_practice",
+        "practice_ids": [
+          "practice-behavior-not-identity"
+        ],
+        "eval_case_count": 1,
+        "evidence_complete": true
+      },
+      {
+        "mechanism_id": "balanced-standards",
+        "status": "covered_single_practice",
+        "practice_ids": [
+          "practice-same-standard-check"
+        ],
+        "eval_case_count": 1,
+        "evidence_complete": true
+      }
+    ],
+    "source_audit_pressure": {
+      "similarity_groups": 7,
+      "flagged_source_records": 65,
+      "owned_practice_overlap_practices": 6,
+      "priority_source_review_items": 12,
+      "note": "Source-corpus similarity and overlap are duplicate-pressure signals only. They do not create or publish practices."
+    }
+  },
+  "summary": {
+    "mechanisms": 11,
+    "published_practices": 11,
+    "semantic_eval_cases": 41,
+    "relation_edges": 10,
+    "published_locales": [
+      "en"
+    ],
+    "machine_draft_locales": [
+      "ru"
+    ],
+    "planned_locales": [
+      "de"
+    ]
+  }
+}
