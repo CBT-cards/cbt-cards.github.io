@@ -1,0 +1,61 @@
+name: New metaphor proposal
+description: Propose a CBT Cards metaphor as a memory aid, not as evidence
+title: "Metaphor: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Metaphors can make an already-reviewed idea easier to remember. They are not evidence, treatment protocols, or shortcuts around practice/source review. Use original wording and do not paste copyrighted therapy-manual text.
+  - type: input
+    id: title
+    attributes:
+      label: Proposed title
+    validations: {required: true}
+  - type: input
+    id: concept
+    attributes:
+      label: Reviewed concept or mechanism it should help remember
+      description: Link to an existing reviewed practice/mechanism when possible.
+    validations: {required: true}
+  - type: textarea
+    id: metaphor_text
+    attributes:
+      label: Proposed metaphor wording
+      description: Keep it short, concrete, and original.
+    validations: {required: true}
+  - type: textarea
+    id: memory_job
+    attributes:
+      label: What memory job does it do?
+      description: Explain the already-reviewed idea this metaphor makes easier to recall.
+    validations: {required: true}
+  - type: textarea
+    id: misuse_risks
+    attributes:
+      label: Misuse / safety risks
+      description: Explain how the metaphor could be overgeneralized, literalized, used to dismiss a real problem, or confused with evidence.
+    validations: {required: true}
+  - type: dropdown
+    id: wording_origin
+    attributes:
+      label: Wording origin
+      options:
+        - Original project wording
+        - Adapted from a cited source in new wording
+        - Quoted wording with explicit reuse permission
+    validations: {required: true}
+  - type: textarea
+    id: provenance
+    attributes:
+      label: Source and rights provenance
+      description: Cite inspirations/sources. If adapted or quoted, state the relevant permission/license.
+    validations: {required: true}
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Submission boundaries
+      options:
+        - label: I have the right to submit this wording and did not paste copyrighted/paywalled therapy-manual text without permission.
+          required: true
+        - label: I understand a metaphor is a memory aid and will not be presented as evidence or clinical validation.
+          required: true
