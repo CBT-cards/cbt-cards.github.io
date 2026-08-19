@@ -1,0 +1,152 @@
+{
+  "schema_version": "1.0",
+  "id": "cbt-cards-outreach-targets-v1",
+  "researched_on": "2026-08-19",
+  "policy": "Prioritize high-fit, inspectable resources. Do not mass-submit the same pitch. Check each target's current contribution rules immediately before contacting them, preserve CBT Cards safety/evidence boundaries, and use the smallest canonical resource that fits the directory.",
+  "targets": [
+    {
+      "id": "awesome-mental-health",
+      "name": "dreamingechoes/awesome-mental-health",
+      "category": "curated-mental-health-list",
+      "evidence_url": "https://github.com/dreamingechoes/awesome-mental-health",
+      "evidence": "Active curated mental-health list with an Applications section, existing CBT/privacy-focused apps, and documented contribution flow.",
+      "target_canonical_url": "https://cbt-cards.github.io/practice/",
+      "priority": "A",
+      "outreach_method": "pull_request_after_fit_review",
+      "status": "not_contacted",
+      "fit_note": "Pitch the free reviewed public practice library, not clinical treatment claims or an app-store install."
+    },
+    {
+      "id": "awesome-mentalhealth",
+      "name": "theimpossibleastronaut/awesome-mentalhealth",
+      "category": "curated-mental-health-list",
+      "evidence_url": "https://github.com/theimpossibleastronaut/awesome-mentalhealth",
+      "evidence": "Curated mental-health resources list covering anxiety, self-help, mindfulness, and related resources; repository was active in 2026 search sampling.",
+      "target_canonical_url": "https://cbt-cards.github.io/worksheets/",
+      "priority": "A",
+      "outreach_method": "pull_request_or_issue_after_contribution_check",
+      "status": "not_contacted",
+      "fit_note": "Lead with browser-local free worksheets and reviewed educational scope."
+    },
+    {
+      "id": "agent-skill-exchange",
+      "name": "Agent Skill Exchange",
+      "category": "agent-skill-catalog",
+      "evidence_url": "https://github.com/agentskillexchange/skills",
+      "evidence": "Curated Agent Skills catalog with a documented Submit a Skill flow and provenance/security review.",
+      "target_canonical_url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
+      "priority": "A",
+      "outreach_method": "pull_request",
+      "status": "not_contacted",
+      "fit_note": "Use the portable reviewed-practice skill and link its immutable manifest/versioning and eval evidence."
+    },
+    {
+      "id": "skills-directory",
+      "name": "dmgrok/agent_skills_directory",
+      "category": "agent-skill-directory",
+      "evidence_url": "https://github.com/dmgrok/agent_skills_directory",
+      "evidence": "Quality-scored Agent Skills directory with a documented publish --submit path, maintenance tracking, and security checks.",
+      "target_canonical_url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
+      "priority": "A",
+      "outreach_method": "directory_submit_flow",
+      "status": "not_contacted",
+      "fit_note": "CBT Cards has public docs, immutable versions, schemas, evals, and active maintenance evidence that map well to its quality criteria."
+    },
+    {
+      "id": "goose-agent-skills",
+      "name": "block/agent-skills",
+      "category": "agent-skill-marketplace",
+      "evidence_url": "https://github.com/block/agent-skills",
+      "evidence": "Goose Skills Marketplace source repository explicitly welcomes community skills through pull requests and validation.",
+      "target_canonical_url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
+      "priority": "A",
+      "outreach_method": "pull_request",
+      "status": "not_contacted",
+      "fit_note": "Submit only if the current portable frontmatter can be adapted without weakening safety/publication boundaries."
+    },
+    {
+      "id": "jpeetz-agent-skills",
+      "name": "JPeetz/agent-skills",
+      "category": "agent-skill-catalog",
+      "evidence_url": "https://github.com/JPeetz/agent-skills",
+      "evidence": "Cross-platform Agent Skills collection accepting issues/PRs and requiring eval suites plus specification validation.",
+      "target_canonical_url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
+      "priority": "A",
+      "outreach_method": "issue_or_pull_request",
+      "status": "not_contacted",
+      "fit_note": "Strong fit after confirming their local packaging/eval conventions; CBT Cards already publishes eval datasets and portability checks."
+    },
+    {
+      "id": "all-the-vibes-skills",
+      "name": "All-The-Vibes/skills-catalog",
+      "category": "agent-skill-catalog",
+      "evidence_url": "https://github.com/All-The-Vibes/skills-catalog",
+      "evidence": "Agent Skills catalog with documented new-skill contribution process and cross-assistant positioning.",
+      "target_canonical_url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
+      "priority": "B",
+      "outreach_method": "pull_request_after_fit_review",
+      "status": "not_contacted",
+      "fit_note": "Check category/domain fit first; their current catalog is engineering-heavy."
+    },
+    {
+      "id": "openmodels-skills",
+      "name": "openmodelsrun/skills",
+      "category": "agent-skill-registry",
+      "evidence_url": "https://github.com/openmodelsrun/skills",
+      "evidence": "Community-maintained skills registry with documented schema validation and PR contribution flow.",
+      "target_canonical_url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
+      "priority": "B",
+      "outreach_method": "format_adaptation_pull_request",
+      "status": "needs_format_adaptation",
+      "fit_note": "Their canonical format is structured YAML rather than portable SKILL.md; adapt metadata without claiming their registry has exercised CBT Cards runtime behavior."
+    },
+    {
+      "id": "ai-agent-skills-index",
+      "name": "bbwdadfg/ai-agent-skills-index",
+      "category": "agent-skill-index",
+      "evidence_url": "https://github.com/bbwdadfg/ai-agent-skills-index",
+      "evidence": "Daily-generated public index of Agent Skills with machine-readable metadata and links to upstream repositories.",
+      "target_canonical_url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
+      "priority": "B",
+      "outreach_method": "monitor_or_upstream_discovery_check",
+      "status": "monitor_auto_index",
+      "fit_note": "First verify whether the public CBT Cards skill is automatically discovered before requesting manual intervention."
+    },
+    {
+      "id": "agent-skills-corpus",
+      "name": "lawrence3699/agent-skills-corpus",
+      "category": "agent-skill-research-corpus",
+      "evidence_url": "https://github.com/lawrence3699/agent-skills-corpus",
+      "evidence": "Reproducible public Agent Skills corpus that records source metadata and publishes full text only for clearly licensed skills.",
+      "target_canonical_url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
+      "priority": "B",
+      "outreach_method": "monitor_snapshot_inclusion",
+      "status": "blocked_by_license_decision",
+      "fit_note": "Metadata discovery is relevant now; full-text redistribution intersects open issue #7 and should not be encouraged until the public reuse license is deliberate."
+    },
+    {
+      "id": "minding-your-mind-directory",
+      "name": "Minding Your Mind resource directory",
+      "category": "mental-health-resource-directory",
+      "evidence_url": "https://mindingyourmind.org/resources/submit-a-resource/",
+      "evidence": "Public resource-submission form accepting national resources/services, with organization and mission fields.",
+      "target_canonical_url": "https://cbt-cards.github.io/worksheets/",
+      "priority": "C",
+      "outreach_method": "submission_form_after_eligibility_check",
+      "status": "needs_org_eligibility_check",
+      "fit_note": "Do not submit until organizational/contact eligibility is confirmed; present CBT Cards as educational/self-reflection material, not treatment."
+    },
+    {
+      "id": "mental-health-at-home",
+      "name": "Mental Health @ Home resource directory",
+      "category": "mental-health-resource-directory",
+      "evidence_url": "https://mentalhealthathome.org/resources/resource-directory/",
+      "evidence": "Curated directory explicitly covering free mental-health workbooks, worksheets, CBT/DBT resources, apps, and coping tools.",
+      "target_canonical_url": "https://cbt-cards.github.io/worksheets/",
+      "priority": "C",
+      "outreach_method": "editorial_contact_if_submission_path_confirmed",
+      "status": "needs_submission_path_check",
+      "fit_note": "High topical fit for free worksheets, but no verified submission workflow was found in the initial research pass; avoid unsolicited outreach until a current path is confirmed."
+    }
+  ]
+}

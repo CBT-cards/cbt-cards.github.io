@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "id": "cbt-cards-search-measurement-v1",
+  "canonical_site": "https://cbt-cards.github.io/",
+  "baseline_date": "2026-08-19",
+  "baseline": {
+    "sitemap_url_count": 37,
+    "public_search_sample": {
+      "method": "assistant web-search sampling; not Search Console or Webmaster Tools",
+      "queries": [
+        "site:cbt-cards.github.io CBT Cards",
+        "site:cbt-cards.github.io/learn CBT Cards thought record worry time",
+        "site:cbt-cards.github.io/worksheets CBT Cards worksheet",
+        "site:cbt-cards.github.io/toolkit CBT Cards toolkit"
+      ],
+      "cbt_cards_results_observed": 1,
+      "observed_urls": ["https://cbt-cards.github.io/features/"],
+      "reported_crawl_age": "3 weeks ago",
+      "representative_new_library_pages_observed": [],
+      "interpretation": "The sample proves at least one CBT Cards page is discoverable, but it is not an official indexed-URL count. The new learning/worksheet/toolkit child surface did not appear in this limited sample, so discoverability should be treated as sparse until console data says otherwise."
+    },
+    "crawler_controls": {
+      "robots_explicit_oai_searchbot_allow": true,
+      "robots_general_allow": true,
+      "sitemap_declared_in_robots": true,
+      "training_crawler_policy": "not_changed_by_search_distribution_work"
+    },
+    "google_search_console": {
+      "status": "external_account_required",
+      "sitemap_submission_verified": false,
+      "indexed_urls": null,
+      "selected_canonical_verified": false
+    },
+    "bing_webmaster_tools": {
+      "status": "external_account_required",
+      "sitemap_submission_verified": false,
+      "indexed_urls": null
+    },
+    "indexnow": {
+      "implementation": "post-deploy changed-HTML submission",
+      "success_receipt_required": true,
+      "verified_success_receipt": false,
+      "note": "The workflow now treats IndexNow failure as visible job failure and uploads a machine-readable receipt. A successful production receipt must be inspected before this field is changed to true."
+    },
+    "privacy_measurement_policy": "Do not add client-side analytics merely to populate this report. Prefer aggregate Search Console/Bing data and other measurements that do not weaken the current privacy posture. Store-link and AI-referral measurements remain null until a privacy-compatible source is deliberately chosen."
+  },
+  "metric_definitions": {
+    "google": ["submitted_urls", "indexed_urls", "impressions", "clicks", "ctr", "average_position"],
+    "bing": ["submitted_urls", "indexed_urls", "impressions", "clicks"],
+    "referrals": ["store_link_referrals", "identified_ai_search_referrals"],
+    "content": ["top_landing_pages", "top_queries"],
+    "citations": ["external_linking_domains", "worksheet_or_toolkit_linking_domains"]
+  },
+  "weekly_checkpoints": [
+    {"week": 1, "date": "2026-08-26", "status": "pending_external_console_data", "google": null, "bing": null, "referrals": null, "content": null, "citations": null},
+    {"week": 2, "date": "2026-09-02", "status": "pending_external_console_data", "google": null, "bing": null, "referrals": null, "content": null, "citations": null},
+    {"week": 3, "date": "2026-09-09", "status": "pending_external_console_data", "google": null, "bing": null, "referrals": null, "content": null, "citations": null},
+    {"week": 4, "date": "2026-09-16", "status": "pending_external_console_data", "google": null, "bing": null, "referrals": null, "content": null, "citations": null},
+    {"week": 5, "date": "2026-09-23", "status": "pending_external_console_data", "google": null, "bing": null, "referrals": null, "content": null, "citations": null},
+    {"week": 6, "date": "2026-09-30", "status": "pending_external_console_data", "google": null, "bing": null, "referrals": null, "content": null, "citations": null},
+    {"week": 7, "date": "2026-10-07", "status": "pending_external_console_data", "google": null, "bing": null, "referrals": null, "content": null, "citations": null},
+    {"week": 8, "date": "2026-10-14", "status": "pending_external_console_data", "google": null, "bing": null, "referrals": null, "content": null, "citations": null}
+  ]
+}
