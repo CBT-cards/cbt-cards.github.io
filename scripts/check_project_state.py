@@ -42,9 +42,19 @@ def main() -> None:
         "data/practice-semantic-evals.json",
         "data/content-review.json",
         "data/search-measurement.json",
+        "data/outreach-targets.json",
         "agents/cbt-cards/manifest.json",
+        "research/SEMANTIC_REVIEW_WORKSPACE.md",
         ".github/workflows/deploy-pages.yml",
+        ".github/workflows/run-practice-semantic-model-eval.yml",
+        ".github/workflows/semantic-review-workspace.yml",
+        ".github/workflows/semantic-publication-pipeline.yml",
         "scripts/check_mobile_release_history.py",
+        "scripts/build_semantic_review_workspace.py",
+        "scripts/check_semantic_review_workspace.py",
+        "scripts/check_practice_semantic_publication_candidate.py",
+        "scripts/build_practice_semantic_publication_report.py",
+        "scripts/check_practice_semantic_publication_pipeline.py",
     ]
     for rel in required:
         if not (ROOT / rel).exists():
@@ -81,6 +91,13 @@ def main() -> None:
     measurement = load_json("data/search-measurement.json")
     if measurement.get("baseline", {}).get("sitemap_url_count") != len(sitemap_urls):
         fail("search measurement sitemap count drifted from sitemap.xml")
+
+    outreach = load_json("data/outreach-targets.json")
+    if outreach.get("schema_version") != "1.1" or outreach.get("requalified_on") != "2026-08-19":
+        fail("outreach queue is not the requalified v1.1 state")
+    outreach_statuses = {item.get("status") for item in outreach.get("targets", [])}
+    if "ready_requires_fork" not in outreach_statuses or "blocked_by_catalog_license_policy" not in outreach_statuses:
+        fail("project status cannot describe outreach blockers until they exist in machine-readable queue")
 
     catalog = load_json("data/catalog.json")
     if catalog.get("updated") != "2026-08-19":
@@ -142,21 +159,36 @@ def main() -> None:
         "Verified snapshot: **19 August 2026**",
         "Current Agent Skill: **v1.8.0**",
         "**No hosted model result is currently published as project evidence.**",
+        "practice-semantic-review-workspace.html",
+        "check_practice_semantic_publication_candidate.py",
+        "build_practice_semantic_publication_report.py",
         "sitemap inventory: 38 public URLs",
+        "ready_requires_fork",
+        "blocked by current permissive-license requirements",
         "CC BY-NC-SA 4.0",
         "0 human-reviewed, 0 published",
     ):
         if fragment not in status:
             fail(f"PROJECT_STATUS.md missing verified snapshot fragment: {fragment}")
 
+    reviewer_doc = (ROOT / "research/SEMANTIC_REVIEW_WORKSPACE.md").read_text(encoding="utf-8")
+    for fragment in (
+        "Publication-candidate gate",
+        "check_practice_semantic_publication_candidate.py",
+        "build_practice_semantic_publication_report.py",
+        "does **not** require a perfect score",
+    ):
+        if fragment not in reviewer_doc:
+            fail(f"semantic review operating doc missing current publication-path fragment: {fragment}")
+
+    run_workflow = (ROOT / ".github/workflows/run-practice-semantic-model-eval.yml").read_text(encoding="utf-8")
+    if "practice-semantic-review-workspace.html" not in run_workflow:
+        fail("real semantic model-run artifact does not include offline review workspace")
+
     llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
     llms_full = (ROOT / "llms-full.txt").read_text(encoding="utf-8")
     for name, text in (("llms.txt", llms), ("llms-full.txt", llms_full)):
-        for fragment in (
-            "v1.8.0",
-            "mobile-releases",
-            "No hosted model result is currently published",
-        ):
+        for fragment in ("v1.8.0", "mobile-releases", "No hosted model result is currently published"):
             if fragment not in text:
                 fail(f"{name} missing current-state fragment: {fragment}")
     if "Updated: 2026-08-19" not in llms_full:
@@ -168,9 +200,9 @@ def main() -> None:
             fail(f"main Pages quality workflow does not execute {script}")
 
     print(
-        "project state check passed: skill 1.8.0, 11 reviewed practices, "
-        "41 semantic cases, 26 freshness items, 38 sitemap URLs, current changelog/catalog, "
-        "mobile/repo release boundary reconciled"
+        "project state check passed: skill 1.8.0, 11 reviewed practices, 41 semantic cases, "
+        "offline blinded review + final publication gate present, 26 freshness items, 38 sitemap URLs, "
+        "requalified outreach blockers, current changelog/catalog, mobile/repo release boundary reconciled"
     )
 
 

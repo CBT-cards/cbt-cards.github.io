@@ -24,9 +24,19 @@ The practice layer is general wellness/self-reflection material. It is not clini
 
 Current Agent Skill: **v1.8.0**.
 
-The repository includes deterministic starter/held-out routing baselines, a blinded semantic-review pipeline, a frozen-context provider runner for all 41 practice-semantic cases, execution provenance checks, and contracts for raw responses/reviews/reports.
+The repository includes deterministic starter/held-out routing baselines, a frozen-context provider runner for all 41 practice-semantic cases, execution provenance checks, and contracts for raw responses/reviews/reports.
 
-**No hosted model result is currently published as project evidence.** A publishable result still requires a real provider execution with preserved raw outputs/provenance plus the declared human semantic/safety review. Synthetic fixtures remain CI plumbing only.
+The real-model review path is now complete on the repository side:
+
+- `full-41` provider execution is manual and spend-guarded; dry-run is the default.
+- generated responses are frozen and validated before benchmark annotations are read.
+- `practice-semantic-review-workspace.html` is an offline, no-submit blinded reviewer UI for all 41 cases and ten semantic dimensions.
+- a human review export remains hash-bound to the original packet/responses.
+- `check_practice_semantic_publication_candidate.py` verifies the final execution → responses → packet → human review → scored-report provenance chain.
+- `build_practice_semantic_publication_report.py` renders a deterministic result summary with a separate safety-critical subset and explicit limitations.
+- CI exercises the entire publication chain with data that is visibly labeled as a synthetic non-model fixture.
+
+**No hosted model result is currently published as project evidence.** The remaining evidence-producing work is no longer missing repository machinery: it requires an intentionally dispatched real `full-41` provider execution and actual blinded human semantic/safety review. Synthetic fixtures remain CI plumbing only.
 
 ## Localization snapshot
 
@@ -63,10 +73,12 @@ These are lab measurements, not field Core Web Vitals.
 - `OAI-SearchBot` is explicitly allowed.
 - IndexNow runs after deployment and produces an observable receipt rather than hiding failures behind `continue-on-error`.
 - an eight-week search measurement ledger exists.
-- 12 researched outreach targets exist.
+- 12 researched outreach targets exist and now use explicit execution/eligibility states rather than treating every target as merely `not_contacted`.
+- two high-fit mental-health lists are currently `ready_requires_fork`; the connected GitHub environment cannot perform the required external fork/PR operation.
+- multiple agent-skill catalogs are explicitly blocked by current permissive-license requirements rather than being submitted with a mislabeled CBT Cards license.
 - Search Console/Bing account metrics remain external and are not invented from `site:` search samples.
 
-See `SEARCH_DISTRIBUTION.md`.
+See `SEARCH_DISTRIBUTION.md` and `data/outreach-targets.json`.
 
 ## Legacy-host snapshot
 
@@ -76,13 +88,13 @@ The legacy MetalHatsCats product/toolkit URLs remain an external-host migration 
 
 Active public terms remain **CC BY-NC-SA 4.0**. `data/knowledge.jsonl` contains six CBT Cards-original records and six toolkit-derived records with explicit record-level rights provenance. `LICENSING_DECISION.md` is a pending publisher/legal decision memo, not a permissive grant.
 
-A future commercial-agent/RAG license change must identify the exact covered datasets and respect mixed provenance rather than assigning one permissive label to source-derived material by implication.
+A future commercial-agent/RAG license change must identify the exact covered datasets and respect mixed provenance rather than assigning one permissive label to source-derived material by implication. The distribution recheck has now demonstrated a practical consequence: some agent catalogs will not accept the current skill/provider under their stated permissive-license policies.
 
 ## Remaining evidence-producing work
 
-The highest-value technical next step is a real hosted-model run through the frozen 41-case practice-semantic pipeline, followed by blinded human semantic/safety review. That will expose failures in routing, safety abstention, canonical citation, mechanism fit and instruction following more usefully than simply adding more cards.
+The highest-value next evidence step is now external execution rather than more benchmark plumbing: run one real hosted model through the frozen 41-case practice-semantic workflow, then perform the blinded human semantic/safety review and pass the final publication-candidate gate. That will expose failures in routing, safety abstention, canonical citation, mechanism fit and instruction following more usefully than simply adding more cards.
 
-Search/distribution also needs time-based external evidence: Search Console/Bing baselines, inspected production IndexNow receipts, weekly measurements and actual accepted citations/outreach placements.
+Search/distribution also needs time-based external evidence: Search Console/Bing baselines, inspected production IndexNow receipts, weekly measurements and actual accepted citations/outreach placements. Some high-fit open-source lists are ready for a human fork/PR; some agent catalogs remain blocked by the unresolved licensing decision.
 
 ## Maintainer invariant
 
