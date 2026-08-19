@@ -2,11 +2,11 @@
 
 Baseline: **19 August 2026**
 
-This is the operating plan for search discovery, webmaster-tool measurement, IndexNow evidence, and selective external citation outreach after the CBT Cards public-library pivot. It deliberately separates observable facts from account-only metrics. A `site:` search sample is not an official index count, and a green deploy is not proof that an optional notification request authenticated successfully.
+This is the operating plan for search discovery, webmaster-tool measurement, IndexNow evidence, and selective external citation outreach after the CBT Cards public-library pivot. It deliberately separates observable facts from account-only metrics. A `site:` search sample is not an official index count, and a green deploy alone is not proof that a notification request authenticated successfully.
 
 ## Current baseline
 
-The canonical website is `https://cbt-cards.github.io/`. The current sitemap contains 37 public URLs. `robots.txt` explicitly allows `OAI-SearchBot`, allows other compliant crawlers, and declares the sitemap.
+The canonical website is `https://cbt-cards.github.io/`. The current sitemap contains **38 public URLs**, including the separately sourced mobile release-history page. `robots.txt` explicitly allows `OAI-SearchBot`, allows other compliant crawlers, and declares the sitemap.
 
 A limited external search sample on 19 August 2026 used four site-scoped queries covering the domain, learning pages, worksheets, and toolkit pages. One CBT Cards result was observed, `/features/`, with the search result reporting a crawl age of roughly three weeks. The newer learn/worksheet/toolkit child pages did not appear in that limited sample.
 
@@ -19,8 +19,8 @@ The older MetalHatsCats product/toolkit surfaces remain a separate distribution 
 - `robots.txt` explicitly allows `OAI-SearchBot` and does not block normal compliant search crawlers.
 - `sitemap.xml` is the canonical public URL inventory.
 - `scripts/notify_indexnow.py` submits changed public HTML URLs only after a successful Pages deployment.
-- IndexNow now produces a machine-readable receipt containing execution time, URL count/list, endpoint result, and success/failure state.
-- The IndexNow job is no longer hidden behind `continue-on-error`. Deployment happens first, so an IndexNow outage cannot undeploy the site, but the workflow must show the notification failure instead of cosmetically remaining green.
+- IndexNow produces a machine-readable receipt containing execution time, URL count/list, endpoint result, and success/failure state.
+- The IndexNow job is not hidden behind `continue-on-error`. Deployment happens first, so an IndexNow outage cannot undeploy the site, but the workflow shows the notification failure.
 - Search Console and Bing Webmaster sitemap submission remain external-account operations. They should be recorded in the measurement ledger when verified.
 
 ## Eight-week measurement window
@@ -48,10 +48,10 @@ The list is a queue, not a mail merge. Outreach should be selective:
 
 1. Recheck the target's current contribution/submission rules immediately before contact.
 2. Use the smallest canonical CBT Cards URL that actually fits the target. Mental-health resource lists should usually receive `/worksheets/` or `/practice/`; agent catalogs should receive the portable `SKILL.md`.
-3. Preserve the project's general-wellness, publication-review, evidence, translation, and privacy boundaries. Do not pitch CBT Cards as clinically validated treatment.
+3. Preserve the project's general-wellness, publication-review, evidence, translation, privacy and licensing boundaries. Do not pitch CBT Cards as clinically validated treatment.
 4. Prefer a pull request or documented submission flow over unsolicited email when the target is an open-source catalog.
 5. Do not force CBT Cards into a directory whose scope does not fit merely to increase backlink count.
-6. Do not encourage full-text redistribution of the Agent Skill or datasets where the unresolved public reuse-license decision in issue #7 matters.
+6. Do not encourage redistribution that exceeds the current public license. `LICENSING_DECISION.md` is a pending decision memo, not a new grant.
 7. Record contact/submission URL, date, result, and resulting canonical link in the target record when outreach actually occurs.
 
 ## Current high-fit targets
