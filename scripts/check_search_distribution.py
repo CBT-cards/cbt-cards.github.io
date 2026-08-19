@@ -47,9 +47,7 @@ def main() -> None:
     sitemap_urls = [node.text for node in sitemap_root.findall("s:url/s:loc", ns) if node.text]
     baseline = measurement.get("baseline", {})
     if baseline.get("sitemap_url_count") != len(sitemap_urls):
-        fail(
-            f"baseline sitemap count {baseline.get('sitemap_url_count')} does not match current sitemap {len(sitemap_urls)}"
-        )
+        fail(f"baseline sitemap count {baseline.get('sitemap_url_count')} does not match current sitemap {len(sitemap_urls)}")
 
     sample = baseline.get("public_search_sample", {})
     method = str(sample.get("method", ""))
@@ -88,24 +86,27 @@ def main() -> None:
             if field not in item:
                 fail(f"weekly checkpoint {index} missing {field}")
 
-    if outreach.get("schema_version") != "1.0" or outreach.get("researched_on") != "2026-08-19":
-        fail("outreach research version/date mismatch")
+    if outreach.get("schema_version") != "1.1" or outreach.get("researched_on") != "2026-08-19" or outreach.get("requalified_on") != "2026-08-19":
+        fail("outreach research/requalification version/date mismatch")
     targets = outreach.get("targets")
     if not isinstance(targets, list) or len(targets) < 10:
         fail("at least ten outreach targets must be researched")
+    status_definitions = outreach.get("status_definitions")
+    if not isinstance(status_definitions, dict) or not status_definitions:
+        fail("outreach status definitions are required")
+    allowed_statuses = set(status_definitions)
+    required_statuses = {
+        "not_contacted", "ready_requires_fork", "blocked_by_catalog_license_policy",
+        "needs_format_adaptation", "monitor_auto_index", "blocked_by_license_decision",
+        "needs_org_eligibility_check", "needs_submission_path_check", "submitted", "accepted", "declined",
+    }
+    if allowed_statuses != required_statuses:
+        fail("outreach status vocabulary differs from the documented v1.1 contract")
+
     seen_ids = set()
     high_priority = 0
-    allowed_statuses = {
-        "not_contacted",
-        "needs_format_adaptation",
-        "monitor_auto_index",
-        "blocked_by_license_decision",
-        "needs_org_eligibility_check",
-        "needs_submission_path_check",
-        "submitted",
-        "accepted",
-        "declined",
-    }
+    requalified = 0
+    blocked_or_ready = 0
     for target in targets:
         target_id = target.get("id")
         if not isinstance(target_id, str) or not target_id or target_id in seen_ids:
@@ -115,15 +116,26 @@ def main() -> None:
             fail(f"outreach target {target_id} lacks HTTPS evidence URL")
         if not str(target.get("target_canonical_url", "")).startswith(ORIGIN):
             fail(f"outreach target {target_id} does not point to a CBT Cards canonical URL")
-        if target.get("status") not in allowed_statuses:
+        status = target.get("status")
+        if status not in allowed_statuses:
             fail(f"outreach target {target_id} has unsupported status")
         if target.get("priority") == "A":
             high_priority += 1
         for field in ("evidence", "outreach_method", "fit_note"):
             if not str(target.get(field, "")).strip():
                 fail(f"outreach target {target_id} missing {field}")
+        if target.get("checked_on") == "2026-08-19":
+            requalified += 1
+        if status in {"ready_requires_fork", "blocked_by_catalog_license_policy"}:
+            blocked_or_ready += 1
+            if not str(target.get("blocker", "")).strip():
+                fail(f"outreach target {target_id} requires a concrete blocker explanation")
     if high_priority < 5:
         fail("outreach queue should contain at least five high-fit priority A targets")
+    if requalified < 5:
+        fail("at least five high-priority targets should have a dated current-process recheck")
+    if blocked_or_ready < 4:
+        fail("requalification should expose concrete executable/license blockers rather than leaving all targets not_contacted")
 
     required_robots = (
         "User-agent: OAI-SearchBot\nAllow: /",
@@ -134,12 +146,7 @@ def main() -> None:
         if fragment not in robots:
             fail(f"robots.txt missing discovery fragment: {fragment}")
 
-    for fragment in (
-        "--receipt",
-        'status="success"',
-        "status not in {200, 202}",
-        "IndexNow/1.1",
-    ):
+    for fragment in ("--receipt", 'status="success"', "status not in {200, 202}", "IndexNow/1.1"):
         if fragment not in indexnow:
             fail(f"IndexNow script missing receipt/result behavior: {fragment}")
 
@@ -168,8 +175,8 @@ def main() -> None:
             fail(f"SEARCH_DISTRIBUTION.md missing policy fragment: {fragment}")
 
     print(
-        f"search distribution check passed: {len(sitemap_urls)} sitemap URLs, "
-        f"8 weekly checkpoints, {len(targets)} researched outreach targets, observable IndexNow receipts"
+        f"search distribution check passed: {len(sitemap_urls)} sitemap URLs, 8 weekly checkpoints, "
+        f"{len(targets)} outreach targets, {requalified} rechecked, concrete blockers recorded"
     )
 
 
