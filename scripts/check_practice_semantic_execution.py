@@ -12,6 +12,7 @@ MANIFEST=ROOT/"data/practice-semantic-evals.json"
 SHARDS=[ROOT/"data/practice-semantic-evals-a.jsonl",ROOT/"data/practice-semantic-evals-b.jsonl"]
 CONTEXT=[ROOT/"data/practice.json",ROOT/"data/practice-recommendations.json",ROOT/"data/practice-evidence.json",ROOT/"data/practice-rag.ndjson"]
 HIDDEN=["category","expected_outcome","acceptable_practice_ids","required_safety_notes"]
+REASONING={"none","low","medium","high","xhigh","max"}
 
 def fail(m): raise SystemExit("practice semantic execution candidate check failed: "+m)
 def sha(b): return hashlib.sha256(b).hexdigest()
@@ -26,6 +27,9 @@ def main():
     if execution.get("schema_version")!="1.0" or execution.get("id")!="cbt-cards-practice-semantic-execution-v1": fail("execution identity")
     if execution.get("provider")!="openai" or execution.get("runtime")!="openai-responses-api": fail("provider/runtime")
     if execution.get("store") is not False or execution.get("web_search_enabled") is not False: fail("store/web-search boundary")
+    if execution.get("reasoning_effort") not in REASONING: fail("missing/invalid reasoning_effort provenance")
+    max_tokens=execution.get("max_output_tokens")
+    if not isinstance(max_tokens,int) or not 256<=max_tokens<=8192: fail("missing/invalid max_output_tokens provenance")
     if execution.get("input_fields")!=["user_message"] or execution.get("benchmark_fields_hidden")!=HIDDEN: fail("input isolation declaration")
     if execution.get("eval_manifest_url")!=f"{ORIGIN}/data/practice-semantic-evals.json" or execution.get("eval_manifest_sha256")!=sha(MANIFEST.read_bytes()): fail("eval manifest provenance")
     combined=sha(b"\n--CBT-CARDS-SHARD--\n".join(raw))
@@ -52,9 +56,13 @@ def main():
             if key not in r: fail(f"{r.get('case_id')}: missing {key}")
         if r["outcome"] not in valid_outcomes: fail(f"{r['case_id']}: outcome")
         if not isinstance(r["answer"],str) or not r["answer"].strip(): fail(f"{r['case_id']}: answer")
-        if r["outcome"] in {"no_match","resource_not_practice"} and r["selected_practice_ids"]: fail(f"{r['case_id']}: selected practice on no-match/resource outcome")
+        selected=r["selected_practice_ids"]
+        if not isinstance(selected,list) or len(selected)!=len(set(selected)): fail(f"{r['case_id']}: selected practice IDs")
+        if r["outcome"]=="match" and not selected: fail(f"{r['case_id']}: match without practice")
+        if r["outcome"]=="clarify" and not 2<=len(selected)<=3: fail(f"{r['case_id']}: clarify requires 2-3 candidates")
+        if r["outcome"] in {"no_match","resource_not_practice"} and selected: fail(f"{r['case_id']}: selected practice on no-match/resource outcome")
         md=r["runtime_metadata"]
         if md.get("store") is not False or md.get("web_search_enabled") is not False: fail(f"{r['case_id']}: runtime boundary")
     if not execution.get("requested_model") or not execution.get("started") or not execution.get("completed"): fail("missing execution provenance")
-    print("practice semantic execution candidate check passed: 41 frozen-context responses with isolated benchmark inputs")
+    print(f"practice semantic execution candidate check passed: 41 frozen-context responses, reasoning={execution['reasoning_effort']}, max_output_tokens={max_tokens}")
 if __name__=="__main__": main()
