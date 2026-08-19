@@ -1,0 +1,21 @@
+name: Semantic review workspace quality
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  review-workspace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate offline blinded reviewer workspace
+        run: |
+          python3 -m py_compile scripts/build_semantic_review_packet.py scripts/build_semantic_review_workspace.py scripts/check_semantic_review_workspace.py scripts/score_semantic_reviews.py
+          python3 scripts/check_semantic_review_workspace.py
