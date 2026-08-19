@@ -1,0 +1,13 @@
+name: Mobile release history quality
+
+on: [pull_request, push]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/check_mobile_release_history.py
+      - run: python3 scripts/check_search_distribution.py
+      - run: python3 scripts/check_site.py
+      - run: python3 scripts/check_crawl_graph.py
