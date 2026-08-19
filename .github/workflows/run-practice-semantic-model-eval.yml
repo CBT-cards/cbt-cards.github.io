@@ -59,8 +59,9 @@ jobs:
 
       - name: Validate frozen-context semantic runner before generation
         run: |
-          python3 -m py_compile scripts/run_practice_semantic_openai.py scripts/check_practice_semantic_model_runner.py scripts/check_practice_semantic_execution.py scripts/build_semantic_review_packet.py
+          python3 -m py_compile scripts/run_practice_semantic_openai.py scripts/check_practice_semantic_model_runner.py scripts/check_practice_semantic_execution.py scripts/build_semantic_review_packet.py scripts/build_semantic_review_workspace.py scripts/check_semantic_review_workspace.py
           python3 scripts/check_practice_semantic_model_runner.py
+          python3 scripts/check_semantic_review_workspace.py
 
       - name: Build no-spend dry-run request artifact
         if: inputs.run_mode == 'dry-run'
@@ -122,13 +123,17 @@ jobs:
             --execution artifacts/practice-semantic-execution.json \
             --responses artifacts/practice-semantic-responses.jsonl
 
-      - name: Build blinded human-review packet
+      - name: Build blinded human-review packet and offline workspace
         if: inputs.run_mode == 'full-41'
         run: |
           python3 scripts/build_semantic_review_packet.py \
             --responses artifacts/practice-semantic-responses.jsonl \
             --packet-out artifacts/practice-semantic-review-packet.json \
             --review-template-out artifacts/practice-semantic-review-template.json
+          python3 scripts/build_semantic_review_workspace.py \
+            --packet artifacts/practice-semantic-review-packet.json \
+            --review-template artifacts/practice-semantic-review-template.json \
+            --output artifacts/practice-semantic-review-workspace.html
 
       - name: Upload frozen execution and blinded review artifacts
         if: inputs.run_mode == 'full-41'
@@ -140,5 +145,6 @@ jobs:
             artifacts/practice-semantic-responses.jsonl
             artifacts/practice-semantic-review-packet.json
             artifacts/practice-semantic-review-template.json
+            artifacts/practice-semantic-review-workspace.html
           if-no-files-found: error
           retention-days: 30
