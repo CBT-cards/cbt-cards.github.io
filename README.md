@@ -380,3 +380,12 @@ See [MIGRATION.md](MIGRATION.md) for legacy URL mappings. Changes to legacy host
 The original CBT Cards website content is licensed under [CC BY-NC-SA 4.0](LICENSE): attribution and the same license are required for sharing or adaptations, and commercial use is not permitted without prior written permission from MetalHatsCats. CBT Cards names and logos are not licensed for reuse.
 
 The source CBT Toolkit v0.1.0 is also documented as CC BY-NC-SA 4.0. Any future change to the reuse license for machine-readable agent/RAG, eval, or translation data must be explicit and publisher-approved rather than inferred from technical accessibility.
+
+
+## Asset performance policy
+
+- Keep original PNG/TTF files only as source/fallback assets when needed; production body images should prefer WebP through `<picture>` and site fonts should use WOFF2.
+- The main hero must not be lazy-loaded. Give it explicit dimensions and `fetchpriority="high"`; below-fold illustrations should use `loading="lazy"` and `decoding="async"`.
+- Add responsive WebP widths close to the rendered mobile/desktop size instead of shipping a multi-megabyte source image to a small viewport.
+- Use `assets/social-preview.jpg` (1200×630) for Open Graph previews rather than portrait product artwork.
+- `scripts/check_asset_budget.py` is the regression gate for production asset references and byte budgets.
