@@ -1,0 +1,333 @@
+name: Build and measure optimized asset candidates
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/asset-candidates.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Prepare baseline and tooling
+        run: |
+          git fetch origin main
+          rm -rf /tmp/cbt-baseline
+          git worktree add --detach /tmp/cbt-baseline origin/main
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends webp
+          python3 -m pip install --disable-pip-version-check fonttools brotli pillow
+          node --version
+          google-chrome --version
+
+      - name: Build production candidate tree
+        run: |
+          set -euo pipefail
+          rm -rf candidate-tree performance-report
+          mkdir -p candidate-tree/assets candidate-tree/scripts performance-report
+
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageDraw, ImageFont, ImageOps
+          from fontTools.ttLib import TTFont
+          import json, re, subprocess
+
+          root = Path('.')
+          assets = root / 'assets'
+          out = Path('candidate-tree/assets')
+          report = {'images': [], 'fonts': [], 'changed_html': []}
+
+          image_specs = {
+              'app-icon.png': [],
+              'cbt.png': [560],
+              'diary.png': [560],
+              'egg-card-journey.png': [560],
+              'egg-diary.png': [560, 1024],
+              'egg-reflection-cards.png': [500],
+          }
+          for name, widths in image_specs.items():
+              src = assets / name
+              with Image.open(src) as im:
+                  sw, sh = im.size
+              full = out / f'{src.stem}.webp'
+              subprocess.run(['cwebp','-quiet','-q','84','-alpha_q','95','-metadata','none',str(src),'-o',str(full)], check=True)
+              report['images'].append({'source': str(src), 'source_bytes': src.stat().st_size, 'candidate': str(full), 'candidate_bytes': full.stat().st_size, 'width': sw, 'height': sh})
+              for width in widths:
+                  if width > sw:
+                      continue
+                  height = round(sh * width / sw)
+                  dst = out / f'{src.stem}-{width}w.webp'
+                  subprocess.run(['cwebp','-quiet','-q','84','-alpha_q','95','-metadata','none','-resize',str(width),str(height),str(src),'-o',str(dst)], check=True)
+                  report['images'].append({'source': str(src), 'source_bytes': src.stat().st_size, 'candidate': str(dst), 'candidate_bytes': dst.stat().st_size, 'width': width, 'height': height})
+
+          for src in sorted(assets.glob('*.ttf')):
+              dst = out / f'{src.stem}.woff2'
+              font = TTFont(src, recalcTimestamp=False)
+              font.flavor = 'woff2'
+              font.save(dst)
+              report['fonts'].append({'source': str(src), 'source_bytes': src.stat().st_size, 'candidate': str(dst), 'candidate_bytes': dst.stat().st_size})
+
+          canvas = Image.new('RGB', (1200, 630), '#F9F4E8')
+          with Image.open(assets / 'egg-reflection-cards.png').convert('RGB') as hero:
+              hero_panel = ImageOps.fit(hero, (520, 630), method=Image.Resampling.LANCZOS, centering=(0.5, 0.48))
+          canvas.paste(hero_panel, (680, 0))
+          draw = ImageDraw.Draw(canvas)
+          title_font = ImageFont.truetype(str(assets / 'Nunito-ExtraBold.ttf'), 76)
+          body_font = ImageFont.truetype(str(assets / 'Nunito-Regular.ttf'), 34)
+          label_font = ImageFont.truetype(str(assets / 'Nunito-ExtraBold.ttf'), 25)
+          draw.text((72, 126), 'CBT Cards', font=title_font, fill='#17130E')
+          draw.multiline_text((72, 246), 'Practical reflection tools\nfor people and AI assistants', font=body_font, fill='#17130E', spacing=12)
+          draw.rounded_rectangle((72, 430, 405, 494), radius=28, fill='#17130E')
+          draw.text((108, 445), 'cbt-cards.github.io', font=label_font, fill='#F9F4E8')
+          preview = out / 'social-preview.jpg'
+          canvas.save(preview, 'JPEG', quality=88, optimize=True, progressive=True)
+          report['social_preview'] = {'candidate': str(preview), 'candidate_bytes': preview.stat().st_size, 'width': 1200, 'height': 630}
+
+          picture_sources = {
+              'cbt.png': ('/assets/cbt-560w.webp 560w, /assets/cbt.webp 1024w', '(max-width: 760px) 88vw, 560px'),
+              'diary.png': ('/assets/diary-560w.webp 560w, /assets/diary.webp 1024w', '(max-width: 760px) 88vw, 560px'),
+              'egg-card-journey.png': ('/assets/egg-card-journey-560w.webp 560w, /assets/egg-card-journey.webp 992w', '(max-width: 760px) 88vw, 560px'),
+              'egg-diary.png': ('/assets/egg-diary-560w.webp 560w, /assets/egg-diary-1024w.webp 1024w, /assets/egg-diary.webp 1254w', '(max-width: 760px) 88vw, 560px'),
+              'egg-reflection-cards.png': ('/assets/egg-reflection-cards-500w.webp 500w, /assets/egg-reflection-cards.webp 992w', '(max-width: 760px) 82vw, 500px'),
+          }
+
+          def app_icon_repl(match):
+              tag = match.group(0).replace('src="/assets/app-icon.png"', 'src="/assets/app-icon.webp"')
+              if 'decoding=' not in tag:
+                  if tag.rstrip().endswith('/>'):
+                      tag = tag.rstrip()[:-2].rstrip() + ' decoding="async" />'
+                  else:
+                      tag = tag.rstrip()[:-1].rstrip() + ' decoding="async">'
+              return tag
+
+          for path in sorted(root.rglob('*.html')):
+              if 'candidate-tree' in path.parts:
+                  continue
+              text = path.read_text(encoding='utf-8')
+              original = text
+              text = re.sub(
+                  r'<meta property="og:image" content="https://cbt-cards\.github\.io/assets/[^"]+"\s*/?>',
+                  '<meta property="og:image" content="https://cbt-cards.github.io/assets/social-preview.jpg" />\n<meta property="og:image:width" content="1200" />\n<meta property="og:image:height" content="630" />',
+                  text,
+              )
+              text = re.sub(r'<img\b[^>]*src="/assets/app-icon\.png"[^>]*>', app_icon_repl, text)
+              for name, (srcset, sizes) in picture_sources.items():
+                  pattern = re.compile(rf'<img(?P<attrs>[^>]*?)src="/assets/{re.escape(name)}"(?P<tail>[^>]*)/>')
+                  def repl(match, name=name, srcset=srcset, sizes=sizes):
+                      img = '<img' + match.group('attrs') + f'src="/assets/{name}"' + match.group('tail') + '/>'
+                      return f'<picture><source type="image/webp" srcset="{srcset}" sizes="{sizes}" />{img}</picture>'
+                  text = pattern.sub(repl, text)
+              text = text.replace('src="/assets/egg-card-journey.png" width="1024" height="1792"', 'src="/assets/egg-card-journey.png" width="992" height="1586"')
+              if text != original:
+                  dst = Path('candidate-tree') / path
+                  dst.parent.mkdir(parents=True, exist_ok=True)
+                  dst.write_text(text, encoding='utf-8')
+                  report['changed_html'].append(str(path))
+
+          css = Path('styles.css').read_text(encoding='utf-8')
+          css = css.replace('url("/assets/Nunito-Regular.ttf")', 'url("/assets/Nunito-Regular.woff2") format("woff2")')
+          css = css.replace('url("/assets/Nunito-ExtraBold.ttf")', 'url("/assets/Nunito-ExtraBold.woff2") format("woff2")')
+          if '.hero-art picture,' not in css:
+              css = css.replace('.hero-art img {', '.hero-art picture,\n.split > picture {\n  display: block;\n  width: 100%;\n}\n.hero-art img {')
+          Path('candidate-tree/styles.css').write_text(css, encoding='utf-8')
+
+          generator_path = Path('scripts/build_localized_pages.py')
+          generator = generator_path.read_text(encoding='utf-8')
+          generator = generator.replace(
+              '<img src="/assets/app-icon.png" width="42" height="42" alt="" />',
+              '<img src="/assets/app-icon.webp" width="42" height="42" alt="" decoding="async" />',
+          )
+          Path('candidate-tree/scripts/build_localized_pages.py').write_text(generator, encoding='utf-8')
+
+          readme = Path('README.md').read_text(encoding='utf-8')
+          if '## Asset performance policy' not in readme:
+              readme += '''\n\n## Asset performance policy\n\n- Keep original PNG/TTF files only as source/fallback assets when needed; production body images should prefer WebP through `<picture>` and site fonts should use WOFF2.\n- The main hero must not be lazy-loaded. Give it explicit dimensions and `fetchpriority="high"`; below-fold illustrations should use `loading="lazy"` and `decoding="async"`.\n- Add responsive WebP widths close to the rendered mobile/desktop size instead of shipping a multi-megabyte source image to a small viewport.\n- Use `assets/social-preview.jpg` (1200×630) for Open Graph previews rather than portrait product artwork.\n- `scripts/check_asset_budget.py` is the regression gate for production asset references and byte budgets.\n'''
+          Path('candidate-tree/README.md').write_text(readme, encoding='utf-8')
+          Path('performance-report/build.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
+          PY
+
+          cat > candidate-tree/scripts/check_asset_budget.py <<'PY'
+          #!/usr/bin/env python3
+          from pathlib import Path
+          import re
+
+          ROOT = Path(__file__).resolve().parents[1]
+          BUDGETS = {
+              'assets/Nunito-Regular.woff2': 50000,
+              'assets/Nunito-ExtraBold.woff2': 50000,
+              'assets/app-icon.webp': 12000,
+              'assets/cbt.webp': 120000,
+              'assets/cbt-560w.webp': 20000,
+              'assets/diary.webp': 110000,
+              'assets/diary-560w.webp': 45000,
+              'assets/egg-card-journey.webp': 60000,
+              'assets/egg-card-journey-560w.webp': 20000,
+              'assets/egg-diary.webp': 40000,
+              'assets/egg-diary-560w.webp': 15000,
+              'assets/egg-diary-1024w.webp': 30000,
+              'assets/egg-reflection-cards.webp': 60000,
+              'assets/egg-reflection-cards-500w.webp': 20000,
+              'assets/social-preview.jpg': 100000,
+          }
+          errors = []
+          total = 0
+          for rel, maximum in BUDGETS.items():
+              path = ROOT / rel
+              if not path.exists():
+                  errors.append(f'missing optimized asset: {rel}')
+                  continue
+              size = path.stat().st_size
+              total += size
+              if size > maximum:
+                  errors.append(f'{rel}: {size} bytes exceeds {maximum}')
+
+          css = (ROOT / 'styles.css').read_text(encoding='utf-8')
+          if '.ttf' in css:
+              errors.append('styles.css still references TTF')
+          for name in ('Nunito-Regular.woff2', 'Nunito-ExtraBold.woff2'):
+              if name not in css:
+                  errors.append(f'styles.css missing {name}')
+          if '.hero-art picture' not in css or '.split > picture' not in css:
+              errors.append('styles.css missing picture layout guards')
+
+          heavy = ('cbt.png','diary.png','egg-card-journey.png','egg-diary.png','egg-reflection-cards.png')
+          app_png_body = []
+          unwrapped = []
+          malformed = []
+          bad_og = []
+          for path in ROOT.rglob('*.html'):
+              text = path.read_text(encoding='utf-8')
+              body = text.split('</head>', 1)[-1]
+              if 'src="/assets/app-icon.png"' in body:
+                  app_png_body.append(str(path.relative_to(ROOT)))
+              if re.search(r'/\s+decoding=', text):
+                  malformed.append(str(path.relative_to(ROOT)))
+              if 'property="og:image"' in text and 'assets/social-preview.jpg' not in text:
+                  bad_og.append(str(path.relative_to(ROOT)))
+              for name in heavy:
+                  for match in re.finditer(rf'<img[^>]+src="/assets/{re.escape(name)}"[^>]*>', body):
+                      prefix = body[max(0, match.start()-400):match.start()]
+                      if '<picture>' not in prefix or 'type="image/webp"' not in prefix:
+                          unwrapped.append(f'{path.relative_to(ROOT)}:{name}')
+          if app_png_body:
+              errors.append('body still uses 512px PNG app icon: ' + ', '.join(app_png_body))
+          if malformed:
+              errors.append('malformed self-closing image attributes: ' + ', '.join(malformed))
+          if unwrapped:
+              errors.append('heavy PNG body image without WebP picture source: ' + ', '.join(unwrapped))
+          if bad_og:
+              errors.append('Open Graph image is not the 1200x630 preview: ' + ', '.join(bad_og))
+
+          generator = (ROOT / 'scripts/build_localized_pages.py').read_text(encoding='utf-8')
+          if '<img src="/assets/app-icon.webp" width="42" height="42" alt="" decoding="async" />' not in generator:
+              errors.append('localized page generator still emits the PNG header icon')
+
+          home = (ROOT / 'index.html').read_text(encoding='utf-8')
+          hero = re.search(r'<img[^>]+src="/assets/egg-reflection-cards\.png"[^>]*>', home)
+          if not hero or 'fetchpriority="high"' not in hero.group(0) or 'loading="lazy"' in hero.group(0):
+              errors.append('home hero must be eager with fetchpriority=high')
+          if 'src="/assets/egg-card-journey.png" width="992" height="1586"' not in home:
+              errors.append('home egg-card-journey intrinsic dimensions are not 992x1586')
+          for name in ('egg-card-journey.png', 'egg-diary.png'):
+              match = re.search(rf'<img[^>]+src="/assets/{re.escape(name)}"[^>]*>', home)
+              if not match or 'loading="lazy"' not in match.group(0) or 'decoding="async"' not in match.group(0):
+                  errors.append(f'below-fold home image {name} must be lazy/async')
+
+          if errors:
+              print('Asset budget checks failed:')
+              for error in errors:
+                  print('- ' + error)
+              raise SystemExit(1)
+          print(f'asset budget check passed: {len(BUDGETS)} optimized runtime assets, {total} bytes total; heavy PNGs only as picture fallbacks/source assets')
+          PY
+          chmod +x candidate-tree/scripts/check_asset_budget.py
+
+          rsync -a candidate-tree/ ./
+          python3 scripts/check_asset_budget.py
+          python3 scripts/build_localized_pages.py --check
+
+      - name: Measure mobile Lighthouse baseline vs candidate
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --directory /tmp/cbt-baseline >/tmp/baseline-server.log 2>&1 &
+          BASE_PID=$!
+          python3 -m http.server 8001 --directory . >/tmp/candidate-server.log 2>&1 &
+          CAND_PID=$!
+          trap 'kill $BASE_PID $CAND_PID || true' EXIT
+          sleep 2
+          curl --fail --silent http://127.0.0.1:8000/ >/dev/null
+          curl --fail --silent http://127.0.0.1:8001/ >/dev/null
+          for side in baseline candidate; do
+            port=8000
+            if [ "$side" = candidate ]; then port=8001; fi
+            for run in 1 2 3; do
+              npx --yes lighthouse@12.8.2 "http://127.0.0.1:${port}/" \
+                --only-categories=performance \
+                --output=json \
+                --output-path="performance-report/${side}-${run}.json" \
+                --chrome-flags='--headless --no-sandbox --disable-dev-shm-usage' \
+                --quiet
+            done
+          done
+          python3 - <<'PY'
+          from pathlib import Path
+          import json, statistics
+          metrics = {
+              'largest-contentful-paint': 'lcp_ms',
+              'total-byte-weight': 'total_bytes',
+              'cumulative-layout-shift': 'cls',
+          }
+          summary = {'method': 'Lighthouse 12.8.2 default mobile simulated throttling on GitHub Actions Ubuntu; three runs per local static server; median reported', 'runs': {}, 'median': {}}
+          for side in ('baseline','candidate'):
+              rows=[]
+              for run in range(1,4):
+                  data=json.loads(Path(f'performance-report/{side}-{run}.json').read_text())
+                  row={'performance_score': data['categories']['performance']['score']}
+                  for audit, key in metrics.items():
+                      row[key]=data['audits'][audit]['numericValue']
+                  rows.append(row)
+              summary['runs'][side]=rows
+              summary['median'][side]={key: statistics.median([r[key] for r in rows]) for key in rows[0]}
+          b=summary['median']['baseline']; c=summary['median']['candidate']
+          summary['change']={
+              'lcp_ms': c['lcp_ms']-b['lcp_ms'],
+              'lcp_percent': (c['lcp_ms']/b['lcp_ms']-1)*100 if b['lcp_ms'] else None,
+              'total_bytes': c['total_bytes']-b['total_bytes'],
+              'total_bytes_percent': (c['total_bytes']/b['total_bytes']-1)*100 if b['total_bytes'] else None,
+              'cls': c['cls']-b['cls'],
+              'performance_score': c['performance_score']-b['performance_score'],
+          }
+          Path('performance-report/lighthouse-summary.json').write_text(json.dumps(summary, indent=2)+'\n')
+          print(json.dumps(summary, indent=2))
+          PY
+
+      - name: Commit product candidates to temporary PR branch
+        run: |
+          set -euo pipefail
+          rm -rf candidate-tree
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md styles.css assets scripts/check_asset_budget.py scripts/build_localized_pages.py
+          find . -name '*.html' -not -path './.git/*' -print0 | xargs -0 git add --
+          if ! git diff --cached --quiet; then
+            git commit -m 'Apply optimized production assets'
+            git push origin HEAD:${{ github.event.pull_request.head.ref }}
+          fi
+
+      - name: Upload performance evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: asset-performance-evidence-${{ github.run_id }}
+          path: performance-report/
+          if-no-files-found: error
+          retention-days: 7
