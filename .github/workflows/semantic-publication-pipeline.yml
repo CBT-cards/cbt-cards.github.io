@@ -1,0 +1,27 @@
+name: Semantic publication pipeline quality
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publication-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate complete synthetic publication path
+        run: |
+          python3 -m py_compile \
+            scripts/check_practice_semantic_execution.py \
+            scripts/build_semantic_review_packet.py \
+            scripts/score_semantic_reviews.py \
+            scripts/check_practice_semantic_publication_candidate.py \
+            scripts/build_practice_semantic_publication_report.py \
+            scripts/check_practice_semantic_publication_pipeline.py
+          python3 scripts/check_practice_semantic_publication_pipeline.py
