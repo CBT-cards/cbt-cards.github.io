@@ -1,80 +1,104 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "id": "cbt-cards-outreach-targets-v1",
   "researched_on": "2026-08-19",
-  "policy": "Prioritize high-fit, inspectable resources. Do not mass-submit the same pitch. Check each target's current contribution rules immediately before contacting them, preserve CBT Cards safety/evidence boundaries, and use the smallest canonical resource that fits the directory.",
+  "requalified_on": "2026-08-19",
+  "policy": "Prioritize high-fit, inspectable resources. Do not mass-submit the same pitch. Check each target's current contribution rules immediately before contacting them, preserve CBT Cards safety/evidence/licensing boundaries, and use the smallest canonical resource that fits the directory. A target is not submitted merely because its process was researched.",
+  "status_definitions": {
+    "not_contacted": "Current fit exists but the submission path has not yet been fully rechecked.",
+    "ready_requires_fork": "Current rules require a pull request/fork; content fit is acceptable but this execution environment cannot fork the target repository.",
+    "blocked_by_catalog_license_policy": "The target's current inclusion rules expect a permissive license that CBT Cards does not currently grant.",
+    "needs_format_adaptation": "The target uses a different skill/registry format that needs an explicit adaptation review.",
+    "monitor_auto_index": "The target appears to index upstream skills automatically; check inclusion before requesting manual action.",
+    "blocked_by_license_decision": "The target's reuse/full-text model intersects open CBT Cards licensing decision #7.",
+    "needs_org_eligibility_check": "Submission eligibility or organizational/contact requirements remain unverified.",
+    "needs_submission_path_check": "Topical fit is known but a current submission path is not verified.",
+    "submitted": "A real submission was made through the target's documented process.",
+    "accepted": "The target accepted or merged the submission.",
+    "declined": "The target explicitly declined the submission."
+  },
   "targets": [
     {
       "id": "awesome-mental-health",
       "name": "dreamingechoes/awesome-mental-health",
       "category": "curated-mental-health-list",
-      "evidence_url": "https://github.com/dreamingechoes/awesome-mental-health",
-      "evidence": "Active curated mental-health list with an Applications section, existing CBT/privacy-focused apps, and documented contribution flow.",
+      "evidence_url": "https://github.com/dreamingechoes/awesome-mental-health/blob/master/.github/CONTRIBUTING.md",
+      "evidence": "Current contribution guide requires one individual pull request per resource, alphabetical placement, short description, spelling/grammar checks, and evidence appropriate to the type of resource. It explicitly exempts small tools/apps from the high-quality clinical-evidence requirement used for therapy claims.",
       "target_canonical_url": "https://cbt-cards.github.io/practice/",
       "priority": "A",
-      "outreach_method": "pull_request_after_fit_review",
-      "status": "not_contacted",
-      "fit_note": "Pitch the free reviewed public practice library, not clinical treatment claims or an app-store install."
+      "outreach_method": "individual_pull_request",
+      "status": "ready_requires_fork",
+      "checked_on": "2026-08-19",
+      "blocker": "The documented submission path is a pull request. The current connected GitHub tool can read the repository but cannot fork it, so no issue-based workaround should be used.",
+      "fit_note": "Pitch the reviewed public practice library as a small general-wellness/self-reflection resource, not clinical treatment or efficacy."
     },
     {
       "id": "awesome-mentalhealth",
       "name": "theimpossibleastronaut/awesome-mentalhealth",
       "category": "curated-mental-health-list",
-      "evidence_url": "https://github.com/theimpossibleastronaut/awesome-mentalhealth",
-      "evidence": "Curated mental-health resources list covering anxiety, self-help, mindfulness, and related resources; repository was active in 2026 search sampling.",
+      "evidence_url": "https://github.com/theimpossibleastronaut/awesome-mentalhealth/blob/main/CONTRIBUTING.md",
+      "evidence": "Current contribution guide asks contributors to prioritize end-user usefulness, prefers HTTPS web resources, and accepts English resources. No issue-based resource-suggestion template or established issue submission path was found in the 19 Aug recheck.",
       "target_canonical_url": "https://cbt-cards.github.io/worksheets/",
       "priority": "A",
-      "outreach_method": "pull_request_or_issue_after_contribution_check",
-      "status": "not_contacted",
-      "fit_note": "Lead with browser-local free worksheets and reviewed educational scope."
+      "outreach_method": "pull_request_after_fit_review",
+      "status": "ready_requires_fork",
+      "checked_on": "2026-08-19",
+      "blocker": "A repository contribution is the defensible path; the connected GitHub tool cannot fork the target repository.",
+      "fit_note": "Lead with free browser-local worksheets, HTTPS, no-submit behavior, and narrow educational/general-wellness scope."
     },
     {
       "id": "agent-skill-exchange",
       "name": "Agent Skill Exchange",
       "category": "agent-skill-catalog",
-      "evidence_url": "https://github.com/agentskillexchange/skills",
-      "evidence": "Curated Agent Skills catalog with a documented Submit a Skill flow and provenance/security review.",
+      "evidence_url": "https://github.com/agentskillexchange/skills/blob/main/CONTRIBUTING.md",
+      "evidence": "Current documented submission process is fork the catalog repository, create skills/<slug>/SKILL.md, and open a pull request. The catalog requires its own skill metadata/profile and a real upstream source.",
       "target_canonical_url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
       "priority": "A",
-      "outreach_method": "pull_request",
-      "status": "not_contacted",
-      "fit_note": "Use the portable reviewed-practice skill and link its immutable manifest/versioning and eval evidence."
+      "outreach_method": "fork_and_pull_request_after_license_review",
+      "status": "ready_requires_fork",
+      "checked_on": "2026-08-19",
+      "blocker": "The connected GitHub tool has no fork operation. Copying/adapting the skill into a third-party catalog should also preserve CBT Cards' active CC BY-NC-SA 4.0 terms rather than inherit the catalog repository license by implication.",
+      "fit_note": "Strong technical fit because CBT Cards has a portable skill, immutable versions, provenance, safety boundaries, and evals; preserve its license and non-clinical scope in any future catalog copy."
     },
     {
       "id": "skills-directory",
-      "name": "dmgrok/agent_skills_directory",
+      "name": "dmgrok/agent-plugins (formerly agent_skills_directory)",
       "category": "agent-skill-directory",
-      "evidence_url": "https://github.com/dmgrok/agent_skills_directory",
-      "evidence": "Quality-scored Agent Skills directory with a documented publish --submit path, maintenance tracking, and security checks.",
+      "evidence_url": "https://github.com/dmgrok/agent-plugins/blob/main/.github/ISSUE_TEMPLATE/new-provider.yml",
+      "evidence": "The current New Provider issue flow performs automated validation and can create an auto-PR, but its explicit provider requirements say the repository must have a proper license such as MIT or Apache 2.0 and skills must score 70+.",
       "target_canonical_url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
       "priority": "A",
-      "outreach_method": "directory_submit_flow",
-      "status": "not_contacted",
-      "fit_note": "CBT Cards has public docs, immutable versions, schemas, evals, and active maintenance evidence that map well to its quality criteria."
+      "outreach_method": "new_provider_issue_after_license_eligibility",
+      "status": "blocked_by_catalog_license_policy",
+      "checked_on": "2026-08-19",
+      "blocker": "CBT Cards currently uses CC BY-NC-SA 4.0. Do not submit while the target explicitly expects permissive-style licensing; open issue #7 must be resolved deliberately first.",
+      "fit_note": "Technical validation/security model is a strong fit, but eligibility fails on the current license boundary before quality scoring even matters."
     },
     {
       "id": "goose-agent-skills",
       "name": "block/agent-skills",
       "category": "agent-skill-marketplace",
       "evidence_url": "https://github.com/block/agent-skills",
-      "evidence": "Goose Skills Marketplace source repository explicitly welcomes community skills through pull requests and validation.",
+      "evidence": "Goose Skills Marketplace source repository welcomes community skills through pull requests and validation.",
       "target_canonical_url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
       "priority": "A",
-      "outreach_method": "pull_request",
+      "outreach_method": "pull_request_after_format_and_license_review",
       "status": "not_contacted",
-      "fit_note": "Submit only if the current portable frontmatter can be adapted without weakening safety/publication boundaries."
+      "fit_note": "Recheck current packaging/license requirements before adapting the portable skill; do not weaken safety/publication boundaries."
     },
     {
       "id": "jpeetz-agent-skills",
       "name": "JPeetz/agent-skills",
       "category": "agent-skill-catalog",
       "evidence_url": "https://github.com/JPeetz/agent-skills",
-      "evidence": "Cross-platform Agent Skills collection accepting issues/PRs and requiring eval suites plus specification validation.",
+      "evidence": "Cross-platform Agent Skills collection with validation/eval expectations; current standards require MIT-licensed skills, so copying the current CBT Cards CC BY-NC-SA skill would not satisfy its stated policy.",
       "target_canonical_url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
       "priority": "A",
-      "outreach_method": "issue_or_pull_request",
-      "status": "not_contacted",
-      "fit_note": "Strong fit after confirming their local packaging/eval conventions; CBT Cards already publishes eval datasets and portability checks."
+      "outreach_method": "issue_or_pull_request_after_license_decision",
+      "status": "blocked_by_catalog_license_policy",
+      "checked_on": "2026-08-19",
+      "blocker": "Current target skill policy expects MIT licensing while CBT Cards' active skill license is CC BY-NC-SA 4.0.",
+      "fit_note": "Strong eval/spec fit, but do not mislabel the CBT Cards license to qualify."
     },
     {
       "id": "all-the-vibes-skills",
@@ -86,7 +110,7 @@
       "priority": "B",
       "outreach_method": "pull_request_after_fit_review",
       "status": "not_contacted",
-      "fit_note": "Check category/domain fit first; their current catalog is engineering-heavy."
+      "fit_note": "Check category/domain and license fit first; its current catalog is engineering-heavy."
     },
     {
       "id": "openmodels-skills",
@@ -98,7 +122,7 @@
       "priority": "B",
       "outreach_method": "format_adaptation_pull_request",
       "status": "needs_format_adaptation",
-      "fit_note": "Their canonical format is structured YAML rather than portable SKILL.md; adapt metadata without claiming their registry has exercised CBT Cards runtime behavior."
+      "fit_note": "Their canonical format differs from portable SKILL.md; adapt metadata only after license/format review and do not claim exercised runtime behavior."
     },
     {
       "id": "ai-agent-skills-index",
@@ -110,7 +134,7 @@
       "priority": "B",
       "outreach_method": "monitor_or_upstream_discovery_check",
       "status": "monitor_auto_index",
-      "fit_note": "First verify whether the public CBT Cards skill is automatically discovered before requesting manual intervention."
+      "fit_note": "Verify automatic discovery before requesting manual intervention."
     },
     {
       "id": "agent-skills-corpus",
