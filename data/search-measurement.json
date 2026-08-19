@@ -4,7 +4,7 @@
   "canonical_site": "https://cbt-cards.github.io/",
   "baseline_date": "2026-08-19",
   "baseline": {
-    "sitemap_url_count": 37,
+    "sitemap_url_count": 38,
     "public_search_sample": {
       "method": "assistant web-search sampling; not Search Console or Webmaster Tools",
       "queries": [
@@ -40,7 +40,7 @@
       "implementation": "post-deploy changed-HTML submission",
       "success_receipt_required": true,
       "verified_success_receipt": false,
-      "note": "The workflow now treats IndexNow failure as visible job failure and uploads a machine-readable receipt. A successful production receipt must be inspected before this field is changed to true."
+      "note": "The workflow treats IndexNow failure as visible job failure and uploads a machine-readable receipt. A successful production receipt must be inspected before this field is changed to true."
     },
     "privacy_measurement_policy": "Do not add client-side analytics merely to populate this report. Prefer aggregate Search Console/Bing data and other measurements that do not weaken the current privacy posture. Store-link and AI-referral measurements remain null until a privacy-compatible source is deliberately chosen."
   },

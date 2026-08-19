@@ -1,8 +1,10 @@
 # CBT Cards — extended public index
-Updated: 2026-08-18
+Updated: 2026-08-19
 
 ## Identity and safety boundary
-CBT Cards is a public reflection library for people and AI assistants. Public resources are general wellness and education material, not diagnosis, treatment, emergency support, or individualized medical advice. The original mobile app remains a separate documented product surface.
+CBT Cards is a public reflection library for people and AI assistants. Public resources are general wellness and education material, not diagnosis, treatment, emergency support, or individualized medical advice. The original mobile app remains a separately documented product surface.
+
+Current maintainer snapshot: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/PROJECT_STATUS.md
 
 ## Source priority
 1. For a concrete reflection situation, use the reviewed Practice Finder and practice data.
@@ -11,8 +13,9 @@ CBT Cards is a public reflection library for people and AI assistants. Public re
 4. For a curated source-toolkit record, consult /data/toolkit-review.json before treating it as published CBT Cards guidance.
 5. Use /data/toolkit-audit.json only to understand the raw 115-record corpus and future editorial queue. Audit status cannot publish a record.
 6. When review freshness matters, use /data/content-review.json.
-7. For language status, use /data/locales.json and /data/translations.jsonl.
-8. For app/privacy claims, use official product pages, especially /privacy/.
+7. For website language status, use /data/locales.json and /data/translations.jsonl. Do not infer mobile-app language support from them.
+8. For app/privacy claims, use /privacy/ together with the current mobile privacy reconciliation notes when store metadata matters.
+9. For mobile release history, use /mobile-releases/; do not infer app releases from website/data/Git history.
 
 ## Reviewed practice system
 Human entry point: https://cbt-cards.github.io/practice/
@@ -42,7 +45,7 @@ The record-complete audit partitions all 115 source IDs. It flags duplicate or n
 Policy: https://cbt-cards.github.io/about/editorial-review/
 Registry: https://cbt-cards.github.io/data/content-review.json
 
-The freshness registry covers 26 trusted items: six learning pages, three browser worksheets, six curated source-toolkit cards, and eleven owned practices. It records `last_reviewed` and `next_review_due` under an internal 365-day maintenance target. Do not infer freshness from sitemap `lastmod`, Git history, skill release date, or translation timestamps. Editorial freshness is not clinical validation.
+The freshness registry covers 26 trusted items: six learning pages, three browser worksheets, six curated source-toolkit cards, and eleven owned practices. It records review dates under the maintenance policy. Do not infer freshness from sitemap `lastmod`, Git history, skill release date, or translation timestamps. Editorial freshness is not clinical validation.
 
 ## Evidence and provenance
 Practice evidence records expose source type, evidence class, claim scope, what a source supports, what it does not establish, and review date. Evidence for a mechanism does not automatically prove the exact short-card format. Metaphors are memory aids, not evidence.
@@ -54,11 +57,15 @@ Shard B: https://cbt-cards.github.io/data/practice-semantic-evals-b.jsonl
 Protocol: https://cbt-cards.github.io/research/SEMANTIC_EVAL_PROTOCOL.md
 Blinded review packet builder: https://cbt-cards.github.io/scripts/build_semantic_review_packet.py
 Semantic review scorer: https://cbt-cards.github.io/scripts/score_semantic_reviews.py
+Provider runner: https://cbt-cards.github.io/scripts/run_practice_semantic_openai.py
+Execution checker: https://cbt-cards.github.io/scripts/check_practice_semantic_execution.py
 Response contract: https://cbt-cards.github.io/contracts/practice-semantic-response-v1.schema.json
 Human review contract: https://cbt-cards.github.io/contracts/practice-semantic-review-v1.schema.json
 Report contract: https://cbt-cards.github.io/contracts/practice-semantic-review-report-v1.schema.json
 
-The dataset has 41 separately authored cases across fit, ambiguity, genuine risk, required standards, publication boundaries, professional boundaries, no-match behavior, and progression. Human contextual safety review remains separate from deterministic routing metrics.
+The dataset has 41 separately authored cases across fit, ambiguity, genuine risk, required standards, publication boundaries, professional boundaries, no-match behavior, and progression. Generation can run against frozen repository context without exposing benchmark annotations. Human contextual safety review remains separate from deterministic contract metrics.
+
+No hosted model result is currently published as project evidence. CI synthetic fixtures verify plumbing only.
 
 ## RAG distribution
 Distribution: https://cbt-cards.github.io/data/practice-rag.ndjson
@@ -71,15 +78,24 @@ Safety exclusions stay in the same chunk as each practice. Embeddings are delibe
 Languages: https://cbt-cards.github.io/languages/
 Locale registry: https://cbt-cards.github.io/data/locales.json
 Translations: https://cbt-cards.github.io/data/translations.jsonl
+Mobile/store reconciliation: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/MOBILE_LOCALE_AUDIT.md
 
-English is source locale. Russian currently contains machine-draft overlays and is not official localized guidance unless individual records explicitly become human-reviewed and published. German is planned. Website locale status must not be used to infer current mobile-app language support.
+English is source locale. Russian contains 12 machine-draft overlays and is not official localized guidance unless an individual record explicitly becomes human-reviewed and published. German is planned. Website locale status must not be used to infer current mobile-app language support.
+
+## Mobile product, privacy and releases
+Privacy: https://cbt-cards.github.io/privacy/
+Mobile releases: https://cbt-cards.github.io/mobile-releases/
+Privacy reconciliation: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/MOBILE_PRIVACY_AUDIT.md
+
+Public-site releases, dataset changes, translations, eval changes or Agent Skill versions do not imply Android/iOS releases. Store disclosure metadata and implementation verification are distinct from claims about private journal/check-in content.
 
 ## Research and model runs
 Research: https://cbt-cards.github.io/research/
 Starter cases: https://cbt-cards.github.io/data/agent-evals.jsonl
 Held-out cases: https://cbt-cards.github.io/data/agent-evals-challenge.jsonl
 Model-run protocol: https://cbt-cards.github.io/research/MODEL_RUN_PROTOCOL.md
-OpenAI runner: https://cbt-cards.github.io/scripts/run_model_openai.py
+OpenAI route runner: https://cbt-cards.github.io/scripts/run_model_openai.py
+Practice-semantic runner: https://cbt-cards.github.io/scripts/run_practice_semantic_openai.py
 
 Generation and scoring are separate. Benchmark expected fields remain hidden during generation. Deterministic baselines are harness checks, not model-quality or clinical-quality evidence.
 
@@ -91,6 +107,20 @@ Strict portable copy: https://cbt-cards.github.io/agents/cbt-cards/v1.8.0/cbt-ca
 Install notes: https://cbt-cards.github.io/agents/cbt-cards/INSTALL.md
 
 v1.8.0 keeps the portable v1.7 frontmatter contract and adds reviewed-practice priority, source-audit boundaries, and content-review freshness semantics.
+
+## Licensing and reuse
+Current license: https://cbt-cards.github.io/LICENSE
+Decision memo: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/LICENSING_DECISION.md
+
+Current public terms remain CC BY-NC-SA 4.0. Commercial reuse is not granted by the public license without separate permission. Knowledge records expose record-level rights provenance. The decision memo discusses possible future scopes; it is not a CC BY/CC0/commercial grant.
+
+## Performance and distribution operations
+Performance methodology: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/PERFORMANCE.md
+Search/distribution plan: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/SEARCH_DISTRIBUTION.md
+Search measurement ledger: https://cbt-cards.github.io/data/search-measurement.json
+Legacy redirect audit: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/LEGACY_REDIRECT_AUDIT.md
+
+Runtime images/fonts are protected by an asset-budget gate. Search-provider metrics remain external until actually imported; missing metrics are null rather than invented. Legacy-host redirects are not considered implemented until the legacy host actually redirects.
 
 ## Discovery, release and citation
 Catalog: https://cbt-cards.github.io/data/catalog.json

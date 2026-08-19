@@ -1,6 +1,6 @@
 # CBT Cards
 
-CBT Cards is a public library of practical reflection resources for people and AI assistants. It publishes a small reviewed practice layer, learning guides, browser-local worksheets, a pinned source toolkit with explicit publication and audit metadata, language status, evaluation data, portable agent instructions, and retrieval-ready public data. It is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
+CBT Cards is a public library of practical reflection resources for people and AI assistants. It publishes a small reviewed practice layer, learning guides, browser-local worksheets, a pinned source toolkit with explicit publication/audit metadata, language status, evaluation tooling, portable agent instructions, and retrieval-ready public data. It is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
 
 ## Start here
 - Overview: https://cbt-cards.github.io/
@@ -13,6 +13,8 @@ CBT Cards is a public library of practical reflection resources for people and A
 - Languages: https://cbt-cards.github.io/languages/
 - Research/evals: https://cbt-cards.github.io/research/
 - For agents: https://cbt-cards.github.io/agents/
+- Mobile release history: https://cbt-cards.github.io/mobile-releases/
+- Privacy: https://cbt-cards.github.io/privacy/
 
 ## Reviewed practice system
 - Practices: https://cbt-cards.github.io/data/practice.json
@@ -44,10 +46,20 @@ The freshness registry currently covers 26 trusted items: learning pages, worksh
 - Translation overlays: https://cbt-cards.github.io/data/translations.jsonl
 - Starter evals: https://cbt-cards.github.io/data/agent-evals.jsonl
 - Held-out challenge: https://cbt-cards.github.io/data/agent-evals-challenge.jsonl
+- Semantic eval protocol: https://cbt-cards.github.io/research/SEMANTIC_EVAL_PROTOCOL.md
 - Model-run protocol: https://cbt-cards.github.io/research/MODEL_RUN_PROTOCOL.md
 - Latest portable skill v1.8.0: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 - Skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
 - Changelog: https://cbt-cards.github.io/data/changelog.json
 - Citation: https://cbt-cards.github.io/CITATION.cff
 
-English is the canonical source locale. Machine-draft translations are not official published guidance. Website/data/skill releases do not imply a mobile-app release.
+## Maintainer provenance
+- Project status: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/PROJECT_STATUS.md
+- Performance methodology: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/PERFORMANCE.md
+- Mobile privacy reconciliation: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/MOBILE_PRIVACY_AUDIT.md
+- Mobile locale reconciliation: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/MOBILE_LOCALE_AUDIT.md
+- Legacy redirect audit: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/LEGACY_REDIRECT_AUDIT.md
+- Search/distribution operations: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/SEARCH_DISTRIBUTION.md
+- Licensing decision boundary: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/LICENSING_DECISION.md
+
+English is the canonical source locale. Machine-draft translations are not official published guidance. Website/data/skill releases do not imply a mobile-app release. The current public license remains CC BY-NC-SA 4.0; a pending licensing memo is not a permissive grant. No hosted model result is currently published as project evidence.
