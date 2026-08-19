@@ -2,9 +2,9 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://cbt-cards.github.io/schemas/knowledge-record-v1.schema.json",
   "title": "CBT Cards curated knowledge record v1",
-  "description": "Schema for one line/record in data/knowledge.jsonl.",
+  "description": "Schema for one line/record in data/knowledge.jsonl, including the record's current effective reuse license and provenance basis.",
   "type": "object",
-  "required": ["schema_version", "id", "locale", "type", "title", "canonical_url", "summary", "key_points", "product_relation", "safety_scope", "reviewed", "sources"],
+  "required": ["schema_version", "id", "locale", "type", "title", "canonical_url", "summary", "key_points", "product_relation", "safety_scope", "reviewed", "sources", "license_url", "rights_basis"],
   "properties": {
     "$schema": {"type": "string", "format": "uri"},
     "schema_version": {"const": "1.0"},
@@ -19,7 +19,20 @@
     "product_relation": {"type": "string", "minLength": 1},
     "safety_scope": {"type": "string", "minLength": 1},
     "reviewed": {"type": "string", "format": "date"},
-    "sources": {"type": "array", "minItems": 1, "items": {"type": "string", "format": "uri"}}
+    "sources": {"type": "array", "minItems": 1, "items": {"type": "string", "format": "uri"}},
+    "license_url": {"const": "https://creativecommons.org/licenses/by-nc-sa/4.0/"},
+    "rights_basis": {"enum": ["cbt_cards_original", "adapted_from_toolkit"]},
+    "source_license_url": {"const": "https://creativecommons.org/licenses/by-nc-sa/4.0/"}
   },
+  "allOf": [
+    {
+      "if": {"properties": {"rights_basis": {"const": "adapted_from_toolkit"}}, "required": ["rights_basis"]},
+      "then": {"required": ["source_record_id", "source_license_url"]}
+    },
+    {
+      "if": {"properties": {"rights_basis": {"const": "cbt_cards_original"}}, "required": ["rights_basis"]},
+      "then": {"not": {"required": ["source_license_url"]}}
+    }
+  ],
   "additionalProperties": false
 }

@@ -2,17 +2,26 @@ Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 
 Copyright (c) 2026 MetalHatsCats
 
-This repository and the original CBT Cards website content are licensed under
-the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
-License (CC BY-NC-SA 4.0).
+CURRENT LICENSE
 
-You may copy, share, and adapt the licensed material only for non-commercial
-purposes, provided that you give appropriate credit, link to this license,
-indicate changes, and distribute adaptations under the same license.
+This repository and the original CBT Cards website content, including CBT Cards-owned machine-readable public data unless a file or record states more specific terms, are licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0).
 
-Commercial use is not permitted without prior written permission from
-MetalHatsCats. Trademark rights, including the CBT Cards name and logo, are
-not granted by this license. Third-party materials remain subject to their own
-terms.
+You may copy, share, and adapt the licensed material only for non-commercial purposes, provided that you give appropriate credit, link to this license, indicate changes, and distribute adaptations under the same license.
+
+Commercial use is not permitted under this public license without prior written permission from MetalHatsCats.
+
+SCOPE AND PROVENANCE
+
+Machine-readable accessibility does not imply a more permissive license. Where a structured record exposes `license_url`, that field states the current effective reuse license for that record. Records marked as adapted from the MetalHatsCats CBT Toolkit retain source provenance and the applicable source-license reference.
+
+The pinned MetalHatsCats CBT Toolkit source corpus is separately documented as CC BY-NC-SA 4.0 in `data/toolkit-source.json`. Third-party materials and external sources remain subject to their own terms and are not relicensed merely because CBT Cards links to or describes them.
+
+BRAND, ARTWORK, AND FUTURE DATA-LICENSE CHANGES
+
+Trademark rights, including rights in the CBT Cards name and logo, are not granted by this license. Nothing in this license authorizes endorsement or presentation of an unofficial integration as an official CBT Cards product.
+
+Product artwork and brand assets are not silently included in any future permissive data-only grant. Any different license for machine-readable datasets must identify its exact scope explicitly and must not be inferred from a proposal, decision memo, technical accessibility, or catalog listing.
+
+`LICENSING_DECISION.md` discusses possible future licensing options. It is not a license grant. Until a publisher-approved change is released, the current terms above remain in force.
 
 Full license text: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
