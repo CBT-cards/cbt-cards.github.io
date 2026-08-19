@@ -3,23 +3,57 @@ name: Run CBT Cards practice semantic model eval
 on:
   workflow_dispatch:
     inputs:
+      run_mode:
+        description: Dry-run validates the frozen request without API spend; full-41 performs the real 41-case provider execution
+        required: true
+        default: dry-run
+        type: choice
+        options:
+          - dry-run
+          - full-41
       model:
         description: OpenAI model identifier
         required: true
         default: gpt-5.6
+        type: string
+      reasoning_effort:
+        description: Explicit reasoning effort recorded in execution provenance; must be supported by the selected model
+        required: true
+        default: none
+        type: choice
+        options:
+          - none
+          - low
+          - medium
+          - high
+          - xhigh
+          - max
+      max_output_tokens:
+        description: Per-response output-token ceiling for this benchmark runner (256-8192)
+        required: true
+        default: 2000
+        type: number
+      confirm_paid_run:
+        description: For full-41 only, type exactly RUN 41 CASES. Dry-run ignores this field.
+        required: false
+        default: ""
         type: string
 
 permissions:
   contents: read
 
 concurrency:
-  group: practice-semantic-model-eval-${{ github.ref }}-${{ inputs.model }}
+  group: practice-semantic-model-eval-${{ github.ref }}-${{ inputs.run_mode }}-${{ inputs.model }}
   cancel-in-progress: false
 
 jobs:
   semantic-model-eval:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    env:
+      MODEL: ${{ inputs.model }}
+      REASONING_EFFORT: ${{ inputs.reasoning_effort }}
+      MAX_OUTPUT_TOKENS: ${{ inputs.max_output_tokens }}
     steps:
       - uses: actions/checkout@v4
 
@@ -28,7 +62,38 @@ jobs:
           python3 -m py_compile scripts/run_practice_semantic_openai.py scripts/check_practice_semantic_model_runner.py scripts/check_practice_semantic_execution.py scripts/build_semantic_review_packet.py
           python3 scripts/check_practice_semantic_model_runner.py
 
+      - name: Build no-spend dry-run request artifact
+        if: inputs.run_mode == 'dry-run'
+        run: |
+          mkdir -p artifacts
+          python3 scripts/run_practice_semantic_openai.py \
+            --model "$MODEL" \
+            --reasoning-effort "$REASONING_EFFORT" \
+            --max-output-tokens "$MAX_OUTPUT_TOKENS" \
+            --dry-run \
+            --dry-run-out artifacts/practice-semantic-dry-run.json
+
+      - name: Upload dry-run request artifact
+        if: inputs.run_mode == 'dry-run'
+        uses: actions/upload-artifact@v4
+        with:
+          name: cbt-cards-practice-semantic-dry-run-${{ github.run_id }}
+          path: artifacts/practice-semantic-dry-run.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Require explicit paid-run confirmation
+        if: inputs.run_mode == 'full-41'
+        env:
+          CONFIRM_PAID_RUN: ${{ inputs.confirm_paid_run }}
+        run: |
+          if [ "$CONFIRM_PAID_RUN" != "RUN 41 CASES" ]; then
+            echo "Full 41-case provider execution is paid work. Re-dispatch with confirm_paid_run exactly: RUN 41 CASES" >&2
+            exit 1
+          fi
+
       - name: Require OpenAI API key
+        if: inputs.run_mode == 'full-41'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
@@ -38,22 +103,27 @@ jobs:
           fi
 
       - name: Generate 41 isolated practice-semantic responses
+        if: inputs.run_mode == 'full-41'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           mkdir -p artifacts
           python3 scripts/run_practice_semantic_openai.py \
-            --model "${{ inputs.model }}" \
+            --model "$MODEL" \
+            --reasoning-effort "$REASONING_EFFORT" \
+            --max-output-tokens "$MAX_OUTPUT_TOKENS" \
             --responses artifacts/practice-semantic-responses.jsonl \
             --execution artifacts/practice-semantic-execution.json
 
       - name: Validate full execution provenance before review
+        if: inputs.run_mode == 'full-41'
         run: |
           python3 scripts/check_practice_semantic_execution.py \
             --execution artifacts/practice-semantic-execution.json \
             --responses artifacts/practice-semantic-responses.jsonl
 
       - name: Build blinded human-review packet
+        if: inputs.run_mode == 'full-41'
         run: |
           python3 scripts/build_semantic_review_packet.py \
             --responses artifacts/practice-semantic-responses.jsonl \
@@ -61,9 +131,10 @@ jobs:
             --review-template-out artifacts/practice-semantic-review-template.json
 
       - name: Upload frozen execution and blinded review artifacts
+        if: inputs.run_mode == 'full-41'
         uses: actions/upload-artifact@v4
         with:
-          name: cbt-cards-practice-semantic-${{ inputs.model }}-${{ github.run_id }}
+          name: cbt-cards-practice-semantic-full-${{ github.run_id }}
           path: |
             artifacts/practice-semantic-execution.json
             artifacts/practice-semantic-responses.jsonl

@@ -1,4 +1,4 @@
-# Semantic recommendation evaluation protocol v1.1
+# Semantic recommendation evaluation protocol v1.2
 
 CBT Cards keeps semantic recommendation review separate from deterministic routing/contract scoring. The point is not to manufacture one flattering percentage. It is to make different failure modes visible.
 
@@ -10,11 +10,24 @@ The canonical dataset contains 41 separately authored situations across fit, amb
 
 ## Frozen-context real-provider path
 
-For the first publishable practice-semantic provider run, CBT Cards uses a separate frozen-context adapter: `scripts/run_practice_semantic_openai.py`. It does not enable web search. Every request receives only the case `user_message` plus the fixed semantic prompt, Agent Skill, and committed reviewed-practice context files.
+For a publishable practice-semantic provider run, CBT Cards uses the separate frozen-context adapter `scripts/run_practice_semantic_openai.py`. It does not enable web search. Every request receives only the case `user_message` plus the fixed semantic prompt, Agent Skill, and committed reviewed-practice context files.
 
-The execution artifact records SHA-256 values for the semantic manifest and both case shards, the fixed prompt, the current Agent Skill, and each frozen context resource (`practice.json`, `practice-recommendations.json`, `practice-evidence.json`, and `practice-rag.ndjson`). `scripts/check_practice_semantic_execution.py` requires all 41 case IDs in canonical order before an execution is accepted as a full review candidate.
+The execution artifact records SHA-256 values for the semantic manifest and both case shards, the fixed prompt, the current Agent Skill, and each frozen context resource (`practice.json`, `practice-recommendations.json`, `practice-evidence.json`, and `practice-rag.ndjson`). It also records the explicitly requested model, `reasoning_effort`, and `max_output_tokens`. These request settings are part of benchmark provenance and must not be reconstructed from memory after a run.
 
-The manual GitHub Actions workflow `run-practice-semantic-model-eval.yml` requires repository secret `OPENAI_API_KEY`, generates responses, validates execution provenance, then builds the blinded human-review packet. It uploads artifacts and does not publish or semantically score the run automatically.
+`scripts/check_practice_semantic_execution.py` requires all 41 case IDs in canonical order before an execution is accepted as a full review candidate.
+
+## Manual GitHub Actions safety boundary
+
+`run-practice-semantic-model-eval.yml` is deliberately manual and has two modes:
+
+- `dry-run` is the default. It builds and uploads the frozen request/provenance artifact **without an API call** and does not require `OPENAI_API_KEY`.
+- `full-41` performs the real hosted-provider execution. It requires repository secret `OPENAI_API_KEY` **and** the separate confirmation string `RUN 41 CASES`.
+
+The workflow also requires explicit `model`, `reasoning_effort`, and `max_output_tokens` inputs. The runner constrains this benchmark-specific output ceiling to 256–8192 tokens per response. A maintainer should choose settings deliberately and record why when comparing runs.
+
+The confirmation gate is an operational guard, not a cost estimate. Actual provider cost depends on the selected model, token usage, account pricing, retries, and provider policy at execution time. Do not hard-code a dollar estimate into benchmark provenance as if it were an invariant.
+
+A full run generates responses, validates execution provenance, builds the blinded human-review packet, and uploads artifacts. It does not publish or semantically score the run automatically.
 
 ## Stage 1: generation
 
@@ -27,6 +40,8 @@ Capture model/runtime responses before semantic benchmark annotations are opened
 - `canonical_urls`
 
 Provider/model/runtime provenance belongs in the surrounding execution artifact. Benchmark-only fields such as `expected_outcome`, acceptable practice IDs, required safety notes, and benchmark category must not be supplied to the model.
+
+`clarify` is intentionally different from the recommendation-contract word `ambiguous`: semantic generation uses `clarify` when the assistant should ask or preserve ambiguity among 2–3 plausible reviewed practices rather than prematurely selecting one. `resource_not_practice` is used when the right CBT Cards resource is outside the reviewed practice layer, such as a worksheet.
 
 ## Stage 2: blinded human review
 
@@ -68,5 +83,7 @@ The scorer fails on incomplete reviews by default. `--allow-incomplete` may be u
 - `contracts/practice-semantic-review-v1.schema.json`
 - `contracts/practice-semantic-review-report-v1.schema.json`
 - `contracts/practice-semantic-execution-v1.schema.json`
+
+The v1 execution schema now permits explicit reasoning/output-token settings while retaining backward compatibility with earlier interface-only v1 records. The current runner and execution gate require those settings for new real runs.
 
 These contracts support reproducible real-model runs but do not themselves claim that a hosted model has been evaluated.

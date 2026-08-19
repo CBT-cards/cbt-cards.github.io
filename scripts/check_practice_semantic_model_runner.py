@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Validate the frozen-context OpenAI practice-semantic runner without an API call."""
 from __future__ import annotations
-import importlib.util,json
+import importlib.util,json,tempfile
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 RUNNER=ROOT/"scripts/run_practice_semantic_openai.py"
 PROMPT=ROOT/"research/practice-semantic-model-prompt-v1.txt"
 SKILL=ROOT/"agents/cbt-cards/SKILL.md"
+WORKFLOW=ROOT/".github/workflows/run-practice-semantic-model-eval.yml"
 
 def fail(m): raise SystemExit("practice semantic model runner check failed: "+m)
 def load():
@@ -18,8 +19,10 @@ def load():
 def main():
     mod=load(); context,prov=mod.load_context()
     fake={"id":"sem-fixture-no-leak","user_message":"I keep checking a harmless message because I fear I missed something.","category":"SECRET_CATEGORY","expected_outcome":"SECRET_OUTCOME","acceptable_practice_ids":["SECRET_PRACTICE"],"required_safety_notes":["SECRET_SAFETY"]}
-    payload=mod.build_payload(model="test-model",user_message=fake["user_message"],prompt_text=PROMPT.read_text(),skill_text=SKILL.read_text(),context_text=context)
-    if payload.get("model")!="test-model" or payload.get("store") is not False: fail("model/store")
+    payload=mod.build_payload(model="gpt-5.6",user_message=fake["user_message"],prompt_text=PROMPT.read_text(),skill_text=SKILL.read_text(),context_text=context,reasoning_effort="none",max_output_tokens=2000)
+    if payload.get("model")!="gpt-5.6" or payload.get("store") is not False: fail("model/store")
+    if payload.get("reasoning")!={"effort":"none"}: fail("reasoning effort must be explicit")
+    if payload.get("max_output_tokens")!=2000: fail("max_output_tokens must be explicit")
     if "tools" in payload: fail("semantic runner must not enable web search/tools")
     inputs=payload.get("input")
     if not isinstance(inputs,list) or len(inputs)!=4: fail("expected 3 developer messages + 1 user message")
@@ -43,5 +46,22 @@ def main():
         values=value if isinstance(value,list) else [value]
         for v in values:
             if v in context: fail("sentinel unexpectedly present in frozen public context")
-    print("practice semantic model runner check passed: user_message-only benchmark input, frozen hashed context, strict output, no web search")
+    for bad_tokens in (255,8193):
+        try: mod.build_payload(model="gpt-5.6",user_message="x",prompt_text="p",skill_text="s",context_text="c",reasoning_effort="none",max_output_tokens=bad_tokens)
+        except SystemExit: pass
+        else: fail("runner accepted out-of-budget max_output_tokens")
+    workflow=WORKFLOW.read_text(encoding="utf-8")
+    for fragment in (
+        "default: dry-run",
+        "full-41",
+        "confirm_paid_run",
+        "RUN 41 CASES",
+        "--dry-run-out",
+        "--reasoning-effort",
+        "--max-output-tokens",
+        "if: inputs.run_mode == 'full-41'",
+    ):
+        if fragment not in workflow: fail("manual workflow missing cost/safety control: "+fragment)
+    if "OPENAI_API_KEY" not in workflow: fail("workflow lost API-key requirement")
+    print("practice semantic model runner check passed: frozen input, explicit request settings, dry-run default and guarded full-41 execution")
 if __name__=="__main__": main()

@@ -12,6 +12,8 @@
     "returned_models":{"type":"array","items":{"type":"string"},"uniqueItems":true},
     "runtime":{"type":"string","minLength":1},
     "api_endpoint":{"type":"string","format":"uri"},
+    "reasoning_effort":{"enum":["none","low","medium","high","xhigh","max"]},
+    "max_output_tokens":{"type":"integer","minimum":256,"maximum":8192},
     "eval_manifest_url":{"type":"string","format":"uri"},
     "eval_manifest_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
     "eval_shards":{"type":"array","minItems":2,"items":{"type":"object"}},
