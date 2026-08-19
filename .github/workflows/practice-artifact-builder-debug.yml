@@ -1,0 +1,36 @@
+name: Temporary practice artifact builder debug
+
+on:
+  push:
+    branches: [agent/practice-artifact-builder-v2]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate deterministic practice artifacts
+        run: python3 scripts/build_practice_artifacts.py --write
+      - name: Validate strict practice system
+        run: python3 scripts/check_practice_system.py
+      - name: Validate generated page in site graph
+        run: |
+          python3 scripts/check_site.py
+          python3 scripts/check_crawl_graph.py
+      - name: Commit generated artifacts to builder branch
+        if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/practice-rag.ndjson data/practice-rag-manifest.json data/practice-coverage.json practice/index.html
+          if git diff --cached --quiet; then
+            echo "No generated changes"
+          else
+            git commit -m "Generate hardened practice artifacts"
+            git push
+          fi

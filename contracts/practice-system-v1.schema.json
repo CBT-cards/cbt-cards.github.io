@@ -1,1 +1,196 @@
-{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://cbt-cards.github.io/contracts/practice-system-v1.schema.json","title":"CBT Cards practice system v1","type":"object","required":["schema_version","id","canonical","safety_scope","practices"],"properties":{"schema_version":{"const":"1.0"},"id":{"const":"cbt-cards-practice-v1"},"canonical":{"const":"https://cbt-cards.github.io/data/practice.json"},"safety_scope":{"type":"string","minLength":40},"practices":{"type":"array","minItems":11,"items":{"$ref":"#/$defs/practice"}}},"$defs":{"practice":{"type":"object","required":["id","title","canonical_url","mechanism_id","situation_ids","best_used_when","avoid_when","micro_action","prompt","reflection_question","evidence_ids","review_status","clinical_validation_status"],"properties":{"review_status":{"const":"editorial_and_safety_reviewed_for_publication"},"clinical_validation_status":{"const":"not_claimed"}}},"relation":{"type":"object","required":["from","to","type","note"]},"semantic_case":{"type":"object","required":["id","category","user_message","expected_outcome","acceptable_practice_ids","required_safety_notes"]},"rag_record":{"type":"object","required":["chunk_id","resource_id","canonical_url","locale","mechanism_id","text","sha256"]}}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cbt-cards.github.io/contracts/practice-system-v1.schema.json",
+  "title": "CBT Cards reviewed practice system v1",
+  "description": "Field-level contract for the canonical reviewed practice dataset plus reusable definitions for related ontology, evidence, recommendation, relation, RAG and interoperability records. Cross-file referential integrity is enforced by repository semantic validation.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "canonical",
+    "updated",
+    "review_status",
+    "clinical_validation_status",
+    "safety_scope",
+    "ontology_url",
+    "evidence_url",
+    "relations_url",
+    "recommendation_contract_url",
+    "practices"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "id": {"const": "cbt-cards-practice-v1"},
+    "canonical": {"const": "https://cbt-cards.github.io/data/practice.json"},
+    "updated": {"type": "string", "format": "date"},
+    "review_status": {"const": "editorial_and_safety_reviewed_for_publication"},
+    "clinical_validation_status": {"const": "not_claimed"},
+    "safety_scope": {"type": "string", "minLength": 80},
+    "ontology_url": {"const": "https://cbt-cards.github.io/data/practice-ontology.json"},
+    "evidence_url": {"const": "https://cbt-cards.github.io/data/practice-evidence.json"},
+    "relations_url": {"const": "https://cbt-cards.github.io/data/practice-relations.json"},
+    "recommendation_contract_url": {"const": "https://cbt-cards.github.io/data/practice-recommendations.json"},
+    "practices": {
+      "type": "array",
+      "minItems": 11,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/practice"}
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "nonempty_string": {"type": "string", "minLength": 1},
+    "id_string": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+    "string_list": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "practice": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "canonical_url",
+        "mechanism_id",
+        "situation_ids",
+        "best_used_when",
+        "avoid_when",
+        "micro_action",
+        "prompt",
+        "reflection_question",
+        "evidence_ids",
+        "review_status",
+        "clinical_validation_status"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^practice-[a-z0-9-]+$"},
+        "title": {"type": "string", "minLength": 3},
+        "canonical_url": {"type": "string", "format": "uri", "pattern": "^https://cbt-cards\\.github\\.io/practice/#practice-"},
+        "mechanism_id": {"$ref": "#/$defs/id_string"},
+        "situation_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^sit-[a-z0-9-]+$"}},
+        "best_used_when": {"$ref": "#/$defs/string_list"},
+        "avoid_when": {"type": "array", "minItems": 3, "uniqueItems": true, "items": {"type": "string", "minLength": 8}},
+        "micro_action": {"type": "string", "minLength": 8},
+        "prompt": {"type": "string", "minLength": 8},
+        "reflection_question": {"type": "string", "minLength": 8},
+        "evidence_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^ev-[a-z0-9-]+$"}},
+        "review_status": {"const": "editorial_and_safety_reviewed_for_publication"},
+        "clinical_validation_status": {"const": "not_claimed"}
+      },
+      "additionalProperties": false
+    },
+    "mechanism": {
+      "type": "object",
+      "required": ["id", "label", "description"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id_string"},
+        "label": {"type": "string", "minLength": 3},
+        "description": {"type": "string", "minLength": 20}
+      },
+      "additionalProperties": false
+    },
+    "situation": {
+      "type": "object",
+      "required": ["id", "label", "mechanism_ids"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^sit-[a-z0-9-]+$"},
+        "label": {"type": "string", "minLength": 20},
+        "mechanism_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id_string"}}
+      },
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["id", "evidence_class", "source_type", "title", "url", "claim_scope", "supports", "does_not_establish", "reviewed_on"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^ev-[a-z0-9-]+$"},
+        "evidence_class": {"enum": ["guideline_supported", "authoritative_self_help", "clinical_resource", "practical_editorial"]},
+        "source_type": {"$ref": "#/$defs/nonempty_string"},
+        "title": {"$ref": "#/$defs/nonempty_string"},
+        "url": {"type": "string", "format": "uri", "pattern": "^https://"},
+        "claim_scope": {"type": "string", "minLength": 30},
+        "supports": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id_string"}},
+        "does_not_establish": {"type": "string", "minLength": 30},
+        "reviewed_on": {"type": "string", "format": "date"}
+      },
+      "additionalProperties": false
+    },
+    "relation": {
+      "type": "object",
+      "required": ["from", "to", "type", "note"],
+      "properties": {
+        "from": {"type": "string", "pattern": "^practice-[a-z0-9-]+$"},
+        "to": {"type": "string", "pattern": "^practice-[a-z0-9-]+$"},
+        "type": {"enum": ["pairs_with", "often_precedes", "follow_up_with", "alternative_when", "not_same_as"]},
+        "note": {"type": "string", "minLength": 20}
+      },
+      "additionalProperties": false
+    },
+    "recommendation_example": {
+      "type": "object",
+      "required": ["id", "result", "practice_ids"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^rec-[a-z0-9-]+$"},
+        "situation_id": {"type": "string", "pattern": "^sit-[a-z0-9-]+$"},
+        "result": {"enum": ["match", "ambiguous", "no_match"]},
+        "practice_ids": {"type": "array", "maxItems": 3, "uniqueItems": true, "items": {"type": "string", "pattern": "^practice-[a-z0-9-]+$"}},
+        "why": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "semantic_case": {
+      "type": "object",
+      "required": ["id", "category", "user_message", "expected_outcome", "acceptable_practice_ids", "required_safety_notes"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^sem-[0-9]+$"},
+        "category": {"enum": ["fit", "ambiguity", "genuine-risk", "required-standard", "publication-boundary", "professional-boundary", "no-match", "progression"]},
+        "user_message": {"type": "string", "minLength": 10},
+        "expected_outcome": {"enum": ["match", "ambiguous", "no_match"]},
+        "acceptable_practice_ids": {"type": "array", "maxItems": 3, "uniqueItems": true, "items": {"type": "string", "pattern": "^practice-[a-z0-9-]+$"}},
+        "required_safety_notes": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "rag_record": {
+      "type": "object",
+      "required": ["chunk_id", "resource_id", "canonical_url", "locale", "mechanism_id", "review_status", "clinical_validation_status", "safety_scope", "text", "sha256"],
+      "properties": {
+        "chunk_id": {"type": "string", "pattern": "^practice-[a-z0-9-]+:en:v1$"},
+        "resource_id": {"type": "string", "pattern": "^practice-[a-z0-9-]+$"},
+        "canonical_url": {"type": "string", "format": "uri"},
+        "locale": {"const": "en"},
+        "mechanism_id": {"$ref": "#/$defs/id_string"},
+        "review_status": {"const": "editorial_and_safety_reviewed_for_publication"},
+        "clinical_validation_status": {"const": "not_claimed"},
+        "safety_scope": {"type": "string", "minLength": 80},
+        "text": {"type": "string", "minLength": 100},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "additionalProperties": false
+    },
+    "interoperability_fixture": {
+      "type": "object",
+      "required": ["client_class", "status", "entrypoint", "expected_resources", "claim"],
+      "properties": {
+        "client_class": {"type": "string", "minLength": 3},
+        "status": {"enum": ["repository_runner_available", "contract_fixture_documented", "ci_contract_exercised"]},
+        "entrypoint": {"type": "string", "format": "uri"},
+        "expected_resources": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "format": "uri"}},
+        "claim": {"type": "string", "minLength": 30}
+      },
+      "additionalProperties": false
+    }
+  },
+  "x-instance-contracts": {
+    "practice": "https://cbt-cards.github.io/data/practice.json",
+    "ontology": "https://cbt-cards.github.io/data/practice-ontology.json",
+    "evidence": "https://cbt-cards.github.io/data/practice-evidence.json",
+    "relations": "https://cbt-cards.github.io/data/practice-relations.json",
+    "recommendations": "https://cbt-cards.github.io/data/practice-recommendations.json",
+    "rag": "https://cbt-cards.github.io/data/practice-rag.ndjson",
+    "coverage": "https://cbt-cards.github.io/data/practice-coverage.json",
+    "interoperability": "https://cbt-cards.github.io/data/interoperability-fixtures.json"
+  }
+}
