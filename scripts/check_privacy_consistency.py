@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PRIVACY_PATH = ROOT / "privacy" / "index.html"
 AUDIT_PATH = ROOT / "MOBILE_PRIVACY_AUDIT.md"
+MOBILE_RELEASE_PATH = ROOT / "mobile-releases" / "index.html"
 CATALOG_PATH = ROOT / "data" / "catalog.json"
 LLMS_FULL_PATH = ROOT / "llms-full.txt"
 APPLE_URL = "https://apps.apple.com/us/app/cbt-cards-%D1%81bt-for-daily-use/id6737169041"
@@ -35,13 +36,29 @@ def require_fragments(text: str, fragments: tuple[str, ...], label: str) -> None
         fail(f"{label} missing required reconciliation text: {', '.join(missing)}")
 
 
+def current_ios_release(mobile_release: str) -> str:
+    match = re.search(
+        r"most recent version consistently observed.*?<strong>([^<]+)</strong>",
+        mobile_release,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if not match:
+        fail("mobile release history does not expose a parseable current Apple release")
+    value = match.group(1).strip()
+    if not value:
+        fail("mobile release history current Apple release is empty")
+    return value
+
+
 def main() -> None:
-    for path in (PRIVACY_PATH, AUDIT_PATH, CATALOG_PATH, LLMS_FULL_PATH):
+    for path in (PRIVACY_PATH, AUDIT_PATH, MOBILE_RELEASE_PATH, CATALOG_PATH, LLMS_FULL_PATH):
         if not path.exists():
             fail(f"missing required file: {path.relative_to(ROOT)}")
 
     privacy = PRIVACY_PATH.read_text(encoding="utf-8")
     audit = AUDIT_PATH.read_text(encoding="utf-8")
+    mobile_release = MOBILE_RELEASE_PATH.read_text(encoding="utf-8")
+    current_ios = current_ios_release(mobile_release)
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
     llms_full = LLMS_FULL_PATH.read_text(encoding="utf-8")
 
@@ -51,7 +68,7 @@ def main() -> None:
             "14 July 2026",
             "19 August 2026",
             "Store reconciliation: <strong>open</strong>",
-            "Version 3.0 CBT",
+            current_ios,
             "Identifiers",
             "Usage Data",
             "9 March 2026",
@@ -59,6 +76,7 @@ def main() -> None:
             "App info and performance",
             "Diary entries, check-in text, notes, and attached photos are reflection content.",
             "technical identifiers, crash diagnostics, performance telemetry, or aggregate usage events",
+            "/mobile-releases/",
             APPLE_URL,
             GOOGLE_URL,
             "/MOBILE_PRIVACY_AUDIT.md",
@@ -72,7 +90,7 @@ def main() -> None:
             "implementation verification pending",
             "19 August 2026",
             "14 July 2026",
-            "Version 3.0 CBT",
+            current_ios,
             "Identifiers",
             "Usage Data",
             "9 March 2026",
@@ -88,6 +106,8 @@ def main() -> None:
         "mobile privacy audit",
     )
 
+    if current_ios not in mobile_release:
+        fail("current iOS release disappeared from mobile release history")
     if 'href="https://cbt-cards.github.io/privacy/"' not in privacy:
         fail("privacy page missing canonical CBT Cards URL")
 
@@ -114,8 +134,9 @@ def main() -> None:
         fail("absolute privacy claims remain while store reconciliation is open: " + "; ".join(violations))
 
     print(
-        "privacy consistency check passed: local reflection content is separated from technical telemetry; "
-        "Apple/Google disclosure reconciliation is explicit and remains open; absolute public privacy slogans are blocked"
+        "privacy consistency check passed: privacy reconciliation matches the current mobile release history; "
+        "local reflection content is separated from technical telemetry; Apple/Google reconciliation remains open; "
+        "absolute public privacy slogans are blocked"
     )
 
 

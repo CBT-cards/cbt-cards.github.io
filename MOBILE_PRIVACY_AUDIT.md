@@ -28,14 +28,14 @@ This baseline must be rechecked against the exact current mobile source/build be
 
 Public listing: `https://apps.apple.com/us/app/cbt-cards-%D1%81bt-for-daily-use/id6737169041`
 
-Observed public metadata:
+Observed public metadata and release-history boundary:
 
-- current public release label: **Version 3.0 CBT**;
+- the separately verified public mobile release history reaches **Version 3.1 CBT IN ACTION**;
 - App Privacy lists **Identifiers** in the tracking category;
 - App Privacy lists **Usage Data** as not linked to identity;
-- marketing copy on the same listing uses broader tracking-free wording.
+- marketing copy on the listing uses broader tracking-free wording.
 
-The public page therefore contains claims that cannot all be treated as one precise technical statement. App Store Connect answers and the shipped iOS implementation need to be checked together.
+The public page therefore contains claims that cannot all be treated as one precise technical statement. App Store Connect answers and the shipped iOS implementation need to be checked together. The current-release label is sourced from the repository's separately verified `/mobile-releases/` history rather than maintained independently here.
 
 ### Google Play
 
@@ -61,7 +61,7 @@ The reverse is also true: local handling of reflection content does not justify 
 
 Before issue #3 can be closed, record all of the following for the current released builds:
 
-1. iOS source commit/tag and App Store build/version corresponding to **Version 3.0 CBT**.
+1. iOS source commit/tag and App Store build/version corresponding to **Version 3.1 CBT IN ACTION**.
 2. Android source commit/tag and the Play-distributed version/build.
 3. Exact Firebase SDKs and initialization/configuration in each build.
 4. Whether Analytics, Crashlytics, and Performance start before or after consent and what disabling consent changes in practice.
