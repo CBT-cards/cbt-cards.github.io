@@ -1,1 +1,55 @@
-{"schema_version":"1.0","updated":"2026-08-18","fixtures":[{"client_class":"OpenAI/ChatGPT-compatible","status":"repository_runner_available","entrypoint":"https://cbt-cards.github.io/scripts/run_model_openai.py","expected_resources":["https://cbt-cards.github.io/agents/cbt-cards/SKILL.md","https://cbt-cards.github.io/data/practice.json","https://cbt-cards.github.io/data/practice-rag.ndjson"],"claim":"Execution adapter exists; recommendation quality is evaluated separately."},{"client_class":"OpenClaw-style Agent Skills consumer","status":"contract_fixture_documented","entrypoint":"https://cbt-cards.github.io/agents/cbt-cards/INSTALL.md","expected_resources":["https://cbt-cards.github.io/agents/cbt-cards/SKILL.md","https://cbt-cards.github.io/agents/cbt-cards/PRACTICE_SYSTEM.md"],"claim":"Portable loading path documented; not claimed as continuously CI-executed."},{"client_class":"Hermes Agent-style skill consumer","status":"contract_fixture_documented","entrypoint":"https://cbt-cards.github.io/agents/cbt-cards/INSTALL.md","expected_resources":["https://cbt-cards.github.io/agents/cbt-cards/SKILL.md","https://cbt-cards.github.io/agents/cbt-cards/PRACTICE_SYSTEM.md"],"claim":"Portable loading path documented; not claimed as continuously CI-executed."},{"client_class":"generic HTTP/RAG client","status":"ci_contract_exercised","entrypoint":"https://cbt-cards.github.io/data/practice-rag.ndjson","expected_resources":["https://cbt-cards.github.io/data/practice.json","https://cbt-cards.github.io/data/practice-rag-manifest.json"],"claim":"Provider-neutral static resource contract is checked in repository CI."}]}
+{
+  "schema_version": "1.1",
+  "updated": "2026-08-20",
+  "purpose": "Provider-neutral interoperability metadata. Runtime execution claims are kept separate from content-quality evaluation.",
+  "fixtures": [
+    {
+      "client_class": "OpenAI/ChatGPT-compatible",
+      "status": "repository_runner_available",
+      "entrypoint": "https://cbt-cards.github.io/scripts/run_model_openai.py",
+      "expected_resources": [
+        "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
+        "https://cbt-cards.github.io/data/practice.json",
+        "https://cbt-cards.github.io/data/practice-rag.ndjson"
+      ],
+      "claim": "Execution adapter exists; recommendation quality is evaluated separately and no hosted-model result is implied by this fixture."
+    },
+    {
+      "client_class": "OpenClaw-style Agent Skills consumer",
+      "status": "contract_fixture_documented",
+      "entrypoint": "https://cbt-cards.github.io/agents/cbt-cards/INSTALL.md",
+      "expected_resources": [
+        "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
+        "https://cbt-cards.github.io/agents/cbt-cards/PRACTICE_SYSTEM.md"
+      ],
+      "claim": "Portable loading path documented; not claimed as continuously CI-executed."
+    },
+    {
+      "client_class": "Hermes Agent-style skill consumer",
+      "status": "contract_fixture_documented",
+      "entrypoint": "https://cbt-cards.github.io/agents/cbt-cards/INSTALL.md",
+      "expected_resources": [
+        "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
+        "https://cbt-cards.github.io/agents/cbt-cards/PRACTICE_SYSTEM.md"
+      ],
+      "claim": "Portable loading path documented; not claimed as continuously CI-executed."
+    },
+    {
+      "client_class": "generic HTTP/RAG client",
+      "status": "ci_contract_exercised",
+      "entrypoint": "https://cbt-cards.github.io/examples/cbt_cards_http_client.py",
+      "expected_resources": [
+        "https://cbt-cards.github.io/data/practice-rag-manifest.json",
+        "https://cbt-cards.github.io/data/practice-rag.ndjson",
+        "https://cbt-cards.github.io/data/practice.json"
+      ],
+      "capabilities": [
+        "manifest_hash_verification",
+        "exact_practice_lookup",
+        "mechanism_filter",
+        "explicit_no_match"
+      ],
+      "claim": "Dependency-free reference consumer is executed offline in repository CI. It verifies the canonical bundle and supports exact stable-ID/mechanism filtering only; it does not perform semantic routing or model-quality evaluation."
+    }
+  ]
+}

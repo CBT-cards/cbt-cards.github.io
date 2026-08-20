@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check practice-system helper syntax
-        run: python3 -m py_compile scripts/build_practice_artifacts.py scripts/check_practice_system.py scripts/check_practice_system_strict.py scripts/check_practice_contract.py
+        run: python3 -m py_compile scripts/build_practice_artifacts.py scripts/check_practice_system.py scripts/check_practice_system_strict.py scripts/check_practice_contract.py scripts/check_interoperability.py examples/cbt_cards_http_client.py
       - name: Validate deterministic practice artifacts
         run: python3 scripts/build_practice_artifacts.py --check
       - name: Validate portable practice-system contract
