@@ -2,7 +2,7 @@
   "schema_version": "1.1",
   "id": "cbt-cards-outreach-targets-v1",
   "researched_on": "2026-08-19",
-  "requalified_on": "2026-08-19",
+  "requalified_on": "2026-08-20",
   "policy": "Prioritize high-fit, inspectable resources. Do not mass-submit the same pitch. Check each target's current contribution rules immediately before contacting them, preserve CBT Cards safety/evidence/licensing boundaries, and use the smallest canonical resource that fits the directory. A target is not submitted merely because its process was researched.",
   "status_definitions": {
     "not_contacted": "Current fit exists but the submission path has not yet been fully rechecked.",
@@ -78,13 +78,15 @@
       "id": "goose-agent-skills",
       "name": "block/agent-skills",
       "category": "agent-skill-marketplace",
-      "evidence_url": "https://github.com/block/agent-skills",
-      "evidence": "Goose Skills Marketplace source repository welcomes community skills through pull requests and validation.",
+      "evidence_url": "https://github.com/block/agent-skills/blob/main/CONTRIBUTING.md",
+      "evidence": "Current contribution guide welcomes community skills and requires contributors to fork the repository, create a branch, add a root-level skill folder with SKILL.md, and open a pull request. Submissions are automatically validated by CI; no issue-based submission substitute is documented.",
       "target_canonical_url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
       "priority": "A",
-      "outreach_method": "pull_request_after_format_and_license_review",
-      "status": "not_contacted",
-      "fit_note": "Recheck current packaging/license requirements before adapting the portable skill; do not weaken safety/publication boundaries."
+      "outreach_method": "fork_and_pull_request_after_license_review",
+      "status": "ready_requires_fork",
+      "checked_on": "2026-08-20",
+      "blocker": "The documented submission path requires a fork and pull request, while the connected GitHub tool cannot fork external repositories. The target repository is Apache-2.0, so a future copied skill must also preserve CBT Cards' actual license explicitly rather than imply catalog licensing applies to CBT Cards content.",
+      "fit_note": "Strong portable-skill fit for Goose and other Agent Skills clients; keep the non-clinical scope, provenance, safety boundaries, and active CBT Cards license explicit in any future submission."
     },
     {
       "id": "jpeetz-agent-skills",

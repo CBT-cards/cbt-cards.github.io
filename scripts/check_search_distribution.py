@@ -86,7 +86,7 @@ def main() -> None:
             if field not in item:
                 fail(f"weekly checkpoint {index} missing {field}")
 
-    if outreach.get("schema_version") != "1.1" or outreach.get("researched_on") != "2026-08-19" or outreach.get("requalified_on") != "2026-08-19":
+    if outreach.get("schema_version") != "1.1" or outreach.get("researched_on") != "2026-08-19" or outreach.get("requalified_on") != "2026-08-20":
         fail("outreach research/requalification version/date mismatch")
     targets = outreach.get("targets")
     if not isinstance(targets, list) or len(targets) < 10:
@@ -124,7 +124,7 @@ def main() -> None:
         for field in ("evidence", "outreach_method", "fit_note"):
             if not str(target.get(field, "")).strip():
                 fail(f"outreach target {target_id} missing {field}")
-        if target.get("checked_on") == "2026-08-19":
+        if target.get("checked_on") in {"2026-08-19", "2026-08-20"}:
             requalified += 1
         if status in {"ready_requires_fork", "blocked_by_catalog_license_policy"}:
             blocked_or_ready += 1

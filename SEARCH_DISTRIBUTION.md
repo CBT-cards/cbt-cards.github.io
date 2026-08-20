@@ -1,6 +1,6 @@
 # Search distribution and citation growth
 
-Baseline: **19 August 2026**
+Baseline: **19 August 2026** · Outreach requalification updated: **20 August 2026**
 
 This is the operating plan for search discovery, webmaster-tool measurement, IndexNow evidence, and selective external citation outreach after the CBT Cards public-library pivot. It deliberately separates observable facts from account-only metrics. A `site:` search sample is not an official index count, and a green deploy alone is not proof that a notification request authenticated successfully.
 
@@ -56,11 +56,12 @@ The list is a queue, not a mail merge. Outreach should be selective:
 
 ## Current high-fit targets
 
-The 19 August process recheck changed several targets from vague `not_contacted` entries into explicit execution states:
+The 19–20 August process rechecks changed several targets from vague `not_contacted` entries into explicit execution states:
 
 - `dreamingechoes/awesome-mental-health` is topically suitable for the reviewed practice library. Its current guide requires one pull request per resource and permits small tools/apps without treating them as therapy-efficacy submissions. The content fit is ready, but the connected GitHub environment cannot fork the target repository, so the target is `ready_requires_fork` rather than falsely `submitted`.
 - `theimpossibleastronaut/awesome-mentalhealth` is a strong fit for the free browser-local worksheets and accepts English HTTPS resources. No documented issue-based suggestion path was found; repository contribution remains the defensible route, so it is also `ready_requires_fork` here.
 - Agent Skill Exchange requires a fork + pull request into its catalog. The technical fit is strong, but the same fork limitation applies and any copied/adapted skill must retain CBT Cards' active license rather than inherit a catalog license by implication.
+- `block/agent-skills`, the source repository for the Goose Skills Marketplace, was rechecked on 20 August. Its current contribution guide explicitly requires a fork, branch, root-level skill folder and pull request, with CI validation. The technical fit is strong, but the connected GitHub environment cannot perform the required fork, so it is `ready_requires_fork`; its Apache-2.0 repository license also means any future copied CBT Cards skill must preserve the actual CBT Cards license explicitly.
 - `dmgrok/agent_skills_directory` now resolves to `dmgrok/agent-plugins`. Its New Provider issue flow is technically executable and automated, but the current template explicitly expects a permissive-style repository license such as MIT or Apache 2.0. CBT Cards remains CC BY-NC-SA 4.0, so this target is `blocked_by_catalog_license_policy` until issue #7 is deliberately resolved.
 - `JPeetz/agent-skills` is similarly held behind its current skill-license expectations rather than being submitted with a mislabeled license.
 
