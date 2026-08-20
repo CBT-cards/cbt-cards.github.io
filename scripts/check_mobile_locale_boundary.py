@@ -4,12 +4,14 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LOCALES = ROOT / "data" / "locales.json"
 LANGUAGES_PAGE = ROOT / "languages" / "index.html"
 AUDIT = ROOT / "MOBILE_LOCALE_AUDIT.md"
+MOBILE_RELEASE = ROOT / "mobile-releases" / "index.html"
 LOCALIZATION = ROOT / "LOCALIZATION.md"
 LLMS_FULL = ROOT / "llms-full.txt"
 
@@ -21,8 +23,22 @@ def fail(message: str) -> None:
     raise SystemExit(f"mobile locale boundary check failed: {message}")
 
 
+def current_ios_release(mobile_release: str) -> str:
+    match = re.search(
+        r"most recent version consistently observed.*?<strong>([^<]+)</strong>",
+        mobile_release,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if not match:
+        fail("mobile release history does not expose a parseable current Apple release")
+    value = match.group(1).strip()
+    if not value:
+        fail("mobile release history current Apple release is empty")
+    return value
+
+
 def main() -> None:
-    for path in (LOCALES, LANGUAGES_PAGE, AUDIT, LOCALIZATION, LLMS_FULL):
+    for path in (LOCALES, LANGUAGES_PAGE, AUDIT, MOBILE_RELEASE, LOCALIZATION, LLMS_FULL):
         if not path.exists():
             fail(f"missing required file: {path.relative_to(ROOT)}")
 
@@ -41,17 +57,21 @@ def main() -> None:
     if languages_page.count(SCOPE_TEXT) != len(locales):
         fail("generated languages page does not expose website-only scope for every locale")
 
+    mobile_release = MOBILE_RELEASE.read_text(encoding="utf-8")
+    current_ios = current_ios_release(mobile_release)
     audit = AUDIT.read_text(encoding="utf-8")
     for fragment in (
         "mobile build verification pending",
         "19 August 2026",
-        "Version 3.0 CBT",
+        current_ios,
         "Google Play",
         "Android language support therefore remains **unverified**",
         "Use `data/locales.json` and `data/translations.jsonl` to answer questions about the public website/library.",
     ):
         if fragment not in audit:
             fail(f"mobile locale audit missing fragment: {fragment}")
+    if "/mobile-releases/" not in audit:
+        fail("mobile locale audit must name the mobile release-history source")
     for language in APPLE_LANGUAGES:
         if f"- {language}" not in audit:
             fail(f"mobile locale audit missing observed Apple language: {language}")
@@ -72,7 +92,7 @@ def main() -> None:
 
     print(
         f"mobile locale boundary check passed: {len(locales)} website locale states remain separate "
-        "from observed/unverified mobile-store language support"
+        f"from observed/unverified mobile-store language support; current iOS release is {current_ios}"
     )
 
 

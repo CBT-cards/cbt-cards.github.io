@@ -20,7 +20,7 @@ These rows describe the website only. A Russian machine draft does not imply Rus
 
 ## Apple App Store observation
 
-The public Apple App Store listing rechecked on 19 August 2026 identifies the release as **Version 3.0 CBT** and lists these languages:
+The separately verified public mobile release history rechecked on 19 August 2026 reaches **Version 3.1 CBT IN ACTION**. The public Apple App Store listing observed during the locale audit lists these languages:
 
 - English
 - French
@@ -29,7 +29,7 @@ The public Apple App Store listing rechecked on 19 August 2026 identifies the re
 - Portuguese
 - Spanish
 
-This is an observed store listing, not yet a verified app-source matrix. It should be reconciled against the exact iOS build/source before CBT Cards describes those six languages as implemented mobile locales outside the store observation itself.
+This is an observed store listing, not yet a verified app-source matrix. It should be reconciled against the exact iOS build/source before CBT Cards describes those six languages as implemented mobile locales outside the store observation itself. The current-release label is sourced from `/mobile-releases/` rather than maintained independently in this audit.
 
 ## Google Play observation
 
@@ -41,7 +41,7 @@ Earlier project/release notes referenced additional languages such as Japanese, 
 
 ## Required verification before issue #5 can close
 
-1. Record the current iOS source commit/tag and distributed App Store build corresponding to Version 3.0 CBT.
+1. Record the current iOS source commit/tag and distributed App Store build corresponding to Version 3.1 CBT IN ACTION.
 2. Inspect the app's actual iOS localization resources and runtime locale configuration.
 3. Record the current Android source commit/tag and distributed Google Play version/build.
 4. Inspect Android localization resources and runtime locale configuration.
