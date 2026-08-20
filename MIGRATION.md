@@ -1,23 +1,25 @@
 # CBT Cards migration inventory
 
-Last external redirect verification: **19 August 2026**
+Last external redirect verification: **20 August 2026**
 
 This inventory describes the redirects that are required on the legacy `metalhatscats.com` host. It does **not** claim that a redirect exists merely because a target was planned in an earlier migration configuration.
 
-| Old MetalHatsCats URL | Required CBT Cards target | Owner | External status on 2026-08-19 |
+| Old MetalHatsCats URL | Required CBT Cards target | Owner | External status on 2026-08-20 |
 | --- | --- | --- | --- |
-| `https://metalhatscats.com/products/cbt-cards` | `https://cbt-cards.github.io/` | legacy MetalHatsCats host | **redirect not observed**; legacy product page still resolves |
-| `https://metalhatscats.com/products/cbt-cards/privacy` | `https://cbt-cards.github.io/privacy/` | legacy MetalHatsCats host | **redirect not observed**; URL remains on legacy host |
-| `https://metalhatscats.com/products/cbt-cards/terms` | `https://cbt-cards.github.io/terms/` | legacy MetalHatsCats host | **redirect not observed**; URL remains on legacy host |
-| `https://metalhatscats.com/cbt` | `https://cbt-cards.github.io/how-it-works/` | legacy MetalHatsCats host | **redirect not observed**; legacy CBT Toolkit page still resolves |
-| `https://metalhatscats.com/cbt/cards` | `https://cbt-cards.github.io/features/` | legacy MetalHatsCats host | redirect **not verified** in the 2026-08-19 fetch; legacy `/cbt` surface remains live |
-| `https://metalhatscats.com/cbt/metaphors` | `https://cbt-cards.github.io/features/` | legacy MetalHatsCats host | redirect **not verified** in the 2026-08-19 fetch; legacy `/cbt` surface remains live |
-| `https://metalhatscats.com/cbt/protocols` and protocol pages | `https://cbt-cards.github.io/how-it-works/` | legacy MetalHatsCats host | redirect **not verified** in the 2026-08-19 fetch; legacy `/cbt` surface remains live |
-| `https://metalhatscats.com/news/cbt-cards-app` | `https://cbt-cards.github.io/` | legacy MetalHatsCats host | redirect **not verified** in the 2026-08-19 fetch |
+| `https://metalhatscats.com/products/cbt-cards` | `https://cbt-cards.github.io/` | legacy MetalHatsCats host | **redirect not observed**; legacy product page still renders independently |
+| `https://metalhatscats.com/products/cbt-cards/privacy` | `https://cbt-cards.github.io/privacy/` | legacy MetalHatsCats host | **redirect not observed**; URL normalizes only to a trailing-slash page on the legacy host |
+| `https://metalhatscats.com/products/cbt-cards/terms` | `https://cbt-cards.github.io/terms/` | legacy MetalHatsCats host | **redirect not observed**; URL normalizes only to a trailing-slash page on the legacy host |
+| `https://metalhatscats.com/cbt` | `https://cbt-cards.github.io/how-it-works/` | legacy MetalHatsCats host | **redirect not observed**; legacy CBT Toolkit page still renders independently |
+| `https://metalhatscats.com/cbt/cards` | `https://cbt-cards.github.io/features/` | legacy MetalHatsCats host | direct fetch remained inconclusive; the live `/cbt` page still links to this route, so the redirect requirement remains open |
+| `https://metalhatscats.com/cbt/metaphors` | `https://cbt-cards.github.io/features/` | legacy MetalHatsCats host | direct fetch remained inconclusive; the live `/cbt` page still links to this route, so the redirect requirement remains open |
+| `https://metalhatscats.com/cbt/protocols` and protocol pages | `https://cbt-cards.github.io/how-it-works/` | legacy MetalHatsCats host | direct fetch remained inconclusive; the live `/cbt` page still links to this route, so the redirect requirement remains open |
+| `https://metalhatscats.com/news/cbt-cards-app` | `https://cbt-cards.github.io/` | legacy MetalHatsCats host | direct fetch remained inconclusive; keep as a redirect requirement until deployed HTTP behavior is verified |
 
-## Why the status changed
+## Verification history
 
-An earlier version of this file marked the mappings as `implemented`. That described the intended legacy-host configuration, not an externally verified HTTP outcome. The 19 August 2026 recheck found that the main legacy CBT Cards product page, its privacy/terms pages, and the `/cbt` toolkit page still resolve on `metalhatscats.com`. The inventory now records observable status instead of treating configuration intent as deployment proof.
+An earlier version of this file marked the mappings as `implemented`. That described intended legacy-host configuration, not externally verified HTTP behavior.
+
+The 19 August 2026 recheck established that the main legacy product, privacy/terms, and `/cbt` surfaces were still live. The 20 August 2026 recheck confirmed the same observable state: the product page and CBT Toolkit remain independent MetalHatsCats pages, while privacy and terms normalize only within the legacy host. Deeper CBT routes remain linked from the live toolkit page but could not be fetched reliably enough to claim either a redirect or an independent page.
 
 See [`LEGACY_REDIRECT_AUDIT.md`](LEGACY_REDIRECT_AUDIT.md) for the verification record and remaining external work.
 

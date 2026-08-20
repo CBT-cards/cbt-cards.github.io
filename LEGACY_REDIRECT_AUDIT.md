@@ -1,21 +1,21 @@
 # Legacy CBT Cards redirect audit
 
-Verification date: **19 August 2026**
+Verification date: **20 August 2026**
 
 Scope: public HTTP/search behavior only. This repository cannot modify the legacy `metalhatscats.com` deployment.
 
 ## Observed live legacy surfaces
 
-The external recheck found these URLs still resolving as independent MetalHatsCats content rather than redirecting to the standalone CBT Cards site:
+The 20 August external recheck confirmed these URLs still resolving as independent MetalHatsCats content rather than redirecting to the standalone CBT Cards site:
 
 - `https://metalhatscats.com/products/cbt-cards`
 - `https://metalhatscats.com/products/cbt-cards/privacy` (normalizes to a trailing-slash URL on the same host)
 - `https://metalhatscats.com/products/cbt-cards/terms` (normalizes to a trailing-slash URL on the same host)
 - `https://metalhatscats.com/cbt`
 
-Search results also continue to expose both the legacy CBT Cards product page and the MetalHatsCats CBT Toolkit page as independent results. The duplicate product/knowledge surface therefore remains externally visible.
+The live `/cbt` page continues to expose links for CBT Cards, CBT Metaphors, and CBT Protocols. Direct fetches of `/cbt/cards`, `/cbt/metaphors`, `/cbt/protocols`, and `/news/cbt-cards-app` were inconclusive in this verification environment, so no redirect success is claimed for those routes. They remain explicit migration requirements until a successful external HTTP check records their status and `Location` target.
 
-The 2026-08-19 fetch for deeper routes such as `/cbt/cards`, `/cbt/metaphors`, `/cbt/protocols`, and `/news/cbt-cards-app` was inconclusive. They remain redirect requirements until a successful external HTTP check proves otherwise.
+This refresh does not treat absence from a sampled search query as proof of de-indexing. The direct live legacy pages are sufficient to keep the duplicate-authority dependency open.
 
 ## Why this matters
 
