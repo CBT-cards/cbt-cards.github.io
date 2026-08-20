@@ -24,10 +24,14 @@ CBT Cards is a public library of practical reflection resources for people and A
 - Recommendation contract: https://cbt-cards.github.io/data/practice-recommendations.json
 - RAG distribution: https://cbt-cards.github.io/data/practice-rag.ndjson
 - RAG manifest + SHA-256: https://cbt-cards.github.io/data/practice-rag-manifest.json
+- Runnable generic HTTP/RAG client: https://cbt-cards.github.io/examples/cbt_cards_http_client.py
+- Interoperability/client status: https://cbt-cards.github.io/data/interoperability-fixtures.json
 - Semantic evals: https://cbt-cards.github.io/data/practice-semantic-evals.json
 - Agent guide: https://cbt-cards.github.io/agents/cbt-cards/PRACTICE_SYSTEM.md
 
 Routing rule: start from the user's plain-language situation, not a diagnosis. Prefer one reviewed practice. Preserve `avoid_when`. Return `no_match` instead of inventing a practice when no reviewed fit exists. Genuine danger, required safety/professional/accessibility rules, and medical/legal/financial/safeguarding decisions are outside practice routing.
+
+The generic reference client is an integration/contract path, not a semantic router. It verifies the canonical RAG manifest/distribution and per-record hashes, preserves canonical URLs plus review/safety metadata, and supports exact stable practice IDs or exact mechanism filters only. Unknown exact IDs/mechanisms return `no_match`. Its CI execution is not model-quality or clinical-quality evidence.
 
 ## Review layers
 - Raw-source publication authority: https://cbt-cards.github.io/data/toolkit-review.json
