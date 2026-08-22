@@ -1,5 +1,5 @@
 # CBT Cards — extended public index
-Updated: 2026-08-19
+Updated: 2026-08-22
 
 ## Identity and safety boundary
 CBT Cards is a public reflection library for people and AI assistants. Public resources are general wellness and education material, not diagnosis, treatment, emergency support, or individualized medical advice. The original mobile app remains a separately documented product surface.
@@ -100,6 +100,7 @@ Practice-semantic runner: https://cbt-cards.github.io/scripts/run_practice_seman
 Generation and scoring are separate. Benchmark expected fields remain hidden during generation. Deterministic baselines are harness checks, not model-quality or clinical-quality evidence.
 
 ## Portable agent skill
+Human quick start: https://cbt-cards.github.io/agents/get-started/
 Latest alias v1.8.0: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
 Manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
 Immutable: https://cbt-cards.github.io/agents/cbt-cards/v1.8.0/SKILL.md
@@ -123,6 +124,9 @@ Legacy redirect audit: https://github.com/CBT-cards/cbt-cards.github.io/blob/mai
 Runtime images/fonts are protected by an asset-budget gate. Search-provider metrics remain external until actually imported; missing metrics are null rather than invented. Legacy-host redirects are not considered implemented until the legacy host actually redirects.
 
 ## Discovery, release and citation
+Contact: https://cbt-cards.github.io/contact/
+Partnerships: https://cbt-cards.github.io/partnerships/
+Editorial visual manifest: https://cbt-cards.github.io/data/visuals.json
 Catalog: https://cbt-cards.github.io/data/catalog.json
 Schema manifest: https://cbt-cards.github.io/schemas/index.json
 Changelog: https://cbt-cards.github.io/data/changelog.json

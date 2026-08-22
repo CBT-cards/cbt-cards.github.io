@@ -69,7 +69,7 @@ These are lab measurements, not field Core Web Vitals.
 
 ## Search/distribution snapshot
 
-- sitemap inventory: 38 public URLs after mobile-release-history reconciliation.
+- sitemap inventory: 41 public URLs after adding Contact, Partnerships, and the AI get-started guide; noindex localization previews are excluded.
 - `OAI-SearchBot` is explicitly allowed.
 - IndexNow runs after deployment and produces an observable receipt rather than hiding failures behind `continue-on-error`.
 - an eight-week search measurement ledger exists.

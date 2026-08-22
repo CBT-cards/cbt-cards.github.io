@@ -22,6 +22,7 @@ class PageParser(HTMLParser):
         self.h1 = 0
         self.description = None
         self.canonical = None
+        self.robots = ""
         self.links = []
         self.jsonld = []
         self._script_type = None
@@ -35,6 +36,8 @@ class PageParser(HTMLParser):
             self.h1 += 1
         elif tag == "meta" and attrs.get("name") == "description":
             self.description = attrs.get("content")
+        elif tag == "meta" and attrs.get("name") == "robots":
+            self.robots = attrs.get("content", "")
         elif tag == "link" and attrs.get("rel") == "canonical":
             self.canonical = attrs.get("href")
         elif tag == "a" and attrs.get("href"):
@@ -118,9 +121,9 @@ for path in html_files:
         errors.append(f"{rel}: missing canonical")
     elif not parser.canonical.startswith(SITE_ORIGIN + "/"):
         errors.append(f"{rel}: canonical is outside the site origin: {parser.canonical}")
-    elif parser.canonical in canonicals:
+    elif "noindex" not in parser.robots.lower() and parser.canonical in canonicals:
         errors.append(f"{rel}: duplicate canonical {parser.canonical}")
-    else:
+    elif "noindex" not in parser.robots.lower():
         canonicals.add(parser.canonical)
 
     for raw in parser.jsonld:

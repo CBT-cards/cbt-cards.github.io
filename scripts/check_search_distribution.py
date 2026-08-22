@@ -46,8 +46,9 @@ def main() -> None:
     ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
     sitemap_urls = [node.text for node in sitemap_root.findall("s:url/s:loc", ns) if node.text]
     baseline = measurement.get("baseline", {})
-    if baseline.get("sitemap_url_count") != len(sitemap_urls):
-        fail(f"baseline sitemap count {baseline.get('sitemap_url_count')} does not match current sitemap {len(sitemap_urls)}")
+    current = measurement.get("current", {})
+    if current.get("sitemap_url_count") != len(sitemap_urls):
+        fail(f"current sitemap count {current.get('sitemap_url_count')} does not match sitemap {len(sitemap_urls)}")
 
     sample = baseline.get("public_search_sample", {})
     method = str(sample.get("method", ""))

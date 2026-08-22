@@ -31,7 +31,7 @@ def main() -> None:
     migration_plain = migration.replace("**", "")
 
     for fragment in (
-        "19 August 2026",
+        "20 August 2026",
         "redirect not observed",
         "not verified",
         "https://cbt-cards.github.io/",
@@ -43,7 +43,7 @@ def main() -> None:
         fail("MIGRATION.md still labels legacy redirects as implemented without deployment proof")
 
     for fragment in (
-        "19 August 2026",
+        "20 August 2026",
         "public HTTP/search behavior only",
         "Required external changes",
         "scripts/check_legacy_boundary.py",

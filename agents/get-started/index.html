@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Use CBT Cards with an AI agent — simple access guide</title>
+<meta name="description" content="Give an AI assistant safe read-only access to CBT Cards reviewed practices without an account or API key, with copy-paste prompts and advanced Agent Skill options." />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href="https://cbt-cards.github.io/agents/get-started/" />
+<link rel="stylesheet" href="/styles.css?v=20260822" />
+<link rel="icon" href="/assets/app-icon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Use CBT Cards with an AI agent" />
+<meta property="og:description" content="A simple, provider-neutral guide to public reviewed practices, privacy boundaries, prompts, and Agent Skills." />
+<meta property="og:url" content="https://cbt-cards.github.io/agents/get-started/" />
+<meta property="og:image" content="https://cbt-cards.github.io/assets/ai-agent-public-private.png" />
+<meta property="og:image:alt" content="The CBT Cards mascot passes a blank public practice card to a neutral assistant while a closed personal notebook stays separate." />
+<meta property="og:image:width" content="1536" />
+<meta property="og:image:height" content="1024" />
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CBT Cards","item":"https://cbt-cards.github.io/"},{"@type":"ListItem","position":2,"name":"For AI","item":"https://cbt-cards.github.io/agents/"},{"@type":"ListItem","position":3,"name":"Get started","item":"https://cbt-cards.github.io/agents/get-started/"}]},{"@type":"HowTo","name":"Use CBT Cards with an AI agent","description":"Give an AI assistant read-only access to CBT Cards public reviewed practices while preserving safety and privacy boundaries.","dateModified":"2026-08-22","step":[{"@type":"HowToStep","position":1,"name":"Choose a public entry point","text":"Use the simple guide, reviewed Practice Finder, or portable Agent Skill URL."},{"@type":"HowToStep","position":2,"name":"Give the agent a bounded instruction","text":"Ask for one reviewed practice, require avoid_when to be preserved, and require no_match when no safe fit exists."},{"@type":"HowToStep","position":3,"name":"Open the canonical source","text":"Keep the returned CBT Cards URL, review status, and safety scope visible."},{"@type":"HowToStep","position":4,"name":"Keep private content separate","text":"Do not assume the agent can access the CBT Cards app journal, check-ins, backup, or account data."}]}]}</script>
+</head>
+<body data-section="library" data-visual="ai-agent-public-private">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.webp" width="46" height="46" alt="" decoding="async" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/practice/">Practice</a><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/agents/">For AI</a><a href="/about/">About</a></nav><a class="download" href="/practice/">Find a practice</a></div></header>
+<main id="main">
+<section class="page-hero"><div class="wrap"><div class="crumb"><a href="/">CBT Cards</a> / <a href="/agents/">For AI</a> / Get started</div><h1>Your AI agent already has a public door.</h1><p class="lede">CBT Cards public resources are read-only and open on the web. You do not need a CBT Cards account or API key to let a capable assistant read them.</p></div></section>
+<figure class="article-visual"><picture><source type="image/webp" srcset="/assets/ai-agent-public-private-560w.webp 560w, /assets/ai-agent-public-private.webp 1024w" sizes="(max-width: 760px) calc(100vw - 28px), 1180px" /><img src="/assets/ai-agent-public-private.webp" width="1024" height="683" alt="The CBT Cards mascot passes a blank public practice card to a neutral assistant while a closed personal notebook stays separate." fetchpriority="high" decoding="async" /></picture><figcaption>The public library can be shared with an assistant; your private notebook is a separate surface.</figcaption></figure>
+<section class="section alt"><div class="wrap prose">
+<h2>The simplest route</h2>
+<div class="step-grid">
+<article class="step-card"><div class="number">1</div><h3>Open your assistant</h3><p>Use an assistant that can open public web links. Do not paste private diary or check-in content unless you deliberately choose to share it with that service.</p></article>
+<article class="step-card"><div class="number">2</div><h3>Give it one bounded prompt</h3><p>Ask for one reviewed practice, require the safety exclusions, and allow <code>no_match</code>.</p></article>
+<article class="step-card"><div class="number">3</div><h3>Keep the source visible</h3><p>Ask the assistant to return the canonical CBT Cards URL and explain why the practice fits.</p></article>
+</div>
+<h2>Copy this prompt</h2>
+<div class="prompt-box"><pre>Use only reviewed CBT Cards practices from https://cbt-cards.github.io/practice/ and its linked canonical data.
+
+My situation is: [describe one ordinary, non-urgent situation].
+
+Return at most one practice. Explain why it fits, preserve every “avoid when” condition, link the canonical CBT Cards page, and return no_match if the situation involves genuine danger, urgent action, a required safety/professional/accessibility rule, a medical/legal/financial/safeguarding decision, or no reviewed fit.</pre></div>
+<h2>What you can ask for</h2>
+<div class="channel-grid">
+<article class="channel-card"><h3>Choose one practice</h3><p>Start from a plain-language situation rather than a diagnosis.</p><p><a href="/practice/">Reviewed Practice Finder →</a></p></article>
+<article class="channel-card"><h3>Explain one technique</h3><p>Use a reviewed learning guide with sources, examples, and limits.</p><p><a href="/learn/">Learning guides →</a></p></article>
+<article class="channel-card"><h3>Guide a blank worksheet</h3><p>Use prompts one at a time. The public worksheet itself has no submit action.</p><p><a href="/worksheets/">Browser-local worksheets →</a></p></article>
+</div>
+<h2>What access does not mean</h2>
+<div class="boundary-box"><strong>No private-app access.</strong> The public site does not give an agent access to your CBT Cards mobile journal, notes, check-ins, photos, backups, device storage, or accounts. Public resources are general wellness and educational material, not diagnosis, treatment, emergency support, or qualified professional advice.</div>
+<h2>Advanced options</h2>
+<p>If your agent supports portable Agent Skills, use the canonical <a href="/agents/cbt-cards/SKILL.md"><code>SKILL.md</code></a> and follow the <a href="/agents/cbt-cards/INSTALL.md">installation guide</a>. Developers can use the <a href="/examples/cbt_cards_http_client.py">dependency-free HTTP/RAG reference client</a>, stable schemas, and versioned manifests.</p>
+<p><a class="store dark" href="/agents/">Open the technical integration hub</a> <a class="store" href="/contact/">Ask an integration question</a></p>
+</div></section>
+</main>
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/agents/">For AI</a><a href="/practice/">Practice</a><a href="/worksheets/">Worksheets</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a></nav></div></footer>
+</body>
+</html>

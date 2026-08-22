@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "name": "CBT Cards public resource catalog",
   "canonical": "https://cbt-cards.github.io/data/catalog.json",
-  "updated": "2026-08-19",
+  "updated": "2026-08-22",
   "license": "https://cbt-cards.github.io/LICENSE",
   "product": {
     "id": "cbt-cards",
@@ -716,6 +716,35 @@
       "url": "https://cbt-cards.github.io/mobile-releases/",
       "title": "CBT Cards mobile release history",
       "updated": "2026-08-19"
+    },
+    {
+      "id": "contact",
+      "type": "support",
+      "url": "https://cbt-cards.github.io/contact/",
+      "title": "Contact CBT Cards",
+      "updated": "2026-08-22"
+    },
+    {
+      "id": "editorial-visuals",
+      "type": "dataset",
+      "url": "https://cbt-cards.github.io/data/visuals.json",
+      "title": "CBT Cards editorial visual manifest",
+      "format": "application/json",
+      "updated": "2026-08-22"
+    },
+    {
+      "id": "partnerships",
+      "type": "collaboration",
+      "url": "https://cbt-cards.github.io/partnerships/",
+      "title": "Partner with CBT Cards",
+      "updated": "2026-08-22"
+    },
+    {
+      "id": "ai-get-started",
+      "type": "agent-doc",
+      "url": "https://cbt-cards.github.io/agents/get-started/",
+      "title": "Use CBT Cards with an AI assistant",
+      "updated": "2026-08-22"
     }
   ]
 }

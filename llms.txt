@@ -13,6 +13,9 @@ CBT Cards is a public library of practical reflection resources for people and A
 - Languages: https://cbt-cards.github.io/languages/
 - Research/evals: https://cbt-cards.github.io/research/
 - For agents: https://cbt-cards.github.io/agents/
+- AI assistant quick start: https://cbt-cards.github.io/agents/get-started/
+- Contact: https://cbt-cards.github.io/contact/
+- Partnerships and translation review: https://cbt-cards.github.io/partnerships/
 - Mobile release history: https://cbt-cards.github.io/mobile-releases/
 - Privacy: https://cbt-cards.github.io/privacy/
 
@@ -56,6 +59,7 @@ The freshness registry currently covers 26 trusted items: learning pages, worksh
 - Skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
 - Changelog: https://cbt-cards.github.io/data/changelog.json
 - Citation: https://cbt-cards.github.io/CITATION.cff
+- Editorial visual manifest: https://cbt-cards.github.io/data/visuals.json
 
 ## Maintainer provenance
 - Project status: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/PROJECT_STATUS.md
@@ -66,4 +70,4 @@ The freshness registry currently covers 26 trusted items: learning pages, worksh
 - Search/distribution operations: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/SEARCH_DISTRIBUTION.md
 - Licensing decision boundary: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/LICENSING_DECISION.md
 
-English is the canonical source locale. Machine-draft translations are not official published guidance. Website/data/skill releases do not imply a mobile-app release. The current public license remains CC BY-NC-SA 4.0; a pending licensing memo is not a permissive grant. No hosted model result is currently published as project evidence.
+English is the canonical source locale. Russian machine drafts may appear as explicitly labelled noindex review previews; they are not official published guidance. German is a noindex planned-language preview. Website/data/skill releases do not imply a mobile-app release. The current public license remains CC BY-NC-SA 4.0; a pending licensing memo is not a permissive grant. No hosted model result is currently published as project evidence.

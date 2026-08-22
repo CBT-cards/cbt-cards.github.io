@@ -21,6 +21,19 @@ RELATION_LABELS = {
     "alternative_when": "Alternative when",
     "not_same_as": "Not the same as",
 }
+PRACTICE_VISUALS = {
+    "practice-test-your-prediction": ("technique-thought-evidence", "The CBT Cards mascot compares a blank prediction card with observable evidence."),
+    "practice-problem-or-worry": ("technique-worry-time", "The CBT Cards mascot places a worry card in a box beside a clock for later review."),
+    "practice-spot-the-safety-behavior": ("technique-grounding", "The CBT Cards mascot pauses among concrete objects before deciding whether another check is useful."),
+    "practice-park-and-return": ("technique-worry-time", "The CBT Cards mascot parks a blank worry card beside a clock for a planned return."),
+    "practice-reflection-or-replay": ("technique-thought-evidence", "The CBT Cards mascot examines one card and sorts what is new from what is repeating."),
+    "practice-one-less-check": ("technique-thought-evidence", "The CBT Cards mascot sorts repeated blank cards into a smaller, deliberate set."),
+    "practice-smallest-approach-step": ("technique-small-steps", "The CBT Cards mascot takes the first of several small paper steps toward an open notebook."),
+    "practice-good-enough-contract": ("technique-small-steps", "A short set of paper steps leads to a visible stopping point instead of endless revision."),
+    "practice-continuum-not-verdict": ("technique-thought-evidence", "Blank cards are sorted across several possible positions instead of only two extremes."),
+    "practice-behavior-not-identity": ("technique-thought-evidence", "The CBT Cards mascot examines one specific event card without turning it into an identity label."),
+    "practice-same-standard-check": ("technique-thought-evidence", "The CBT Cards mascot compares blank cards using the same evidence-sorting process."),
+}
 
 
 def read_bytes(path: str) -> bytes:
@@ -224,6 +237,13 @@ def build_page() -> str:
     )
     articles: list[str] = []
     for item in practice["practices"]:
+        visual_name, visual_alt = PRACTICE_VISUALS[item["id"]]
+        visual_html = (
+            f'<figure class="practice-visual"><img src="/assets/{visual_name}.webp" '
+            f'srcset="/assets/{visual_name}-560w.webp 560w, /assets/{visual_name}.webp 1024w" '
+            f'sizes="(max-width: 760px) calc(100vw - 56px), 620px" width="1024" height="683" '
+            f'alt="{html.escape(visual_alt)}" loading="lazy" decoding="async" /></figure>'
+        )
         evidence_items = []
         for evidence_id in item["evidence_ids"]:
             ev = evidence_by_id[evidence_id]
@@ -243,6 +263,7 @@ def build_page() -> str:
         articles.append(
             f'<article id="{item["id"]}"><h3>{html.escape(item["title"])}</h3>'
             f'<p>{html.escape(item["prompt"])}</p>'
+            f'{visual_html}'
             f'<p><strong>Action:</strong> {html.escape(item["micro_action"])}</p>'
             f'<h4>Best used when</h4><ul>{li(item["best_used_when"])}</ul>'
             f'<h4>Avoid when</h4><ul>{li(item["avoid_when"])}</ul>'
@@ -263,14 +284,14 @@ def build_page() -> str:
 
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Practice Finder & reviewed cards — CBT Cards</title><meta name="description" content="Situation-first reviewed CBT-inspired reflection practices with explicit safety boundaries, evidence provenance and agent-ready data."/><meta name="robots" content="index,follow,max-image-preview:large"/><link rel="canonical" href="{ORIGIN}/practice/"/><link rel="stylesheet" href="/styles.css?v=20260818"/><link rel="icon" href="/assets/app-icon.png"/></head>
-<body><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.webp" width="42" height="42" alt="" decoding="async"/>CBT Cards</a><nav class="nav-links"><a href="/learn/">Learn</a><a href="/practice/">Practice</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/about/">About</a></nav></div></header>
+<title>Practice Finder & reviewed cards — CBT Cards</title><meta name="description" content="Situation-first reviewed CBT-inspired reflection practices with explicit safety boundaries, evidence provenance and agent-ready data."/><meta name="robots" content="index,follow,max-image-preview:large"/><link rel="canonical" href="{ORIGIN}/practice/"/><meta property="og:image" content="{ORIGIN}/assets/collage-hero.png"/><meta property="og:image:alt" content="CBT Cards mascot beside blank reflection cards in a bright paper collage"/><link rel="stylesheet" href="/styles.css?v=20260822"/><link rel="icon" href="/assets/app-icon.png"/></head>
+<body data-section="practice"><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="wrap nav"><a class="brand" href="/"><img src="/assets/app-icon.webp" width="46" height="46" alt="" decoding="async" />CBT Cards</a><nav class="nav-links" aria-label="Primary"><a href="/practice/">Practice</a><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/agents/">For AI</a><a href="/about/">About</a></nav><a class="download" href="/practice/">Find a practice</a></div></header>
 <main id="main"><section class="page-hero"><div class="wrap"><h1>Start with the situation, not a diagnosis.</h1><p class="lede">{len(practice['practices'])} reviewed practices. Same mechanism map for people and agents. Genuine safety rules outrank a reflection exercise.</p></div></section>
-<section class="section alt"><div class="wrap prose" id="finder"><h2>Practice Finder</h2><p>This finder is <strong>local-only</strong>; your selection is not submitted. It is navigation, not assessment.</p><label for="s">Situation</label> <select id="s"><option value="">Choose a situation…</option>{options}</select> <button id="go" type="button">Find</button><div id="out" aria-live="polite"><p>No JavaScript? Browse below. If nothing fits, the correct practice-layer result is <code>no_match</code>, not an invented card.</p></div></div></section>
+<section class="section alt"><div class="wrap prose" id="finder"><h2>Practice Finder</h2><p>This finder is <strong>local-only</strong>; your selection is not submitted. It is navigation, not assessment.</p><label for="s">Situation</label> <select id="s"><option value="">Choose a situation…</option>{options}</select> <button id="go" type="button">Find</button><div id="out" tabindex="-1" aria-live="polite"><p>No JavaScript? Browse below. If nothing fits, the correct practice-layer result is <code>no_match</code>, not an invented card.</p></div></div></section>
 <section class="section"><div class="wrap prose"><h2>Reviewed practices</h2><p>{html.escape(practice['safety_scope'])}</p><ul>{summary_items}</ul>{''.join(articles)}</div></section>
 <section class="section alt"><div class="wrap prose" id="methodology"><h2>Evidence and editorial method</h2><p>Reviewed means claim scope, sources and safety boundaries were checked for public use. It does not mean the short card format has independent efficacy evidence or that it suits an individual. Evidence may be guideline-supported, authoritative self-help, clinical-resource, or practical editorial synthesis. No numeric truth score is used. Metaphors are memory aids, not evidence.</p><p>Each practice above exposes the same <strong>best used when</strong>, <strong>avoid when</strong>, evidence-provenance and reviewed relation data that agents receive. Source limitations are shown alongside evidence so a citation is not mistaken for validation of the exact card format.</p><p>Do not use this layer to override genuine danger, protective boundaries, accessibility aids, medication/professional instructions, required safety checks, or medical/legal/financial/safeguarding decisions. Agents return <code>no_match</code> in those cases.</p><p>Data: <a href="/data/practice.json">practice records</a>, <a href="/data/practice-ontology.json">ontology</a>, <a href="/data/practice-evidence.json">evidence</a>, <a href="/data/practice-relations.json">relations</a>, <a href="/data/practice-semantic-evals.json">semantic eval manifest</a>, <a href="/data/practice-rag.ndjson">RAG</a>, <a href="/data/practice-coverage.json">coverage</a>.</p></div></section></main>
 <footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav><a href="/learn/">Learn</a><a href="/practice/">Practice</a><a href="/agents/">For agents</a></nav></div></footer>
-<script>const M={mapping_js},T={titles_js};document.getElementById('go').onclick=()=>{{const key=document.getElementById('s').value;const found=M[key]||[];document.getElementById('out').innerHTML=found.length?'<p>'+found.map(x=>'<a href="#'+x+'">'+T[x]+'</a>').join(', ')+' — read best-use, exclusions, evidence and related-practice notes below.</p>':'<p><code>no_match</code></p>';}};</script></body></html>
+<script>const M={mapping_js},T={titles_js};document.getElementById('go').onclick=()=>{{const key=document.getElementById('s').value;const found=M[key]||[];const out=document.getElementById('out');out.innerHTML=found.length?'<p><strong>Reviewed matches</strong></p><ul>'+found.map(x=>'<li><a class="result-link" href="#'+x+'">Open '+T[x]+' →</a></li>').join('')+'</ul><p class="source-note">Check best-use, exclusions, evidence and related-practice notes before using one.</p>':'<p><strong><code>no_match</code></strong> — choose a listed situation or browse the reviewed practices below. Do not invent a fit.</p>';out.focus();}};</script></body></html>
 '''
 
 

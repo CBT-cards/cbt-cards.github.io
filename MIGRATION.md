@@ -1,6 +1,6 @@
 # CBT Cards migration inventory
 
-Last external redirect verification: **20 August 2026**
+Last external redirect verification: **20 August 2026**. Deployment remains **not verified** on the legacy host.
 
 This inventory describes the redirects that are required on the legacy `metalhatscats.com` host. It does **not** claim that a redirect exists merely because a target was planned in an earlier migration configuration.
 

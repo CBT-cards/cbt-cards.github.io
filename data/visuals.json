@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "id": "cbt-cards-editorial-visuals-2026-08-22",
+  "updated": "2026-08-22",
+  "generation_method": "OpenAI built-in image generation; art-directed to match the CBT Cards logo and tactile paper-collage system; reviewed for page fit and compressed to responsive WebP variants.",
+  "text_policy": "No generated image contains instructional text. Meaning, safety boundaries, and localized copy remain in accessible HTML.",
+  "visuals": [
+    {"id":"thought-evidence","source":"/assets/technique-thought-evidence.png","webp":"/assets/technique-thought-evidence.webp","small_webp":"/assets/technique-thought-evidence-560w.webp","used_for":["thought records","automatic thoughts","thought versus fact","Socratic questioning"]},
+    {"id":"worry-time","source":"/assets/technique-worry-time.png","webp":"/assets/technique-worry-time.webp","small_webp":"/assets/technique-worry-time-560w.webp","used_for":["worry time","worry box"]},
+    {"id":"small-steps","source":"/assets/technique-small-steps.png","webp":"/assets/technique-small-steps.webp","small_webp":"/assets/technique-small-steps-560w.webp","used_for":["activity planning","large goals and small steps"]},
+    {"id":"grounding","source":"/assets/technique-grounding.png","webp":"/assets/technique-grounding.webp","small_webp":"/assets/technique-grounding-560w.webp","used_for":["grounding"]},
+    {"id":"metaphor-library","source":"/assets/metaphor-library.png","webp":"/assets/metaphor-library.webp","small_webp":"/assets/metaphor-library-560w.webp","used_for":["metaphor library"]},
+    {"id":"ai-public-private","source":"/assets/ai-agent-public-private.png","webp":"/assets/ai-agent-public-private.webp","small_webp":"/assets/ai-agent-public-private-560w.webp","used_for":["AI assistant guide","public/private boundary"]},
+    {"id":"collaboration","source":"/assets/collaboration.png","webp":"/assets/collaboration.webp","small_webp":"/assets/collaboration-560w.webp","used_for":["contact","partnerships"]}
+  ]
+}

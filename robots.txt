@@ -2,7 +2,10 @@
 User-agent: OAI-SearchBot
 Allow: /
 
-# Public website content remains crawlable by other compliant crawlers.
+# Search/retrieval access is intentional. Training crawlers are not given a
+# separate restriction in this release; the general public crawl rule applies.
+# The noindex localization previews remain crawlable so crawlers can read their
+# noindex directive while excluding them from search results.
 User-agent: *
 Allow: /
 

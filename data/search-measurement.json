@@ -3,6 +3,11 @@
   "id": "cbt-cards-search-measurement-v1",
   "canonical_site": "https://cbt-cards.github.io/",
   "baseline_date": "2026-08-19",
+  "current": {
+    "checked_on": "2026-08-22",
+    "sitemap_url_count": 41,
+    "note": "Current repository inventory after the visual, contact, partnership, and AI-onboarding release. This is not an indexed-URL count."
+  },
   "baseline": {
     "sitemap_url_count": 38,
     "public_search_sample": {

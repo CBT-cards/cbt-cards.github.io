@@ -22,7 +22,8 @@
 <link rel="manifest" href="/manifest.webmanifest" />
 <link rel="alternate" type="application/json" href="https://cbt-cards.github.io/data/catalog.json" title="CBT Cards public resource catalog" />
 <link rel="alternate" type="application/x-ndjson" href="https://cbt-cards.github.io/data/knowledge.jsonl" title="CBT Cards curated knowledge dataset" />
-<link rel="stylesheet" href="/styles.css?v=20260818" />
+<link rel="stylesheet" href="/styles.css?v=20260822" />
+<script defer src="/assets/site.js?v=20260822"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -58,94 +59,100 @@
 }
 </script>
 </head>
-<body>
+<body data-section="home">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header"><div class="wrap nav">
-<a class="brand" href="/"><img src="/assets/app-icon.webp" width="42" height="42" alt="" decoding="async" />CBT Cards</a>
+<a class="brand" href="/"><img src="/assets/app-icon.webp" width="46" height="46" alt="" decoding="async" />CBT Cards</a>
 <nav class="nav-links" aria-label="Primary">
-<a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/agents/">For AI</a><a href="/about/">About</a>
+<a href="/practice/">Practice</a><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/agents/">For AI</a><a href="/about/">About</a>
 </nav>
-<a class="download" href="/toolkit/">Explore tools</a>
+<a class="download" href="/practice/">Find a practice</a>
 </div></header>
+
 <main id="main">
 <section class="hero"><div class="wrap hero-grid">
-<div>
+<div class="hero-copy">
 <div class="eyebrow">Open reflection library</div>
-<h1>Practical tools for difficult moments.</h1>
-<p>CBT Cards is a public library of short reflection cards, worksheets, and plain-language guides. Read them yourself, share a direct link, or let an AI assistant use the same canonical resources.</p>
-<div class="store-row">
-<a class="store dark" href="/toolkit/">Browse reflection tools</a>
-<a class="store" href="/agents/">Use with an AI assistant</a>
+<h1>Pause. Name it. Try one thing.</h1>
+<p>Small, reviewed reflection tools for difficult everyday moments. Start with what is happening—not with a diagnosis.</p>
 </div>
-<p class="notice">CBT Cards is for general wellness and self-reflection. It is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.</p>
+<div class="hero-actions">
+<div class="situation-picker" data-practice-picker>
+<strong>What is closest right now?</strong>
+<div class="situation-options">
+<button class="situation-choice" type="button" aria-pressed="true" data-practice-choice data-title="Reflection or Replay?" data-copy="Ask what new information the last round produced, then choose one useful next step." data-href="/practice/#practice-reflection-or-replay">I keep replaying it</button>
+<button class="situation-choice" type="button" aria-pressed="false" data-practice-choice data-title="The Smallest Approach Step" data-copy="Choose one safe step small enough to finish now, without asking yourself to solve everything." data-href="/practice/#practice-smallest-approach-step">I cannot get started</button>
+<button class="situation-choice" type="button" aria-pressed="false" data-practice-choice data-title="Run the Same-Standard Check" data-copy="Compare the rule you are using for yourself with the one you would use for someone else." data-href="/practice/#practice-same-standard-check">I am hard on myself</button>
 </div>
-<div class="hero-art"><picture><source type="image/webp" srcset="/assets/egg-reflection-cards-500w.webp 500w, /assets/egg-reflection-cards.webp 992w" sizes="(max-width: 760px) 82vw, 500px" /><img src="/assets/egg-reflection-cards.png" width="500" height="800" alt="CBT Cards mascot resting on reflection cards beside a pencil" fetchpriority="high" /></picture></div>
+</div>
+<p class="notice">General wellness and self-reflection only. CBT Cards does not diagnose, prescribe treatment, replace urgent action, or override professional or safety requirements.</p>
+</div>
+<div class="hero-visual">
+<picture><source type="image/webp" srcset="/assets/collage-hero.webp" /><img src="/assets/collage-hero.png" width="1586" height="992" alt="CBT Cards mascot in a vivid paper collage with blank reflection cards and a pencil" fetchpriority="high" /></picture>
+<article class="practice-preview" aria-live="polite">
+<div class="kicker">A reviewed practice</div>
+<h2 data-practice-title>Reflection or Replay?</h2>
+<p data-practice-copy>Ask what new information the last round produced, then choose one useful next step.</p>
+<a data-practice-link href="/practice/#practice-reflection-or-replay"><strong>Try this practice</strong></a>
+</article>
+</div>
+</div></section>
+
+<aside class="trust-strip" aria-label="CBT Cards boundaries"><div class="wrap">
+<div class="trust-item"><strong>Private by construction</strong><span>The finder and worksheets run locally in your browser.</span></div>
+<div class="trust-item"><strong>One useful route</strong><span>Reviewed practices stay separate from raw source material.</span></div>
+<div class="trust-item"><strong>People and assistants</strong><span>The same canonical resources are readable by both.</span></div>
+</div></aside>
+
+<section class="section"><div class="wrap collage-section">
+<div>
+<div class="kicker">A small shift</div>
+<h2>Choose the moment before choosing the tool.</h2>
+<p class="lede">The library is organized around concrete situations: looping worry, repeated checking, avoidance, perfectionistic polishing, and harsh self-evaluation.</p>
+<p>When there is a clear fit, the Practice Finder points to one reviewed practice with best-use notes, exclusions, evidence provenance, and a tiny action. When there is no safe fit, it returns <code>no_match</code> instead of inventing advice.</p>
+<p><a href="/practice/"><strong>Start with the Practice Finder →</strong></a></p>
+</div>
+<figure class="collage-media"><picture><source type="image/webp" srcset="/assets/collage-library.webp" /><img src="/assets/collage-library.png" width="1536" height="1024" alt="CBT Cards mascot moving between blank cards and an open notebook in a bright paper collage" loading="lazy" decoding="async" /></picture></figure>
 </div></section>
 
 <section class="section alt"><div class="wrap">
 <div class="kicker">Use it your way</div>
-<h2>Useful without requiring another app.</h2>
-<div class="use-grid">
-<article class="use"><h3>Open one small tool</h3><p>Choose a reflection card when a thought, feeling, or decision needs a little more structure.</p><p><a href="/toolkit/cards/">Browse cards →</a></p></article>
-<article class="use"><h3>Work through a worksheet</h3><p>Use a browser-local worksheet for a thought record, worry time, or activity planning. Nothing is submitted to CBT Cards.</p><p><a href="/worksheets/">Open worksheets →</a></p></article>
-<article class="use"><h3>Bring your own assistant</h3><p>AI assistants can read the same public pages, JSON/JSONL resources, schemas, and versioned skill instructions.</p><p><a href="/agents/">For AI assistants →</a></p></article>
-</div>
-</div></section>
-
-<section class="section"><div class="wrap split">
-<div>
-<div class="kicker">Learn</div>
-<h2>Understand the idea, not just the prompt.</h2>
-<p class="lede">Short guides explain common CBT-inspired reflection techniques in ordinary language, with sources and clear limits on what the material does and does not claim.</p>
+<h2>Three ways in. No account wall.</h2>
 <div class="feature-grid">
-<article class="feature"><h3>CBT thought record</h3><p>A structured way to capture a situation, thoughts, feelings, evidence, and a more balanced alternative.</p><p><a href="/learn/cbt-thought-record/">Read the guide →</a></p></article>
-<article class="feature"><h3>Automatic thoughts</h3><p>Learn what fast, situation-linked thoughts are and why noticing them can make reflection more concrete.</p><p><a href="/learn/automatic-thoughts/">Read the guide →</a></p></article>
-<article class="feature"><h3>Thought vs fact</h3><p>A practical pause for separating what you know from what you are predicting, interpreting, or assuming.</p><p><a href="/learn/thought-vs-fact/">Read the guide →</a></p></article>
+<article class="feature"><h3>Find one practice</h3><p>Start from a plain-language situation and open one reviewed reflection practice with safety limits kept visible.</p><p><a href="/practice/">Find a practice →</a></p></article>
+<article class="feature"><h3>Write it through</h3><p>Use a browser-local thought record, worry-time worksheet, or activity planner. Nothing is submitted to CBT Cards.</p><p><a href="/worksheets/">Open worksheets →</a></p></article>
+<article class="feature"><h3>Understand the idea</h3><p>Read short guides before trying a prompt, with sources and clear limits on what the material does and does not claim.</p><p><a href="/learn/">Browse learning guides →</a></p></article>
 </div>
-<p><a href="/learn/">Browse the learning library →</a></p>
-</div>
-<picture><source type="image/webp" srcset="/assets/egg-card-journey-560w.webp 560w, /assets/egg-card-journey.webp 992w" sizes="(max-width: 760px) 88vw, 560px" /><img class="art" src="/assets/egg-card-journey.png" width="992" height="1586" alt="CBT Cards mascot moving through a sequence of reflection cards" loading="lazy" decoding="async" /></picture>
 </div></section>
 
-<section class="section alt"><div class="wrap split">
-<picture><source type="image/webp" srcset="/assets/egg-diary-560w.webp 560w, /assets/egg-diary-1024w.webp 1024w, /assets/egg-diary.webp 1254w" sizes="(max-width: 760px) 88vw, 560px" /><img class="art" src="/assets/egg-diary.png" width="1024" height="1024" alt="CBT Cards mascot beside an open reflection journal" loading="lazy" decoding="async" /></picture>
+<section class="section"><div class="wrap collage-section">
+<figure class="collage-media"><picture><source type="image/webp" srcset="/assets/collage-tools.webp" /><img src="/assets/collage-tools.png" width="1536" height="1024" alt="Blank reflection cards, an open notebook, a pencil, and the CBT Cards mascot in a colorful paper collage" loading="lazy" decoding="async" /></picture></figure>
 <div>
 <div class="kicker">Public by design</div>
 <h2>Readable by people. Predictable for software.</h2>
-<p class="lede">The same project publishes human-readable pages and machine-readable resources with stable IDs, canonical URLs, review status, versioned schemas, and release provenance.</p>
-<p>That means an assistant does not need to scrape a marketing page and improvise. It can use the public <a href="/data/catalog.json">resource catalog</a>, <a href="/data/knowledge.jsonl">curated JSONL dataset</a>, <a href="/schemas/index.json">schemas</a>, <a href="/languages/">language and translation status</a>, and <a href="/agents/cbt-cards/SKILL.md">agent skill</a>.</p>
-<p><a href="/agents/">See the agent integration guide →</a></p>
-</div>
-</div></section>
-
-<section class="section"><div class="wrap">
-<div class="kicker">Review and provenance</div>
-<h2>Useful claims should have somewhere to stand.</h2>
-<p class="lede">Published toolkit records are separated from raw source material. Review status, source IDs, data contracts, and public release history remain visible and versioned across the project.</p>
-<div class="feature-grid">
-<article class="feature"><h3>Review status</h3><p>See which source records have been reviewed for standalone publication and which remain source-only.</p><p><a href="/toolkit/review-status/">Review boundary →</a></p></article>
-<article class="feature"><h3>Public changelog</h3><p>Track website, dataset, schema, worksheet, and agent-interface changes separately from mobile releases.</p><p><a href="/changelog/">Read the changelog →</a></p></article>
-<article class="feature"><h3>Project context</h3><p>Read how the project moved from a mobile app toward a public reflection library for people and assistants.</p><p><a href="/about/">About CBT Cards →</a></p></article>
+<p class="lede">Human-readable pages and machine-readable resources share stable IDs, canonical URLs, review status, versioned schemas, and release provenance.</p>
+<p>An assistant can use the public <a href="/data/catalog.json">resource catalog</a>, <a href="/data/knowledge.jsonl">curated JSONL</a>, <a href="/schemas/index.json">schemas</a>, and <a href="/agents/cbt-cards/SKILL.md">versioned skill</a> instead of scraping a marketing page and improvising.</p>
+<div class="store-row"><a class="store dark" href="/agents/get-started/">Use with an AI assistant</a><a class="store" href="/toolkit/">Inspect the source toolkit</a></div>
 </div>
 </div></section>
 
 <section class="section alt"><div class="wrap">
-<div class="kicker">The original app</div>
-<h2>CBT Cards started on a phone.</h2>
-<p class="lede">The mobile app is still available and includes private on-device journaling, cards, guided tools, and mood, stress, and energy check-ins. The public library now lets the useful material live beyond an app install.</p>
-<div class="store-row">
-<a class="store dark" href="https://play.google.com/store/apps/details?id=cbt.cbtcards.stressrelief" rel="noopener">Google Play</a>
-<a class="store" href="https://apps.apple.com/us/app/cbt-cards-%D1%81bt-for-daily-use/id6737169041" rel="noopener">App Store</a>
+<div class="kicker">The wider library</div>
+<h2>Built to grow without becoming a wall of cards.</h2>
+<div class="use-grid">
+<article class="use"><h3>Reviewed practice layer</h3><p>Situation-first tools with explicit fit, exclusions, evidence notes, and relationships.</p><p><a href="/practice/">Reviewed practices →</a></p></article>
+<article class="use"><h3>Learning and worksheets</h3><p>Plain-language guides and printable local forms for deeper reflection.</p><p><a href="/learn/">Learning library →</a></p></article>
+<article class="use"><h3>Review and provenance</h3><p>Publication status, audit boundaries, datasets, schemas, research methods, and release history.</p><p><a href="/about/editorial-review/">Editorial review →</a></p></article>
 </div>
-<p><a href="/features/">See original app features →</a> · <a href="/how-it-works/">How the app works →</a></p>
 </div></section>
 
 <section class="final"><div class="wrap">
-<h2>Start with one useful tool.</h2>
+<h2>Start with one small, useful step.</h2>
 <p>No account, no installation, and no requirement to use AI.</p>
-<div class="store-row"><a class="store" href="/toolkit/">Explore the toolkit</a><a class="store" href="/worksheets/">Open a worksheet</a></div>
+<div class="store-row"><a class="store" href="/practice/">Find a practice</a><a class="store" href="/worksheets/">Open a worksheet</a><a class="store" href="/features/">Explore the mobile app</a><a class="store" href="/partnerships/">Work with CBT Cards</a></div>
 </div></section>
 </main>
-<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/languages/">Languages</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/support/">Support</a><a href="/agents/">For AI</a></nav></div></footer>
+
+<footer class="footer"><div class="wrap footer-grid"><div>© 2026 CBT Cards</div><nav aria-label="Footer"><a href="/practice/">Practice</a><a href="/learn/">Learn</a><a href="/worksheets/">Worksheets</a><a href="/toolkit/">Toolkit</a><a href="/languages/">Languages</a><a href="/changelog/">Changelog</a><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/partnerships/">Partnerships</a><a href="/agents/get-started/">AI guide</a></nav></div></footer>
 </body>
 </html>

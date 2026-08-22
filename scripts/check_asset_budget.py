@@ -19,6 +19,23 @@ BUDGETS = {
     'assets/egg-reflection-cards.webp': 60000,
     'assets/egg-reflection-cards-500w.webp': 20000,
     'assets/social-preview.jpg': 100000,
+    'assets/collage-hero.webp': 180000,
+    'assets/collage-library.webp': 180000,
+    'assets/collage-tools.webp': 180000,
+    'assets/technique-thought-evidence.webp': 65000,
+    'assets/technique-thought-evidence-560w.webp': 25000,
+    'assets/technique-worry-time.webp': 45000,
+    'assets/technique-worry-time-560w.webp': 18000,
+    'assets/technique-small-steps.webp': 60000,
+    'assets/technique-small-steps-560w.webp': 22000,
+    'assets/technique-grounding.webp': 65000,
+    'assets/technique-grounding-560w.webp': 22000,
+    'assets/metaphor-library.webp': 70000,
+    'assets/metaphor-library-560w.webp': 26000,
+    'assets/ai-agent-public-private.webp': 50000,
+    'assets/ai-agent-public-private-560w.webp': 20000,
+    'assets/collaboration.webp': 60000,
+    'assets/collaboration-560w.webp': 24000,
 }
 errors = []
 total = 0
@@ -38,10 +55,10 @@ if '.ttf' in css:
 for name in ('Nunito-Regular.woff2', 'Nunito-ExtraBold.woff2'):
     if name not in css:
         errors.append(f'styles.css missing {name}')
-if '.hero-art picture' not in css or '.split > picture' not in css:
+if '.hero-visual picture' not in css or '.collage-media picture' not in css:
     errors.append('styles.css missing picture layout guards')
 
-heavy = ('cbt.png','diary.png','egg-card-journey.png','egg-diary.png','egg-reflection-cards.png')
+heavy = ('cbt.png','diary.png','egg-card-journey.png','egg-diary.png','egg-reflection-cards.png','collage-hero.png','collage-library.png','collage-tools.png')
 app_png_body = []
 unwrapped = []
 malformed = []
@@ -53,8 +70,11 @@ for path in ROOT.rglob('*.html'):
         app_png_body.append(str(path.relative_to(ROOT)))
     if re.search(r'/\s+decoding=', text):
         malformed.append(str(path.relative_to(ROOT)))
-    if 'property="og:image"' in text and 'assets/social-preview.jpg' not in text:
-        bad_og.append(str(path.relative_to(ROOT)))
+    og = re.search(r'<meta property="og:image" content="https://cbt-cards\.github\.io(/assets/[^\"]+)"', text)
+    if og:
+        is_shared_preview = og.group(1) == "/assets/social-preview.jpg"
+        if not (ROOT / og.group(1).lstrip('/')).exists() or (not is_shared_preview and 'property="og:image:alt"' not in text):
+            bad_og.append(str(path.relative_to(ROOT)))
     for name in heavy:
         for match in re.finditer(rf'<img[^>]+src="/assets/{re.escape(name)}"[^>]*>', body):
             prefix = body[max(0, match.start()-400):match.start()]
@@ -67,19 +87,19 @@ if malformed:
 if unwrapped:
     errors.append('heavy PNG body image without WebP picture source: ' + ', '.join(unwrapped))
 if bad_og:
-    errors.append('Open Graph image is not the 1200x630 preview: ' + ', '.join(bad_og))
+    errors.append('Open Graph image is missing locally or has no contextual alt: ' + ', '.join(bad_og))
 
 generator = (ROOT / 'scripts/build_localized_pages.py').read_text(encoding='utf-8')
-if '<img src="/assets/app-icon.webp" width="42" height="42" alt="" decoding="async" />' not in generator:
+if '<img src="/assets/app-icon.webp" width="46" height="46" alt="" decoding="async" />' not in generator:
     errors.append('localized page generator still emits the PNG header icon')
 
 home = (ROOT / 'index.html').read_text(encoding='utf-8')
-hero = re.search(r'<img[^>]+src="/assets/egg-reflection-cards\.png"[^>]*>', home)
+hero = re.search(r'<img[^>]+src="/assets/collage-hero\.png"[^>]*>', home)
 if not hero or 'fetchpriority="high"' not in hero.group(0) or 'loading="lazy"' in hero.group(0):
     errors.append('home hero must be eager with fetchpriority=high')
-if 'src="/assets/egg-card-journey.png" width="992" height="1586"' not in home:
-    errors.append('home egg-card-journey intrinsic dimensions are not 992x1586')
-for name in ('egg-card-journey.png', 'egg-diary.png'):
+if 'src="/assets/collage-library.png" width="1536" height="1024"' not in home:
+    errors.append('home collage-library intrinsic dimensions are not 1536x1024')
+for name in ('collage-library.png', 'collage-tools.png'):
     match = re.search(rf'<img[^>]+src="/assets/{re.escape(name)}"[^>]*>', home)
     if not match or 'loading="lazy"' not in match.group(0) or 'decoding="async"' not in match.group(0):
         errors.append(f'below-fold home image {name} must be lazy/async')

@@ -43,8 +43,8 @@ def main() -> None:
             fail(f"missing required file: {path.relative_to(ROOT)}")
 
     registry = json.loads(LOCALES.read_text(encoding="utf-8"))
-    if registry.get("updated") != "2026-08-19":
-        fail("locale registry must record the 2026-08-19 scope clarification")
+    if registry.get("updated") != "2026-08-22":
+        fail("locale registry must record the 2026-08-22 preview-publication update")
 
     locales = registry.get("locales")
     if not isinstance(locales, list) or not locales:

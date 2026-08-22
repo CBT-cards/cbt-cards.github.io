@@ -23,6 +23,12 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check Python helper syntax
         run: python3 -m py_compile scripts/check_site.py scripts/check_worksheets.py scripts/check_discovery.py scripts/check_changelog.py scripts/check_toolkit_review.py scripts/check_toolkit_audit.py scripts/check_content_review.py scripts/build_practice_artifacts.py scripts/check_practice_system.py scripts/check_practice_system_strict.py scripts/check_practice_contract.py scripts/check_contribution_templates.py scripts/build_semantic_review_packet.py scripts/score_semantic_reviews.py scripts/check_semantic_review_pipeline.py scripts/run_practice_semantic_openai.py scripts/check_practice_semantic_model_runner.py scripts/check_practice_semantic_execution.py scripts/check_localization.py scripts/build_localized_pages.py scripts/check_evals.py scripts/check_evals_challenge.py scripts/run_eval_baselines.py scripts/run_eval_challenge.py scripts/evaluate_model_run.py scripts/check_model_run_protocol.py scripts/run_model_openai.py scripts/score_model_execution.py scripts/check_model_runner.py scripts/check_model_run_candidate.py scripts/check_citation.py scripts/check_skill_portability.py scripts/check_schemas.py scripts/check_crawl_graph.py scripts/check_asset_budget.py scripts/check_privacy_consistency.py scripts/check_legacy_boundary.py scripts/check_mobile_locale_boundary.py scripts/check_search_distribution.py scripts/check_license_boundaries.py scripts/check_mobile_release_history.py scripts/check_project_state.py scripts/notify_indexnow.py
+      - name: Validate shared design shell and editorial imagery
+        run: >-
+          python3 scripts/apply_design_shell.py --check &&
+          python3 scripts/apply_editorial_visuals.py --check &&
+          python3 scripts/apply_release_links.py --check &&
+          python3 scripts/apply_release_metadata.py --check
       - name: Validate deterministic reviewed-practice artifacts
         run: python3 scripts/build_practice_artifacts.py --check
       - name: Validate portable practice-system contract

@@ -83,25 +83,25 @@ def main() -> None:
     sitemap_root = ET.parse(ROOT / "sitemap.xml").getroot()
     ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
     sitemap_urls = {node.text for node in sitemap_root.findall("s:url/s:loc", ns) if node.text}
-    if len(sitemap_urls) != 38:
-        fail(f"expected reconciled sitemap size 38, found {len(sitemap_urls)}")
+    if len(sitemap_urls) != 41:
+        fail(f"expected reconciled sitemap size 41, found {len(sitemap_urls)}")
     if f"{ORIGIN}/mobile-releases/" not in sitemap_urls:
         fail("mobile release history is not indexed in sitemap")
 
     measurement = load_json("data/search-measurement.json")
-    if measurement.get("baseline", {}).get("sitemap_url_count") != len(sitemap_urls):
+    if measurement.get("current", {}).get("sitemap_url_count") != len(sitemap_urls):
         fail("search measurement sitemap count drifted from sitemap.xml")
 
     outreach = load_json("data/outreach-targets.json")
-    if outreach.get("schema_version") != "1.1" or outreach.get("requalified_on") != "2026-08-19":
+    if outreach.get("schema_version") != "1.1" or outreach.get("requalified_on") != "2026-08-20":
         fail("outreach queue is not the requalified v1.1 state")
     outreach_statuses = {item.get("status") for item in outreach.get("targets", [])}
     if "ready_requires_fork" not in outreach_statuses or "blocked_by_catalog_license_policy" not in outreach_statuses:
         fail("project status cannot describe outreach blockers until they exist in machine-readable queue")
 
     catalog = load_json("data/catalog.json")
-    if catalog.get("updated") != "2026-08-19":
-        fail("resource catalog update date does not reflect the 19 Aug reconciliation release")
+    if catalog.get("updated") != "2026-08-22":
+        fail("resource catalog update date does not reflect the 22 Aug public release")
     resources = {item.get("id"): item for item in catalog.get("resources", [])}
     mobile = resources.get("mobile-releases")
     if not mobile or mobile.get("url") != f"{ORIGIN}/mobile-releases/":
@@ -162,7 +162,7 @@ def main() -> None:
         "practice-semantic-review-workspace.html",
         "check_practice_semantic_publication_candidate.py",
         "build_practice_semantic_publication_report.py",
-        "sitemap inventory: 38 public URLs",
+        "sitemap inventory: 41 public URLs",
         "ready_requires_fork",
         "blocked by current permissive-license requirements",
         "CC BY-NC-SA 4.0",
@@ -191,7 +191,7 @@ def main() -> None:
         for fragment in ("v1.8.0", "mobile-releases", "No hosted model result is currently published"):
             if fragment not in text:
                 fail(f"{name} missing current-state fragment: {fragment}")
-    if "Updated: 2026-08-19" not in llms_full:
+    if "Updated: 2026-08-22" not in llms_full:
         fail("llms-full.txt update date is stale")
 
     workflow = (ROOT / ".github/workflows/deploy-pages.yml").read_text(encoding="utf-8")
@@ -201,7 +201,7 @@ def main() -> None:
 
     print(
         "project state check passed: skill 1.8.0, 11 reviewed practices, 41 semantic cases, "
-        "offline blinded review + final publication gate present, 26 freshness items, 38 sitemap URLs, "
+        "offline blinded review + final publication gate present, 26 freshness items, 41 sitemap URLs, "
         "requalified outreach blockers, current changelog/catalog, mobile/repo release boundary reconciled"
     )
 

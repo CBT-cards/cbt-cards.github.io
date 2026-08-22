@@ -6,7 +6,7 @@ This is the operating plan for search discovery, webmaster-tool measurement, Ind
 
 ## Current baseline
 
-The canonical website is `https://cbt-cards.github.io/`. The current sitemap contains **38 public URLs**, including the separately sourced mobile release-history page. `robots.txt` explicitly allows `OAI-SearchBot`, allows other compliant crawlers, and declares the sitemap.
+The canonical website is `https://cbt-cards.github.io/`. The current sitemap contains **41 public URLs**, including Contact, Partnerships, the AI get-started guide, and the separately sourced mobile release-history page. Russian machine-draft and German planned previews are `noindex` and excluded. `robots.txt` explicitly allows `OAI-SearchBot`, allows other compliant crawlers, and declares the sitemap.
 
 A limited external search sample on 19 August 2026 used four site-scoped queries covering the domain, learning pages, worksheets, and toolkit pages. One CBT Cards result was observed, `/features/`, with the search result reporting a crawl age of roughly three weeks. The newer learn/worksheet/toolkit child pages did not appear in that limited sample.
 
