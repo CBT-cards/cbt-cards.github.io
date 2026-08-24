@@ -21,7 +21,7 @@ def section_for(path: Path) -> str:
         return "worksheets"
     if first == "learn":
         return "learn"
-    if first in {"toolkit", "research", "agents", "schemas"}:
+    if first in {"library", "toolkit", "research", "agents", "schemas"}:
         return "library"
     if first in {"privacy", "terms", "support", "faq", "contact"}:
         return "support"
