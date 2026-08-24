@@ -1,6 +1,6 @@
 # CBT Cards project status
 
-Verified snapshot: **19 August 2026**
+Verified snapshot: **24 August 2026**
 
 This file is the concise maintainer-facing state of the public CBT Cards repository. It describes what is actually present in `main` and what remains intentionally unresolved. CI checks the key invariants so this page does not quietly turn into archaeology.
 
@@ -15,10 +15,11 @@ CBT Cards is now primarily a public reflection-resource and agent-readable knowl
 - 41 practice-semantic evaluation cases.
 - 11 stable practice RAG chunks with safety exclusions kept in-chunk.
 - 26 trusted items in the editorial freshness registry.
+- 24 CBT Cards-owned content-library records: 6 patterns, 6 bounded low-risk experiments, 6 worked examples, and 6 reflection scripts.
 - 115 pinned source-toolkit records: 77 cards, 23 metaphors, 15 protocols.
 - Raw source records remain source-only unless explicitly published by the review overlay.
 
-The practice layer is general wellness/self-reflection material. It is not clinical validation, diagnosis, treatment, emergency support, or evidence that a practice is suitable for every person or situation.
+The practice layer is general wellness/self-reflection material. It is not clinical validation, diagnosis, treatment, emergency support, or evidence that a practice is suitable for every person or situation. The owned content library is an editorial synthesis mapped to the reviewed practice/evidence layer; its short formats do not carry independent efficacy claims, and linked practice safety boundaries control when there is a conflict.
 
 ## Agent/research snapshot
 
@@ -69,7 +70,7 @@ These are lab measurements, not field Core Web Vitals.
 
 ## Search/distribution snapshot
 
-- sitemap inventory: 41 public URLs after adding Contact, Partnerships, and the AI get-started guide; noindex localization previews are excluded.
+- sitemap inventory: 42 public URLs after adding the CBT Cards-owned content library; noindex localization previews are excluded.
 - `OAI-SearchBot` is explicitly allowed.
 - IndexNow runs after deployment and produces an observable receipt rather than hiding failures behind `continue-on-error`.
 - an eight-week search measurement ledger exists.
