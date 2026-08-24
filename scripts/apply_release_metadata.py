@@ -18,11 +18,21 @@ NEW_URLS = (
 
 
 def expected(source: str) -> str:
-    result = re.sub(r"<lastmod>2026-\d{2}-\d{2}</lastmod>", f"<lastmod>{DATE}</lastmod>", source)
+    """Keep the dated 22 Aug release entries stable without rewriting later releases."""
+    result = source
     marker = "  <!-- BEGIN GENERATED LOCALIZED URLS -->"
-    additions = "\n".join(f"  <url><loc>{url}</loc><lastmod>{DATE}</lastmod></url>" for url in NEW_URLS)
-    if NEW_URLS[0] not in result:
-        result = result.replace(marker, additions + "\n" + marker, 1)
+    additions: list[str] = []
+    for url in NEW_URLS:
+        pattern = re.compile(
+            rf"  <url><loc>{re.escape(url)}</loc><lastmod>2026-\d{{2}}-\d{{2}}</lastmod></url>"
+        )
+        replacement = f"  <url><loc>{url}</loc><lastmod>{DATE}</lastmod></url>"
+        if pattern.search(result):
+            result = pattern.sub(replacement, result, count=1)
+        else:
+            additions.append(replacement)
+    if additions:
+        result = result.replace(marker, "\n".join(additions) + "\n" + marker, 1)
     return result
 
 
