@@ -1,5 +1,5 @@
 # CBT Cards — extended public index
-Updated: 2026-08-22
+Updated: 2026-08-24
 
 ## Identity and safety boundary
 CBT Cards is a public reflection library for people and AI assistants. Public resources are general wellness and education material, not diagnosis, treatment, emergency support, or individualized medical advice. The original mobile app remains a separately documented product surface.
@@ -8,14 +8,15 @@ Current maintainer snapshot: https://github.com/CBT-cards/cbt-cards.github.io/bl
 
 ## Source priority
 1. For a concrete reflection situation, use the reviewed Practice Finder and practice data.
-2. For conceptual questions, use reviewed pages under /learn/.
-3. For a blank exercise, use /worksheets/; public worksheets have no submit action.
-4. For a curated source-toolkit record, consult /data/toolkit-review.json before treating it as published CBT Cards guidance.
-5. Use /data/toolkit-audit.json only to understand the raw 115-record corpus and future editorial queue. Audit status cannot publish a record.
-6. When review freshness matters, use /data/content-review.json.
-7. For website language status, use /data/locales.json and /data/translations.jsonl. Do not infer mobile-app language support from them.
-8. For app/privacy claims, use /privacy/ together with the current mobile privacy reconciliation notes when store metadata matters.
-9. For mobile release history, use /mobile-releases/; do not infer app releases from website/data/Git history.
+2. After identifying a reviewed-practice fit, use the CBT Cards-owned content system when a pattern, bounded experiment, worked example, script, contrast, progression, or decision rule would make the mechanism easier to understand or apply.
+3. For conceptual questions, use reviewed pages under /learn/.
+4. For a blank exercise, use /worksheets/; public worksheets have no submit action.
+5. For a curated source-toolkit record, consult /data/toolkit-review.json before treating it as published CBT Cards guidance.
+6. Use /data/toolkit-audit.json only to understand the raw 115-record corpus and future editorial queue. Audit status cannot publish a record.
+7. When review freshness matters, use /data/content-review.json.
+8. For website language status, use /data/locales.json and /data/translations.jsonl. Do not infer mobile-app language support from them.
+9. For app/privacy claims, use /privacy/ together with the current mobile privacy reconciliation notes when store metadata matters.
+10. For mobile release history, use /mobile-releases/; do not infer app releases from website/data/Git history.
 
 ## Reviewed practice system
 Human entry point: https://cbt-cards.github.io/practice/
@@ -29,7 +30,17 @@ RAG manifest: https://cbt-cards.github.io/data/practice-rag-manifest.json
 Semantic evals: https://cbt-cards.github.io/data/practice-semantic-evals.json
 Agent guide: https://cbt-cards.github.io/agents/cbt-cards/PRACTICE_SYSTEM.md
 
-The trusted owned layer contains 11 practices. Routes are situation/mechanism mappings, not diagnoses. Agents should preserve exclusions and use `no_match` for genuine danger, qualified professional decisions, required safety rules, or when no reviewed fit exists.
+The trusted owned practice layer contains 11 practices. Routes are situation/mechanism mappings, not diagnoses. Agents should preserve exclusions and use `no_match` for genuine danger, qualified professional decisions, required safety rules, or when no reviewed fit exists.
+
+## CBT Cards-owned content system
+Human core library: https://cbt-cards.github.io/library/
+Human navigation guides: https://cbt-cards.github.io/library/guides/
+Patterns/experiments/examples/scripts data: https://cbt-cards.github.io/data/content-library.json
+Contrasts/progressions/decision-rules data: https://cbt-cards.github.io/data/content-guides.json
+
+The owned editorial layer contains 42 stable records across seven formats: 6 patterns, 6 bounded low-risk experiments, 6 worked examples, 6 reflection scripts, 6 contrasts, 6 progressions, and 6 decision rules. It is CBT Cards-original content and is deliberately separate from the pinned source toolkit.
+
+Use this layer to explain or scaffold an already appropriate reviewed practice, not to bypass practice routing. Experiments preserve explicit low-risk exclusions; contrasts state common mistakes/boundaries; progressions include stop conditions; decision rules include safety overrides. Related practice IDs and evidence IDs are explicit. If an owned module conflicts with a linked reviewed practice, the practice safety boundary controls. These exact short formats do not carry independent efficacy claims.
 
 ## Source toolkit publication and audit
 Source metadata: https://cbt-cards.github.io/data/toolkit-source.json
@@ -45,10 +56,10 @@ The record-complete audit partitions all 115 source IDs. It flags duplicate or n
 Policy: https://cbt-cards.github.io/about/editorial-review/
 Registry: https://cbt-cards.github.io/data/content-review.json
 
-The freshness registry covers 26 trusted items: six learning pages, three browser worksheets, six curated source-toolkit cards, and eleven owned practices. It records review dates under the maintenance policy. Do not infer freshness from sitemap `lastmod`, Git history, skill release date, or translation timestamps. Editorial freshness is not clinical validation.
+The freshness registry covers 26 trusted items: six learning pages, three browser worksheets, six curated source-toolkit cards, and eleven owned practices. It records review dates under the maintenance policy. Do not infer freshness from sitemap `lastmod`, Git history, skill release date, or translation timestamps. The separately published 42-module owned editorial layer is structurally linked to reviewed practices/evidence but is not represented as part of this 26-item freshness count. Editorial freshness is not clinical validation.
 
 ## Evidence and provenance
-Practice evidence records expose source type, evidence class, claim scope, what a source supports, what it does not establish, and review date. Evidence for a mechanism does not automatically prove the exact short-card format. Metaphors are memory aids, not evidence.
+Practice evidence records expose source type, evidence class, claim scope, what a source supports, what it does not establish, and review date. Evidence for a mechanism does not automatically prove the exact short-card or owned editorial format. Metaphors are memory aids, not evidence.
 
 ## Semantic recommendation evaluation
 Manifest: https://cbt-cards.github.io/data/practice-semantic-evals.json
@@ -72,7 +83,7 @@ Distribution: https://cbt-cards.github.io/data/practice-rag.ndjson
 Manifest: https://cbt-cards.github.io/data/practice-rag-manifest.json
 Coverage: https://cbt-cards.github.io/data/practice-coverage.json
 
-Safety exclusions stay in the same chunk as each practice. Embeddings are deliberately not canonical.
+Safety exclusions stay in the same chunk as each practice. Embeddings are deliberately not canonical. The owned editorial content is currently exposed as canonical JSON resources rather than being silently mixed into the reviewed-practice RAG distribution.
 
 ## Languages
 Languages: https://cbt-cards.github.io/languages/
@@ -107,7 +118,7 @@ Immutable: https://cbt-cards.github.io/agents/cbt-cards/v1.8.0/SKILL.md
 Strict portable copy: https://cbt-cards.github.io/agents/cbt-cards/v1.8.0/cbt-cards/SKILL.md
 Install notes: https://cbt-cards.github.io/agents/cbt-cards/INSTALL.md
 
-v1.8.0 keeps the portable v1.7 frontmatter contract and adds reviewed-practice priority, source-audit boundaries, and content-review freshness semantics.
+v1.8.0 keeps the portable v1.7 frontmatter contract and adds reviewed-practice priority, source-audit boundaries, and content-review freshness semantics. The owned content resources are discoverable through the public indexes without retroactively changing this immutable skill release.
 
 ## Licensing and reuse
 Current license: https://cbt-cards.github.io/LICENSE
@@ -135,4 +146,4 @@ JSON Feed: https://cbt-cards.github.io/feed.json
 Citation: https://cbt-cards.github.io/CITATION.cff
 Security: https://cbt-cards.github.io/.well-known/security.txt
 
-Website, dataset, evaluation, localization, review, practice-system, or agent-skill releases are separate from Android/iOS releases unless explicitly recorded as app releases.
+Website, dataset, evaluation, localization, review, practice-system, owned-content, or agent-skill releases are separate from Android/iOS releases unless explicitly recorded as app releases.
