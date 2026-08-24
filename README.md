@@ -12,6 +12,8 @@ Human-facing public resource:
 
 - `/` — project overview
 - `/practice/` — situation-first Practice Finder
+- `/library/` — CBT Cards-owned patterns, experiments, worked examples and reflection scripts
+- `/library/guides/` — contrasts, progressions and decision rules around reviewed practices
 - `/learn/` — reviewed learning guides
 - `/worksheets/` — browser-local blank worksheets with no submit action
 - `/toolkit/` — pinned 115-record source toolkit and curated publication layer
@@ -41,6 +43,20 @@ Canonical resources:
 
 Agents should prefer one reviewed practice when there is a clear fit, preserve `avoid_when`, and return `no_match` rather than inventing guidance. Genuine danger, mandatory safety/professional/accessibility requirements, and medical/legal/financial/safeguarding decisions are outside the practice-routing contract.
 
+## CBT Cards-owned content system
+
+The owned editorial layer currently contains **42 modules across seven formats**. It is deliberately separate from the pinned source toolkit and does not create a second diagnosis or recommendation engine.
+
+- **Patterns (6)** — name a recurring thinking–behavior loop without turning it into a diagnosis.
+- **Experiments (6)** — compare an ordinary low-stakes prediction with an observable result; every experiment preserves explicit safety exclusions.
+- **Worked examples (6)** — show how observation, inference, standards, responsibility and next actions can be separated in concrete situations.
+- **Reflection scripts (6)** — sentence scaffolds for structured reflection, not affirmations or instructions to believe a preferred conclusion.
+- **Contrasts (6)** — distinguish similar-looking processes through one practical discriminator and a stated common mistake.
+- **Progressions (6)** — show a gradual sequence toward an existing reviewed practice mechanism and preserve a stop condition.
+- **Decision rules (6)** — narrow a choice between existing reviewed practices while preserving an explicit safety override.
+
+Human pages are `/library/` and `/library/guides/`. Machine-readable records are `data/content-library.json` and `data/content-guides.json`. Stable record IDs link back to existing reviewed practice IDs and evidence IDs. If an owned module conflicts with a linked practice, the practice safety boundary controls. These short editorial formats do not carry independent clinical-efficacy claims.
+
 ## Source toolkit and trust layers
 
 The related MetalHatsCats CBT Toolkit v0.1.0 is pinned as a **115-record source corpus**: 77 cards, 23 metaphors, and 15 protocols.
@@ -51,7 +67,7 @@ Three different trust layers are deliberately separate:
 2. `data/toolkit-audit.json` is a record-complete editorial triage layer for duplicates, framework attribution, overclaim, treatment-like wording, and future review priority. Audit candidacy is not publication approval.
 3. `data/content-review.json` records freshness for **26 trusted items**: six learning pages, three worksheets, six curated source-toolkit cards, and all eleven owned practices.
 
-Editorial review is not clinical validation or evidence of efficacy. Metaphors are memory aids, not evidence.
+Editorial review is not clinical validation or evidence of efficacy. Metaphors are memory aids, not evidence. The separately published 42-module owned content system is structurally linked to reviewed practices/evidence but is not being misrepresented as part of the 26-item freshness count.
 
 ## Evaluation and real-model pipeline
 
@@ -129,6 +145,7 @@ CBT Cards names, logos and trademark rights are not granted for reuse by the con
 - `data/knowledge.jsonl`
 - `data/locales.json` / `data/translations.jsonl`
 - `data/practice*.json` / `data/practice-rag.ndjson`
+- `data/content-library.json` / `data/content-guides.json`
 - `data/changelog.json`
 - `CITATION.cff`
 - `feed.xml` / `feed.json`
@@ -136,7 +153,7 @@ CBT Cards names, logos and trademark rights are not granted for reuse by the con
 
 ## Quality gates
 
-The main Pages workflow runs the repository's validation chain before deployment. Important gates include localization generation, starter/held-out eval reproducibility, model-run input isolation, skill portability, HTML/canonical/link/crawl checks, worksheets, schemas, toolkit publication/audit, content freshness, semantic-review blinding, frozen-context semantic model execution, optimized asset budgets, privacy consistency, legacy-host boundaries, website/mobile locale boundaries, search-distribution observability, licensing provenance, mobile release-history separation, and project-state consistency.
+The main Pages workflow runs the repository's validation chain before deployment. Important gates include localization generation, starter/held-out eval reproducibility, model-run input isolation, skill portability, HTML/canonical/link/crawl checks, worksheets, schemas, toolkit publication/audit, content freshness, owned-content/project-state consistency, semantic-review blinding, frozen-context semantic model execution, optimized asset budgets, privacy consistency, legacy-host boundaries, website/mobile locale boundaries, search-distribution observability, licensing provenance, mobile release-history separation, and project-state consistency.
 
 Useful targeted checks:
 
