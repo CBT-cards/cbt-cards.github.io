@@ -280,9 +280,9 @@ def main() -> None:
             if fragment not in text:
                 fail(f"{name} missing current-state fragment: {fragment}")
     for fragment in ("/library/guides/", "/data/content-guides.json"):
-        if fragment not in llms:
-            fail(f"llms.txt missing owned content-guide discovery fragment: {fragment}")
-    if "Updated: 2026-08-22" not in llms_full:
+        if fragment not in llms or fragment not in llms_full:
+            fail(f"AI indexes missing owned content-guide discovery fragment: {fragment}")
+    if "Updated: 2026-08-24" not in llms_full:
         fail("llms-full.txt update date is stale")
 
     workflow = (ROOT / ".github/workflows/deploy-pages.yml").read_text(encoding="utf-8")
