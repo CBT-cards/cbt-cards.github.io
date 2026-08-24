@@ -1,10 +1,11 @@
 # CBT Cards
 
-CBT Cards is a public library of practical reflection resources for people and AI assistants. It publishes a small reviewed practice layer, learning guides, browser-local worksheets, a pinned source toolkit with explicit publication/audit metadata, language status, evaluation tooling, portable agent instructions, and retrieval-ready public data. It is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
+CBT Cards is a public library of practical reflection resources for people and AI assistants. It publishes a small reviewed practice layer, an owned content library of patterns, bounded low-risk experiments, worked examples and reflection scripts, learning guides, browser-local worksheets, a pinned source toolkit with explicit publication/audit metadata, language status, evaluation tooling, portable agent instructions, and retrieval-ready public data. It is not medical advice, diagnosis, treatment, emergency support, or a substitute for professional care.
 
 ## Start here
 - Overview: https://cbt-cards.github.io/
 - Reviewed Practice Finder: https://cbt-cards.github.io/practice/
+- Owned content library: https://cbt-cards.github.io/library/
 - Learn: https://cbt-cards.github.io/learn/
 - Worksheets: https://cbt-cards.github.io/worksheets/
 - Toolkit: https://cbt-cards.github.io/toolkit/
@@ -25,6 +26,7 @@ CBT Cards is a public library of practical reflection resources for people and A
 - Evidence + claim provenance: https://cbt-cards.github.io/data/practice-evidence.json
 - Relations: https://cbt-cards.github.io/data/practice-relations.json
 - Recommendation contract: https://cbt-cards.github.io/data/practice-recommendations.json
+- Owned content modules: https://cbt-cards.github.io/data/content-library.json
 - RAG distribution: https://cbt-cards.github.io/data/practice-rag.ndjson
 - RAG manifest + SHA-256: https://cbt-cards.github.io/data/practice-rag-manifest.json
 - Runnable generic HTTP/RAG client: https://cbt-cards.github.io/examples/cbt_cards_http_client.py
@@ -33,6 +35,8 @@ CBT Cards is a public library of practical reflection resources for people and A
 - Agent guide: https://cbt-cards.github.io/agents/cbt-cards/PRACTICE_SYSTEM.md
 
 Routing rule: start from the user's plain-language situation, not a diagnosis. Prefer one reviewed practice. Preserve `avoid_when`. Return `no_match` instead of inventing a practice when no reviewed fit exists. Genuine danger, required safety/professional/accessibility rules, and medical/legal/financial/safeguarding decisions are outside practice routing.
+
+The owned content library is a CBT Cards-original editorial layer, not part of the pinned 115-record source toolkit. It contains 24 records across four formats: patterns, bounded low-risk experiments, worked examples, and reflection scripts. Use these records to explain, illustrate, or scaffold reflection after identifying an appropriate reviewed practice; do not treat them as an independent recommendation router. Linked practice safety boundaries control, and the exact short formats do not carry independent efficacy claims.
 
 The generic reference client is an integration/contract path, not a semantic router. It verifies the canonical RAG manifest/distribution and per-record hashes, preserves canonical URLs plus review/safety metadata, and supports exact stable practice IDs or exact mechanism filters only. Unknown exact IDs/mechanisms return `no_match`. Its CI execution is not model-quality or clinical-quality evidence.
 
@@ -43,10 +47,11 @@ The generic reference client is an integration/contract path, not a semantic rou
 
 The source audit is not publication approval. Any raw source record not explicitly published by the review overlay remains `unreviewed` and `source_only`. Audit candidates are editorial work items only. Every source protocol remains behind a separate protocol-level review gate. Metaphors are memory aids, not evidence.
 
-The freshness registry currently covers 26 trusted items: learning pages, worksheets, curated source-toolkit cards, and all 11 CBT Cards-owned practices. Freshness review is not clinical validation.
+The freshness registry currently covers 26 trusted items: learning pages, worksheets, curated source-toolkit cards, and all 11 CBT Cards-owned practices. The separately published owned content library is structurally linked to reviewed practices/evidence and exposes its own safety boundary, but it is not being misrepresented as part of that 26-item freshness count. Freshness review is not clinical validation.
 
 ## Agent/data layer
 - Resource catalog: https://cbt-cards.github.io/data/catalog.json
+- Owned content library: https://cbt-cards.github.io/data/content-library.json
 - JSON Schema manifest: https://cbt-cards.github.io/schemas/index.json
 - Curated knowledge JSONL: https://cbt-cards.github.io/data/knowledge.jsonl
 - Locale registry: https://cbt-cards.github.io/data/locales.json
