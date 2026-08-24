@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+from collections import Counter
 import json
 from pathlib import Path
 import xml.etree.ElementTree as ET
@@ -33,12 +34,15 @@ def main() -> None:
         "llms.txt",
         "llms-full.txt",
         "mobile-releases/index.html",
+        "library/index.html",
         "about/index.html",
         "changelog/index.html",
         "sitemap.xml",
         "data/catalog.json",
         "data/changelog.json",
         "data/practice.json",
+        "data/practice-evidence.json",
+        "data/content-library.json",
         "data/practice-semantic-evals.json",
         "data/content-review.json",
         "data/search-measurement.json",
@@ -71,6 +75,45 @@ def main() -> None:
     if any(item.get("review_status") != "editorial_and_safety_reviewed_for_publication" for item in practice_items):
         fail("project status cannot call all practices reviewed while a practice lacks publication review status")
 
+    content_library = load_json("data/content-library.json")
+    if content_library.get("schema_version") != "1.0" or content_library.get("id") != "cbt-cards-content-library-v1":
+        fail("owned content library identity/version mismatch")
+    if content_library.get("rights_basis") != "cbt_cards_original" or content_library.get("clinical_validation_status") != "not_claimed":
+        fail("owned content library provenance/clinical-claim boundary mismatch")
+    if content_library.get("human_url") != f"{ORIGIN}/library/" or content_library.get("canonical") != f"{ORIGIN}/data/content-library.json":
+        fail("owned content library canonical URLs mismatch")
+    content_records = content_library.get("records", [])
+    if len(content_records) != 24:
+        fail(f"expected 24 owned content-library records, found {len(content_records)}")
+    expected_content_counts = {"pattern": 6, "experiment": 6, "worked_example": 6, "script": 6}
+    if dict(Counter(item.get("type") for item in content_records)) != expected_content_counts:
+        fail("owned content library must contain six records in each of four formats")
+    content_ids = [item.get("id") for item in content_records]
+    if any(not isinstance(item_id, str) or not item_id for item_id in content_ids) or len(content_ids) != len(set(content_ids)):
+        fail("owned content library has missing or duplicate record IDs")
+    practice_ids = {item.get("id") for item in practice_items}
+    evidence_ids = {item.get("id") for item in load_json("data/practice-evidence.json").get("evidence", [])}
+    for item in content_records:
+        record_id = item.get("id")
+        related = item.get("related_practice_ids", [])
+        linked_evidence = item.get("evidence_ids", [])
+        if not related or not set(related).issubset(practice_ids):
+            fail(f"owned content record {record_id} has missing/unknown reviewed-practice links")
+        if not linked_evidence or not set(linked_evidence).issubset(evidence_ids):
+            fail(f"owned content record {record_id} has missing/unknown evidence links")
+        if item.get("type") == "experiment":
+            avoid = item.get("avoid_when", [])
+            avoid_text = " ".join(map(str, avoid)).lower()
+            for marker in ("danger", "required", "high-stakes", "irreversible"):
+                if marker not in avoid_text:
+                    fail(f"experiment {record_id} missing safety marker: {marker}")
+    library_page = (ROOT / "library/index.html").read_text(encoding="utf-8")
+    if 'href="/data/content-library.json"' not in library_page:
+        fail("owned content human page does not link machine-readable data")
+    for record_id in content_ids:
+        if f'id="{record_id}"' not in library_page:
+            fail(f"owned content human page missing stable anchor {record_id}")
+
     semantic = load_json("data/practice-semantic-evals.json")
     if semantic.get("case_count") != 41:
         fail(f"expected 41 practice-semantic cases, found {semantic.get('case_count')}")
@@ -83,10 +126,12 @@ def main() -> None:
     sitemap_root = ET.parse(ROOT / "sitemap.xml").getroot()
     ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
     sitemap_urls = {node.text for node in sitemap_root.findall("s:url/s:loc", ns) if node.text}
-    if len(sitemap_urls) != 41:
-        fail(f"expected reconciled sitemap size 41, found {len(sitemap_urls)}")
+    if len(sitemap_urls) != 42:
+        fail(f"expected reconciled sitemap size 42, found {len(sitemap_urls)}")
     if f"{ORIGIN}/mobile-releases/" not in sitemap_urls:
         fail("mobile release history is not indexed in sitemap")
+    if f"{ORIGIN}/library/" not in sitemap_urls:
+        fail("owned content library is not indexed in sitemap")
 
     measurement = load_json("data/search-measurement.json")
     if measurement.get("current", {}).get("sitemap_url_count") != len(sitemap_urls):
@@ -156,13 +201,14 @@ def main() -> None:
 
     status = (ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8")
     for fragment in (
-        "Verified snapshot: **19 August 2026**",
+        "Verified snapshot: **24 August 2026**",
         "Current Agent Skill: **v1.8.0**",
+        "24 CBT Cards-owned content-library records",
         "**No hosted model result is currently published as project evidence.**",
         "practice-semantic-review-workspace.html",
         "check_practice_semantic_publication_candidate.py",
         "build_practice_semantic_publication_report.py",
-        "sitemap inventory: 41 public URLs",
+        "sitemap inventory: 42 public URLs",
         "ready_requires_fork",
         "blocked by current permissive-license requirements",
         "CC BY-NC-SA 4.0",
@@ -200,9 +246,10 @@ def main() -> None:
             fail(f"main Pages quality workflow does not execute {script}")
 
     print(
-        "project state check passed: skill 1.8.0, 11 reviewed practices, 41 semantic cases, "
-        "offline blinded review + final publication gate present, 26 freshness items, 41 sitemap URLs, "
-        "requalified outreach blockers, current changelog/catalog, mobile/repo release boundary reconciled"
+        "project state check passed: skill 1.8.0, 11 reviewed practices, 24 owned content modules, "
+        "41 semantic cases, offline blinded review + final publication gate present, 26 freshness items, "
+        "42 sitemap URLs, requalified outreach blockers, current changelog/catalog, "
+        "mobile/repo release boundary reconciled"
     )
 
 
