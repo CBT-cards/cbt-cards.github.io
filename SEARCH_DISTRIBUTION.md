@@ -1,12 +1,12 @@
 # Search distribution and citation growth
 
-Baseline: **19 August 2026** · Outreach requalification updated: **20 August 2026**
+Baseline: **19 August 2026** · Outreach requalification updated: **20 August 2026** · Public URL inventory updated: **24 August 2026**
 
 This is the operating plan for search discovery, webmaster-tool measurement, IndexNow evidence, and selective external citation outreach after the CBT Cards public-library pivot. It deliberately separates observable facts from account-only metrics. A `site:` search sample is not an official index count, and a green deploy alone is not proof that a notification request authenticated successfully.
 
 ## Current baseline
 
-The canonical website is `https://cbt-cards.github.io/`. The current sitemap contains **41 public URLs**, including Contact, Partnerships, the AI get-started guide, and the separately sourced mobile release-history page. Russian machine-draft and German planned previews are `noindex` and excluded. `robots.txt` explicitly allows `OAI-SearchBot`, allows other compliant crawlers, and declares the sitemap.
+The canonical website is `https://cbt-cards.github.io/`. The current sitemap contains **42 public URLs**, including the CBT Cards-owned content library, Contact, Partnerships, the AI get-started guide, and the separately sourced mobile release-history page. Russian machine-draft and German planned previews are `noindex` and excluded. `robots.txt` explicitly allows `OAI-SearchBot`, allows other compliant crawlers, and declares the sitemap.
 
 A limited external search sample on 19 August 2026 used four site-scoped queries covering the domain, learning pages, worksheets, and toolkit pages. One CBT Cards result was observed, `/features/`, with the search result reporting a crawl age of roughly three weeks. The newer learn/worksheet/toolkit child pages did not appear in that limited sample.
 
