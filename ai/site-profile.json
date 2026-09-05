@@ -1,10 +1,10 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-profile.schema.json",
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/v0.1.0/schema/site-profile.schema.json",
   "profileVersion": "0.1",
   "id": "cbt-cards-public-reflection",
   "name": "CBT Cards Public Reflection Resource",
   "canonicalUrl": "https://cbt-cards.github.io/",
-  "description": "Static, inspectable public reflection library with reviewed practice routing, explicit safety boundaries, retrieval-ready data, schemas and a portable Agent Skill.",
+  "description": "Static, inspectable public reflection library with reviewed practice routing, explicit safety boundaries, retrieval-ready data, schemas, a portable Agent Skill, and an evidence-bounded AI search and citation profile.",
   "languages": ["en", "ru", "de"],
   "web": {
     "sitemap": "https://cbt-cards.github.io/sitemap.xml",
@@ -40,6 +40,41 @@
         "mediaType": "application/json",
         "role": "release",
         "description": "Manifest and provenance for the reviewed practice retrieval distribution."
+      },
+      {
+        "name": "CBT Cards AI Search & Citation Profile",
+        "url": "https://cbt-cards.github.io/ai/ai-search-profile.json",
+        "mediaType": "application/json",
+        "role": "other",
+        "description": "Evidence-bounded implementation profile describing canonical surfaces, active and planned AI-discovery modules, measurement, and guardrails."
+      },
+      {
+        "name": "CBT Cards reviewed evidence registry",
+        "url": "https://cbt-cards.github.io/data/practice-evidence.json",
+        "mediaType": "application/json",
+        "role": "other",
+        "description": "Stable evidence records with scoped support, explicit non-claims, and review dates for the reviewed practice layer."
+      },
+      {
+        "name": "CBT Cards Trust Center",
+        "url": "https://cbt-cards.github.io/trust/trust.json",
+        "mediaType": "application/json",
+        "role": "other",
+        "description": "Machine-readable trust, review, safety, provenance, licensing, and security boundaries for the public resource."
+      },
+      {
+        "name": "CBT Cards corrections ledger",
+        "url": "https://cbt-cards.github.io/trust/corrections.json",
+        "mediaType": "application/json",
+        "role": "other",
+        "description": "Public correction policy and ledger for material factual or safety-relevant publication errors."
+      },
+      {
+        "name": "CBT Cards entity knowledge graph",
+        "url": "https://cbt-cards.github.io/knowledge/graph.json",
+        "mediaType": "application/ld+json",
+        "role": "other",
+        "description": "JSON-LD graph linking the site, reviewed practice dataset, evidence registry, Agent Skill, editorial review policy, and trust surfaces."
       }
     ]
   },
@@ -73,5 +108,35 @@
     "provenance": "https://cbt-cards.github.io/data/practice-rag-manifest.json",
     "reviewPolicy": "https://cbt-cards.github.io/about/editorial-review/",
     "security": "https://cbt-cards.github.io/.well-known/security.txt"
+  },
+  "extensions": {
+    "io.github.dkharlanau/localized-llms": {
+      "version": "0.1",
+      "status": "experimental",
+      "defaultLanguage": "en",
+      "fallbackLanguage": "en",
+      "humanInterfaceLanguages": ["en"],
+      "agentRoutingLanguages": ["en", "ru"],
+      "manifest": "https://cbt-cards.github.io/data/locales.json"
+    },
+    "io.github.dkharlanau/ai-search-profile": {
+      "version": "0.1",
+      "status": "experimental-project-profile",
+      "profile": "https://cbt-cards.github.io/ai/ai-search-profile.json",
+      "schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/ai-search-profile.schema.json",
+      "documentation": "https://dkharlanau.github.io/agent-ready-web-profile/AI-SEARCH-PROFILE.md",
+      "claimsRegistry": "https://cbt-cards.github.io/data/practice-evidence.json",
+      "trustCenter": "https://cbt-cards.github.io/trust/trust.json",
+      "correctionsLedger": "https://cbt-cards.github.io/trust/corrections.json",
+      "knowledgeGraph": "https://cbt-cards.github.io/knowledge/graph.json"
+    },
+    "io.github.dkharlanau/trust-center": {
+      "version": "0.1",
+      "status": "active-project-policy",
+      "machine": "https://cbt-cards.github.io/trust/trust.json",
+      "reviewPolicy": "https://cbt-cards.github.io/about/editorial-review/",
+      "securityPolicy": "https://cbt-cards.github.io/.well-known/security.txt",
+      "corrections": "https://cbt-cards.github.io/trust/corrections.json"
+    }
   }
 }
