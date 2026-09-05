@@ -1,0 +1,87 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "name": "schema:name",
+    "url": "schema:url",
+    "isPartOf": {"@id": "schema:isPartOf", "@type": "@id"},
+    "about": {"@id": "schema:about", "@type": "@id"},
+    "subjectOf": {"@id": "schema:subjectOf", "@type": "@id"},
+    "mainEntity": {"@id": "schema:mainEntity", "@type": "@id"},
+    "citation": {"@id": "schema:citation", "@type": "@id"},
+    "license": {"@id": "schema:license", "@type": "@id"}
+  },
+  "@graph": [
+    {
+      "@id": "https://cbt-cards.github.io/#site",
+      "@type": "schema:WebSite",
+      "name": "CBT Cards",
+      "url": "https://cbt-cards.github.io/",
+      "subjectOf": [
+        "https://cbt-cards.github.io/ai/site-profile.json#profile",
+        "https://cbt-cards.github.io/trust/trust.json#trust"
+      ],
+      "license": "https://cbt-cards.github.io/LICENSE"
+    },
+    {
+      "@id": "https://cbt-cards.github.io/ai/site-profile.json#profile",
+      "@type": "schema:CreativeWork",
+      "name": "CBT Cards Agent-Ready Web Profile",
+      "url": "https://cbt-cards.github.io/ai/site-profile.json",
+      "about": "https://cbt-cards.github.io/#site"
+    },
+    {
+      "@id": "https://cbt-cards.github.io/data/practice.json#dataset",
+      "@type": "schema:Dataset",
+      "name": "CBT Cards reviewed practice dataset",
+      "url": "https://cbt-cards.github.io/data/practice.json",
+      "isPartOf": "https://cbt-cards.github.io/#site",
+      "subjectOf": "https://cbt-cards.github.io/data/practice-rag-manifest.json#manifest"
+    },
+    {
+      "@id": "https://cbt-cards.github.io/data/practice-evidence.json#registry",
+      "@type": "schema:Dataset",
+      "name": "CBT Cards reviewed evidence registry",
+      "url": "https://cbt-cards.github.io/data/practice-evidence.json",
+      "about": "https://cbt-cards.github.io/data/practice.json#dataset",
+      "isPartOf": "https://cbt-cards.github.io/#site"
+    },
+    {
+      "@id": "https://cbt-cards.github.io/data/practice-rag-manifest.json#manifest",
+      "@type": "schema:CreativeWork",
+      "name": "CBT Cards practice RAG manifest",
+      "url": "https://cbt-cards.github.io/data/practice-rag-manifest.json",
+      "about": "https://cbt-cards.github.io/data/practice.json#dataset"
+    },
+    {
+      "@id": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md#skill",
+      "@type": "schema:SoftwareSourceCode",
+      "name": "CBT Cards Agent Skill",
+      "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
+      "about": "https://cbt-cards.github.io/data/practice.json#dataset",
+      "isPartOf": "https://cbt-cards.github.io/#site"
+    },
+    {
+      "@id": "https://cbt-cards.github.io/about/editorial-review/#policy",
+      "@type": "schema:CreativeWork",
+      "name": "CBT Cards editorial review policy",
+      "url": "https://cbt-cards.github.io/about/editorial-review/",
+      "about": "https://cbt-cards.github.io/#site"
+    },
+    {
+      "@id": "https://cbt-cards.github.io/trust/trust.json#trust",
+      "@type": "schema:CreativeWork",
+      "name": "CBT Cards Trust Center",
+      "url": "https://cbt-cards.github.io/trust/trust.json",
+      "about": "https://cbt-cards.github.io/#site",
+      "citation": "https://cbt-cards.github.io/CITATION.cff",
+      "subjectOf": "https://cbt-cards.github.io/trust/corrections.json#ledger"
+    },
+    {
+      "@id": "https://cbt-cards.github.io/trust/corrections.json#ledger",
+      "@type": "schema:CreativeWork",
+      "name": "CBT Cards corrections ledger",
+      "url": "https://cbt-cards.github.io/trust/corrections.json",
+      "about": "https://cbt-cards.github.io/#site"
+    }
+  ]
+}

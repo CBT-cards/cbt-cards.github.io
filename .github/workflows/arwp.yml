@@ -6,10 +6,15 @@ on:
     paths:
       - 'ai/**'
       - 'data/**'
+      - 'knowledge/**'
+      - 'trust/**'
       - 'schemas/**'
       - 'agents/**'
       - '.well-known/**'
       - 'llms.txt'
+      - 'llms-full.txt'
+      - 'robots.txt'
+      - 'sitemap.xml'
       - 'scripts/apply_arwp.py'
       - '.github/workflows/arwp.yml'
   pull_request:
@@ -17,10 +22,15 @@ on:
     paths:
       - 'ai/**'
       - 'data/**'
+      - 'knowledge/**'
+      - 'trust/**'
       - 'schemas/**'
       - 'agents/**'
       - '.well-known/**'
       - 'llms.txt'
+      - 'llms-full.txt'
+      - 'robots.txt'
+      - 'sitemap.xml'
       - 'scripts/apply_arwp.py'
       - '.github/workflows/arwp.yml'
   workflow_dispatch:
@@ -36,6 +46,22 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Validate Agent-Ready Web Profile
-        uses: dkharlanau/agent-ready-web-profile@2b9c627f9a8cbe5cae2d6aaa78012a1671c4566e
+        uses: dkharlanau/agent-ready-web-profile@c1d51698e3765d0817ee14bcbc36c67297457260
         with:
           profile: ai/site-profile.json
+
+      - name: Parse AI search, trust and knowledge surfaces
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          for path in [
+              'ai/ai-search-profile.json',
+              'trust/trust.json',
+              'trust/corrections.json',
+              'knowledge/graph.json',
+          ]:
+              json.loads(Path(path).read_text(encoding='utf-8'))
+              print(f'validated JSON: {path}')
+          PY

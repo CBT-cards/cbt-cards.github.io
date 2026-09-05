@@ -1,0 +1,288 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/ai-search-profile.schema.json",
+  "profileVersion": "0.1",
+  "site": {
+    "id": "cbt-cards-public-reflection",
+    "name": "CBT Cards Public Reflection Resource",
+    "canonicalUrl": "https://cbt-cards.github.io/",
+    "languages": ["en", "ru", "de"],
+    "canonicalLanguage": "en"
+  },
+  "objective": {
+    "primary": "Make CBT Cards easy for search systems and AI assistants to identify, retrieve, verify and cite while preserving its reviewed-practice, provenance, abstention and safety boundaries.",
+    "targetQuestions": [
+      "What is CBT Cards and what is it for?",
+      "Which reviewed CBT Cards practice fits a plain-language reflection situation?",
+      "What evidence supports a reviewed CBT Cards practice?",
+      "How should an AI assistant use CBT Cards without turning it into medical advice?",
+      "What are the CBT Cards safety and abstention boundaries?",
+      "Which CBT Cards resources are available for agents and retrieval?"
+    ],
+    "canonicalTerms": [
+      "CBT Cards",
+      "Reviewed Practice Finder",
+      "reviewed practice routing",
+      "avoid_when",
+      "no_match",
+      "practice RAG"
+    ]
+  },
+  "surfaces": {
+    "entityHome": {
+      "status": "active",
+      "url": "https://cbt-cards.github.io/",
+      "mediaType": "text/html"
+    },
+    "siteProfile": {
+      "status": "active",
+      "url": "https://cbt-cards.github.io/ai/site-profile.json",
+      "mediaType": "application/json"
+    },
+    "llmsCanonical": {
+      "status": "active",
+      "url": "https://cbt-cards.github.io/llms.txt",
+      "language": "en",
+      "mediaType": "text/plain"
+    },
+    "history": {
+      "status": "active",
+      "url": "https://cbt-cards.github.io/changelog/",
+      "mediaType": "text/html"
+    },
+    "localeManifest": {
+      "status": "active",
+      "url": "https://cbt-cards.github.io/data/locales.json",
+      "mediaType": "application/json"
+    },
+    "sitemap": {
+      "status": "active",
+      "url": "https://cbt-cards.github.io/sitemap.xml",
+      "mediaType": "application/xml"
+    },
+    "robots": {
+      "status": "active",
+      "url": "https://cbt-cards.github.io/robots.txt",
+      "mediaType": "text/plain"
+    },
+    "knowledgeGraph": {
+      "status": "active",
+      "url": "https://cbt-cards.github.io/knowledge/graph.json",
+      "mediaType": "application/ld+json"
+    },
+    "claimsIndex": {
+      "status": "active",
+      "url": "https://cbt-cards.github.io/data/practice-evidence.json",
+      "mediaType": "application/json",
+      "notes": "Evidence records expose stable identifiers, scoped support, explicit non-claims and review dates; they are not clinical efficacy claims for CBT Cards itself."
+    },
+    "trustCenter": {
+      "status": "active",
+      "url": "https://cbt-cards.github.io/trust/trust.json",
+      "mediaType": "application/json"
+    },
+    "correctionsLedger": {
+      "status": "active",
+      "url": "https://cbt-cards.github.io/trust/corrections.json",
+      "mediaType": "application/json"
+    }
+  },
+  "modules": {
+    "answerPages": {
+      "status": "active",
+      "priority": "P0",
+      "description": "Publish direct learning and FAQ pages for recurring reflection questions with stable canonical URLs and explicit boundaries.",
+      "url": "https://cbt-cards.github.io/learn/",
+      "machineReadable": ["https://cbt-cards.github.io/data/catalog.json"]
+    },
+    "originalResearch": {
+      "status": "active",
+      "priority": "P1",
+      "description": "Publish reproducible semantic evaluations, review protocols and a dated practice-watch stream without presenting model runs as clinical validation.",
+      "url": "https://cbt-cards.github.io/research/",
+      "machineReadable": [
+        "https://cbt-cards.github.io/data/practice-semantic-evals.json",
+        "https://cbt-cards.github.io/data/practice-watch.json"
+      ],
+      "cadence": "monthly"
+    },
+    "protocolObservatory": {
+      "status": "not-applicable",
+      "priority": "P2",
+      "description": "CBT Cards does not maintain a general agentic-web protocol observatory; its research scope remains the CBT Cards resource and agent-use contract."
+    },
+    "comparisonPages": {
+      "status": "active",
+      "priority": "P1",
+      "description": "Publish bounded contrasts and decision rules that distinguish related reflection patterns without turning them into diagnosis or treatment selection.",
+      "url": "https://cbt-cards.github.io/library/guides/",
+      "machineReadable": ["https://cbt-cards.github.io/data/content-guides.json"]
+    },
+    "conceptDefinitions": {
+      "status": "active",
+      "priority": "P1",
+      "description": "Expose stable learning pages and a situation-mechanism ontology for the concepts used by reviewed practice routing.",
+      "url": "https://cbt-cards.github.io/learn/",
+      "machineReadable": ["https://cbt-cards.github.io/data/practice-ontology.json"]
+    },
+    "claimsRegistry": {
+      "status": "active",
+      "priority": "P0",
+      "description": "Expose stable evidence identifiers with scoped support, source links, review dates and explicit does-not-establish boundaries for the reviewed practice layer.",
+      "url": "https://cbt-cards.github.io/data/practice-evidence.json",
+      "machineReadable": ["https://cbt-cards.github.io/data/practice-evidence.json"],
+      "cadence": "on-change",
+      "notes": "This registry records evidence scope. It does not claim that CBT Cards is clinically validated or equivalent to professional care."
+    },
+    "evidenceReceipts": {
+      "status": "planned",
+      "priority": "P1",
+      "description": "Add durable replayable evidence receipts only where a concrete observation or evaluation can be reproduced and independently inspected."
+    },
+    "crawlerMatrix": {
+      "status": "planned",
+      "priority": "P2",
+      "description": "Keep the existing robots policy explicit and add a dated crawler-role matrix only when it can be maintained from official sources without guessing platform behavior."
+    },
+    "agentFetchLab": {
+      "status": "planned",
+      "priority": "P2",
+      "description": "Measure which CBT Cards discovery and retrieval surfaces agents actually use for bounded tasks instead of assuming that special files are always fetched first."
+    },
+    "knowledgeGraph": {
+      "status": "active",
+      "priority": "P1",
+      "description": "Link the canonical site, reviewed practice dataset, evidence registry, Agent Skill, editorial review policy and trust surfaces in JSON-LD.",
+      "url": "https://cbt-cards.github.io/knowledge/graph.json",
+      "machineReadable": ["https://cbt-cards.github.io/knowledge/graph.json"]
+    },
+    "citationVisuals": {
+      "status": "active",
+      "priority": "P2",
+      "description": "Maintain a machine-readable manifest for editorial visuals so agents can resolve their purpose and canonical resource context.",
+      "url": "https://cbt-cards.github.io/data/visuals.json",
+      "machineReadable": ["https://cbt-cards.github.io/data/visuals.json"]
+    },
+    "openReuseAssets": {
+      "status": "not-applicable",
+      "priority": "P2",
+      "description": "The current public license is CC BY-NC-SA 4.0, so CBT Cards does not describe its media as a permission-free open-reuse pack.",
+      "notes": "Reuse must follow the published project license and resource-level rights metadata."
+    },
+    "trustCenter": {
+      "status": "active",
+      "priority": "P0",
+      "description": "Publish one machine-readable trust surface that resolves review, safety, provenance, licensing, citation, privacy and security boundaries.",
+      "url": "https://cbt-cards.github.io/trust/trust.json",
+      "machineReadable": ["https://cbt-cards.github.io/trust/trust.json"]
+    },
+    "correctionsLedger": {
+      "status": "active",
+      "priority": "P1",
+      "description": "Maintain a public corrections policy and machine-readable ledger for material factual or safety-relevant publication errors.",
+      "url": "https://cbt-cards.github.io/trust/corrections.json",
+      "machineReadable": ["https://cbt-cards.github.io/trust/corrections.json"],
+      "cadence": "on-change"
+    },
+    "softwareProvenance": {
+      "status": "planned",
+      "priority": "P2",
+      "description": "Keep repository and deployment provenance visible and only claim artifact attestations after verifiable build or publish provenance actually exists."
+    },
+    "persistentIdentifiers": {
+      "status": "planned",
+      "priority": "P2",
+      "description": "Add externally issued persistent identifiers only when they materially improve durable citation; CITATION.cff alone is not treated as a DOI."
+    },
+    "externalTrustSignals": {
+      "status": "planned",
+      "priority": "P2",
+      "description": "Expose independent trust signals only after they exist and keep their scope separate from content correctness, safety or clinical validity."
+    },
+    "externalDistribution": {
+      "status": "active",
+      "priority": "P1",
+      "description": "Maintain sitemap, feeds and explicit search-distribution operations while keeping canonical CBT Cards URLs as the source of record.",
+      "url": "https://github.com/CBT-cards/cbt-cards.github.io/blob/main/SEARCH_DISTRIBUTION.md",
+      "machineReadable": ["https://cbt-cards.github.io/data/search-measurement.json"],
+      "cadence": "on-change"
+    },
+    "aiVisibility": {
+      "status": "active",
+      "priority": "P2",
+      "description": "Maintain a privacy-bounded measurement framework for search inventory, citations and AI referrals while leaving unavailable external-console metrics null.",
+      "url": "https://cbt-cards.github.io/data/search-measurement.json",
+      "machineReadable": ["https://cbt-cards.github.io/data/search-measurement.json"],
+      "cadence": "monthly"
+    },
+    "localization": {
+      "status": "active",
+      "priority": "P1",
+      "description": "Expose English as canonical, Russian as a machine-readable review pilot, and German as planned without implying unreviewed translations are authoritative.",
+      "url": "https://cbt-cards.github.io/languages/",
+      "machineReadable": [
+        "https://cbt-cards.github.io/data/locales.json",
+        "https://cbt-cards.github.io/data/translations.jsonl"
+      ],
+      "cadence": "on-change"
+    },
+    "history": {
+      "status": "active",
+      "priority": "P1",
+      "description": "Expose product and content evolution through the public changelog and machine-readable changelog data without implying a mobile release from website changes.",
+      "url": "https://cbt-cards.github.io/changelog/",
+      "machineReadable": ["https://cbt-cards.github.io/data/changelog.json"],
+      "cadence": "on-change"
+    }
+  },
+  "vocabulary": [
+    {
+      "term": "reviewed practice routing",
+      "definition": "A bounded routing method that starts from a plain-language situation, chooses at most one reviewed CBT Cards practice when there is a reviewed fit, preserves safety exclusions, and returns no_match rather than inventing a practice.",
+      "url": "https://cbt-cards.github.io/practice/",
+      "status": "active"
+    },
+    {
+      "term": "avoid_when",
+      "definition": "A practice-level boundary describing circumstances in which a CBT Cards reflection practice should not be routed or should defer to genuine safety, professional, accessibility or other higher-priority constraints.",
+      "url": "https://cbt-cards.github.io/agents/cbt-cards/PRACTICE_SYSTEM.md",
+      "status": "active"
+    },
+    {
+      "term": "no_match",
+      "definition": "The explicit abstention result used when the reviewed practice catalog does not contain a sufficiently supported fit for the user situation, preventing an agent from inventing a CBT Cards recommendation.",
+      "url": "https://cbt-cards.github.io/agents/cbt-cards/PRACTICE_SYSTEM.md",
+      "status": "active"
+    }
+  ],
+  "measurement": {
+    "signals": [
+      {
+        "name": "search inventory",
+        "status": "active",
+        "description": "Track repository sitemap inventory and distinguish it from externally verified indexed-URL counts.",
+        "url": "https://cbt-cards.github.io/data/search-measurement.json"
+      },
+      {
+        "name": "AI citations and referrals",
+        "status": "planned",
+        "description": "Track observable AI citations and referral signals only where a privacy-compatible, inspectable source is available."
+      },
+      {
+        "name": "agent semantic evaluation",
+        "status": "active",
+        "description": "Track bounded semantic evaluation artifacts for the practice-routing contract without presenting them as clinical-quality evidence.",
+        "url": "https://cbt-cards.github.io/data/practice-semantic-evals.json"
+      }
+    ],
+    "reviewCadence": "monthly",
+    "privacy": "Prefer aggregate search and citation measurements that do not weaken the current privacy posture; do not create visitor browsing-history data merely to populate AI visibility metrics."
+  },
+  "guardrails": {
+    "noRankingClaimsWithoutEvidence": true,
+    "separateOwnedFromIndependentEvidence": true,
+    "preserveNegativeResults": true,
+    "canonicalTechnicalSemantics": true,
+    "noFabricatedAdoption": true,
+    "noReadinessScore": true
+  }
+}

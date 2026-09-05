@@ -1,0 +1,24 @@
+{
+  "version": "0.1",
+  "id": "cbt-cards-corrections-ledger",
+  "canonical": "https://cbt-cards.github.io/trust/corrections.json",
+  "updated": "2026-09-05",
+  "policy": {
+    "scope": "Material factual, provenance, licensing, translation-status, review-status or safety-boundary errors in published CBT Cards resources.",
+    "handling": "Correct the canonical resource, preserve the change in repository history and record a ledger entry when the error is material enough that downstream readers or agents could otherwise retain a misleading fact or boundary.",
+    "no_silent_history_rewrite": true,
+    "report": "https://github.com/CBT-cards/cbt-cards.github.io/issues/new?template=safety-correction.yml",
+    "changelog": "https://cbt-cards.github.io/data/changelog.json"
+  },
+  "entry_fields": [
+    "id",
+    "published_on",
+    "corrected_on",
+    "resource",
+    "summary",
+    "impact",
+    "replacement",
+    "commit"
+  ],
+  "entries": []
+}
