@@ -38,6 +38,7 @@ def main() -> None:
         "library/guides/index.html",
         "about/index.html",
         "changelog/index.html",
+        "research/practice-watch/index.html",
         "sitemap.xml",
         "data/catalog.json",
         "data/changelog.json",
@@ -47,8 +48,10 @@ def main() -> None:
         "data/content-guides.json",
         "data/practice-semantic-evals.json",
         "data/content-review.json",
+        "data/practice-watch.json",
         "data/search-measurement.json",
         "data/outreach-targets.json",
+        "schemas/practice-watch-v1.schema.json",
         "agents/cbt-cards/manifest.json",
         "research/SEMANTIC_REVIEW_WORKSPACE.md",
         ".github/workflows/deploy-pages.yml",
@@ -166,14 +169,16 @@ def main() -> None:
     sitemap_root = ET.parse(ROOT / "sitemap.xml").getroot()
     ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
     sitemap_urls = {node.text for node in sitemap_root.findall("s:url/s:loc", ns) if node.text}
-    if len(sitemap_urls) != 43:
-        fail(f"expected reconciled sitemap size 43, found {len(sitemap_urls)}")
+    if len(sitemap_urls) != 44:
+        fail(f"expected reconciled sitemap size 44, found {len(sitemap_urls)}")
     if f"{ORIGIN}/mobile-releases/" not in sitemap_urls:
         fail("mobile release history is not indexed in sitemap")
     if f"{ORIGIN}/library/" not in sitemap_urls:
         fail("owned content library is not indexed in sitemap")
     if f"{ORIGIN}/library/guides/" not in sitemap_urls:
         fail("content navigation guides are not indexed in sitemap")
+    if f"{ORIGIN}/research/practice-watch/" not in sitemap_urls:
+        fail("monthly practice watch is not indexed in sitemap")
 
     measurement = load_json("data/search-measurement.json")
     if measurement.get("current", {}).get("sitemap_url_count") != len(sitemap_urls):
@@ -250,7 +255,7 @@ def main() -> None:
         "practice-semantic-review-workspace.html",
         "check_practice_semantic_publication_candidate.py",
         "build_practice_semantic_publication_report.py",
-        "sitemap inventory: 43 public URLs",
+        "sitemap inventory: 44 public URLs",
         "ready_requires_fork",
         "blocked by current permissive-license requirements",
         "CC BY-NC-SA 4.0",
@@ -293,7 +298,7 @@ def main() -> None:
     print(
         "project state check passed: skill 1.8.0, 11 reviewed practices, 42 owned content modules across seven formats, "
         "41 semantic cases, offline blinded review + final publication gate present, 26 freshness items, "
-        "43 sitemap URLs, requalified outreach blockers, current changelog/catalog, "
+        "44 sitemap URLs, requalified outreach blockers, current changelog/catalog, "
         "mobile/repo release boundary reconciled"
     )
 
