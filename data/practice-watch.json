@@ -148,7 +148,7 @@
           "signal_type": "evidence_refresh",
           "freshness_basis": "issue_publication",
           "first_online_date": "2026-07-22",
-          "issue_publication_date": "2026-08-01",
+          "issue_publication_date": null,
           "journal": "Clinical Psychology Review",
           "evidence_type": "systematic review and meta-analysis of randomized controlled trials",
           "sample": "105 trials, 13,933 patients",
@@ -157,7 +157,7 @@
           "cbt_cards_decision": "refresh_existing_activity_planning_evidence",
           "candidate": null,
           "limitations": [
-            "High heterogeneity for adult outpatient comparisons.",
+            "The source used assigns the article to the August 2026 issue but does not state an exact issue-publication day.",
             "Too few trials for strong estimates in children/adolescents or versus pharmacotherapy.",
             "This updates mechanism-level evidence; it does not validate any exact CBT Cards card or worksheet."
           ],
@@ -192,7 +192,8 @@
           "limitations": [
             "Small pilot sample.",
             "Clinical transdiagnostic group treatment, not a self-guided micro-practice.",
-            "Wait-list comparison and one national/cultural context."
+            "Wait-list comparison and one national/cultural context.",
+            "The abstract reports 39 participants while the stated randomized group counts are 22 and 23; this internal source inconsistency should be checked against the full paper before reuse."
           ],
           "reviewed_practice_status": "not_reviewed_not_published_as_practice",
           "sources": [
