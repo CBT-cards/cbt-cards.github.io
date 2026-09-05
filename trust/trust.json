@@ -1,0 +1,67 @@
+{
+  "version": "0.1",
+  "id": "cbt-cards-trust-center",
+  "canonical": "https://cbt-cards.github.io/trust/trust.json",
+  "reviewed_on": "2026-09-05",
+  "project": {
+    "name": "CBT Cards",
+    "site": "https://cbt-cards.github.io/",
+    "repository": "https://github.com/CBT-cards/cbt-cards.github.io",
+    "site_profile": "https://cbt-cards.github.io/ai/site-profile.json",
+    "ai_search_profile": "https://cbt-cards.github.io/ai/ai-search-profile.json"
+  },
+  "review": {
+    "policy": "https://cbt-cards.github.io/about/editorial-review/",
+    "content_registry": "https://cbt-cards.github.io/data/content-review.json",
+    "toolkit_review": "https://cbt-cards.github.io/data/toolkit-review.json",
+    "toolkit_audit": "https://cbt-cards.github.io/data/toolkit-audit.json"
+  },
+  "evidence": {
+    "registry": "https://cbt-cards.github.io/data/practice-evidence.json",
+    "practice_catalog": "https://cbt-cards.github.io/data/practice.json",
+    "rag_manifest": "https://cbt-cards.github.io/data/practice-rag-manifest.json",
+    "semantic_evals": "https://cbt-cards.github.io/data/practice-semantic-evals.json",
+    "boundary": "Evidence records describe scoped support for mechanisms or source material. They do not establish clinical efficacy for CBT Cards, individual suitability, diagnosis, or equivalence to therapist-delivered care."
+  },
+  "safety": {
+    "agent_contract": "https://cbt-cards.github.io/agents/cbt-cards/PRACTICE_SYSTEM.md",
+    "principles": [
+      "Start from a plain-language situation rather than a diagnosis.",
+      "Preserve practice-level avoid_when boundaries.",
+      "Return no_match rather than inventing a reviewed practice.",
+      "Do not use CBT Cards as emergency support, diagnosis, treatment, or a substitute for professional care.",
+      "Genuine danger and required medical, legal, financial, safeguarding, professional or accessibility decisions override reflection routing."
+    ]
+  },
+  "provenance": {
+    "canonical_data": "https://cbt-cards.github.io/data/knowledge.jsonl",
+    "rag_manifest": "https://cbt-cards.github.io/data/practice-rag-manifest.json",
+    "changelog": "https://cbt-cards.github.io/data/changelog.json",
+    "project_status": "https://github.com/CBT-cards/cbt-cards.github.io/blob/main/PROJECT_STATUS.md"
+  },
+  "license": {
+    "url": "https://cbt-cards.github.io/LICENSE",
+    "current": "CC BY-NC-SA 4.0",
+    "boundary": "Do not infer permission-free or unrestricted commercial reuse from public availability. Resource-level rights metadata and the published project license remain controlling."
+  },
+  "citation": {
+    "cff": "https://cbt-cards.github.io/CITATION.cff"
+  },
+  "security": {
+    "policy": "https://cbt-cards.github.io/.well-known/security.txt"
+  },
+  "privacy": {
+    "policy": "https://cbt-cards.github.io/privacy/",
+    "measurement": "https://cbt-cards.github.io/data/search-measurement.json"
+  },
+  "corrections": {
+    "ledger": "https://cbt-cards.github.io/trust/corrections.json",
+    "report": "https://github.com/CBT-cards/cbt-cards.github.io/issues/new?template=safety-correction.yml"
+  },
+  "boundaries": [
+    "Website, data, skill and research publication do not imply a mobile-app release.",
+    "Machine-translated or preview locales are not authoritative until their declared review gates are complete.",
+    "Repository CI and semantic evaluations are engineering evidence, not clinical validation.",
+    "No readiness, safety, ranking or adoption score is claimed by this trust surface."
+  ]
+}
