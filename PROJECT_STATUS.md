@@ -27,6 +27,8 @@ Current Agent Skill: **v1.8.0**.
 
 The repository includes deterministic starter/held-out routing baselines, a frozen-context provider runner for all 41 practice-semantic cases, execution provenance checks, and contracts for raw responses/reviews/reports.
 
+A separate Monthly Practice Watch now records dated research-to-practice signals without automatically promoting them into the reviewed `/practice/` layer. The first archived edition covers August 2026, and the machine-readable history preserves first-online versus issue-publication dates, evidence type, limitations, CBT Cards decisions, candidate status, and source identifiers.
+
 The real-model review path is now complete on the repository side:
 
 - `full-41` provider execution is manual and spend-guarded; dry-run is the default.
@@ -70,7 +72,7 @@ These are lab measurements, not field Core Web Vitals.
 
 ## Search/distribution snapshot
 
-- sitemap inventory: 43 public URLs after adding the CBT Cards-owned content library and its contrasts/progressions/decision-rule guide page; noindex localization previews are excluded.
+- sitemap inventory: 44 public URLs after adding the indexed Monthly Practice Watch research history; noindex localization previews are excluded.
 - `OAI-SearchBot` is explicitly allowed.
 - IndexNow runs after deployment and produces an observable receipt rather than hiding failures behind `continue-on-error`.
 - an eight-week search measurement ledger exists.
