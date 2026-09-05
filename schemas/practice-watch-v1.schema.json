@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cbt-cards.github.io/schemas/practice-watch-v1.schema.json",
+  "title": "CBT Cards monthly practice watch v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "canonical",
+    "human_url",
+    "schema_url",
+    "updated",
+    "purpose",
+    "publication_boundary",
+    "cadence",
+    "editions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "id": {
+      "type": "string"
+    },
+    "canonical": {
+      "type": "string",
+      "format": "uri"
+    },
+    "human_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "schema_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "publication_boundary": {
+      "type": "string"
+    },
+    "cadence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "frequency",
+        "target_run_day",
+        "coverage_rule"
+      ],
+      "properties": {
+        "frequency": {
+          "const": "monthly"
+        },
+        "target_run_day": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 28
+        },
+        "coverage_rule": {
+          "type": "string"
+        }
+      }
+    },
+    "editions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/edition"
+      }
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "url"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "pubmed",
+            "doi",
+            "journal",
+            "repository",
+            "other"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "pmid": {
+          "type": "string"
+        },
+        "doi": {
+          "type": "string"
+        }
+      }
+    },
+    "candidate": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "working_title",
+        "status",
+        "prompt",
+        "micro_action",
+        "boundary"
+      ],
+      "properties": {
+        "working_title": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "prompt": {
+          "type": "string"
+        },
+        "micro_action": {
+          "type": "string"
+        },
+        "boundary": {
+          "type": "string"
+        }
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "signal_type",
+        "freshness_basis",
+        "first_online_date",
+        "issue_publication_date",
+        "journal",
+        "evidence_type",
+        "sample",
+        "studied_format",
+        "finding",
+        "cbt_cards_decision",
+        "candidate",
+        "limitations",
+        "reviewed_practice_status",
+        "sources"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^watch-"
+        },
+        "title": {
+          "type": "string"
+        },
+        "signal_type": {
+          "enum": [
+            "candidate_mechanism",
+            "brief_intervention_signal",
+            "context_routing_signal",
+            "evidence_refresh",
+            "delivery_model_signal",
+            "negative_product_signal"
+          ]
+        },
+        "freshness_basis": {
+          "enum": [
+            "first_online",
+            "issue_publication"
+          ]
+        },
+        "first_online_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "issue_publication_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "journal": {
+          "type": "string"
+        },
+        "evidence_type": {
+          "type": "string"
+        },
+        "sample": {
+          "type": "string"
+        },
+        "studied_format": {
+          "type": "string"
+        },
+        "finding": {
+          "type": "string"
+        },
+        "cbt_cards_decision": {
+          "type": "string"
+        },
+        "candidate": {
+          "$ref": "#/$defs/candidate"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "reviewed_practice_status": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "edition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "run_date",
+        "coverage",
+        "selection_note",
+        "highlights",
+        "items"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^practice-watch-\\d{4}-\\d{2}$"
+        },
+        "label": {
+          "type": "string"
+        },
+        "run_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "coverage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "from",
+            "to"
+          ],
+          "properties": {
+            "from": {
+              "type": "string",
+              "format": "date"
+            },
+            "to": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        },
+        "selection_note": {
+          "type": "string"
+        },
+        "highlights": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/item"
+          }
+        }
+      }
+    }
+  }
+}

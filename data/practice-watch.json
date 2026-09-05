@@ -1,0 +1,246 @@
+{
+  "schema_version": "1.0",
+  "id": "cbt-cards-monthly-practice-watch-v1",
+  "canonical": "https://cbt-cards.github.io/data/practice-watch.json",
+  "human_url": "https://cbt-cards.github.io/research/practice-watch/",
+  "schema_url": "https://cbt-cards.github.io/schemas/practice-watch-v1.schema.json",
+  "updated": "2026-09-05",
+  "purpose": "Monthly research-to-practice watch for CBT Cards. It records new evidence and intervention signals without automatically publishing them as reviewed CBT Cards practices.",
+  "publication_boundary": "Inclusion in this watch is not clinical validation, treatment advice, or publication in the reviewed /practice/ layer. Candidate wording is original CBT Cards editorial prototyping and is not the studied intervention unless explicitly stated.",
+  "cadence": {
+    "frequency": "monthly",
+    "target_run_day": 5,
+    "coverage_rule": "Review the previous calendar month. Record both first-online and issue-publication dates. An item can enter on either date, but the freshness basis must be explicit and DOI/PMID must be deduplicated across future editions."
+  },
+  "editions": [
+    {
+      "id": "practice-watch-2026-08",
+      "label": "August 2026",
+      "run_date": "2026-09-05",
+      "coverage": {
+        "from": "2026-08-01",
+        "to": "2026-08-31"
+      },
+      "selection_note": "Selected high-signal peer-reviewed studies relevant to CBT/ACT mechanisms, brief interventions, just-in-time support, behavioral activation, delivery models, or digital-practice design. This is a curated watch, not a claim of an exhaustive systematic search.",
+      "highlights": [
+        "Imagery-enhanced activity scheduling is the clearest candidate mechanism for a future CBT Cards micro-practice, but the trial used a four-session depression intervention and a wait-list control.",
+        "Single-session CBT and ACT both reduced short-term procrastination in students; intervention details are not sufficiently exposed in the abstract to create a faithful practice card yet.",
+        "A micro-randomized just-in-time study suggests that gratitude, savoring, and acceptance may have different short-term fit depending on the moment; this is a routing signal, not proof of a universal sequence.",
+        "A large behavioral-activation meta-analysis strengthens the evidence context for existing activity-planning content rather than requiring a new practice.",
+        "An online group Unified Protocol pilot is a delivery-model signal, not a self-help card.",
+        "Adding an app to homework after one-session treatment for childhood phobias did not improve outcomes or at-home practice, a useful negative product-design signal."
+      ],
+      "items": [
+        {
+          "id": "watch-2026-08-wimba-imagery-ba",
+          "title": "Imagery-enhanced behavioral activation (WIMBA)",
+          "signal_type": "candidate_mechanism",
+          "freshness_basis": "issue_publication",
+          "first_online_date": "2026-04-13",
+          "issue_publication_date": "2026-08-15",
+          "journal": "Journal of Affective Disorders",
+          "evidence_type": "randomized controlled trial",
+          "sample": "168 adults in Germany meeting criteria for a major depressive episode",
+          "studied_format": "Four brief unguided online sessions with psychoeducation, imagery-enhanced activity scheduling, and personalized feedback versus wait-list.",
+          "finding": "Behavioral activation increased more in WIMBA from session 3 through follow-up, and depressive symptoms decreased more than wait-list. The authors call for further trials including an active control.",
+          "cbt_cards_decision": "prototype_candidate",
+          "candidate": {
+            "working_title": "Preview One Reward",
+            "status": "editorial_prototype_not_reviewed",
+            "prompt": "Before a safe planned activity, picture yourself doing it for about 30 seconds. Notice one concrete sensory detail and one realistically rewarding part, then take the smallest start step.",
+            "micro_action": "Choose one already-planned safe activity, imagine one rewarding detail briefly, then begin for two minutes.",
+            "boundary": "Do not present this as a depression treatment or as the WIMBA protocol. Do not use imagery to override real danger, professional instructions, or required safety steps."
+          },
+          "limitations": [
+            "Clinical depression sample; general-wellness use is an extrapolation.",
+            "Wait-list rather than active-control comparison.",
+            "The CBT Cards prototype is not the tested four-session WIMBA intervention."
+          ],
+          "reviewed_practice_status": "not_reviewed_not_published_as_practice",
+          "sources": [
+            {
+              "kind": "pubmed",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/41985751/",
+              "pmid": "41985751"
+            },
+            {
+              "kind": "doi",
+              "url": "https://doi.org/10.1016/j.jad.2026.121794",
+              "doi": "10.1016/j.jad.2026.121794"
+            }
+          ]
+        },
+        {
+          "id": "watch-2026-08-concras-procrastination-ssi",
+          "title": "Single-session CBT and ACT for procrastination (CONCRAS)",
+          "signal_type": "brief_intervention_signal",
+          "freshness_basis": "first_online",
+          "first_online_date": "2026-08-10",
+          "issue_publication_date": null,
+          "journal": "Psychotherapy and Psychosomatics",
+          "evidence_type": "randomized controlled trial",
+          "sample": "151 students with recurrent procrastination and a currently postponed task",
+          "studied_format": "Approximately 60-minute face-to-face CBT or ACT single-session intervention versus no-intervention control, with 2-week follow-up.",
+          "finding": "Both CBT and ACT single-session interventions reduced state procrastination more than control, with no significant difference between CBT and ACT. Similar short-term patterns appeared for task anxiety/doubt and several secondary outcomes.",
+          "cbt_cards_decision": "needs_intervention_detail_before_candidate_card",
+          "candidate": null,
+          "limitations": [
+            "Short 2-week follow-up.",
+            "Student sample and face-to-face 60-minute sessions.",
+            "The abstract does not expose enough intervention procedure detail to derive a faithful CBT Cards micro-practice without inventing content."
+          ],
+          "reviewed_practice_status": "not_reviewed_not_published_as_practice",
+          "sources": [
+            {
+              "kind": "pubmed",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/42574294/",
+              "pmid": "42574294"
+            },
+            {
+              "kind": "doi",
+              "url": "https://doi.org/10.1159/pps/aemag001",
+              "doi": "10.1159/pps/aemag001"
+            }
+          ]
+        },
+        {
+          "id": "watch-2026-08-alert-jitai",
+          "title": "Just-in-time ecological momentary interventions (ALERT)",
+          "signal_type": "context_routing_signal",
+          "freshness_basis": "issue_publication",
+          "first_online_date": "2026-03-23",
+          "issue_publication_date": "2026-08-01",
+          "journal": "Journal of Affective Disorders",
+          "evidence_type": "micro-randomized trial",
+          "sample": "72 people at increased risk for mental disorders",
+          "studied_format": "16 days with four daily assessments; two assessments per day were followed by randomized momentary interventions based on gratitude, savoring, cognitive restructuring, or acceptance.",
+          "finding": "Thirty minutes later, gratitude, savoring, and acceptance improved positive affect; gratitude and savoring reduced negative affect; acceptance reduced negative affect particularly during higher-distress moments. Cognitive reappraisal did not improve affect in this trial.",
+          "cbt_cards_decision": "prototype_routing_rule",
+          "candidate": {
+            "working_title": "Match the Micro-Practice to the Moment",
+            "status": "editorial_product_prototype_not_reviewed",
+            "prompt": "If the moment is safe and you want to amplify something already okay, try a brief savoring or gratitude cue. If distress is high, try making room for the feeling before choosing the next safe action.",
+            "micro_action": "Choose one context-matched 30–60 second cue instead of opening a long menu of techniques.",
+            "boundary": "This is a routing prototype, not an individualized treatment rule. High distress can also signal genuine danger or need for qualified support; do not use acceptance to delay urgent action."
+          },
+          "limitations": [
+            "Small sample and short intervention period.",
+            "No inactive control for distal pre/post changes, so longer-term changes cannot be attributed cleanly to the momentary interventions.",
+            "One null result for cognitive reappraisal does not establish that cognitive restructuring is generally ineffective."
+          ],
+          "reviewed_practice_status": "not_reviewed_not_published_as_practice",
+          "sources": [
+            {
+              "kind": "pubmed",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/41881110/",
+              "pmid": "41881110"
+            },
+            {
+              "kind": "doi",
+              "url": "https://doi.org/10.1016/j.jad.2026.121661",
+              "doi": "10.1016/j.jad.2026.121661"
+            }
+          ]
+        },
+        {
+          "id": "watch-2026-08-ba-meta",
+          "title": "Behavioral activation for depression: comprehensive meta-analysis",
+          "signal_type": "evidence_refresh",
+          "freshness_basis": "issue_publication",
+          "first_online_date": "2026-07-22",
+          "issue_publication_date": "2026-08-01",
+          "journal": "Clinical Psychology Review",
+          "evidence_type": "systematic review and meta-analysis of randomized controlled trials",
+          "sample": "105 trials, 13,933 patients",
+          "studied_format": "Behavioral activation across age groups, settings, and comparators.",
+          "finding": "For adult outpatients, behavioral activation outperformed control conditions on average, with substantial heterogeneity; it did not significantly differ from other therapies. Self-guided behavioral activation showed a smaller but significant average effect.",
+          "cbt_cards_decision": "refresh_existing_activity_planning_evidence",
+          "candidate": null,
+          "limitations": [
+            "High heterogeneity for adult outpatient comparisons.",
+            "Too few trials for strong estimates in children/adolescents or versus pharmacotherapy.",
+            "This updates mechanism-level evidence; it does not validate any exact CBT Cards card or worksheet."
+          ],
+          "reviewed_practice_status": "not_a_new_practice",
+          "sources": [
+            {
+              "kind": "pubmed",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/42492146/",
+              "pmid": "42492146"
+            },
+            {
+              "kind": "doi",
+              "url": "https://doi.org/10.1016/j.cpr.2026.102783",
+              "doi": "10.1016/j.cpr.2026.102783"
+            }
+          ]
+        },
+        {
+          "id": "watch-2026-08-unified-protocol-argentina",
+          "title": "Online group Unified Protocol pilot in Argentina",
+          "signal_type": "delivery_model_signal",
+          "freshness_basis": "first_online",
+          "first_online_date": "2026-08-25",
+          "issue_publication_date": null,
+          "journal": "Cognitive Behaviour Therapy",
+          "evidence_type": "controlled randomized pilot study",
+          "sample": "39 adults in Argentina with various emotional disorders",
+          "studied_format": "Ten 90-minute online group Unified Protocol sessions versus wait-list.",
+          "finding": "The intervention group improved across the reported post-treatment outcomes versus wait-list, with high satisfaction and perceived usefulness.",
+          "cbt_cards_decision": "record_as_delivery_model_signal_not_card",
+          "candidate": null,
+          "limitations": [
+            "Small pilot sample.",
+            "Clinical transdiagnostic group treatment, not a self-guided micro-practice.",
+            "Wait-list comparison and one national/cultural context."
+          ],
+          "reviewed_practice_status": "not_reviewed_not_published_as_practice",
+          "sources": [
+            {
+              "kind": "pubmed",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/42639813/",
+              "pmid": "42639813"
+            },
+            {
+              "kind": "doi",
+              "url": "https://doi.org/10.1080/16506073.2026.2720138",
+              "doi": "10.1080/16506073.2026.2720138"
+            }
+          ]
+        },
+        {
+          "id": "watch-2026-08-phobia-app-homework",
+          "title": "App-supported homework after one-session treatment for childhood phobias",
+          "signal_type": "negative_product_signal",
+          "freshness_basis": "first_online",
+          "first_online_date": "2026-08-20",
+          "issue_publication_date": null,
+          "journal": "Journal of the American Academy of Child & Adolescent Psychiatry",
+          "evidence_type": "randomized controlled trial",
+          "sample": "172 children aged 7–14 with specific phobias",
+          "studied_format": "Standard one-session treatment followed by therapist-provided homework versus an app-supported homework program.",
+          "finding": "Both groups improved, but the app-supported homework program did not improve outcomes or at-home practice; families reported higher satisfaction with the app condition.",
+          "cbt_cards_decision": "retain_as_product_warning_against_appification_assumption",
+          "candidate": null,
+          "limitations": [
+            "Child clinical phobia treatment context; not directly generalizable to CBT Cards users.",
+            "The result tests one specific app-supported homework implementation, not apps in general."
+          ],
+          "reviewed_practice_status": "not_a_practice_candidate",
+          "sources": [
+            {
+              "kind": "pubmed",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/42624399/",
+              "pmid": "42624399"
+            },
+            {
+              "kind": "doi",
+              "url": "https://doi.org/10.1016/j.jaac.2026.08.007",
+              "doi": "10.1016/j.jaac.2026.08.007"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
