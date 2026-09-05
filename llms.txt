@@ -52,6 +52,11 @@ The source audit is not publication approval. Any raw source record not explicit
 The freshness registry currently covers 26 trusted items: learning pages, worksheets, curated source-toolkit cards, and all 11 CBT Cards-owned practices. The separately published owned content system is structurally linked to reviewed practices/evidence and exposes its own safety boundaries, but it is not being misrepresented as part of that 26-item freshness count. Freshness review is not clinical validation.
 
 ## Agent/data layer
+- Agent-Ready Web Profile: https://cbt-cards.github.io/ai/site-profile.json
+- AI Search & Citation Profile: https://cbt-cards.github.io/ai/ai-search-profile.json
+- Machine-readable Trust Center: https://cbt-cards.github.io/trust/trust.json
+- Corrections ledger: https://cbt-cards.github.io/trust/corrections.json
+- Entity knowledge graph: https://cbt-cards.github.io/knowledge/graph.json
 - Resource catalog: https://cbt-cards.github.io/data/catalog.json
 - Owned content library: https://cbt-cards.github.io/data/content-library.json
 - Owned content navigation guides: https://cbt-cards.github.io/data/content-guides.json
@@ -68,6 +73,8 @@ The freshness registry currently covers 26 trusted items: learning pages, worksh
 - Changelog: https://cbt-cards.github.io/data/changelog.json
 - Citation: https://cbt-cards.github.io/CITATION.cff
 - Editorial visual manifest: https://cbt-cards.github.io/data/visuals.json
+
+The AI Search & Citation Profile is an implementation/discovery declaration, not a ranking or readiness score. `active` means the referenced CBT Cards surface exists; `planned` means it must not be treated as deployed evidence. The Trust Center and corrections ledger consolidate existing project boundaries without upgrading engineering, editorial, or source evidence into clinical validation.
 
 ## Maintainer provenance
 - Project status: https://github.com/CBT-cards/cbt-cards.github.io/blob/main/PROJECT_STATUS.md
