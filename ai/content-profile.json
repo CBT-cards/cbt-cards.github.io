@@ -1,0 +1,73 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/content-profile.schema.json",
+  "profileVersion": "0.1",
+  "site": {
+    "id": "cbt-cards-public-reflection",
+    "name": "CBT Cards Public Reflection Resource",
+    "canonicalUrl": "https://cbt-cards.github.io/",
+    "languages": ["en", "ru", "de"],
+    "canonicalLanguage": "en"
+  },
+  "archetypes": {
+    "registry": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/registry/content-archetypes.json",
+    "enabled": ["answer", "guide", "tutorial", "research", "comparison", "reference", "concept", "changelog"],
+    "default": "guide"
+  },
+  "graph": {
+    "enabled": true,
+    "relationTypes": ["broader", "narrower", "prerequisite", "contrasts-with", "applies-to", "evidence-for", "updates", "next-question"],
+    "minimumMeaningfulRelations": 1,
+    "machineReadableGraph": "https://cbt-cards.github.io/knowledge/graph.json"
+  },
+  "publication": {
+    "canonicalRequired": true,
+    "authorIdentity": {
+      "requiredForEditorialContent": true,
+      "profileUrlRecommended": true
+    },
+    "dates": {
+      "published": false,
+      "modifiedOnlyOnMaterialChange": true,
+      "reviewedForTimeSensitiveFacts": true
+    },
+    "structuredData": {
+      "useWhenSemanticallyAccurate": true,
+      "mirrorVisibleContent": true
+    },
+    "discover": {
+      "status": "active",
+      "largeImageRecommended": true,
+      "recommendedMinWidth": 1200,
+      "recommendedMinPixels": 300000,
+      "preferredAspectRatio": "3:2",
+      "maxImagePreviewLarge": true,
+      "source": "https://developers.google.com/search/docs/appearance/google-discover"
+    },
+    "preferredSources": {
+      "status": "planned",
+      "placement": "article-end",
+      "source": "https://developers.google.com/search/docs/appearance/preferred-sources",
+      "notes": "Do not add a control merely because the mechanism exists. Activate it only if CBT Cards is eligible/selectable and repeat-reader measurement justifies the user-facing element."
+    }
+  },
+  "style": {
+    "fingerprintLint": true,
+    "lintMode": "warn",
+    "languages": ["en"]
+  },
+  "guardrails": {
+    "contentGrammarNotTemplate": true,
+    "formatAdaptive": true,
+    "noForcedWordCount": true,
+    "noKeywordDensityTargets": true,
+    "noMandatoryFaq": true,
+    "noGenericConclusionRequirement": true,
+    "noSyntheticStatistics": true,
+    "noInventedFirstHandExperience": true,
+    "noQueryVariantPageFactory": true,
+    "noUniformSectionOrder": true,
+    "evidenceBeforeDecoration": true,
+    "visibleContentBeforeMachineMetadata": true,
+    "noRankingPromise": true
+  }
+}
