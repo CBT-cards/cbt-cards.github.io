@@ -4,7 +4,7 @@
   "id": "cbt-cards-public-reflection",
   "name": "CBT Cards Public Reflection Resource",
   "canonicalUrl": "https://cbt-cards.github.io/",
-  "description": "Static, inspectable public reflection library with reviewed practice routing, explicit safety boundaries, retrieval-ready data, schemas, a portable Agent Skill, and an evidence-bounded AI search and citation profile.",
+  "description": "Static, inspectable public reflection library with reviewed practice routing, explicit safety boundaries, retrieval-ready data, schemas, a portable Agent Skill, adaptive content policy, and an evidence-bounded AI search and citation profile.",
   "languages": ["en", "ru", "de"],
   "web": {
     "sitemap": "https://cbt-cards.github.io/sitemap.xml",
@@ -47,6 +47,13 @@
         "mediaType": "application/json",
         "role": "other",
         "description": "Evidence-bounded implementation profile describing canonical surfaces, active and planned AI-discovery modules, measurement, and guardrails."
+      },
+      {
+        "name": "CBT Cards adaptive content profile",
+        "url": "https://cbt-cards.github.io/ai/content-profile.json",
+        "mediaType": "application/json",
+        "role": "other",
+        "description": "Format-adaptive publishing policy for content archetypes, graph relations, authorship, truthful freshness, Discover imagery, style linting, and anti-template guardrails."
       },
       {
         "name": "CBT Cards reviewed evidence registry",
