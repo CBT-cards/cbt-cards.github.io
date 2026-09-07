@@ -1,0 +1,36 @@
+name: Dataset release / DOI
+about: Prepare a reviewed public corpus release for external archival publication and DOI citation.
+title: "Dataset release: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template only for a genuine reusable dataset release. DOI publication is for citation and reproducibility, not a ranking promise.
+  - type: input
+    id: version
+    attributes:
+      label: Dataset version
+      description: Version of the frozen corpus release.
+    validations:
+      required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Release boundary
+      description: Exact public distributions to include/exclude.
+    validations:
+      required: true
+  - type: checkboxes
+    id: readiness
+    attributes:
+      label: Publication readiness
+      options:
+        - label: Dataset metadata reviewed
+        - label: Methodology/provenance/limitations reviewed
+        - label: License boundary reviewed
+        - label: Exact release files frozen
+        - label: SHA-256 checksums generated
+        - label: CITATION.cff reviewed
+        - label: External archive record created
+        - label: Issued DOI verified and written back to dataset metadata
