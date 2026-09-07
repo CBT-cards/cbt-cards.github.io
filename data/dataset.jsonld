@@ -1,0 +1,74 @@
+{
+  "@context": "https://schema.org",
+  "@id": "https://cbt-cards.github.io/data/dataset.jsonld#dataset",
+  "@type": "Dataset",
+  "name": "CBT Cards Public Reflection and Evaluation Corpus",
+  "description": "A reusable public corpus of CBT Cards reflection practices, curated knowledge records, evidence and ontology overlays, relationships, worksheets, translations, and agent evaluation cases. The dataset supports research, interoperability and reproducible evaluation of the public resource; it is not medical advice or a clinical dataset.",
+  "url": "https://cbt-cards.github.io/research/",
+  "mainEntityOfPage": "https://cbt-cards.github.io/research/",
+  "identifier": "https://cbt-cards.github.io/data/dataset.jsonld#dataset",
+  "creator": {
+    "@type": "Organization",
+    "name": "MetalHatsCats"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MetalHatsCats"
+  },
+  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "isAccessibleForFree": true,
+  "dateModified": "2026-08-22",
+  "citation": "https://github.com/CBT-cards/cbt-cards.github.io/blob/main/CITATION.cff",
+  "keywords": [
+    "CBT",
+    "self-reflection",
+    "structured knowledge",
+    "agent evaluation",
+    "AI assistants",
+    "localization",
+    "public dataset"
+  ],
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "name": "Practice dataset",
+      "contentUrl": "https://cbt-cards.github.io/data/practice.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "DataDownload",
+      "name": "Curated knowledge records",
+      "contentUrl": "https://cbt-cards.github.io/data/knowledge.jsonl",
+      "encodingFormat": "application/x-ndjson"
+    },
+    {
+      "@type": "DataDownload",
+      "name": "Practice evidence",
+      "contentUrl": "https://cbt-cards.github.io/data/practice-evidence.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "DataDownload",
+      "name": "Practice ontology",
+      "contentUrl": "https://cbt-cards.github.io/data/practice-ontology.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "DataDownload",
+      "name": "Practice relations",
+      "contentUrl": "https://cbt-cards.github.io/data/practice-relations.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "DataDownload",
+      "name": "Agent evaluation cases",
+      "contentUrl": "https://cbt-cards.github.io/data/agent-evals.jsonl",
+      "encodingFormat": "application/x-ndjson"
+    }
+  ],
+  "subjectOf": [
+    "https://cbt-cards.github.io/about/editorial-review/",
+    "https://cbt-cards.github.io/research/",
+    "https://cbt-cards.github.io/toolkit/review-status/"
+  ]
+}
