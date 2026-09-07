@@ -1,0 +1,63 @@
+{
+  "version": "0.1",
+  "datasetId": "cbt-cards-public-reflection-evaluation-corpus",
+  "canonicalMetadata": "https://cbt-cards.github.io/data/dataset.jsonld",
+  "publicationState": "doi-not-issued",
+  "releaseVersion": null,
+  "archive": {
+    "preferredProvider": "Zenodo",
+    "recordUrl": null
+  },
+  "persistentIdentifier": {
+    "type": "DOI",
+    "state": "not-issued",
+    "value": null,
+    "resolverUrl": null
+  },
+  "releaseBoundary": {
+    "include": [
+      "data/practice.json",
+      "data/knowledge.jsonl",
+      "data/practice-evidence.json",
+      "data/practice-ontology.json",
+      "data/practice-relations.json",
+      "data/agent-evals.jsonl",
+      "data/worksheets.json",
+      "data/translations.jsonl",
+      "schemas/knowledge-record-v1.schema.json",
+      "schemas/agent-eval-case-v1.schema.json"
+    ],
+    "reviewBeforeArchive": true,
+    "note": "Freeze an intentional public release; do not archive operational/private material merely because it exists in the repository."
+  },
+  "citation": {
+    "cff": "https://github.com/CBT-cards/cbt-cards.github.io/blob/main/CITATION.cff",
+    "datasetTypeDeclared": true
+  },
+  "methodologyAndProvenance": [
+    "https://cbt-cards.github.io/about/editorial-review/",
+    "https://cbt-cards.github.io/research/",
+    "https://cbt-cards.github.io/toolkit/review-status/"
+  ],
+  "license": "CC-BY-NC-SA-4.0",
+  "integrity": {
+    "requiredAtRelease": true,
+    "algorithm": "SHA-256",
+    "state": "pending-release-freeze"
+  },
+  "activation": {
+    "externalOwnerActionRequired": true,
+    "steps": [
+      "Choose and record a dataset release version.",
+      "Freeze the reviewed public release files and compute SHA-256 checksums.",
+      "Publish the frozen release through Zenodo or another appropriate persistent archive.",
+      "Verify the archive record and issued DOI.",
+      "Update this file, data/dataset.jsonld and CITATION.cff with the issued DOI without rewriting historical release identity."
+    ]
+  },
+  "guardrails": [
+    "No DOI is claimed before an external archive issues one.",
+    "Dataset publication is a citation and reproducibility mechanism, not a Search ranking guarantee.",
+    "Medical or clinical authority is not implied by dataset publication."
+  ]
+}
