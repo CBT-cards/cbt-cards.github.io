@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-focus-profile-v0.3.schema.json",
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/8f1847e9ef7154f69a781071414f88be5b7eddd9/schema/site-focus-profile-v0.3.schema.json",
   "version": "0.3",
   "canonicalUrl": "https://cbt-cards.github.io/",
   "thesis": {
@@ -10,104 +10,36 @@
     "primaryAction": "Use the Practice Finder for a non-urgent situation and inspect the practice boundaries before trying it."
   },
   "scope": {
-    "in": [
-      "low-stakes structured reflection",
-      "reviewed CBT-informed practices with explicit safety exclusions",
-      "thought and behavior experiments linked to reviewed practices",
-      "worked examples, reflection scripts, contrasts and decision rules",
-      "browser-local blank worksheets with no submission requirement"
-    ],
-    "adjacent": [
-      "educational learning guides",
-      "source-toolkit publication and editorial review",
-      "AI assistant integration over the reviewed public practice layer",
-      "research and evaluation of routing, semantics and safety"
-    ],
-    "out": [
-      "mental-health diagnosis",
-      "clinical treatment or therapy replacement",
-      "crisis response or emergency guidance",
-      "medical, legal, financial or safeguarding decisions",
-      "high-risk behavioral experiments",
-      "search ranking or AI citation guarantees"
-    ]
+    "in": ["low-stakes structured reflection", "reviewed CBT-informed practices with explicit safety exclusions", "thought and behavior experiments linked to reviewed practices", "worked examples, reflection scripts, contrasts and decision rules", "browser-local blank worksheets with no submission requirement"],
+    "adjacent": ["educational learning guides", "source-toolkit publication and editorial review", "AI assistant integration over the reviewed public practice layer", "research and evaluation of routing, semantics and safety"],
+    "out": ["mental-health diagnosis", "clinical treatment or therapy replacement", "crisis response or emergency guidance", "medical, legal, financial or safeguarding decisions", "high-risk behavioral experiments", "search ranking or AI citation guarantees"]
   },
   "problemLanes": [
-    {
-      "id": "find",
-      "label": "Find",
-      "job": "Move from a plain-language situation to one reviewed practice when the maintained library supports a clear fit.",
-      "audience": "A person who wants help structuring a non-urgent reflection but does not know which reviewed practice is relevant.",
-      "problem": "Technique-first browsing can encourage people or assistants to choose a familiar method even when it does not fit the situation.",
-      "desiredOutcome": "Reach one relevant practice with fit, exclusions and no_match preserved rather than forcing a recommendation.",
-      "primaryAction": "Use the Practice Finder."
-    },
-    {
-      "id": "reflect",
-      "label": "Reflect",
-      "job": "Use a bounded exercise to separate observation, interpretation, prediction or action without turning the exercise into a diagnosis.",
-      "audience": "A person with a clear low-stakes fit who wants a structured next reflection step.",
-      "problem": "Reflection prompts can become vague reassurance or treatment-like instruction when their mechanism and stopping boundary are unclear.",
-      "desiredOutcome": "Complete one practical reflection step while keeping safety exclusions and uncertainty visible.",
-      "primaryAction": "Open the matched practice, worksheet or linked example."
-    },
-    {
-      "id": "learn",
-      "label": "Learn",
-      "job": "Understand why two reflection approaches differ and when a practice should or should not be used.",
-      "audience": "A reader, educator or assistant integrator who needs the maintained reasoning and safety boundary behind the resource.",
-      "problem": "A list of techniques does not explain discriminators, progression, evidence provenance or when another option is safer.",
-      "desiredOutcome": "Understand the practical discriminator, evidence source and stop conditions without escalating the resource into clinical advice.",
-      "primaryAction": "Read the relevant guide, contrast or evidence record."
-    }
+    {"id":"find","label":"Find","job":"Move from a plain-language situation to one reviewed practice when the maintained library supports a clear fit.","audience":"A person who wants help structuring a non-urgent reflection but does not know which reviewed practice is relevant.","problem":"Technique-first browsing can encourage people or assistants to choose a familiar method even when it does not fit the situation.","desiredOutcome":"Reach one relevant practice with fit, exclusions and no_match preserved rather than forcing a recommendation.","primaryAction":"Use the Practice Finder."},
+    {"id":"reflect","label":"Reflect","job":"Use a bounded exercise to separate observation, interpretation, prediction or action without turning the exercise into a diagnosis.","audience":"A person with a clear low-stakes fit who wants a structured next reflection step.","problem":"Reflection prompts can become vague reassurance or treatment-like instruction when their mechanism and stopping boundary are unclear.","desiredOutcome":"Complete one practical reflection step while keeping safety exclusions and uncertainty visible.","primaryAction":"Open the matched practice, worksheet or linked example."},
+    {"id":"learn","label":"Learn","job":"Understand why two reflection approaches differ and when a practice should or should not be used.","audience":"A reader, educator or assistant integrator who needs the maintained reasoning and safety boundary behind the resource.","problem":"A list of techniques does not explain discriminators, progression, evidence provenance or when another option is safer.","desiredOutcome":"Understand the practical discriminator, evidence source and stop conditions without escalating the resource into clinical advice.","primaryAction":"Read the relevant guide, contrast or evidence record."}
   ],
-  "homepage": {
-    "primaryLane": "find",
-    "supportingLanes": ["reflect", "learn"],
-    "requiredSignals": ["problem", "audience", "outcome", "evidence", "action"]
-  },
-  "primaryNavigation": [
-    "/practice/",
-    "/library/",
-    "/learn/",
-    "/worksheets/",
-    "/about/editorial-review/"
-  ],
+  "homepage": {"primaryLane":"find","supportingLanes":["reflect","learn"],"requiredSignals":["problem","audience","outcome","evidence","action"]},
+  "primaryNavigation": ["/practice/","/library/","/learn/","/worksheets/","/about/editorial-review/"],
   "routeRules": [
-    { "match": { "path": "/" }, "role": "problem-commercial", "scope": "IN", "lane": "find" },
-    { "match": { "pathPrefix": "/practice" }, "role": "problem-commercial", "scope": "IN", "lane": "find" },
-    { "match": { "pathPrefix": "/library" }, "role": "problem-commercial", "scope": "IN", "lane": "reflect" },
-    { "match": { "pathPrefix": "/worksheets" }, "role": "problem-commercial", "scope": "IN", "lane": "reflect" },
-    { "match": { "pathPrefix": "/learn" }, "role": "problem-commercial", "scope": "IN", "lane": "learn" },
-    { "match": { "pathPrefix": "/toolkit" }, "role": "technical-reference", "scope": "ADJACENT", "lane": "learn" },
-    { "match": { "pathPrefix": "/research" }, "role": "proof-portfolio", "scope": "ADJACENT", "lane": "learn" },
-    { "match": { "pathPrefix": "/agents" }, "role": "technical-reference", "scope": "ADJACENT", "lane": "learn" },
-    { "match": { "pathPrefix": "/about" }, "role": "trust-utility", "scope": "ADJACENT", "lane": "learn" },
-    { "match": { "pathPrefix": "/privacy" }, "role": "trust-utility", "scope": "ADJACENT", "lane": "learn" },
-    { "match": { "pathPrefix": "/terms" }, "role": "trust-utility", "scope": "ADJACENT", "lane": "learn" },
-    { "match": { "pathPrefix": "/languages" }, "role": "trust-utility", "scope": "ADJACENT", "lane": "learn" },
-    { "match": { "pathPrefix": "/mobile-releases" }, "role": "trust-utility", "scope": "ADJACENT", "lane": "learn" }
+    {"match":{"path":"/"},"role":"problem-commercial","scope":"IN","lane":"find"},
+    {"match":{"pathPrefix":"/practice"},"role":"problem-commercial","scope":"IN","lane":"find"},
+    {"match":{"pathPrefix":"/library"},"role":"problem-commercial","scope":"IN","lane":"reflect"},
+    {"match":{"pathPrefix":"/worksheets"},"role":"problem-commercial","scope":"IN","lane":"reflect"},
+    {"match":{"pathPrefix":"/learn"},"role":"problem-commercial","scope":"IN","lane":"learn"},
+    {"match":{"pathPrefix":"/toolkit"},"role":"technical-reference","scope":"ADJACENT","lane":"learn"},
+    {"match":{"pathPrefix":"/research"},"role":"proof-portfolio","scope":"ADJACENT","lane":"learn"},
+    {"match":{"pathPrefix":"/agents"},"role":"technical-reference","scope":"ADJACENT","lane":"learn"},
+    {"match":{"pathPrefix":"/about"},"role":"trust-utility","scope":"ADJACENT","lane":"learn"},
+    {"match":{"pathPrefix":"/privacy"},"role":"trust-utility","scope":"ADJACENT","lane":"learn"},
+    {"match":{"pathPrefix":"/terms"},"role":"trust-utility","scope":"ADJACENT","lane":"learn"},
+    {"match":{"pathPrefix":"/languages"},"role":"trust-utility","scope":"ADJACENT","lane":"learn"},
+    {"match":{"pathPrefix":"/mobile-releases"},"role":"trust-utility","scope":"ADJACENT","lane":"learn"}
   ],
   "experience": {
-    "visualPrinciples": [
-      "Keep the interface calm and non-clinical while making the next bounded reflection action easy to identify.",
-      "Place safety exclusions, avoid-when conditions and no_match boundaries close to the action they constrain.",
-      "Distinguish reviewed practices from source-only toolkit material and from research/evaluation artifacts.",
-      "Avoid persuasive or gamified patterns that pressure a person to continue a reflection exercise."
-    ],
-    "navigation": {
-      "maxPrimaryItems": 5,
-      "consistentAcrossPages": true
-    },
-    "performance": {
-      "lcpMsP75Max": 2500,
-      "inpMsP75Max": 200,
-      "clsP75Max": 0.1
-    }
+    "visualPrinciples": ["Keep the interface calm and non-clinical while making the next bounded reflection action easy to identify.","Place safety exclusions, avoid-when conditions and no_match boundaries close to the action they constrain.","Distinguish reviewed practices from source-only toolkit material and from research/evaluation artifacts.","Avoid persuasive or gamified patterns that pressure a person to continue a reflection exercise."],
+    "navigation": {"maxPrimaryItems":5,"consistentAcrossPages":true},
+    "performance": {"lcpMsP75Max":2500,"inpMsP75Max":200,"clsP75Max":0.1}
   },
-  "notes": [
-    "The Site Focus contract does not expand the practice-routing boundary: danger, crisis, professional decisions and treatment needs remain outside scope.",
-    "A source record or evaluation fixture is not automatically a public recommendation or efficacy claim.",
-    "A passing focus audit does not demonstrate therapeutic benefit, Search visibility or AI citation."
-  ]
+  "notes": ["The Site Focus contract does not expand the practice-routing boundary: danger, crisis, professional decisions and treatment needs remain outside scope.","A source record or evaluation fixture is not automatically a public recommendation or efficacy claim.","A passing focus audit does not demonstrate therapeutic benefit, Search visibility or AI citation."]
 }
