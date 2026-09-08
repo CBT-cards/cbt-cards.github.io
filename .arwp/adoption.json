@@ -1,0 +1,39 @@
+{
+  "version": "1.0",
+  "site_url": "https://cbt-cards.github.io/",
+  "audience": "Readers and educators evaluating structured reflection material",
+  "useful_action": "Complete a bounded reflection practice with its visible safety limits",
+  "page_urls": [
+    "https://cbt-cards.github.io/"
+  ],
+  "tactic_ids": [
+    "arwp-access-status",
+    "arwp-access-html",
+    "arwp-architecture-intent-owner",
+    "arwp-editorial-worked-example",
+    "arwp-editorial-counterexample",
+    "arwp-evidence-inline-links",
+    "arwp-comparisons-decision-criteria",
+    "arwp-comparisons-source-cells",
+    "arwp-comparisons-fit-cases",
+    "arwp-comparisons-ownership"
+  ],
+  "profile_source": "ai/site-profile.json",
+  "published_directory": ".",
+  "evidence_sources": [
+    "README.md"
+  ],
+  "editorial_opportunity": {
+    "status": "proposed",
+    "question": "Compare self-guided reflection formats using the existing practice contract; do not present the resource as treatment or invent clinical outcomes.",
+    "proof_required": "Use a current inspectable artifact or explicitly synthetic worked example. Attribute external claims to dated primary sources. Preserve the strongest limitation.",
+    "success_observation": "Observe completion of the useful action separately from search impressions, indexing and independent AI citations."
+  },
+  "release_state": "local_only",
+  "benchmark_state": "baseline_pending",
+  "constraints": [
+    "No fabricated first-hand results, reviews, users, credentials or endorsements.",
+    "Profile validity does not prove indexing, recommendations or rank.",
+    "Preserve product privacy and publication boundaries."
+  ]
+}
