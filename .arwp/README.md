@@ -1,30 +1,29 @@
-# Agent-Ready Web Profile adoption
+# Cite Goose / ARWP adoption
 
-Start with the repository's governing instructions and `.arwp/adoption.json`. This is a publisher-authored adoption contract, not a ranking certification.
+This directory contains publisher-authored ARWP contracts for CBT Cards. They describe product intent and adoption state; they are not ranking, citation, diagnostic, clinical or efficacy certification.
 
-Audience: Readers and educators evaluating structured reflection material. Useful action: Complete a bounded reflection practice with its visible safety limits.
+## Current contracts
 
-## Sources and publication
+- `adoption.json` — retained discoverability/adoption experiment contract.
+- `site-focus.json` — Cite Goose Site Focus v0.3 problem, scope, navigation, safety and experience contract.
+- `../ai/site-profile.json` — machine/agent service map for real published interfaces.
 
-- Canonical publication: https://cbt-cards.github.io/
-- Profile source: `ai/site-profile.json`; public location: `ai/site-profile.json` under the canonical site base.
-- Authoritative site source: `.`.
-- Published directory: `.`.
-- Build evidence: `.github/workflows/deploy-pages.yml`.
-- Product claims are bounded by `README.md`; CLI or source availability does not imply a hosted agent endpoint.
+The Site Focus contract keeps CBT Cards centered on low-stakes structured reflection. It does not widen the reviewed practice-routing boundary and does not turn the public resource into a therapy or crisis product.
 
-## Editorial experiment
+## Product boundary
 
-Compare self-guided reflection formats using the existing practice contract; do not present the resource as treatment or invent clinical outcomes.
+IN: reviewed CBT-informed practices, low-stakes reflection, linked experiments/examples, worksheets and practical decision rules.
 
-Reuse the existing intent owner before adding a page. Put the direct answer, concrete example, sources and strongest limitation in visible HTML. Keep comparison criteria symmetric; state where another approach is a better fit. Label synthetic fixtures and first-party interpretations.
+ADJACENT: learning guides, source-toolkit review, AI-assistant integration and research/evaluation.
 
-The tactic IDs in the adoption contract resolve against [the ARWP corpus](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/knowledge/discoverability-corpus.json). New tactics require evidence and a measurable product consequence.
+OUT: diagnosis, treatment, crisis response, medical/legal/financial/safeguarding decisions, high-risk experiments and Search/AI guarantees.
 
-## Validation and baseline
+## Validation
 
-Validate the profile against [the ARWP v0.1 schema](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/schema/site-profile.schema.json). Use this repository's existing build and profile publication mechanism; `public/` assets are served directly by Next.js, and root static assets must survive the site generator.
+The Cite Goose Site Focus workflow validates the v0.3 declaration and compares it with the public site using a bounded Site Focus run. The report is retained as a workflow artifact for human review.
 
-Check the exact emitted JSON and HTML before release. After an authorized release, verify the canonical live URL, HTTP status, profile link and response body. Record crawl eligibility, index status, search clicks/impressions, useful-action completion and independent AI citation separately. Missing observations remain unavailable; no score is a ranking promise.
+A focus warning never authorizes automatic deletion or content escalation. Review the page role, safety boundary, publication state and linked practice authority before changing anything.
 
-This application is local only. Existing unrelated changes, product telemetry constraints and publication approvals remain in force.
+## Evidence rule
+
+Implementation evidence is separate from therapeutic or field outcomes. A passing focus audit does not establish clinical benefit, user safety in every context, indexing, ranking or AI citation. Missing evidence remains unknown, and `no_match` remains a valid outcome.
