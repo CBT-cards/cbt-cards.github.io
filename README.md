@@ -5,6 +5,7 @@ CBT Cards is a static, inspectable library of practical reflection resources for
 The website intentionally remains simple: plain HTML, CSS, JSON/JSONL/NDJSON, Markdown, product-owned assets, and small Python validation/generation scripts published through GitHub Pages. There is no server-side account system and no JavaScript application bundle required to read the public library.
 
 For the current verified snapshot and the deliberately unresolved boundaries, see [PROJECT_STATUS.md](PROJECT_STATUS.md).
+For repository work from ChatGPT or another coding agent, start with [AGENTS.md](AGENTS.md).
 
 ## Start here
 
