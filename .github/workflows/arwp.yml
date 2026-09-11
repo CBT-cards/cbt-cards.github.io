@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'ai/**'
+      - '.arwp/**'
       - 'data/**'
       - 'knowledge/**'
       - 'trust/**'
@@ -16,11 +17,14 @@ on:
       - 'robots.txt'
       - 'sitemap.xml'
       - 'scripts/apply_arwp.py'
+      - 'scripts/apply_internal_discovery.py'
+      - 'scripts/check_internal_discovery.py'
       - '.github/workflows/arwp.yml'
   pull_request:
     branches: [main]
     paths:
       - 'ai/**'
+      - '.arwp/**'
       - 'data/**'
       - 'knowledge/**'
       - 'trust/**'
@@ -32,6 +36,8 @@ on:
       - 'robots.txt'
       - 'sitemap.xml'
       - 'scripts/apply_arwp.py'
+      - 'scripts/apply_internal_discovery.py'
+      - 'scripts/check_internal_discovery.py'
       - '.github/workflows/arwp.yml'
   workflow_dispatch:
 
@@ -46,11 +52,11 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Validate Agent-Ready Web Profile
-        uses: dkharlanau/agent-ready-web-profile@a60be6a057f6ffe07a85ed884e89c91d2d4d740f
+        uses: dkharlanau/agent-ready-web-profile@793483e3404a97f7892e86bcda3fd317d5c7427c
         with:
           profile: ai/site-profile.json
 
-      - name: Parse AI search, adaptive content, trust and knowledge surfaces
+      - name: Parse AI search, adaptive content, trust, knowledge and ARWP surfaces
         run: |
           python - <<'PY'
           import json
@@ -62,6 +68,7 @@ jobs:
               'trust/trust.json',
               'trust/corrections.json',
               'knowledge/graph.json',
+              '.arwp/internal-discovery.json',
           ]:
               json.loads(Path(path).read_text(encoding='utf-8'))
               print(f'validated JSON: {path}')
