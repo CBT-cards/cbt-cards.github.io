@@ -10,6 +10,7 @@ Read only the context needed for the task:
 2. `PROJECT_STATUS.md` — current verified snapshot and deliberately unresolved work.
 3. `CONTRIBUTING.md` — review and contribution workflow.
 4. Relevant source files from the task router below.
+5. `.arwp/README.md` and `.arwp/image-discovery.json` when the task changes public editorial imagery, preferred-image metadata, image sitemap coverage or Search/Discover image verification.
 
 Do not begin by loading the whole repository. Generated/publication artifacts are outputs unless the repository explicitly documents them as sources.
 
@@ -23,7 +24,7 @@ Do not begin by loading the whole repository. Generated/publication artifacts ar
 | Localization | `data/locales.json`, `data/translations.jsonl` | generated `/<locale>/resources/` pages | `python3 scripts/check_localization.py` and `python3 scripts/build_localized_pages.py --check` |
 | Agent Skill | `agents/cbt-cards/SKILL.md`, versioned skill source | `agents/cbt-cards/manifest.json`, install docs | `python3 scripts/check_skill_portability.py` |
 | Evaluation/research | `data/*eval*.jsonl`, `research/` protocols | model-run inputs, review packets, provenance | relevant semantic/model runner checks from `README.md` |
-| Site/discovery/SEO | human HTML/Markdown source plus discovery data | sitemap, feeds, crawl graph, search measurement | `python3 scripts/check_site.py`, `python3 scripts/check_crawl_graph.py`, `python3 scripts/check_search_distribution.py` |
+| Site/discovery/SEO | human HTML/Markdown source plus discovery data | sitemap, feeds, crawl graph, search measurement, reviewed editorial imagery, `.arwp/image-discovery.json` | `python3 scripts/check_site.py`, `python3 scripts/check_crawl_graph.py`, `python3 scripts/check_search_distribution.py`, `python3 scripts/apply_image_discovery.py --validate`; gate the exact post-mutation artifact with `python3 scripts/check_image_discovery.py` |
 | Privacy/licensing/mobile boundaries | canonical policy/audit files named in `README.md` | public copy and machine-readable records | relevant boundary checker from `scripts/` |
 
 ## Source and generated-output rules
@@ -34,6 +35,9 @@ Do not begin by loading the whole repository. Generated/publication artifacts ar
 - Do not infer mobile releases from repository activity.
 - Edit source data/scripts first when a generated page or artifact is wrong; regenerate through the documented builder rather than hand-editing output.
 - Keep website content, mobile-product claims, toolkit trust layers, owned content, and model-evaluation evidence distinct as documented in `README.md`.
+- Image Discovery is scoped to the authored `VISUALS` registry in `scripts/apply_editorial_visuals.py`. Reuse those reviewed visual descriptions; do not infer symptoms, emotions, diagnoses, efficacy, safety or unseen scene details from a filename or topic label.
+- Preserve the responsive WebP sources. The high-resolution PNG may be used as the ordinary `<img src>` fallback and preferred Search/Discover image so crawlers have a stable high-resolution fallback without forcing browsers to download it when WebP is supported.
+- Discover-specific large-image guidance is a separate presentation/readiness check, not a universal Google Images indexing requirement. A passing image gate does not prove image indexing, Search thumbnail selection, Discover placement, ranking or traffic.
 
 ## GitHub / publication boundary
 
@@ -64,6 +68,9 @@ python3 scripts/check_project_state.py
 python3 scripts/check_site.py
 python3 scripts/check_crawl_graph.py
 python3 scripts/check_schemas.py
+python3 scripts/apply_image_discovery.py --validate
 ```
+
+The production Pages job applies Image Discovery only after the source-quality checks, then reruns the exact final site/Search/crawl checks plus `scripts/check_image_discovery.py` before upload. `scripts/check_live_image_discovery.py` provides bounded post-deploy evidence for the published sitemap, metadata and image responses.
 
 Do not claim a check passed unless that exact check ran for the changed revision. Preserve existing safety, provenance, licensing, privacy, push, and deployment constraints over generic agent preferences.
