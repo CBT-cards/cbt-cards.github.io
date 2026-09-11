@@ -1,0 +1,29 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-11",
+  "site": "https://cbt-cards.github.io/",
+  "arwpRevision": "793483e3404a97f7892e86bcda3fd317d5c7427c",
+  "mode": "deep-run-execute",
+  "scope": "reviewed low-stakes learning, worksheet and toolkit-card surfaces",
+  "findings": [
+    {"id":"IDD-01-canonical-crawlable-paths","status":"implemented-existing-plus-gate","evidence":"The existing crawl-graph gate already requires every sitemap URL to have inbound indexed links and remain within depth three; the new layer adds only sitemap-backed continuation targets."},
+    {"id":"IDD-02-descriptive-anchor-text","status":"implemented","evidence":"Continuation links use task-specific labels and resource titles rather than generic click-here anchors."},
+    {"id":"IDD-03-reachability-and-global-only-review","status":"implemented-existing-gate","evidence":"scripts/check_crawl_graph.py preserves no-orphan and homepage-depth requirements separately from contextual continuation."},
+    {"id":"IDD-04-semantic-related-and-reverse-relations","status":"implemented-bounded","evidence":"The rollout reuses reviewed Learn, Worksheet and Toolkit relationships plus the existing practice relation model; it does not infer clinical personalization."},
+    {"id":"IDD-05-visible-breadcrumbs-and-schema","status":"covered-existing","evidence":"Reviewed learning surfaces already expose visible breadcrumbs and BreadcrumbList where applicable; this rollout preserves rather than replaces them."},
+    {"id":"IDD-06-intentional-continuation","status":"implemented","evidence":"A curated Continue from here block connects explanation to worksheet or related reviewed card only where the relationship is explicitly maintained."},
+    {"id":"IDD-07-share-copy-save-cite-utilities","status":"implemented","evidence":"Reviewed target pages expose browser-local Save plus Share, Copy link and Cite actions using the canonical page URL."},
+    {"id":"IDD-08-citation-contract","status":"implemented-conservative","evidence":"The Cite utility copies project name, page title and canonical URL without inventing authorship, DOI, clinical status or publication dates."},
+    {"id":"IDD-09-preferred-sources-applicability","status":"watch","evidence":"No Preferred Sources control is added until current source-preference availability and publisher applicability are verified independently."},
+    {"id":"IDD-10-regression-safe-graph-gates","status":"implemented","evidence":"Deterministic final checks reject missing utilities, missing continuation, non-indexed targets and accidental noindex; a bounded post-deploy check verifies representative live pages."}
+  ],
+  "guardrails": {
+    "noRankingGuarantee": true,
+    "noClinicalPersonalization": true,
+    "noDiagnosisOrTreatmentInference": true,
+    "localSaveOnly": true,
+    "canonicalUrlsForDistribution": true,
+    "existingCrawlGraphPreserved": true,
+    "liveVerificationAfterDeploy": true
+  }
+}
