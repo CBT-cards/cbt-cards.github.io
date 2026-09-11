@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated": "2026-08-22",
+  "generated": "2026-09-11",
   "purpose": "Editorial planning only; not a claim that CBT is complete.",
   "mechanisms": [
     {
@@ -216,7 +216,7 @@
       "similarity_groups": 7,
       "flagged_source_records": 65,
       "owned_practice_overlap_practices": 6,
-      "priority_source_review_items": 12,
+      "priority_source_review_items": 8,
       "note": "Source-corpus similarity and overlap are duplicate-pressure signals only. They do not create or publish practices."
     }
   },
