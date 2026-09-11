@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate CBT Cards toolkit review/publication overlay."""
+"""Validate CBT Cards toolkit review/publication overlay across web and Agent Skill surfaces."""
 
 from __future__ import annotations
 
@@ -29,8 +29,10 @@ def main() -> None:
     review_path = ROOT / "data" / "toolkit-review.json"
     source_path = ROOT / "data" / "toolkit-source.json"
     catalog_path = ROOT / "data" / "catalog.json"
+    marketplace_path = ROOT / "data" / "skill-marketplace.json"
     knowledge_path = ROOT / "data" / "knowledge.jsonl"
     page_path = ROOT / "toolkit" / "review-status" / "index.html"
+    marketplace_page = ROOT / "skills" / "index.html"
     sitemap_path = ROOT / "sitemap.xml"
     latest_skill_path = ROOT / "agents" / "cbt-cards" / "SKILL.md"
     skill_manifest_path = ROOT / "agents" / "cbt-cards" / "manifest.json"
@@ -39,8 +41,10 @@ def main() -> None:
         review_path,
         source_path,
         catalog_path,
+        marketplace_path,
         knowledge_path,
         page_path,
+        marketplace_page,
         sitemap_path,
         latest_skill_path,
         skill_manifest_path,
@@ -51,6 +55,7 @@ def main() -> None:
     review = json.loads(review_path.read_text(encoding="utf-8"))
     source = json.loads(source_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    marketplace = json.loads(marketplace_path.read_text(encoding="utf-8"))
     skill_manifest = json.loads(skill_manifest_path.read_text(encoding="utf-8"))
 
     if review.get("schema_version") != "1.0":
@@ -93,6 +98,8 @@ def main() -> None:
     if not isinstance(resources, list):
         fail("catalog resources must be a list")
     resource_by_id = {item.get("id"): item for item in resources}
+    market_items = marketplace.get("skills", [])
+    market_by_id = {item.get("id"): item for item in market_items if isinstance(item, dict)}
 
     latest_skill_resource_id = f"agent-skill-v{latest_skill_version}"
     for resource_id, expected_url in {
@@ -120,6 +127,8 @@ def main() -> None:
 
     seen_source_ids: set[str] = set()
     overlay_by_source: dict[str, dict] = {}
+    catalog_sources: set[str] = set()
+    agent_skill_sources: set[str] = set()
     for record in records:
         source_id = record.get("source_record_id")
         if not isinstance(source_id, str) or not source_id:
@@ -138,26 +147,51 @@ def main() -> None:
         if record.get("review_scope") != "editorial_and_safety_for_public_web_use":
             fail(f"unexpected review_scope for {source_id}")
 
-        catalog_id = record.get("catalog_resource_id")
-        catalog_resource = resource_by_id.get(catalog_id)
-        if not catalog_resource:
-            fail(f"missing catalog resource {catalog_id} for {source_id}")
-        if catalog_resource.get("source_record_id") != source_id:
-            fail(f"catalog source_record_id mismatch for {source_id}")
-        if catalog_resource.get("url") != record.get("canonical_url"):
-            fail(f"canonical URL mismatch for {source_id}")
-
         target = local_target(record.get("canonical_url", ""))
         if target is None or not target.exists():
             fail(f"published page missing for {source_id}: {record.get('canonical_url')}")
+
+        publication_surface = record.get("publication_surface", "catalog_resource")
+        publication_id = record.get("catalog_resource_id")
+        if publication_surface == "catalog_resource":
+            catalog_resource = resource_by_id.get(publication_id)
+            if not catalog_resource:
+                fail(f"missing catalog resource {publication_id} for {source_id}")
+            if catalog_resource.get("source_record_id") != source_id:
+                fail(f"catalog source_record_id mismatch for {source_id}")
+            if catalog_resource.get("url") != record.get("canonical_url"):
+                fail(f"canonical URL mismatch for {source_id}")
+            catalog_sources.add(source_id)
+        elif publication_surface == "agent_skill":
+            if not source_id.startswith("metaphor-"):
+                fail(f"agent_skill publication must be a metaphor source record: {source_id}")
+            market_item = market_by_id.get(publication_id)
+            if not market_item:
+                fail(f"missing marketplace record {publication_id} for {source_id}")
+            if market_item.get("kind") != "metaphor" or market_item.get("source_id") != source_id:
+                fail(f"marketplace source/kind mismatch for {source_id}")
+            if market_item.get("name") != record.get("skill_name"):
+                fail(f"skill_name mismatch for {source_id}")
+            if market_item.get("canonical_human_url") != record.get("canonical_url"):
+                fail(f"marketplace canonical URL mismatch for {source_id}")
+            skill_path = local_target(market_item.get("skill_url", ""))
+            if skill_path is None or not skill_path.exists():
+                fail(f"marketplace SKILL.md missing for {source_id}")
+            agent_skill_sources.add(source_id)
+        else:
+            fail(f"unknown publication_surface for {source_id}: {publication_surface}")
+
+    expected_agent_skill_sources = {"metaphor-4", "metaphor-5", "metaphor-18", "metaphor-19"}
+    if agent_skill_sources != expected_agent_skill_sources:
+        fail(f"unexpected reviewed metaphor Agent Skill set: {sorted(agent_skill_sources)}")
 
     catalog_toolkit_cards = {
         item.get("source_record_id"): item
         for item in resources
         if item.get("type") == "toolkit-card"
     }
-    if set(catalog_toolkit_cards) != seen_source_ids:
-        fail("published toolkit-card catalog set does not match review overlay")
+    if set(catalog_toolkit_cards) != catalog_sources:
+        fail("published toolkit-card catalog set does not match catalog-resource review records")
 
     knowledge_toolkit: dict[str, dict] = {}
     for line_number, line in enumerate(knowledge_path.read_text(encoding="utf-8").splitlines(), start=1):
@@ -173,9 +207,8 @@ def main() -> None:
                 fail(f"duplicate toolkit source_record_id in knowledge.jsonl: {source_id}")
             knowledge_toolkit[source_id] = item
 
-    if set(knowledge_toolkit) != seen_source_ids:
-        fail("curated toolkit-card JSONL set does not match review overlay")
-
+    if set(knowledge_toolkit) != catalog_sources:
+        fail("curated toolkit-card JSONL set does not match catalog-resource review records")
     for source_id, item in knowledge_toolkit.items():
         if item.get("canonical_url") != overlay_by_source[source_id].get("canonical_url"):
             fail(f"knowledge canonical URL mismatch for {source_id}")
@@ -183,8 +216,9 @@ def main() -> None:
     sitemap_root = ET.parse(sitemap_path).getroot()
     ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
     sitemap_urls = {node.text for node in sitemap_root.findall("s:url/s:loc", ns)}
-    if f"{ORIGIN}/toolkit/review-status/" not in sitemap_urls:
-        fail("sitemap missing toolkit review-status page")
+    for expected in (f"{ORIGIN}/toolkit/review-status/", f"{ORIGIN}/skills/"):
+        if expected not in sitemap_urls:
+            fail(f"sitemap missing publication surface {expected}")
 
     skill = latest_skill_path.read_text(encoding="utf-8")
     immutable_skill = immutable_skill_path.read_text(encoding="utf-8")
@@ -198,8 +232,9 @@ def main() -> None:
         fail("latest skill does not preserve default raw-record status")
 
     print(
-        f"toolkit review check passed: {len(records)} published records; "
-        f"latest skill v{latest_skill_version}; unlisted records default to source-only"
+        f"toolkit review check passed: {len(records)} published source records "
+        f"({len(catalog_sources)} catalog, {len(agent_skill_sources)} metaphor Agent Skills); "
+        f"latest broad skill v{latest_skill_version}; unlisted records default to source-only"
     )
 
 
