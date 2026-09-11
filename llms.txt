@@ -5,6 +5,7 @@ CBT Cards is a public library of practical reflection resources for people and A
 ## Start here
 - Overview: https://cbt-cards.github.io/
 - Reviewed Practice Finder: https://cbt-cards.github.io/practice/
+- Free individual Agent Skill marketplace: https://cbt-cards.github.io/skills/
 - Owned content library: https://cbt-cards.github.io/library/
 - Contrasts, progressions and decision rules: https://cbt-cards.github.io/library/guides/
 - Learn: https://cbt-cards.github.io/learn/
@@ -42,6 +43,14 @@ The owned content system is a CBT Cards-original editorial layer, not part of th
 
 The generic reference client is an integration/contract path, not a semantic router. It verifies the canonical RAG manifest/distribution and per-record hashes, preserves canonical URLs plus review/safety metadata, and supports exact stable practice IDs or exact mechanism filters only. Unknown exact IDs/mechanisms return `no_match`. Its CI execution is not model-quality or clinical-quality evidence.
 
+## Individual Agent Skill marketplace
+- Human marketplace: https://cbt-cards.github.io/skills/
+- Machine-readable marketplace: https://cbt-cards.github.io/data/skill-marketplace.json
+- Agent Skills discovery index: https://cbt-cards.github.io/.well-known/agent-skills/index.json
+- skills.sh grouping: https://cbt-cards.github.io/skills.sh.json
+
+The marketplace contains 15 portable `SKILL.md` packages: 11 techniques backed by the reviewed CBT Cards practice layer and 4 source-toolkit metaphors reviewed specifically for the `agent_skill` publication surface. Metaphor skills are memory aids, not evidence. All packages preserve safety exclusions and a `no_match` path. Raw source inclusion is never enough to create an installable skill.
+
 ## Review layers
 - Raw-source publication authority: https://cbt-cards.github.io/data/toolkit-review.json
 - 115-record source audit/triage: https://cbt-cards.github.io/data/toolkit-audit.json
@@ -58,6 +67,9 @@ The freshness registry currently covers 26 trusted items: learning pages, worksh
 - Corrections ledger: https://cbt-cards.github.io/trust/corrections.json
 - Entity knowledge graph: https://cbt-cards.github.io/knowledge/graph.json
 - Resource catalog: https://cbt-cards.github.io/data/catalog.json
+- Individual skill marketplace JSON: https://cbt-cards.github.io/data/skill-marketplace.json
+- Agent Skills discovery index: https://cbt-cards.github.io/.well-known/agent-skills/index.json
+- skills.sh grouping: https://cbt-cards.github.io/skills.sh.json
 - Owned content library: https://cbt-cards.github.io/data/content-library.json
 - Owned content navigation guides: https://cbt-cards.github.io/data/content-guides.json
 - JSON Schema manifest: https://cbt-cards.github.io/schemas/index.json
@@ -68,8 +80,8 @@ The freshness registry currently covers 26 trusted items: learning pages, worksh
 - Held-out challenge: https://cbt-cards.github.io/data/agent-evals-challenge.jsonl
 - Semantic eval protocol: https://cbt-cards.github.io/research/SEMANTIC_EVAL_PROTOCOL.md
 - Model-run protocol: https://cbt-cards.github.io/research/MODEL_RUN_PROTOCOL.md
-- Latest portable skill v1.8.0: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
-- Skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
+- Latest portable broad skill v1.8.0: https://cbt-cards.github.io/agents/cbt-cards/SKILL.md
+- Broad skill manifest: https://cbt-cards.github.io/agents/cbt-cards/manifest.json
 - Changelog: https://cbt-cards.github.io/data/changelog.json
 - Citation: https://cbt-cards.github.io/CITATION.cff
 - Editorial visual manifest: https://cbt-cards.github.io/data/visuals.json
