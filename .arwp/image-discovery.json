@@ -1,0 +1,28 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-11",
+  "site": "https://cbt-cards.github.io/",
+  "arwpRevision": "73bd2a64e2e746deeb8de792ca01f654f0a7d33a",
+  "mode": "deep-run-execute",
+  "scope": "ARWP Image Discovery IDL-01 through IDL-08 applied to the reviewed CBT Cards editorial visual cohort defined by scripts/apply_editorial_visuals.py.",
+  "findings": [
+    {"id":"IDL-01-crawlable-image-and-landing-page","status":"implemented-final-and-live-gate","evidence":"Each reviewed editorial page keeps responsive WebP sources and uses the 1536x1024 PNG as the ordinary img fallback and preferred image; bounded live verification fetches the deployed pages and image bytes."},
+    {"id":"IDL-02-preferred-image-signal-convergence","status":"implemented-regression-gate","evidence":"The finalizer aligns og:image, twitter:image, WebPage.primaryImageOfPage and Article.image to the same high-resolution PNG artwork."},
+    {"id":"IDL-03-image-sitemap-canonical-cohort","status":"implemented-regression-gate","evidence":"Only the reviewed editorial visual cohort receives image:image/image:loc entries; deprecated image sitemap fields are rejected."},
+    {"id":"IDL-04-context-and-alt-semantics","status":"implemented-reviewed-copy","evidence":"The rollout reuses the explicitly authored visual descriptions from the VISUALS registry and carries them to visible alt, og:image:alt and twitter:image:alt without generating new clinical or visual claims."},
+    {"id":"IDL-05-image-preview-and-serving-controls","status":"implemented-regression-gate","evidence":"max-image-preview:large is required for the cohort and noimageindex is treated as a conflict with the intended image-discovery surface."},
+    {"id":"IDL-06-representative-quality-and-discover-readiness","status":"implemented-with-measured-assets","evidence":"Preferred PNG assets are read from their actual file headers; the gate reports the subset meeting the Discover-oriented >=1200px and >=300000-pixel guidance without relabelling it as a universal indexing requirement."},
+    {"id":"IDL-07-responsive-delivery-with-crawlable-fallback","status":"implemented","evidence":"Existing 560w/1024w WebP picture sources remain intact while the high-resolution PNG becomes the normal img src fallback, preserving a straightforward crawlable image URL."},
+    {"id":"IDL-08-license-and-creator-metadata-boundary","status":"covered-by-existing-license-boundary","evidence":"The rollout does not invent per-image ownership or clinical provenance. Existing CBT Cards license checks remain authoritative and deprecated image-sitemap licensing fields are not introduced."}
+  ],
+  "guardrails": {
+    "noRankingGuarantee": true,
+    "noImageIndexingGuarantee": true,
+    "discoverSpecificGuidanceSeparated": true,
+    "noUnreviewedVisualClaims": true,
+    "noClinicalClaimEscalation": true,
+    "noDeprecatedImageSitemapFields": true,
+    "finalArtifactBeforeRelease": true,
+    "liveAssetVerificationAfterDeploy": true
+  }
+}
