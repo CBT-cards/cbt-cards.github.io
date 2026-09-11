@@ -36,6 +36,7 @@ def main() -> None:
         "mobile-releases/index.html",
         "library/index.html",
         "library/guides/index.html",
+        "skills/index.html",
         "about/index.html",
         "changelog/index.html",
         "research/practice-watch/index.html",
@@ -51,14 +52,19 @@ def main() -> None:
         "data/practice-watch.json",
         "data/search-measurement.json",
         "data/outreach-targets.json",
+        "data/skill-marketplace.json",
+        ".well-known/agent-skills/index.json",
+        "skills.sh.json",
         "schemas/practice-watch-v1.schema.json",
         "agents/cbt-cards/manifest.json",
         "research/SEMANTIC_REVIEW_WORKSPACE.md",
         ".github/workflows/deploy-pages.yml",
+        ".github/workflows/skill-marketplace.yml",
         ".github/workflows/run-practice-semantic-model-eval.yml",
         ".github/workflows/semantic-review-workspace.yml",
         ".github/workflows/semantic-publication-pipeline.yml",
         "scripts/check_mobile_release_history.py",
+        "scripts/check_skill_marketplace.py",
         "scripts/build_semantic_review_workspace.py",
         "scripts/check_semantic_review_workspace.py",
         "scripts/check_practice_semantic_publication_candidate.py",
@@ -166,11 +172,17 @@ def main() -> None:
     if summary.get("covered_items") != 26 or summary.get("owned_practices") != 11:
         fail("editorial freshness summary no longer matches 26 trusted items / 11 owned practices")
 
+    marketplace = load_json("data/skill-marketplace.json")
+    if marketplace.get("summary") != {"skills": 15, "techniques": 11, "metaphors": 4}:
+        fail("Agent Skill marketplace summary no longer matches 15 / 11 / 4")
+    if marketplace.get("human_url") != f"{ORIGIN}/skills/":
+        fail("Agent Skill marketplace human URL mismatch")
+
     sitemap_root = ET.parse(ROOT / "sitemap.xml").getroot()
     ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
     sitemap_urls = {node.text for node in sitemap_root.findall("s:url/s:loc", ns) if node.text}
-    if len(sitemap_urls) != 44:
-        fail(f"expected reconciled sitemap size 44, found {len(sitemap_urls)}")
+    if len(sitemap_urls) != 45:
+        fail(f"expected reconciled sitemap size 45, found {len(sitemap_urls)}")
     if f"{ORIGIN}/mobile-releases/" not in sitemap_urls:
         fail("mobile release history is not indexed in sitemap")
     if f"{ORIGIN}/library/" not in sitemap_urls:
@@ -179,6 +191,8 @@ def main() -> None:
         fail("content navigation guides are not indexed in sitemap")
     if f"{ORIGIN}/research/practice-watch/" not in sitemap_urls:
         fail("monthly practice watch is not indexed in sitemap")
+    if f"{ORIGIN}/skills/" not in sitemap_urls:
+        fail("Agent Skill marketplace is not indexed in sitemap")
 
     measurement = load_json("data/search-measurement.json")
     if measurement.get("current", {}).get("sitemap_url_count") != len(sitemap_urls):
@@ -294,11 +308,14 @@ def main() -> None:
     for script in ("scripts/check_mobile_release_history.py", "scripts/check_project_state.py"):
         if script not in workflow:
             fail(f"main Pages quality workflow does not execute {script}")
+    marketplace_workflow = (ROOT / ".github/workflows/skill-marketplace.yml").read_text(encoding="utf-8")
+    if "scripts/check_skill_marketplace.py" not in marketplace_workflow:
+        fail("Agent Skill marketplace workflow does not execute its integrity checker")
 
     print(
-        "project state check passed: skill 1.8.0, 11 reviewed practices, 42 owned content modules across seven formats, "
-        "41 semantic cases, offline blinded review + final publication gate present, 26 freshness items, "
-        "44 sitemap URLs, requalified outreach blockers, current changelog/catalog, "
+        "project state check passed: skill 1.8.0, 11 reviewed practices, 15 individual Agent Skills, "
+        "42 owned content modules across seven formats, 41 semantic cases, offline blinded review + final publication gate present, "
+        "26 freshness items, 45 sitemap URLs, requalified outreach blockers, current changelog/catalog, "
         "mobile/repo release boundary reconciled"
     )
 
