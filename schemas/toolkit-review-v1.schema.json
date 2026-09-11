@@ -37,9 +37,17 @@
           "reviewed_by": {"type": "string", "minLength": 1},
           "review_scope": {"const": "editorial_and_safety_for_public_web_use"},
           "publication_status": {"const": "published"},
+          "publication_surface": {"enum": ["catalog_resource", "agent_skill"]},
+          "skill_name": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
           "clinical_validation_status": {"const": "not_claimed"},
           "canonical_url": {"type": "string", "format": "uri"}
         },
+        "allOf": [
+          {
+            "if": {"properties": {"publication_surface": {"const": "agent_skill"}}, "required": ["publication_surface"]},
+            "then": {"required": ["skill_name"]}
+          }
+        ],
         "additionalProperties": false
       }
     },
