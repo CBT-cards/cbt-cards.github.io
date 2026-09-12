@@ -1,0 +1,110 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "test-your-prediction",
+      "type": "skill-md",
+      "description": "Use when a user has a specific low-stakes feared prediction that can be checked safely. Turn it into one observable prediction, one safe observation, and one result without dismissing genuine danger.",
+      "url": "/skills/test-your-prediction/SKILL.md",
+      "digest": "sha256:aeb726df01942e7958d113f9e1f04f8c360e22851d1d98a8c06b64457f7a1685"
+    },
+    {
+      "name": "problem-or-worry",
+      "type": "skill-md",
+      "description": "Use when a user is looping on a concern and needs to separate an actionable present problem from a future-focused what-if. Produce one practical next action or a bounded review point.",
+      "url": "/skills/problem-or-worry/SKILL.md",
+      "digest": "sha256:c3e46419e702279939a156fefa3eda647da1add23dcaa962b34f7b5c0256045c"
+    },
+    {
+      "name": "spot-safety-behavior",
+      "type": "skill-md",
+      "description": "Use only in objectively low-risk situations to identify an extra reassurance, checking, or protective behavior that may block learning. Never remove a genuine safety measure.",
+      "url": "/skills/spot-safety-behavior/SKILL.md",
+      "digest": "sha256:e7f5c1332c3a26b8b5dbcc9d2712cd08bd1db96f706da6611592ae05e2ecabd7"
+    },
+    {
+      "name": "park-and-return",
+      "type": "skill-md",
+      "description": "Use when a non-urgent worry keeps interrupting the current task. Capture it once, choose a realistic review time, and return attention without requiring the worry to disappear.",
+      "url": "/skills/park-and-return/SKILL.md",
+      "digest": "sha256:fcb355a6da163124231ec743f16dc6408c6127e87fb830a5fb289f3e25895f2a"
+    },
+    {
+      "name": "reflection-or-replay",
+      "type": "skill-md",
+      "description": "Use when a user keeps replaying an event after the main facts and usable lesson are already known. Test whether another round is producing new information, a decision, or an action.",
+      "url": "/skills/reflection-or-replay/SKILL.md",
+      "digest": "sha256:63881453a7868bbaa477b264a98791519dd1f148543d7d5bbc4627d1d07c8b96"
+    },
+    {
+      "name": "one-less-check",
+      "type": "skill-md",
+      "description": "Use only in ordinary objectively low-risk situations when a user is doing a clearly non-essential extra check or reassurance request. Skip one extra check and observe uncertainty without replacing it.",
+      "url": "/skills/one-less-check/SKILL.md",
+      "digest": "sha256:ab551aef45ac121bf72a1d2f4de1dbb1791e915162224ebd7b4b2e399e6595ff"
+    },
+    {
+      "name": "smallest-approach-step",
+      "type": "skill-md",
+      "description": "Use when a user is avoiding a genuinely safe task and can define a much smaller first approach step. Shrink the task until one observable part can be done now.",
+      "url": "/skills/smallest-approach-step/SKILL.md",
+      "digest": "sha256:59ef9e7573665ff409820b1cf1bc349fc778505a30b5807946e4634a23f66544"
+    },
+    {
+      "name": "good-enough-contract",
+      "type": "skill-md",
+      "description": "Use when discretionary work keeps expanding because the user cannot decide when it is done. Define fit-for-purpose completion criteria before another pass.",
+      "url": "/skills/good-enough-contract/SKILL.md",
+      "digest": "sha256:174d618033fbd45c68f1655af72c3dadea4c8444a2a63547a4e96a0f9b26b5b0"
+    },
+    {
+      "name": "continuum-not-verdict",
+      "type": "skill-md",
+      "description": "Use when a user turns a graded result into a total success/failure verdict. Rate specific dimensions on a continuum instead of making one global judgment.",
+      "url": "/skills/continuum-not-verdict/SKILL.md",
+      "digest": "sha256:df1e3b659b0335c29048404e88dada23c6ee468b7be3064141d0ce697c32c507"
+    },
+    {
+      "name": "behavior-not-identity",
+      "type": "skill-md",
+      "description": "Use when a user turns one behavior, choice, or skill gap into a global identity label. Translate the label into a specific reviewable description while preserving responsibility.",
+      "url": "/skills/behavior-not-identity/SKILL.md",
+      "digest": "sha256:0d9e748005de8132c146fda7ffdf68ffa81dda647f6a813795ae8a593d4a3deb"
+    },
+    {
+      "name": "same-standard-check",
+      "type": "skill-md",
+      "description": "Use when a user may be applying a harsher rule to themselves than to another person in genuinely similar circumstances. Compare the two standards and explain any real responsibility difference.",
+      "url": "/skills/same-standard-check/SKILL.md",
+      "digest": "sha256:9b5458e06d61ade7d49bf9a120c7d2d884b10763d43e135012a862f8417bb1ad"
+    },
+    {
+      "name": "invisible-fence-metaphor",
+      "type": "skill-md",
+      "description": "Use as a memory aid when an old learned rule may still constrain a clearly safe situation even though the original condition has changed. Ask whether the fence is actually gone before discussing any step forward.",
+      "url": "/skills/invisible-fence-metaphor/SKILL.md",
+      "digest": "sha256:788b5b31fccdf0220b6de5feb24ca2594c1bfaa240598b10971e400447055ed9"
+    },
+    {
+      "name": "storm-that-never-came",
+      "type": "skill-md",
+      "description": "Use as a memory aid for prediction uncertainty when repeated low-risk forecasts are being treated as certainty. Preserve genuine-danger exceptions and never use the metaphor to dismiss real warning signs.",
+      "url": "/skills/storm-that-never-came/SKILL.md",
+      "digest": "sha256:8833f1bd40031f4a2e4ee881034010890d44adda58911b7aaa5a1b6a9ca325c9"
+    },
+    {
+      "name": "slow-flame-metaphor",
+      "type": "skill-md",
+      "description": "Use as a memory aid when a safe change feels too large and the user is discounting small repeatable steps. Connect the image to one smallest approach step without promising a big outcome.",
+      "url": "/skills/slow-flame-metaphor/SKILL.md",
+      "digest": "sha256:975ebc57d9756e299ade47af5fffb1c486bd49b448db49b600914a1ab3bca1bc"
+    },
+    {
+      "name": "skater-who-fell",
+      "type": "skill-md",
+      "description": "Use as a memory aid when one ordinary mistake is being treated as proof of permanent inability. Separate a single outcome from a learning process while preserving accountability and real skill limits.",
+      "url": "/skills/skater-who-fell/SKILL.md",
+      "digest": "sha256:a8c225174a0db844d532fe795c5afc79d8dc5ccbe2fc4112492b009c34a6ca2f"
+    }
+  ]
+}

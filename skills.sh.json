@@ -1,0 +1,33 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Reviewed CBT techniques",
+      "description": "11 bounded CBT Cards reflection techniques with explicit fit, safety exclusions and no-match behavior.",
+      "skills": [
+        "test-your-prediction",
+        "problem-or-worry",
+        "spot-safety-behavior",
+        "park-and-return",
+        "reflection-or-replay",
+        "one-less-check",
+        "smallest-approach-step",
+        "good-enough-contract",
+        "continuum-not-verdict",
+        "behavior-not-identity",
+        "same-standard-check"
+      ]
+    },
+    {
+      "title": "Reviewed metaphor memory aids",
+      "description": "4 source-toolkit metaphors reviewed specifically for agent-skill use. Metaphors are memory aids, not evidence.",
+      "skills": [
+        "invisible-fence-metaphor",
+        "storm-that-never-came",
+        "slow-flame-metaphor",
+        "skater-who-fell"
+      ]
+    }
+  ]
+}
