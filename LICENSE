@@ -1,27 +1,14 @@
-Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+PROJECT LICENSE NOTICE
 
-Copyright (c) 2026 MetalHatsCats
+Copyright 2026 MetalHatsCats and project contributors.
 
-CURRENT LICENSE
+Software and implementation assets in this repository are licensed under the PolyForm Strict License 1.0.0, incorporated here by reference:
+https://polyformproject.org/licenses/strict/1.0.0
 
-This repository and the original CBT Cards website content, including CBT Cards-owned machine-readable public data unless a file or record states more specific terms, are licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0).
+Under PolyForm Strict, noncommercial use is permitted, but redistribution and creation of modified or derivative versions are not permitted except as allowed by law or by separate written permission from the applicable copyright holder.
 
-You may copy, share, and adapt the licensed material only for non-commercial purposes, provided that you give appropriate credit, link to this license, indicate changes, and distribute adaptations under the same license.
+CBT Cards-authored non-software content, datasets, text, images, design assets, research materials, and documentation are All Rights Reserved unless a file or record explicitly states different terms.
 
-Commercial use is not permitted under this public license without prior written permission from MetalHatsCats.
+Third-party and source-corpus material remains subject to its own license or rights. Existing provenance and source-license declarations are not overridden by this notice. Copyright in contributions remains with the respective copyright holders where applicable.
 
-SCOPE AND PROVENANCE
-
-Machine-readable accessibility does not imply a more permissive license. Where a structured record exposes `license_url`, that field states the current effective reuse license for that record. Records marked as adapted from the MetalHatsCats CBT Toolkit retain source provenance and the applicable source-license reference.
-
-The pinned MetalHatsCats CBT Toolkit source corpus is separately documented as CC BY-NC-SA 4.0 in `data/toolkit-source.json`. Third-party materials and external sources remain subject to their own terms and are not relicensed merely because CBT Cards links to or describes them.
-
-BRAND, ARTWORK, AND FUTURE DATA-LICENSE CHANGES
-
-Trademark rights, including rights in the CBT Cards name and logo, are not granted by this license. Nothing in this license authorizes endorsement or presentation of an unofficial integration as an official CBT Cards product.
-
-Product artwork and brand assets are not silently included in any future permissive data-only grant. Any different license for machine-readable datasets must identify its exact scope explicitly and must not be inferred from a proposal, decision memo, technical accessibility, or catalog listing.
-
-`LICENSING_DECISION.md` discusses possible future licensing options. It is not a license grant. Until a publisher-approved change is released, the current terms above remain in force.
-
-Full license text: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+This change applies from this revision onward and does not revoke rights already granted for earlier revisions under CC BY-NC-SA 4.0 or any other prior license.
