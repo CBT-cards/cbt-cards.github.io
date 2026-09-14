@@ -13,6 +13,11 @@ SITE_ORIGIN = "https://cbt-cards.github.io"
 SOURCE = ROOT / "data/changelog.json"
 OUTPUT = ROOT / "rss.xml"
 MAX_ITEMS = 30
+DISCOVERY_TARGETS = [ROOT / "index.html", ROOT / "changelog/index.html"]
+DISCOVERY_LINK = (
+    '<link rel="alternate" type="application/rss+xml" '
+    'href="https://cbt-cards.github.io/rss.xml" title="CBT Cards updates" />'
+)
 
 
 def rfc822(day: str) -> str:
@@ -20,14 +25,18 @@ def rfc822(day: str) -> str:
     return format_datetime(value, usegmt=True)
 
 
-def build() -> str:
+def canonical_entries() -> list[dict]:
     data = json.loads(SOURCE.read_text(encoding="utf-8"))
     entries = list(data.get("entries") or [])
     entries.sort(key=lambda item: (str(item.get("date") or ""), str(item.get("id") or "")), reverse=True)
     entries = entries[:MAX_ITEMS]
     if not entries:
         raise SystemExit("data/changelog.json contains no feedable entries")
+    return entries
 
+
+def build() -> str:
+    entries = canonical_entries()
     latest = str(entries[0]["date"])
     items = []
     for entry in entries:
@@ -64,10 +73,33 @@ def build() -> str:
     )
 
 
+def inject_autodiscovery() -> int:
+    changed = 0
+    for path in DISCOVERY_TARGETS:
+        html = path.read_text(encoding="utf-8")
+        if 'type="application/rss+xml"' in html and "/rss.xml" in html:
+            continue
+        if "</head>" not in html:
+            raise SystemExit(f"cannot add RSS autodiscovery: {path.relative_to(ROOT)} has no </head>")
+        path.write_text(html.replace("</head>", f"{DISCOVERY_LINK}\n</head>", 1), encoding="utf-8")
+        changed += 1
+    return changed
+
+
+def autodiscovery_is_present() -> bool:
+    ok = True
+    for path in DISCOVERY_TARGETS:
+        html = path.read_text(encoding="utf-8")
+        if 'rel="alternate" type="application/rss+xml"' not in html or "https://cbt-cards.github.io/rss.xml" not in html:
+            print(f"{path.relative_to(ROOT)} is missing canonical RSS autodiscovery")
+            ok = False
+    return ok
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Build CBT Cards RSS 2.0 feed from data/changelog.json")
-    parser.add_argument("--write", action="store_true", help="write rss.xml")
-    parser.add_argument("--check", action="store_true", help="verify committed rss.xml matches canonical changelog")
+    parser.add_argument("--write", action="store_true", help="write rss.xml and ensure HTML autodiscovery")
+    parser.add_argument("--check", action="store_true", help="verify generated RSS and autodiscovery match the canonical contract")
     args = parser.parse_args()
     expected = build()
 
@@ -79,12 +111,14 @@ def main() -> int:
         if actual != expected:
             print("rss.xml is stale relative to data/changelog.json; regenerate it")
             return 1
-        print("OK: rss.xml matches canonical changelog data")
+        if not autodiscovery_is_present():
+            return 1
+        print("OK: rss.xml matches canonical changelog data and HTML advertises it")
         return 0
 
-    if args.write or not args.check:
-        OUTPUT.write_text(expected, encoding="utf-8")
-        print(f"Wrote {OUTPUT.relative_to(ROOT)} from data/changelog.json")
+    OUTPUT.write_text(expected, encoding="utf-8")
+    changed = inject_autodiscovery()
+    print(f"Wrote {OUTPUT.relative_to(ROOT)} from data/changelog.json; updated {changed} HTML discovery target(s)")
     return 0
 
 
