@@ -63,15 +63,16 @@ def main() -> None:
 
     license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
     for fragment in (
-        "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International",
-        "Commercial use is not permitted under this public license without prior written permission",
-        "Machine-readable accessibility does not imply a more permissive license.",
-        "Trademark rights, including rights in the CBT Cards name and logo, are not granted",
-        "LICENSING_DECISION.md",
-        "It is not a license grant.",
+        "PROJECT LICENSE NOTICE",
+        "PolyForm Strict License 1.0.0",
+        "https://polyformproject.org/licenses/strict/1.0.0",
+        "redistribution and creation of modified or derivative versions are not permitted",
+        "All Rights Reserved unless a file or record explicitly states different terms",
+        "Third-party and source-corpus material remains subject to its own license or rights",
+        "does not revoke rights already granted for earlier revisions under CC BY-NC-SA 4.0",
     ):
         if fragment not in license_text:
-            fail(f"LICENSE missing current-scope fragment: {fragment}")
+            fail(f"LICENSE missing current project-scope fragment: {fragment}")
 
     if "creativecommons.org/licenses/by/4.0" in license_text or "creativecommons.org/publicdomain/zero" in license_text:
         fail("LICENSE contains a permissive CC BY/CC0 grant while publisher decision is still pending")
@@ -155,8 +156,8 @@ def main() -> None:
         fail("latest Agent Skill license changed without a deliberate skill/license release")
 
     print(
-        "license boundary check passed: current NC-SA terms explicit; "
-        f"{len(OWNED_IDS)} owned and {len(DERIVED_IDS)} toolkit-derived knowledge records distinguished; "
+        "license boundary check passed: project-level PolyForm/ARR notice explicit; "
+        f"{len(OWNED_IDS)} owned and {len(DERIVED_IDS)} toolkit-derived knowledge records retain their explicit NC-SA terms; "
         "permissive options remain proposals, not grants"
     )
 

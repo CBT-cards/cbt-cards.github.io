@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check Python helper syntax
-        run: python3 -m py_compile scripts/check_site.py scripts/check_search_release.py scripts/check_worksheets.py scripts/check_discovery.py scripts/check_changelog.py scripts/check_toolkit_review.py scripts/check_toolkit_audit.py scripts/check_content_review.py scripts/build_practice_artifacts.py scripts/check_practice_system.py scripts/check_practice_system_strict.py scripts/check_practice_contract.py scripts/check_contribution_templates.py scripts/build_semantic_review_packet.py scripts/score_semantic_reviews.py scripts/check_semantic_review_pipeline.py scripts/run_practice_semantic_openai.py scripts/check_practice_semantic_model_runner.py scripts/check_practice_semantic_execution.py scripts/check_localization.py scripts/build_localized_pages.py scripts/check_evals.py scripts/check_evals_challenge.py scripts/run_eval_baselines.py scripts/run_eval_challenge.py scripts/evaluate_model_run.py scripts/check_model_run_protocol.py scripts/run_model_openai.py scripts/score_model_execution.py scripts/check_model_runner.py scripts/check_model_run_candidate.py scripts/check_citation.py scripts/check_skill_portability.py scripts/check_schemas.py scripts/check_crawl_graph.py scripts/check_asset_budget.py scripts/check_privacy_consistency.py scripts/check_legacy_boundary.py scripts/check_mobile_locale_boundary.py scripts/check_search_distribution.py scripts/check_license_boundaries.py scripts/check_mobile_release_history.py scripts/check_project_state.py scripts/notify_indexnow.py scripts/apply_arwp.py scripts/apply_image_discovery.py scripts/check_image_discovery.py scripts/check_live_image_discovery.py scripts/apply_internal_discovery.py scripts/check_internal_discovery.py scripts/check_live_internal_discovery.py scripts/apply_goose_proof_mark.py
+        run: python3 -m py_compile scripts/check_site.py scripts/check_search_release.py scripts/check_worksheets.py scripts/check_discovery.py scripts/check_changelog.py scripts/check_toolkit_review.py scripts/check_toolkit_audit.py scripts/check_content_review.py scripts/build_practice_artifacts.py scripts/check_practice_system.py scripts/check_practice_system_strict.py scripts/check_practice_contract.py scripts/check_contribution_templates.py scripts/build_semantic_review_packet.py scripts/score_semantic_reviews.py scripts/check_semantic_review_pipeline.py scripts/run_practice_semantic_openai.py scripts/check_practice_semantic_model_runner.py scripts/check_practice_semantic_execution.py scripts/check_localization.py scripts/build_localized_pages.py scripts/check_evals.py scripts/check_evals_challenge.py scripts/run_eval_baselines.py scripts/run_eval_challenge.py scripts/evaluate_model_run.py scripts/check_model_run_protocol.py scripts/run_model_openai.py scripts/score_model_execution.py scripts/check_model_runner.py scripts/check_model_run_candidate.py scripts/check_citation.py scripts/check_skill_portability.py scripts/check_schemas.py scripts/check_crawl_graph.py scripts/check_asset_budget.py scripts/check_privacy_consistency.py scripts/check_legacy_boundary.py scripts/check_mobile_locale_boundary.py scripts/check_search_distribution.py scripts/check_license_boundaries.py scripts/check_mobile_release_history.py scripts/check_project_state.py scripts/notify_indexnow.py scripts/apply_arwp.py scripts/apply_image_discovery.py scripts/check_image_discovery.py scripts/check_live_image_discovery.py scripts/apply_internal_discovery.py scripts/check_internal_discovery.py scripts/check_live_internal_discovery.py scripts/apply_goose_proof_mark.py scripts/build_rss_feed.py scripts/check_rss_feed.py
       - name: Validate shared design shell and editorial imagery
         run: >-
           python3 scripts/apply_design_shell.py --check &&
@@ -33,6 +33,8 @@ jobs:
         run: python3 scripts/apply_image_discovery.py --validate
       - name: Validate Internal Discovery inputs
         run: python3 scripts/apply_internal_discovery.py --validate
+      - name: Generate RSS subscription artifact
+        run: python3 scripts/build_rss_feed.py --write
       - name: Validate deterministic reviewed-practice artifacts
         run: python3 scripts/build_practice_artifacts.py --check
       - name: Validate portable practice-system contract
@@ -73,6 +75,8 @@ jobs:
         run: python3 scripts/check_worksheets.py
       - name: Validate feeds and security metadata
         run: python3 scripts/check_discovery.py
+      - name: Validate canonical RSS subscription feed
+        run: python3 scripts/check_rss_feed.py
       - name: Validate public changelog and resource provenance
         run: python3 scripts/check_changelog.py
       - name: Validate toolkit review and publication status
@@ -111,6 +115,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Generate RSS subscription artifact
+        run: python3 scripts/build_rss_feed.py --write
       - name: Advertise ARWP profile
         run: python3 scripts/apply_arwp.py --write
       - name: Install Google Tag Manager
@@ -127,6 +133,7 @@ jobs:
           python3 scripts/check_search_release.py &&
           python3 scripts/check_crawl_graph.py &&
           python3 scripts/check_discovery.py &&
+          python3 scripts/check_rss_feed.py &&
           python3 scripts/check_image_discovery.py &&
           python3 scripts/check_internal_discovery.py
       - uses: actions/configure-pages@v5
