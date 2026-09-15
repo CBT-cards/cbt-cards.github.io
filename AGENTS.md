@@ -41,6 +41,7 @@ Do not begin by loading the whole repository. Generated/publication artifacts ar
 
 ## GitHub / publication boundary
 
+- Public publisher and maintainer attribution is **MetalHatsCats**. Do not introduce `Dzmitryi Kharlanau`, `dkharlanau`, or another personal identity as the public maintainer/publisher unless a future explicit product decision changes this rule. Historical provenance and third-party citations must remain factually accurate.
 - `main` is the production GitHub Pages source. Do not push or merge to `main` unless the active user request authorizes it.
 - The Pages workflow runs quality checks for pull requests, but its `deploy` job is skipped for `pull_request`; preserve that separation.
 - Do not edit deployment triggers, Pages permissions, IndexNow behavior, or CI gates merely to make an agent run faster.
