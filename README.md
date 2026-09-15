@@ -2,6 +2,8 @@
 
 CBT Cards is a static, inspectable library of practical reflection resources for people and the AI assistants they choose to use. It began as a mobile app; the repository now treats the public web/data layer as a first-class product with stable IDs, provenance, safety boundaries, review metadata, retrieval-ready data, versioned schemas, and reproducible evaluation tooling.
 
+**Maintained by [MetalHatsCats](https://github.com/metalhatscats).** Public publisher and maintainer attribution should use MetalHatsCats rather than a personal name.
+
 The website intentionally remains simple: plain HTML, CSS, JSON/JSONL/NDJSON, Markdown, product-owned assets, and small Python validation/generation scripts published through GitHub Pages. There is no server-side account system and no JavaScript application bundle required to read the public library.
 
 For the current verified snapshot and the deliberately unresolved boundaries, see [PROJECT_STATUS.md](PROJECT_STATUS.md).
