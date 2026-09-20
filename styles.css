@@ -139,6 +139,59 @@ select {
 .store.dark { background: var(--ink); color: var(--paper-bright); }
 .store small { display: block; font-size: 12px; font-weight: 400; }
 .store-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.vedokrok-banner {
+  border-block-end: 2px solid var(--line);
+  padding-block: clamp(26px, 4vw, 42px);
+  background: var(--yolk);
+}
+.vedokrok-banner__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+.vedokrok-banner__kicker {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+  border: 2px solid var(--line);
+  padding: 5px 9px;
+  background: var(--paper-bright);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.vedokrok-banner__name {
+  margin: 0;
+  font-size: clamp(38px, 4.6vw, 62px);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+}
+.vedokrok-banner__name a { text-decoration: none; }
+.vedokrok-banner__name a:hover { text-decoration: underline; }
+.vedokrok-banner__line { max-width: 72ch; margin: 0; color: var(--ink-soft); font-size: 16px; }
+.vedokrok-banner__cta { grid-column: 2; grid-row: 1 / span 3; margin: 0; }
+.vedokrok-banner__cta a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 19px;
+  background: var(--ink);
+  color: var(--paper-bright);
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.vedokrok-banner__cta a:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--cobalt); }
 .hero { position: relative; overflow: hidden; border-block-end: 2px solid var(--line); background: var(--yolk); }
 .hero-grid {
   display: grid;
@@ -287,8 +340,9 @@ select {
 .final { position: relative; overflow: hidden; border-block: 2px solid var(--line); padding-block: 78px; background: var(--cobalt); color: var(--paper-bright); }
 .final .store { border-color: var(--paper-bright); }
 .footer { border-block-start: 2px solid var(--line); padding-block: 42px; background: var(--ink); color: var(--paper-bright); font-size: 15px; }
-.footer-grid { display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; }
+.footer-grid { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 32px; }
 .footer nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px 18px; }
+.vedokrok-footer { flex: 0 0 100%; margin: 4px 0 0; color: #d8d0c3; font-size: 14px; }
 .page-hero {
   position: relative;
   isolation: isolate;
@@ -505,6 +559,10 @@ body[data-visual] .page-hero .lede { max-width: 780px; }
   body { font-size: 17px; }
   .wrap { width: min(var(--content), calc(100% - 28px)); }
   .site-header { padding-block: 12px; }
+  .vedokrok-banner { padding-block: 22px; }
+  .vedokrok-banner__inner { grid-template-columns: 1fr; }
+  .vedokrok-banner__cta { grid-column: 1; grid-row: auto; margin-block-start: 6px; }
+  .vedokrok-banner__cta a { width: 100%; white-space: normal; }
   .brand { font-size: 20px; }
   .brand img { width: 40px; height: 40px; }
   .download { min-height: 42px; padding: 8px 13px; font-size: 14px; }

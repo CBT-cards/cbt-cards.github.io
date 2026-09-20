@@ -9,6 +9,12 @@ The website intentionally remains simple: plain HTML, CSS, JSON/JSONL/NDJSON, Ma
 For the current verified snapshot and the deliberately unresolved boundaries, see [PROJECT_STATUS.md](PROJECT_STATUS.md).
 For repository work from ChatGPT or another coding agent, start with [AGENTS.md](AGENTS.md).
 
+## Now part of Vedokrok
+
+CBT Cards is now part of [Vedokrok](https://vedokrok.com), a substantially broader practical knowledge system. CBT Cards started as a mobile reflection app and grew into this public library of compact, actionable CBT techniques; it proved that small, concrete techniques are the kind of knowledge people actually use. Vedokrok takes the same practical principle much further — techniques, mental models, decision tools, frameworks, checklists, protocols, exercises, and communication and learning methods across many areas of life and work, with evidence, collections, and future AI access.
+
+This repository and site stay online as a historical project and a useful standalone resource: no redirects, no removed pages, and no change to content, licensing, or the MetalHatsCats publisher identity. Active development of the wider knowledge system continues at Vedokrok. See [VEDOKROK.md](VEDOKROK.md) for the project history and migration notes.
+
 ## Start here
 
 Human-facing public resource:

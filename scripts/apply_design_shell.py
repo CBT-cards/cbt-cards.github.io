@@ -9,7 +9,23 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-STYLE_VERSION = "20260822"
+STYLE_VERSION = "20260920"
+
+BANNER = (
+    '<aside class="vedokrok-banner no-print" data-vedokrok-banner><div class="wrap vedokrok-banner__inner">'
+    '<p class="vedokrok-banner__kicker">Now part of</p>'
+    '<p class="vedokrok-banner__name"><a href="https://vedokrok.com">Vedokrok</a></p>'
+    '<p class="vedokrok-banner__line">CBT Cards proved that compact, actionable techniques are worth keeping. '
+    "Vedokrok takes the same practical principle much further: reusable knowledge you can actually use, "
+    'across many areas of life and work.</p>'
+    '<p class="vedokrok-banner__cta"><a href="https://vedokrok.com">Explore Vedokrok →</a></p>'
+    "</div></aside>"
+)
+
+FOOTER_LINE = (
+    '<p class="vedokrok-footer">Now part of <a href="https://vedokrok.com">Vedokrok</a> — '
+    "a broader practical knowledge system.</p>"
+)
 
 
 def section_for(path: Path) -> str:
@@ -60,7 +76,15 @@ def transform(path: Path, source: str) -> str:
     )
     header_match = re.search(r'<header class="site-header(?: no-print)?">.*?</header>', result, flags=re.S)
     if header_match:
-        result = result[: header_match.start()] + header("no-print" in header_match.group(0)) + result[header_match.end() :]
+        prefix = "" if "data-vedokrok-banner" in result else BANNER
+        result = result[: header_match.start()] + prefix + header("no-print" in header_match.group(0)) + result[header_match.end() :]
+    if 'class="vedokrok-footer"' not in result:
+        result = re.sub(
+            r"(<div>© 2026 CBT Cards.*?</div>)",
+            lambda match: match.group(1) + FOOTER_LINE,
+            result,
+            count=1,
+        )
     return result
 
 

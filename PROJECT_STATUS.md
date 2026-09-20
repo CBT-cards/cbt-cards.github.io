@@ -102,3 +102,11 @@ Search/distribution also needs time-based external evidence: Search Console/Bing
 ## Maintainer invariant
 
 When this snapshot changes, update the underlying source-of-truth data first. `PROJECT_STATUS.md`, README, llms indexes and public pages should describe that data. They must not become an alternative editorial universe.
+
+## History note: consolidation into Vedokrok
+
+CBT Cards ran as a deliberate experiment: take one mobile reflection app and rebuild it as an inspectable public knowledge resource — stable IDs, provenance, safety boundaries, review metadata, retrieval-ready data, and reproducible checks instead of a marketing page.
+
+The lessons held. Small, concrete, actionable techniques are the kind of practical knowledge people actually use, and the review-first machinery (reviewed layer separated from raw sources, `no_match` instead of invented advice, freshness tracked per item) is what makes such material safe to reuse by people and by AI assistants.
+
+The project has now been consolidated into [Vedokrok](https://vedokrok.com), a broader practical knowledge system that applies the same principle across many areas of life and work. CBT Cards remains online as a historical project and standalone resource; the snapshots above stay pinned to the dates they were verified. Active development continues at Vedokrok.
