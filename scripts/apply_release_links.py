@@ -49,8 +49,8 @@ REPLACEMENTS: dict[str, list[tuple[str, str]]] = {
     ],
     "about/index.html": [
         (
-            '<p>CBT Cards is published by MetalHatsCats. Public project data is read-only and does not expose a user\'s journal, check-ins, backups, or account.</p>',
-            '<p>CBT Cards is published by MetalHatsCats. Public project data is read-only and does not expose a user\'s journal, check-ins, backups, or account.</p><p>For corrections, accessibility, support, or a private first contact, use <a href="/contact/">Contact</a>. For translation review, research, education, responsible AI integration, distribution, or licensing, see <a href="/partnerships/">Partnerships</a>.</p>',
+            '<p>CBT Cards is published and maintained by <a href="https://github.com/metalhatscats">MetalHatsCats</a>. Public project data is read-only and does not expose a user\'s journal, check-ins, backups, or account.</p>',
+            '<p>CBT Cards is published and maintained by <a href="https://github.com/metalhatscats">MetalHatsCats</a>. Public project data is read-only and does not expose a user\'s journal, check-ins, backups, or account.</p><p>For corrections, accessibility, support, or a private first contact, use <a href="/contact/">Contact</a>. For translation review, research, education, responsible AI integration, distribution, or licensing, see <a href="/partnerships/">Partnerships</a>.</p>',
         ),
         (
             '<a href="/privacy/">Privacy</a><a href="/agents/">For AI</a>',
