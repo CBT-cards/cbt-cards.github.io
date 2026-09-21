@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CBT Cards updates</title>
+    <link>https://cbt-cards.github.io/changelog/</link>
+    <description>Reviewed CBT Cards website, public-data, research, localization and agent-interface updates.</description>
+    <language>en</language>
+    <lastBuildDate>Wed, 19 Aug 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://cbt-cards.github.io/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reviewed practice, agent evaluation, and trust hardening</title>
+      <link>https://cbt-cards.github.io/changelog/#data-2026-08-19-practice-agent-trust-hardening</link>
+      <guid isPermaLink="false">urn:cbt-cards:changelog:data-2026-08-19-practice-agent-trust-hardening</guid>
+      <pubDate>Wed, 19 Aug 2026 00:00:00 GMT</pubDate>
+      <category>data</category>
+      <description>Consolidated the situation-first reviewed practice system, source/audit/freshness boundaries, semantic model-evaluation pipeline, performance/privacy/localization/search hardening, explicit rights provenance, and current Agent Skill v1.8.0 into one verified public project state.</description>
+    </item>
+    <item>
+      <title>Toolkit review and publication overlay</title>
+      <link>https://cbt-cards.github.io/changelog/#web-2026-08-18-toolkit-review-overlay</link>
+      <guid isPermaLink="false">urn:cbt-cards:changelog:web-2026-08-18-toolkit-review-overlay</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <category>website</category>
+      <description>Added an explicit CBT Cards-owned review layer that separates raw toolkit source records from records reviewed for standalone website publication.</description>
+    </item>
+    <item>
+      <title>Versioned public JSON Schema contracts</title>
+      <link>https://cbt-cards.github.io/changelog/#web-2026-08-18-public-json-schemas</link>
+      <guid isPermaLink="false">urn:cbt-cards:changelog:web-2026-08-18-public-json-schemas</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <category>data</category>
+      <description>Published JSON Schema 2020-12 contracts for CBT Cards-owned machine-readable resources and made them discoverable from the public catalog.</description>
+    </item>
+    <item>
+      <title>Localization review and generated publication pipeline</title>
+      <link>https://cbt-cards.github.io/changelog/#web-2026-08-18-localization-publication-pipeline</link>
+      <guid isPermaLink="false">urn:cbt-cards:changelog:web-2026-08-18-localization-publication-pipeline</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <category>website</category>
+      <description>Completed Russian machine-draft coverage for the current curated knowledge set, added a human-readable language-status hub, and introduced deterministic generation that publishes only human-reviewed localized records.</description>
+    </item>
+    <item>
+      <title>Knowledge, worksheets, agent data, and discovery foundation</title>
+      <link>https://cbt-cards.github.io/changelog/#web-2026-08-18-knowledge-foundation</link>
+      <guid isPermaLink="false">urn:cbt-cards:changelog:web-2026-08-18-knowledge-foundation</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <category>website</category>
+      <description>Expanded the standalone CBT Cards website from a product landing page into a public knowledge and discovery surface for people, search engines, and read-only AI/RAG clients.</description>
+    </item>
+    <item>
+      <title>Indexed-page crawl graph quality gate</title>
+      <link>https://cbt-cards.github.io/changelog/#web-2026-08-18-crawl-graph-quality</link>
+      <guid isPermaLink="false">urn:cbt-cards:changelog:web-2026-08-18-crawl-graph-quality</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <category>website</category>
+      <description>Added homepage links to key public resource hubs and a CI check that rejects orphaned or excessively deep indexable pages.</description>
+    </item>
+    <item>
+      <title>Reproducible agent eval baselines and citation metadata</title>
+      <link>https://cbt-cards.github.io/changelog/#data-2026-08-18-reproducible-eval-baselines</link>
+      <guid isPermaLink="false">urn:cbt-cards:changelog:data-2026-08-18-reproducible-eval-baselines</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <category>data</category>
+      <description>Added a versioned evaluation-run format, two deterministic non-model baselines tied to the exact evaluation dataset hash, CI regeneration checks, and repository-level citation metadata.</description>
+    </item>
+    <item>
+      <title>Provenance-first model-run protocol v1</title>
+      <link>https://cbt-cards.github.io/changelog/#data-2026-08-18-model-run-protocol</link>
+      <guid isPermaLink="false">urn:cbt-cards:changelog:data-2026-08-18-model-run-protocol</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <category>data</category>
+      <description>Added a two-stage protocol for generating real assistant responses without benchmark answers and scoring routing metadata afterward with a deterministic evaluator.</description>
+    </item>
+    <item>
+      <title>Locale registry and translation overlay foundation</title>
+      <link>https://cbt-cards.github.io/changelog/#data-2026-08-18-localization-foundation</link>
+      <guid isPermaLink="false">urn:cbt-cards:changelog:data-2026-08-18-localization-foundation</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <category>data</category>
+      <description>Added a source-locale registry, versioned translation-record contract, Russian pilot translation overlays, and CI rules that keep localized review and publication status separate from source content.</description>
+    </item>
+    <item>
+      <title>Held-out paraphrase and adversarial eval challenge</title>
+      <link>https://cbt-cards.github.io/changelog/#data-2026-08-18-held-out-eval-challenge</link>
+      <guid isPermaLink="false">urn:cbt-cards:changelog:data-2026-08-18-held-out-eval-challenge</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <category>data</category>
+      <description>Added 12 separately authored challenge cases and recorded the unchanged deterministic router's large drop from its friendly starter-set score.</description>
+    </item>
+    <item>
+      <title>Public agent routing and boundary evals</title>
+      <link>https://cbt-cards.github.io/changelog/#data-2026-08-18-agent-eval-foundation</link>
+      <guid isPermaLink="false">urn:cbt-cards:changelog:data-2026-08-18-agent-eval-foundation</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <category>data</category>
+      <description>Published a starter set of 24 evaluation cases for testing CBT Cards resource routing, localization status, publication boundaries, privacy boundaries, and safety abstention without prescribing exact model wording.</description>
+    </item>
+    <item>
+      <title>Public reflection resource skill v1.5.0</title>
+      <link>https://cbt-cards.github.io/changelog/#agent-2026-08-18-public-resource-skill</link>
+      <guid isPermaLink="false">urn:cbt-cards:changelog:agent-2026-08-18-public-resource-skill</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <category>agent</category>
+      <description>Reframed the CBT Cards agent skill around finding and using public reflection cards, worksheets, learning resources, and verified project information rather than treating the mobile app as the primary resource surface.</description>
+    </item>
+    <item>
+      <title>Portable Agent Skills release v1.7.0</title>
+      <link>https://cbt-cards.github.io/changelog/#agent-2026-08-18-portable-skill-v1-7</link>
+      <guid isPermaLink="false">urn:cbt-cards:changelog:agent-2026-08-18-portable-skill-v1-7</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <category>agent</category>
+      <description>Published a strict portable Agent Skills profile for the latest CBT Cards skill while preserving the existing immutable URL convention and adding installation guidance for OpenClaw, Hermes Agent, and generic Agent Skills clients.</description>
+    </item>
+    <item>
+      <title>Localization-aware agent skill v1.6.0</title>
+      <link>https://cbt-cards.github.io/changelog/#agent-2026-08-18-localization-aware-skill</link>
+      <guid isPermaLink="false">urn:cbt-cards:changelog:agent-2026-08-18-localization-aware-skill</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <category>agent</category>
+      <description>Added explicit language and translation-status handling to the CBT Cards agent skill so assistants can distinguish source content, machine drafts, reviewed translations, and published localized resources.</description>
+    </item>
+    <item>
+      <title>Standalone CBT Cards website</title>
+      <link>https://cbt-cards.github.io/changelog/#web-2026-07-14-standalone-site</link>
+      <guid isPermaLink="false">urn:cbt-cards:changelog:web-2026-07-14-standalone-site</guid>
+      <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
+      <category>website</category>
+      <description>Established the standalone CBT Cards public website on the cbt-cards.github.io domain with canonical product, privacy, terms, support, FAQ, and feature documentation.</description>
+    </item>
+  </channel>
+</rss>
